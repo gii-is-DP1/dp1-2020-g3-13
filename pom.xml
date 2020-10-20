@@ -31,7 +31,37 @@
         <spring-format.version>0.0.19</spring-format.version>
 
     </properties>
-
+    <developers>
+        <developer>
+            <id>alebangon</id>
+            <name>Alejandro Baños Gonzalez</name>
+            <email>alebangon@alum.us.es</email>
+            <url>http://www.tmht.com/leo</url>
+            <roles>
+                <role>Development Team Member</role>
+            </roles>
+            <properties>
+                <picUrl>
+                    /media/images/Ale.jpg
+                </picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>Donnie</id>
+            <name>Donatello</name>
+            <email>donnie@tmht.com</email>
+            <url>http://www.tmht.com/donnie</url>
+            <roles>
+                <role>tech master</role>
+            </roles>
+            <properties>
+                <picUrl>
+                    https://pbs.twimg.com/media/Eh4n9GgUYAAan80
+                </picUrl>
+            </properties>
+        </developer>
+ <!-- More developers ...-->
+    </developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
