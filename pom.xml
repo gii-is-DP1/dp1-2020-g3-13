@@ -32,37 +32,6 @@
 
     </properties>
 
-<developers>
- <developer>
- <id>romflorod</id>
- <name>Román</name>
- <email>romanflodriguez13@gmail.com</email>
- <url>https://github.com/Romanflodriguez</url>
- <roles>
- <role>admin</role>
- </roles>
- <properties>
- <picUrl>
-https://pbs.twimg.com/media/Eh4n9GhUMAAdO8x?format=jpg&name=large
-</picUrl>
- </properties>
- </developer>
-<developer>
- <id>Donnie</id>
- <name>Donatello</name>
- <email>donnie@tmht.com</email>
- <url>http://www.tmht.com/donnie</url>
- <roles>
- <role>tech master</role>
- </roles>
- <properties>
- <picUrl>
-https://pbs.twimg.com/media/Eh4n9GgUYAAan80?format=jpg&name=large
-</picUrl>
- </properties>
- </developer>
- <!-- More developers ...-->
-</developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
