@@ -47,16 +47,16 @@
             </properties>
         </developer>
         <developer>
-            <id>Donnie</id>
-            <name>Donatello</name>
-            <email>donnie@tmht.com</email>
+            <id>romflorod</id>
+            <name>Román Flores Rodriguez</name>
+            <email>romflorod@alum.us.es</email>
             <url>http://www.tmht.com/donnie</url>
             <roles>
-                <role>tech master</role>
+                <role>Development Team Member</role>
             </roles>
             <properties>
                 <picUrl>
-                    https://pbs.twimg.com/media/Eh4n9GgUYAAan80
+                    /media/images/ROMAN.JPG
                 </picUrl>
             </properties>
         </developer>
@@ -71,7 +71,7 @@
             </roles>
             <properties>
                 <picUrl>
-                    https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.milanuncios.com%2Fpeluches%2Fpulpo-de-peluche-reversible-de-moda-369197125.htm&psig=AOvVaw2yk6NHiULASGY5dpFKJFDU&ust=1603363570789000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCICviPPAxewCFQAAAAAdAAAAABAL
+                    /media/images/pablo.jpg        
                 </picUrl>
             </properties>
         </developer>
