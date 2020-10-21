@@ -47,16 +47,16 @@
             </properties>
         </developer>
         <developer>
-            <id>Donnie</id>
-            <name>Donatello</name>
-            <email>donnie@tmht.com</email>
+            <id>romflorod</id>
+            <name>Román Flores Rodriguez</name>
+            <email>romflorod@alum.us.es</email>
             <url>http://www.tmht.com/donnie</url>
             <roles>
-                <role>tech master</role>
+                <role>Development Team Member</role>
             </roles>
             <properties>
                 <picUrl>
-                    https://pbs.twimg.com/media/Eh4n9GgUYAAan80
+                    /media/images/ROMAN.JPG
                 </picUrl>
             </properties>
         </developer>
