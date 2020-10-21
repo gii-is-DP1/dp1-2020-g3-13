@@ -76,6 +76,21 @@
             </properties>
         </developer>
 
+        <developer>
+            <id>ezepersos</id>
+            <name>Ezequiel</name>
+            <email>ezepersos@tmht.com</email>
+            <url>http://www.tmht.com/ezepersos</url>
+            <roles>
+                <role>Development Team Member</role>
+            </roles>
+            <properties>
+                <picUrl>
+                    https://pbs.twimg.com/media/Dj735pCUcAAMKlH.jpg
+                </picUrl>
+            </properties>
+        </developer>
+
  <!-- More developers ...-->
     </developers>
     <dependencies>
