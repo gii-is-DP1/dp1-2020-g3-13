@@ -45,6 +45,7 @@ INSERT INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Wa
 INSERT INTO owners VALUES (11, 'alebangon', '', 'C/ Gertrudis Gomez 123', 'Sevilla', '6085558487', 'owner1');
 INSERT INTO owners VALUES (12, 'andmecsan', '', 'C/ Ingenieria Informatica 2', 'Sevilla', '6085558487', 'owner1');
 INSERT INTO owners VALUES (13, 'ezepersos', '', 'C/ Presidente 1', 'Sevilla', '675888212', 'owner1');
+INSERT INTO owners VALUES (14, 'pabloguti01', '', 'C/ Betis 10', 'Sevilla', '667836389', 'owner1');
 
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (1, 'Leo', '2010-09-07', 1, 1);
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (2, 'Basil', '2012-08-06', 6, 2);
