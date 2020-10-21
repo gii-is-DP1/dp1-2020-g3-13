@@ -32,6 +32,24 @@
 
     </properties>
 
+    <developers>
+     <developer>
+      <id>Paul</id>
+      <name>Pablo</name>
+      <email>pabloguti1006@gmail.com</email>
+      <url> </url>
+      <roles>
+       <role>member</role>
+      </roles>
+      <properties>
+       <picUrl>
+                https://www.eluniversal.com.mx/sites/default/files/u40162/meme-pulpo_5.png
+       </picUrl>
+      </properties>
+     </developer>
+    </developers>
+            
+
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
