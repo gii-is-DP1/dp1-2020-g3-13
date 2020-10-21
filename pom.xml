@@ -47,6 +47,20 @@
             </properties>
         </developer>
         <developer>
+            <id>julibamon</id>
+            <name>Julia Ibáñez Montero</name>
+            <email>julibamon@alum.us.es</email>
+            <url>http://www.tmht.com/julibamon</url>
+            <roles>
+                <role>Development Team Member</role>
+            </roles>
+            <properties>
+                <picUrl>
+                    https://upload.wikimedia.org/wikipedia/en/d/db/Beagirlwannadiesalbum.jpg
+                </picUrl>
+            </properties>
+        </developer>
+        <developer>
             <id>romflorod</id>
             <name>Román Flores Rodriguez</name>
             <email>romflorod@alum.us.es</email>
@@ -92,7 +106,7 @@
         </developer>
 
  <!-- More developers ...-->
-    </developers>
+   > </developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
@@ -104,7 +118,7 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
