@@ -47,16 +47,44 @@
             </properties>
         </developer>
         <developer>
-            <id>Donnie</id>
-            <name>Donatello</name>
-            <email>donnie@tmht.com</email>
-            <url>http://www.tmht.com/donnie</url>
+            <id>andmecsan</id>
+            <name>Andrea Meca Sanchez</name>
+            <email>andmecsan@alum.us.es</email>
+            <url>http://www.tmht.com/andmecsan</url>
             <roles>
-                <role>tech master</role>
+                <role>Development Team Member</role>
             </roles>
             <properties>
                 <picUrl>
-                    https://pbs.twimg.com/media/Eh4n9GgUYAAan80
+                    http://images2.fanpop.com/image/photos/10500000/pichi-pichi-pitch-pichi-pichi-pitch-mermaid-melody-10579313-1734-1205.jpg
+                </picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>julibamon</id>
+            <name>Julia Ibáñez Montero</name>
+            <email>julibamon@alum.us.es</email>
+            <url>http://www.tmht.com/julibamon</url>
+            <roles>
+                <role>Development Team Member</role>
+            </roles>
+            <properties>
+                <picUrl>
+                    https://upload.wikimedia.org/wikipedia/en/d/db/Beagirlwannadiesalbum.jpg
+                </picUrl>
+            </properties>
+        </developer>
+        <developer>
+            <id>romflorod</id>
+            <name>Román Flores Rodriguez</name>
+            <email>romflorod@alum.us.es</email>
+            <url>http://www.tmht.com/donnie</url>
+            <roles>
+                <role>Development Team Member</role>
+            </roles>
+            <properties>
+                <picUrl>
+                    /media/images/ROMAN.JPG
                 </picUrl>
             </properties>
         </developer>
@@ -71,13 +99,28 @@
             </roles>
             <properties>
                 <picUrl>
-                    https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.milanuncios.com%2Fpeluches%2Fpulpo-de-peluche-reversible-de-moda-369197125.htm&psig=AOvVaw2yk6NHiULASGY5dpFKJFDU&ust=1603363570789000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCICviPPAxewCFQAAAAAdAAAAABAL
+                    /media/images/pablo.jpg        
+                </picUrl>
+            </properties>
+        </developer>
+
+        <developer>
+            <id>ezepersos</id>
+            <name>Ezequiel</name>
+            <email>ezepersos@tmht.com</email>
+            <url>http://www.tmht.com/ezepersos</url>
+            <roles>
+                <role>Development Team Member</role>
+            </roles>
+            <properties>
+                <picUrl>
+                    https://pbs.twimg.com/media/Dj735pCUcAAMKlH.jpg
                 </picUrl>
             </properties>
         </developer>
 
  <!-- More developers ...-->
-    </developers>
+   > </developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
