@@ -68,4 +68,4 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
 INSERT INTO clientes VALUES (1,'pepe56', '1234abc', 'Pepe', 'Ceballos', 'pepeceba@gmail.com', 666777888);
-
+INSERT INTO admins(id, usuario, password, nombre, apellidos, email) VALUES (1, 'alebangon', 'alebangon99', 'alejandro', 'Baños Gonzalez', 'awwadw@gmail.com' );
