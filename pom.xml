@@ -120,7 +120,7 @@
         </developer>
 
  <!-- More developers ...-->
-   > </developers>
+    </developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
