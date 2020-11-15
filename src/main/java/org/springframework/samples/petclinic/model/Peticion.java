@@ -6,8 +6,8 @@ import lombok.Data;
 @Entity
 @Data
 public class Peticion extends NamedEntity{
-    String email;
-    String nombreOrganizacion;
-    String cif;
-    String info;
+    private String email;
+    private String nombreOrganizacion;
+    private String cif;
+    private String info;
 }
