@@ -5,8 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="peticion">
-    <h2>Admins</h2>
+
+
+<petclinic:layout pageName="peticion/listado">
+    <h2>Peticiones</h2>
 
     <table id="peticionesTable" class="table table-striped">
         <thead>
@@ -21,7 +23,7 @@
             <tr>
                 <td>
 
-                    <c:out value="${peticion.nombreOrganizacion}"/></a>
+                    <c:out value="${peticion.organizacion}"/></a>
                 </td>
                 <td>
                     <c:out value="${peticion.info}"/></a>

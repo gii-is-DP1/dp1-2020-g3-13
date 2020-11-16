@@ -67,3 +67,5 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
+INSERT INTO peticion(id,name,cif,email,info,organizacion) VALUES (2,'antonio','690321145','antonio@elbola.es','EMPRESA DE BALONES CUADRADOS','BALON CUADRADO');
+INSERT INTO peticion(id,name,cif,email,info,organizacion) VALUES (1,'paco','6969696969','PRIMOPEPE@PEPE.COM','EMPRESA DE VINO SIN ALCOHOL','PRIMO PEPE');
