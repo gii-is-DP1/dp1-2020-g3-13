@@ -1,35 +1,42 @@
 package org.springframework.samples.petclinic.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
-
-@Entity
 @Data
-@Table(name = "peticion")
-public class Peticion extends NamedEntity{
-    @OneToOne
-    @JoinColumn(name = "FK_INVOICE", updatable = false, nullable = false)
-    private Organizacion organizacion;
+@Entity
+@Table(name= "organizaciones")  
+public class Organizacion extends BaseEntity {
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "organizacion")
+    private Peticion peticion;
+    @Column(name = "usuario")
+    @NotEmpty
+    private String user;
+    @Column(name = "password")
+    @NotEmpty
+    private String password;
 
     @Column(name = "email")
     @NotEmpty
-    protected String email;
+    private String email;
+
     @Column(name = "nombreOrganizacion")
     @NotEmpty
     protected String nombreOrganizacion;
     @Column(name = "cif")
     @NotEmpty
-    protected String cif;
+    private String cif;
     @Column(name = "info")
     @NotEmpty
-    protected String info;
+    private String info;
 
+
+    
 }
