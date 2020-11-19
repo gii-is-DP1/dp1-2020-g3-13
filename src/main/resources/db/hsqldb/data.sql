@@ -67,4 +67,6 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
-INSERT INTO admins(id, usuario, password, nombre, apellidos, email) VALUES (1, 'alebangon', 'alebangon99', 'alejandro', 'Baños Gonzalez', 'awwadw@gmail.com' );
+INSERT INTO admins(id, nombre, apellidos, email) VALUES (1, 'alejandro', 'Baños Gonzalez', 'abagon1999@gmail.com' );
+INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('alebangon', 'alebangon', TRUE);
+INSERT INTO autoridades(id,usuario,autoridad) VALUES (5,'alebangon','admin');
