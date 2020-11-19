@@ -11,25 +11,25 @@
     <table id="adminsTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">User</th>
-            <th style="width: 200px;">Name</th>
-            <th style="width: 200px;">email</th>
+            <th style="width: 150px;">Nombre</th>
+            <th style="width: 200px;">Email</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${admins}" var="admin">
             <tr>
-                <td>
 
-                    <c:out value="${admin.usuario}"/></a>
-                </td>
                 <td>
-                    <c:out value="${admin.nombre} ${admin.apellidos}"/></a>
-                </td>
+                    <spring:url value="/admins/{adminId}" var="adminUrl">
+                    <spring:param name="adminId" value="${admin.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(adminUrl)}"><c:out value="${admin.nombre} ${admin.apellidos}"/></a>
+                    </td>
+
                 <td>
                     <c:out value="${admin.email}"/>
                 </td>
-                
+
       
 <!--
                 <td> 

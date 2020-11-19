@@ -9,12 +9,6 @@ import lombok.Data;
 @MappedSuperclass
 @Data
 public class Persona extends BaseEntity{
-    @Column(name = "usuario")
-    @NotEmpty
-    protected String usuario;
-    @Column(name = "password")
-    @NotEmpty
-    protected String password;
     @Column(name = "nombre")
     @NotEmpty
     protected String nombre;
@@ -24,4 +18,5 @@ public class Persona extends BaseEntity{
     @Column(name = "email")
     @NotEmpty
     protected String email;
+
 }
