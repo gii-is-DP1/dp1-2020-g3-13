@@ -5,9 +5,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "admins")
-public class Admin extends Persona{
-
+@Data
+@Table(name = "clientes")
+public class Cliente extends Persona{
+    Integer telefono;
+      
 }
