@@ -76,3 +76,4 @@ INSERT INTO peticion(id,name,cif,email,info,nombre_organizacion) VALUES (1,'paco
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('alebangon', 'alebangon', TRUE);
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (1, 'alejandro', 'Baños Gonzalez', 'abagon1999@gmail.com', 'alebangon');
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (5,'alebangon','admin');
+INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');
