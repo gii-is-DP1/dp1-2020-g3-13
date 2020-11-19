@@ -16,6 +16,6 @@ public class AdminServiceTest {
     @Test
     public void testCountWithInitialDataAdmin(){
         int count = adminService.adminCount();
-        assertEquals(count, 0);
+        assertEquals(count, 1);
     }
 }
