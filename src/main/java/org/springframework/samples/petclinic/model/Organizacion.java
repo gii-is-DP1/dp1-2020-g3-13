@@ -1,8 +1,8 @@
 package org.springframework.samples.petclinic.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -14,8 +14,12 @@ import lombok.Data;
 @Table(name= "organizaciones")  
 public class Organizacion extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "organizacion")
+
+    @OneToOne
+    @JoinColumn(name = "FK_PETICION", updatable = false, nullable = false)
     private Peticion peticion;
+
+
     @Column(name = "usuario")
     @NotEmpty
     private String user;
