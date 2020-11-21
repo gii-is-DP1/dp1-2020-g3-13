@@ -22,7 +22,7 @@
             <tr>
                 <td>
 
-                    <c:out value="${clientes.nombre_usuario}"/></a>
+                    <c:out value="${clientes.usuario.nombreUsuario}"/></a>
                 </td>
                 <td>
                     <c:out value="${clientes.nombre} ${clientes.apellidos}"/></a>
