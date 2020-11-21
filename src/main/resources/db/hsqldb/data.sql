@@ -67,5 +67,13 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
-INSERT INTO clientes VALUES (1,'pepe56', '1234abc', 'Pepe', 'Ceballos', 'pepeceba@gmail.com', 666777888);
-INSERT INTO admins(id, usuario, password, nombre, apellidos, email) VALUES (1, 'alebangon', 'alebangon99', 'alejandro', 'Baños Gonzalez', 'awwadw@gmail.com' );
+-- INSERT INTO peticion(id,name,cif,email,info,organizacion) VALUES (2,'antonio','690321145','antonio@elbola.es','EMPRESA DE BALONES CUADRADOS','BALON CUADRADO');
+-- INSERT INTO admins(id, usuario, password, nombre, apellidos, email) VALUES (1, 'alebangon', 'alebangon99', 'alejandro', 'Baños Gonzalez', 'awwadw@gmail.com' );
+INSERT INTO clientes VALUES (1,'pepe56', 'Ceballos', 'pepeceba@gmail.com', 666777888);
+
+-- INSERT INTO organizaciones(id, cif, email, info, password, usuario, nombre_organizacion,fk_peticion) VALUES (1,'690321145', 'antonio@elbola.es','EMPRESA DE BALONES CUADRADOS','pelotasCuadradas','antBola', 'BALON CUADRADO',1);
+INSERT INTO peticion(id,name,cif,email,info,nombre_organizacion) VALUES (1,'paco','6969696969','PRIMOPEPE@PEPE.COM','EMPRESA DE VINO SIN ALCOHOL','PRIMO PEPE');
+INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('alebangon', 'alebangon', TRUE);
+INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (1, 'alejandro', 'Baños Gonzalez', 'abagon1999@gmail.com', 'alebangon');
+INSERT INTO autoridades(id,usuario,autoridad) VALUES (5,'alebangon','admin');
+INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');

@@ -7,15 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class AdminServiceTest {
+public class ActividadServiceTest {
     @Autowired
-    private AdminService adminService;
+    private ActividadService actividadService;
 
     @Test
-    public void testCountWithInitialDataAdmin(){
-        int count = adminService.adminCount();
-        assertEquals(count, 1);
+    public void testCountWithInitialDataActividad(){
+        int count = actividadService.actividadesCount();
+        assertEquals(count, 0);
     }
 }
