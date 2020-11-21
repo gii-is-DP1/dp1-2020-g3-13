@@ -9,13 +9,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class AdminServiceTest {
+public class OrganizacionTest {
     @Autowired
-    private AdminService adminService;
+    private OrganizacionService organizacionService;
 
     @Test
-    public void testCountWithInitialDataAdmin(){
-        int count = adminService.adminCount();
-        assertEquals(count, 1);
+    public void testCountWithInitialDataOrganizational(){
+        int count = organizacionService.organizacionCount();
+        assertEquals(count, 0);
     }
 }
