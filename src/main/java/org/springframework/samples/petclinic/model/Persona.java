@@ -1,16 +1,22 @@
 package org.springframework.samples.petclinic.model;
 
-import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
 @MappedSuperclass
 @Data
 public class Persona extends BaseEntity{
-    private String usuario;
-    private String password;
-    private String nombre;
-    private String apellidos;
-    private String email;
+    @Column(name = "nombre")
+    @NotEmpty
+    protected String nombre;
+    @Column(name = "apellidos")
+    @NotEmpty
+    protected String apellidos;
+    @Column(name = "email")
+    @NotEmpty
+    protected String email;
+
 }
