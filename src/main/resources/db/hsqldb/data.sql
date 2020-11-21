@@ -75,4 +75,7 @@ INSERT INTO clientes VALUES (1,'pepe56', 'Ceballos', 'pepeceba@gmail.com', 66677
 INSERT INTO peticion(id,name,cif,email,info,nombre_organizacion) VALUES (1,'paco','6969696969','PRIMOPEPE@PEPE.COM','EMPRESA DE VINO SIN ALCOHOL','PRIMO PEPE');
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('alebangon', 'alebangon', TRUE);
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (1, 'alejandro', 'Baños Gonzalez', 'abagon1999@gmail.com', 'alebangon');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (5,'alebangon','admin');
+INSERT INTO autoridades(id,usuario,autoridad) VALUES (1,'alebangon','admin');
+-- One owner user, named owner1 with passwor 0wn3r
+INSERT INTO usuarios(nombre_usuario,password,enabled) VALUES ('owner1','0wn3r',TRUE);
+INSERT INTO autoridades(id,usuario,autoridad) VALUES (2,'owner1','owner');

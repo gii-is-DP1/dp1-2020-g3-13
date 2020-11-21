@@ -22,6 +22,6 @@ public class Usuario {
     String password;
 	boolean enabled;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private Set<Authorities> authorities;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+	private Set<Autoridades> autoridades;
 }
