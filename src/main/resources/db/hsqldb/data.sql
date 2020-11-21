@@ -79,6 +79,8 @@ INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (1, 'ale
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (1,'alebangon','admin');
 INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');
 
+INSERT INTO factura (id,name,fecha_factura,precio_total,usuario_asociado) VALUES(1,'alebangon','2020-03-03', 15.6,'alebangon');
+
 
 
 
