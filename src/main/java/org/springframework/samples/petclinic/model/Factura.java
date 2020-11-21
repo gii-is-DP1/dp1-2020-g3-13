@@ -8,23 +8,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import lombok.Data;
-
 @Entity
-@Data
-@Table(name="consulta")
-public class Consulta extends NamedEntity{
-
-    @Column(name = "asunto")
+@Table(name = "factura")
+public class Factura extends NamedEntity{
+    @Column(name="precioTotal")
     @NotEmpty
-    protected String asunto;
-    
-    @Column(name = "descripcion")
+    protected Double precioTotal;
+    @Column(name="usuarioAsociado")
     @NotEmpty
-    protected String descripcion;
-
-    @Column(name = "fechaConsulta")
+    protected String usuarioAsocidado;
+    @Column(name = "fechaFactura")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private LocalDate fechaConsulta;
+    private LocalDate fechaFactura;
 }
