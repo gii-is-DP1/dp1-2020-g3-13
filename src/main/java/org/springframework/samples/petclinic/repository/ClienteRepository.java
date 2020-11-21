@@ -7,5 +7,5 @@ public interface ClienteRepository extends CrudRepository<Cliente,Integer>{
 
     Cliente findById(int id) throws DataAccessException;
 
-    
+
 }
