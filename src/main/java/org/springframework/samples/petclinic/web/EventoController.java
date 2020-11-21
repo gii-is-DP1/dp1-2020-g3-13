@@ -16,9 +16,9 @@ public class EventoController {
 
     @GetMapping
     public String listadoEventos(ModelMap modelMap){
-        String vista = "Eventos/listadoEventos";
+        String vista = "eventos/listadoEventos";
         Iterable<Evento> eventos = eventoService.findAll();
-        modelMap.addAttribute("Eventos", eventos);
+        modelMap.addAttribute("eventos", eventos);
         return vista;
     }
 }
