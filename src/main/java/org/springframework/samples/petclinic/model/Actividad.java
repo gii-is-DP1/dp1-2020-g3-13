@@ -2,8 +2,11 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -14,7 +17,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "actividad")
-public class Actividad extends NamedEntity{
+public class Actividad extends BaseEntity{
 
     @Column(name = "tematicaActividad")
     @NotEmpty
@@ -29,5 +32,9 @@ public class Actividad extends NamedEntity{
     @Column(name ="fechaFin")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFin;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nombre_recinto", referencedColumnName = "nombre_recinto")
+	private LugarRealizacion lugarRealizacion;
 
 }
