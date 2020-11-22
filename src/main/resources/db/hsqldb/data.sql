@@ -74,9 +74,7 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04',
 -- INSERT INTO organizaciones(id, cif, email, info, password, usuario, nombre_organizacion,fk_peticion) VALUES (1,'690321145', 'antonio@elbola.es','EMPRESA DE BALONES CUADRADOS','pelotasCuadradas','antBola', 'BALON CUADRADO',1);
 INSERT INTO peticion(id,name,cif,email,info,nombre_organizacion) VALUES (1,'paco','6969696969','PRIMOPEPE@PEPE.COM','EMPRESA DE VINO SIN ALCOHOL','PRIMO PEPE');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('alebangon', 'alebangon', TRUE);
-INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (1, 'alejandro', 'Baños Gonzalez', 'abagon1999@gmail.com', 'alebangon');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (1,'alebangon','admin');
+
 INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');
 
 INSERT INTO factura (id,name,fecha_factura,precio_total,usuario_asociado) VALUES(1,'alebangon','2020-03-03', 15.6,'alebangon');
@@ -121,7 +119,12 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (2,'pabgutceb','admin');
 
 INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (1,'pepe56', 'Ceballos', 'pepeceba@gmail.com', 'pabgutceb',  666777888);
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (3,'pabgutceb','cliente');
+
+INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('alebangon', 'alebangon', TRUE);
+INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (1, 'alejandro', 'Baños Gonzalez', 'abagon1999@gmail.com', 'alebangon');
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (1,'alebangon','admin');
 -- One owner user, named owner1 with passwor 0wn3r
 INSERT INTO usuarios(nombre_usuario,password,enabled) VALUES ('owner1','0wn3r',TRUE);
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (2,'owner1','owner');
+INSERT INTO autoridades(id,usuario,autoridad) VALUES (4,'owner1','owner');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com', TRUE,'muy bonito', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,nombre_recinto) VALUES (1,'concierto de estopa', 'un buen concierto', '2020-12-12', '2020-12-12', 'caixaforum');

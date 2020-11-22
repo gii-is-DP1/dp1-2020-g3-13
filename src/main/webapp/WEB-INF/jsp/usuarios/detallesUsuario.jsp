@@ -4,23 +4,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="admins">
+<petclinic:layout pageName="usuarios">
 
     <h2>admin Information</h2>
 
 
     <table class="table table-striped">
         <tr>
-            <th>Nombre</th>
-            <td><b><c:out value="${admin.nombre} ${admin.apellidos}"/></b></td>
+            <th>usuario</th>
+            <td><b><c:out value="${usuarios.nombreUsuario}"/></b></td>
         </tr>
         <tr>
-            <th>Email</th>
-            <td><c:out value="${admin.email}"/></td>
-        </tr>
-        <tr>
-            <th>Usuario</th>
-            <td><c:out value="${admin.usuario.nombreUsuario}"/></td>
+            <th>autoridades</th>
+            <c:forEach items="${usuarios.autoridades}" var="autoridades">
+                <c:out value="${autoridades.autoridad} "/>
+            </c:forEach>
         </tr>
     </table>
 

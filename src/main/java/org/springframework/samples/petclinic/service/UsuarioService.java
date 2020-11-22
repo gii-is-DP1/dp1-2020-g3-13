@@ -24,10 +24,15 @@ public class UsuarioService {
 		usuario.setEnabled(true);
 		usuarioRepository.save(usuario);
 	}
+
+	public Iterable<Usuario> findAll(){
+		return usuarioRepository.findAll();
+	}
 	
 	public Optional<Usuario> findUsuario(String usuarioID) {
-		return usuarioRepository.findById(usuarioID);
+		return usuarioRepository.findBynombreUsuario(usuarioID);
 	}
+	
 
 
 
