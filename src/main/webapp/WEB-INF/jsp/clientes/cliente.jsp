@@ -11,8 +11,8 @@
     <table id="clientesTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">User</th>
-            <th style="width: 200px;">Name</th>
+            <th style="width: 150px;">Usuario</th>
+            <th style="width: 200px;">Nombre</th>
             <th style="width: 200px;">email</th>
             <th style="width: 200px;">telefono</th>
         </tr>

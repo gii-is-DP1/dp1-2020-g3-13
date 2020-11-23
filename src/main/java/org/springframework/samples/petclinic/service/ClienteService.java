@@ -1,8 +1,11 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,16 +26,15 @@ public class ClienteService {
     }
 
     @Transactional
-	public void saveCliente(Cliente cliente) throws DataAccessException {
+    public void saveCliente(Cliente cliente)throws DataAccessException{
         clienteRepo.save(cliente);
     }
 
-    @Transactional(readOnly = true)
-	public Cliente findById(int clienteId) throws DataAccessException {
-		return clienteRepo.findById(clienteId);
+    public Cliente findClienteByUsuario(String usuario) throws DataAccessException{
+        return clienteRepo.listadoClienteByUsuario(usuario);
     }
-    
-    public void deleteCliente(int clienteId) {
-        clienteRepo.delete(clienteRepo.findById(clienteId));
+
+    public void deleteCliente(Cliente cliente) throws DataAccessException{
+        clienteRepo.delete(cliente);
     }
 }

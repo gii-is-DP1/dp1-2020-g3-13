@@ -1,8 +1,10 @@
 package org.springframework.samples.petclinic.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.repository.OrganizacionRepository;
+import org.springframework.samples.petclinic.repository.PeticionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +13,8 @@ public class OrganizacionService {
 
         @Autowired
         private OrganizacionRepository organizacionRepo;
-
+        @Autowired
+        private PeticionRepository peticionrepo;
         @Transactional
         public int organizacionCount(){
             return (int) organizacionRepo.count();
@@ -20,6 +23,14 @@ public class OrganizacionService {
         public Iterable<Organizacion> findAll(){
             return organizacionRepo.findAll();
         }
+        public Organizacion findOrganizacionByUsuario(String usuario) throws DataAccessException{
+            return organizacionRepo.listadoOrganizacionByUsuario(usuario);
+        }
+    
+        public void deleteOrganizacion(Organizacion organizacion) throws DataAccessException{
+            organizacionRepo.delete(organizacion);
+            peticionrepo.delete(peticionrepo.findPeticionByOrganizacion(organizacion.getNombreOrganizacion().getNombre_organizacion()));
 
+        }
     }
     
