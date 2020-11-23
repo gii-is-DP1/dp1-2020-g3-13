@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Organizacion;
@@ -33,14 +35,18 @@ public class PeticionService {
       //  return peticionRepo.findPeticionByOrganizacionId(organizacionId);
     //}
 
-    @Transactional
-    public Peticion findById(int organizacionId) throws DataAccessException{
-        return peticionRepo.findById(organizacionId);
-    }
-
 public void deleteOrganizacion(int organizacionId) {
-    peticionRepo.delete(peticionRepo.findById(organizacionId));
+    peticionRepo.delete(peticionRepo.findById(organizacionId).get());
 }
+
+
+    @Transactional
+    public Optional<Peticion> findPeticionById(int peticionId){
+        return peticionRepo.findById(peticionId);
+    }
+	public void deletePeticion(Peticion peticion) {
+         peticionRepo.delete(peticion);
+	}
 
 }
 
