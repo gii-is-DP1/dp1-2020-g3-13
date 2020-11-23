@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "factura")
-public class Factura extends NamedEntity{
+public class Factura extends BaseEntity{
     @Column(name="precioTotal")
     @NotEmpty
     protected Double precioTotal;

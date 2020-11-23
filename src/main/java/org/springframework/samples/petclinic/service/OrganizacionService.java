@@ -29,7 +29,7 @@ public class OrganizacionService {
     
         public void deleteOrganizacion(Organizacion organizacion) throws DataAccessException{
             organizacionRepo.delete(organizacion);
-           // peticionrepo.delete(peticionrepo.findPeticionByOrganizacion(organizacion.getNombreOrganizacion().getNombre_organizacion()));
+          //  peticionrepo.delete(peticionrepo.findPeticionByOrganizacion(organizacion.getNombreOrganizacion().getNombre_organizacion()));
 
         }
     }
