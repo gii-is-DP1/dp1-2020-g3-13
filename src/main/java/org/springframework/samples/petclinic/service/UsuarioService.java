@@ -24,10 +24,20 @@ public class UsuarioService {
 		usuario.setEnabled(true);
 		usuarioRepository.save(usuario);
 	}
-	
-	public Optional<Usuario> findUsuario(String usuarioID) {
-		return usuarioRepository.findById(usuarioID);
+
+	public Iterable<Usuario> findAll(){
+		return usuarioRepository.findAll();
 	}
+	
+	public Usuario findUsuario(String usuarioID) {
+	//	return usuarioRepository.findBynombreUsuario(usuarioID);
+		return usuarioRepository.findById(usuarioID).get();
+	}
+
+	public void deleteUsuario(Usuario usuario) throws DataAccessException{
+		usuarioRepository.delete(usuario);
+	}
+	
 
 
 

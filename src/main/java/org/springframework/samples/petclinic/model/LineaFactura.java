@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "lineaFactura")
-public class LineaFactura extends NamedEntity{
+public class LineaFactura extends BaseEntity{
 
     @Column(name = "precio")
     @NotEmpty

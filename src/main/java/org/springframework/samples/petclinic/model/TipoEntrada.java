@@ -13,8 +13,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "tipo_entrada")
-public class TipoEntrada extends NamedEntity{
+@Table(name = "tipoentradas")
+public class TipoEntrada extends BaseEntity{
 
     @Column(name = "precio")
     @NotEmpty

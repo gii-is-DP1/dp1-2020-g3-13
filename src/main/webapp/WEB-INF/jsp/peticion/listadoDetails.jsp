@@ -8,29 +8,46 @@
 
                         <h2>peticion Information</h2>
 
+                        <ul>
+                            <li>
+                                <label>Nombre organizacion:</label>
+                                <c:out value="${peticion.nombre_organizacion}" />
+                            </li>
+                            <li>
+                                <label>CIF:</label>
+                                <c:out value="${peticion.cif}" />
+                            </li>
+                            <li>
+                                <label>Info:</label>
+                                <c:out value="${peticion.info}" />
+                            </li>
+                            <li>
+                                <label>Email:</label>
+                                <c:out value="${peticion.email}" />
+                            </li>
+                            <li>
+                                <label>Opciones:</label>
 
+                            </li>
+                            <li class="button">
+                                <button type="submit"><spring:url value="/peticion/delete/{peticionid}" var="peticionUrl">
+                                    <spring:param name="peticionid" value="${peticion.id}" />
+                                </spring:url>
+                                <a href="${fn:escapeXml(peticionUrl)}">
+                                    <c:out value="" /> Rechazar
+                                </a></button>
+                            </li>
+
+                        </ul>
                         <table class="table table-striped">
-                            <tr>
-                                <th>Name</th>
 
 
-                                <td>
-                                    <spring:url value="/peticion/delete/{peticionid}" var="peticionUrl">
-                                        <spring:param name="peticionid" value="${peticion.id}" />
-                                    </spring:url>
-                                    <a href="${fn:escapeXml(peticionUrl)}">
-                                        <c:out value="${peticion.id}" /> ${peticion.id}
-                                    </a>
-                                </td>
-                            </tr>
-
-                        </table>
 
 
-                        <br/>
-                        <br/>
-                        <br/>
-                        <h2>Pets and Visits</h2>
+                            <br/>
+                            <br/>
+                            <br/>
+
 
 
 
