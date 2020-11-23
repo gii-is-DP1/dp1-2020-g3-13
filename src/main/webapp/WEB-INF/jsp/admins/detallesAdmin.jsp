@@ -18,6 +18,10 @@
             <th>Email</th>
             <td><c:out value="${admin.email}"/></td>
         </tr>
+        <tr>
+            <th>Usuario</th>
+            <td><c:out value="${admin.usuario.nombreUsuario}"/></td>
+        </tr>
     </table>
 
     <spring:url value="{adminId}/edit" var="editUrl">

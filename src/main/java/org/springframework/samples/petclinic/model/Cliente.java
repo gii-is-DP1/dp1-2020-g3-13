@@ -5,6 +5,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
@@ -21,10 +22,12 @@ public class Cliente extends Persona{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
-	private Usuario usuario;
+    private Usuario usuario;
+    
+
 
     @Column(name = "telefono")
-    @NotEmpty
+    @NotNull
     protected Integer telefono;
 
       

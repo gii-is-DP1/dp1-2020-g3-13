@@ -29,6 +29,10 @@ public class PeticionService {
     public void saveOrganizacion(Peticion organizacion) throws DataAccessException{
         peticionRepo.save(organizacion);
     }
+    //@Transactional
+    //public Peticion findByPeticionByOrganizacionId(int organizacionId) throws DataAccessException{
+      //  return peticionRepo.findPeticionByOrganizacionId(organizacionId);
+    //}
 
 public void deleteOrganizacion(int organizacionId) {
     peticionRepo.delete(peticionRepo.findById(organizacionId).get());
