@@ -31,7 +31,10 @@
                         <c:out value="${autoridades.autoridad} "/>
                     </c:forEach>
                 </td>
-
+                    <td><spring:url value="/usuarios/{usuarioId}/delete" var="deleteUrl">
+                        <spring:param name="usuarioId" value="${usuarios.nombreUsuario}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Borrar Usuario</a></td>
       
 <!--
                 <td> 

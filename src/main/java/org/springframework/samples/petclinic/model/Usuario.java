@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 
 import lombok.Data;
@@ -24,7 +25,7 @@ public class Usuario {
 
     String password;
 	boolean enabled;
-	
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
 	private List<Autoridades> autoridades;
 }
