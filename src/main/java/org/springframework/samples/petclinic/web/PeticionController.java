@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -11,11 +12,12 @@ import org.springframework.samples.petclinic.service.PeticionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 //www.paco.es/peticiones/listado 
+import org.springframework.web.servlet.ModelAndView;
 
 //tienen que aperecer botones a www.paco.es/peticiones/listado/peticion concreto
 
@@ -27,7 +29,7 @@ public class PeticionController {
 
     @Autowired
     private PeticionService peticionServ;
-    @GetMapping()
+    @GetMapping(value="/listado")
     public String ListadoPeticiones(ModelMap modelmap){
         String vista = "/peticion/listado";
         Iterable<Peticion> peticion=peticionServ.dimeTodas(); 
@@ -50,11 +52,26 @@ public class PeticionController {
         }else{
             this.peticionServ.saveOrganizacion(peticion);
             return "redirect:/"; 
-            //TODO Revisar
         }
 
     }
 
+        @GetMapping("/{peticionId}")
+        public ModelAndView showPeticion(@PathVariable("peticionId") int peticionId) {
+            ModelAndView mav = new ModelAndView("peticion/listadoDetails");
+            mav.addObject(this.peticionServ.findPeticionById(peticionId).get());
+            return mav;
+         }
+
     
-    
-}
+             @GetMapping(path ="/delete/{peticionid}")
+             public String borrarPeticion(@PathVariable("peticionid") Integer peticionid,ModelMap modelMap){
+                 String vista = "/peticion/listado";
+                 Optional<Peticion> peti = peticionServ.findPeticionById(peticionid);
+                 peticionServ.deletePeticion(peti.get());
+                 modelMap.addAttribute("message","event  succesfully deleted!"); 
+                 return vista;
+         
+             }
+              
+          }
