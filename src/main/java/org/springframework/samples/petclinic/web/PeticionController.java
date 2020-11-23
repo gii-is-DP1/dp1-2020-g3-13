@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -70,7 +71,7 @@ public class PeticionController {
                  Optional<Peticion> peti = peticionServ.findPeticionById(peticionid);
                  peticionServ.deletePeticion(peti.get());
                  modelMap.addAttribute("message","event  succesfully deleted!"); 
-                 return vista;
+                 return "redirect:/peticion/listado";
          
              }
               
