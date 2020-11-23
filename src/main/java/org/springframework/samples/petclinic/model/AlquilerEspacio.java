@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "alquilerEspacio")
-public class AlquilerEspacio extends NamedEntity{
+public class AlquilerEspacio extends BaseEntity{
 
     @Column(name = "precio")
     @NotEmpty

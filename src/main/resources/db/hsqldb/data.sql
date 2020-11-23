@@ -81,39 +81,8 @@ INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 't
 
 INSERT INTO factura (id,name,fecha_factura,precio_total,usuario_asociado) VALUES(1,'alebangon','2020-03-03', 15.6,'alebangon');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin) VALUES ('ConciertoEminem', 'Concierto', 'Cantan', '2021-06-11', 'muchas', 'Musica', '2021-06-11' );
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas) VALUES (8, 'Diurna', '2022-04-11', 15, '2022-05-10', 10);
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('pabgutceb', 'pabgutceb', TRUE);
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (2, 'Pablo', 'Gutiérrez Ceballos', 'pabloguti1006@gmail.com', 'pabgutceb');
