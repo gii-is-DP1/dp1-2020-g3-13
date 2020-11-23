@@ -13,6 +13,7 @@
         <tr>
             <th style="width: 150px;">Nombre de usuario</th>
             <th style="width: 200px;">Autoridades</th>
+            <th style="width: 200px;"></th>
         </tr>
         </thead>
         <tbody>

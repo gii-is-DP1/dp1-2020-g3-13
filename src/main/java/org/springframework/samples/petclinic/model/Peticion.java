@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "peticion")
-public class Peticion extends NamedEntity{
+public class Peticion extends BaseEntity{
 
   //@OneToOne(cascade = CascadeType.ALL, mappedBy = "organizacion")
   //private Organizacion organizacion;
