@@ -81,7 +81,11 @@ INSERT INTO peticion(id,cif,email,info,nombre_organizacion) VALUES (4,'9999999',
 
 INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');
 
-INSERT INTO factura (id,name,fecha_factura,precio_total,usuario_asociado) VALUES(1,'alebangon','2020-03-03', 15.6,'alebangon');
+INSERT INTO factura (id,fecha_factura,precio_total,usuario_asociado) VALUES(1,'2020-03-03', 15.6,'alebangon');
+INSERT INTO factura (id,fecha_factura,precio_total,usuario_asociado) VALUES(2,'2020-05-03', 1.6,'romflorod');
+INSERT INTO factura (id,fecha_factura,precio_total,usuario_asociado) VALUES(3,'2020-09-03', 5.6,'ezepersos');
+INSERT INTO factura (id,fecha_factura,precio_total,usuario_asociado) VALUES(4,'2020-02-03', 68.1,'andmecsan');
+
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('pabgutceb', 'pabgutceb', TRUE);
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (2, 'Pablo', 'Gutiérrez Ceballos', 'pabloguti1006@gmail.com', 'pabgutceb');
