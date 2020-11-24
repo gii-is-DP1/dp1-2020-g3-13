@@ -29,8 +29,13 @@ public class UsuarioService {
 		return usuarioRepository.findAll();
 	}
 	
-	public Optional<Usuario> findUsuario(String usuarioID) {
-		return usuarioRepository.findBynombreUsuario(usuarioID);
+	public Usuario findUsuario(String usuarioID) {
+	//	return usuarioRepository.findBynombreUsuario(usuarioID);
+		return usuarioRepository.findById(usuarioID).get();
+	}
+
+	public void deleteUsuario(Usuario usuario) throws DataAccessException{
+		usuarioRepository.delete(usuario);
 	}
 	
 

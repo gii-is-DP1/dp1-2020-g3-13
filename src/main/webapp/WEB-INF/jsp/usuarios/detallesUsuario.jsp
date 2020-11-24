@@ -4,28 +4,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="usuarios">
+<petclinic:layout pageName="usuario">
 
-    <h2>admin Information</h2>
+    <h2>Detalles Usuario <c:out value="${usuario.nombreUsuario}"/></h2>
 
 
     <table class="table table-striped">
         <tr>
             <th>usuario</th>
-            <td><b><c:out value="${usuarios.nombreUsuario}"/></b></td>
+            <td><b><c:out value="${usuario.nombreUsuario}"/></b></td>
         </tr>
         <tr>
-            <th>autoridades</th>
-            <c:forEach items="${usuarios.autoridades}" var="autoridades">
+            <th>Autoridades</th>
+            <td><c:forEach items="${usuario.autoridades}" var="autoridades">
                 <c:out value="${autoridades.autoridad} "/>
-            </c:forEach>
+            </c:forEach></td>
+            
         </tr>
     </table>
 
-    <spring:url value="{adminId}/edit" var="editUrl">
+    <!-- <spring:url value="{adminId}/edit" var="editUrl">
         <spring:param name="adminId" value="${admin.id}"/>
     </spring:url>
-    <a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Editar Administrador</a>
+    <a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Editar Administrador</a> -->
 
 
 </petclinic:layout>

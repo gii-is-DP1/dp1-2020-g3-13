@@ -13,9 +13,10 @@
                             <table id="peticionesTable" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="width: 150px;">nombreOrganizacion</th>
-                                        <th style="width: 200px;">info</th>
-                                        <th style="width: 200px;">email</th>
+                                        <th style="width: 150px;">Nombre organizacion</th>
+                                        <th style="width: 200px;">Info</th>
+                                        <th style="width: 200px;">Email</th>
+                                        <th style="width: 200px;">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,8 +34,14 @@
                                             <td>
                                                 <c:out value="${peticion.email}" />
                                             </td>
-
-
+                                            <td>
+                                                <spring:url value="/peticion/{peticionid}" var="peticionUrl">
+                                                    <spring:param name="peticionid" value="${peticion.id}" />
+                                                </spring:url>
+                                                <a href="${fn:escapeXml(peticionUrl)}">
+                                                    <c:out value="${peticion.id}" />
+                                                </a>
+                                            </td>
                                             <!--
                 <td> 
                     <c:out value="${owner.user.username}"/> 
