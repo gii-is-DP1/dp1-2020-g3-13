@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/tiposentrada")
+@RequestMapping("/tipoentradas")
 public class TipoEntradaController {
     @Autowired
     private TipoEntradaService tipoEntradaService;
 
     @GetMapping
     public String listadoTiposEntrada(ModelMap modelMap){
-        String vista = "Eventos/listadoTiposEntrada";
+        String vista = "tipoentradas/listadoTipoEntradas";
         Iterable<TipoEntrada> tiposEntrada = tipoEntradaService.findAll();
         modelMap.addAttribute("TiposEntrada", tiposEntrada);
         return vista;

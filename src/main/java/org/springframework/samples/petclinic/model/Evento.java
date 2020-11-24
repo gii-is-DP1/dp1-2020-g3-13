@@ -14,11 +14,11 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "eventos")
-public class Evento extends NamedEntity{
+public class Evento extends BaseEntity{
 
     @Column(name = "tipoEvento")
     @NotEmpty
-    protected String tipoevento;
+    protected String tipoEvento;
 
     @Column(name = "descripcion")
     @NotEmpty

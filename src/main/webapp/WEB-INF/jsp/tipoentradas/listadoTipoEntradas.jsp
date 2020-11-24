@@ -5,31 +5,26 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="eventos">
-    <h2>Eventos</h2>
+<petclinic:layout pageName="tipoentradas">
+    <h2>Entradas</h2>
 
-    <table id="eventosTable" class="table table-striped">
+    <table id="tipoentradasTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Evento</th>
-            <th style="width: 200px;">TipoEvento</th>
-            <th style="width: 200px;">FechaInicio</th>
-
+            <th style="width: 150px;">Tipo de entrada</th>
+            <th style="width: 200px;">Precio</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${eventos}" var="evento">
+        <c:forEach items="${tipoentradas}" var="tipoentrada">
             <tr>
                 <td>
+                    <c:out value="${tipoentrada.nombre}"/></a>
+                </td>
+                <td>
+                    <c:out value="${tipoentrada.precio}"/></a>
+                </td>
 
-                    <c:out value="${evento.nombreEvento}"/></a>
-                </td>
-                <td>
-                    <c:out value="${evento.tipoEvento}"/></a>
-                </td>
-                <td>
-                    <c:out value="${evento.fechaInicio}"/>
-                </td>
                 
             </tr>
         </c:forEach>
@@ -37,5 +32,3 @@
     </table>
 
 </petclinic:layout>
-
-

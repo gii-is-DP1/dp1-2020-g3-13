@@ -21,10 +21,12 @@ public class Cliente extends Persona{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
-	private Usuario usuario;
+    private Usuario usuario;
+    
+
 
     @Column(name = "telefono")
-    @NotEmpty
+    //@NotEmpty
     protected Integer telefono;
 
       

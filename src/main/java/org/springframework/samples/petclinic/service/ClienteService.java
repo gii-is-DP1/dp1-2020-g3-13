@@ -25,6 +25,11 @@ public class ClienteService {
         return clienteRepo.findAll();
     }
 
+    @Transactional
+    public void saveCliente(Cliente cliente)throws DataAccessException{
+        clienteRepo.save(cliente);
+    }
+
     public Cliente findClienteByUsuario(String usuario) throws DataAccessException{
         return clienteRepo.listadoClienteByUsuario(usuario);
     }
