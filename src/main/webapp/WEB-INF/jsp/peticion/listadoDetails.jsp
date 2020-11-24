@@ -37,6 +37,14 @@
                                     <c:out value="" /> Rechazar
                                 </a></button>
                             </li>
+                            <li class="button">
+                                <button type="submit"><spring:url value="/peticion/{peticionid}/create" var="peticionUrl">
+                                    <spring:param name="peticionid" value="${peticion.id}" />
+                                </spring:url>
+                                <a href="${fn:escapeXml(peticionUrl)}">
+                                    <c:out value="" /> Aceptar
+                                </a></button>
+                            </li>
 
                         </ul>
                         <table class="table table-striped">
