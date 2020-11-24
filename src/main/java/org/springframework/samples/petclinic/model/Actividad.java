@@ -32,7 +32,7 @@ public class Actividad extends BaseEntity{
     @Column(name ="fechaFin")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFin;
-
+// CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombre_recinto", referencedColumnName = "nombre_recinto")
 	private LugarRealizacion lugarRealizacion;

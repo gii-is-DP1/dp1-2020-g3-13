@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,7 @@ import lombok.Data;
 @Table(name = "lugar_realizacion")
 public class LugarRealizacion extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Actividad> actividades;
+    private List<Actividad> actividades;
     
     @Column(name = "telefono")
     private Integer telefono;
