@@ -25,10 +25,17 @@ public class PeticionService {
 
 
             
+   // @Transactional
+    //public void saveOrganizacion(Peticion organizacion) throws DataAccessException{
+     //   peticionRepo.save(organizacion);
+    //}
+
     @Transactional
-    public void saveOrganizacion(Peticion organizacion) throws DataAccessException{
-        peticionRepo.save(organizacion);
-    }
+        public void savePeticion(Peticion organizacion) throws DataAccessException{
+             peticionRepo.save(organizacion);
+         }
+     
+
     //@Transactional
     //public Peticion findByPeticionByOrganizacionId(int organizacionId) throws DataAccessException{
       //  return peticionRepo.findPeticionByOrganizacionId(organizacionId);

@@ -39,6 +39,7 @@
                                                     <spring:param name="peticionid" value="${peticion.id}" />
                                                 </spring:url>
                                                 <a href="${fn:escapeXml(peticionUrl)}">
+                                                    <img class="img-responsive" src="/resources/images/icons/details.png" width="10%" />
                                                     <c:out value="${peticion.id}" />
                                                 </a>
                                             </td>
