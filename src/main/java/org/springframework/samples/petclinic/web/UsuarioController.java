@@ -56,10 +56,10 @@ public class UsuarioController {
         Organizacion o = organizacionService.findOrganizacionByUsuario(usuarioId); 
 
         for(Autoridades a: this.autoridadesService.listadoAutoridades(usuarioId)){
-            if(a.equals("cliente")){
+            if(a.getAutoridad().equals("cliente")){
                 this.clienteService.deleteCliente(c);
             }
-            if(a.equals("organizacion")){
+            if(a.getAutoridad().equals("organizacion")){
                 this.organizacionService.deleteOrganizacion(o);
             }
             this.autoridadesService.deleteAutoridades(a);
