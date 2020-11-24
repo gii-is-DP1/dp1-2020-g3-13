@@ -6,6 +6,9 @@ import java.util.Random;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Peticion;
 import org.springframework.samples.petclinic.model.Usuario;
@@ -26,7 +29,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/peticion")//seria la pagina donde estan todas las peticiones
 public class PeticionController {
-
+    @Autowired
+    private JavaMailSender mailSender;
     private static final String VIEWS_CREATE_FORM = "peticion/CreatePeticionForm";
     @Autowired
     private AutoridadesService autoridadesService;
@@ -100,6 +104,7 @@ public class PeticionController {
                 this.organizacionService.saveOrganizacion(newOrg); 
                 autoridadesService.saveAuthorities(newUsuario.getNombreUsuario(), "organizacion");
                 peticionServ.deletePeticion(peti.get());
+                sendEmail(newOrg, "Yes we can", "Chavales, podemos mandar emails, toma tu password: "+newOrg.getUsuario().getPassword() +"y tu usuario: "+newOrg.getUsuario().getNombreUsuario());
                 //Redirecciona a la lista de peticiones
                 return "redirect:/peticion";
                       
@@ -127,8 +132,19 @@ public class PeticionController {
 
             }
              
-             
-                          
+            //Envia un correo al destinatario dado con un asunto y contenido
+            //Este metodo solo sirve para emails simples.
+            public void sendEmail(Organizacion organizacion, String subject, String content) {
+
+                    SimpleMailMessage email = new SimpleMailMessage();
+        
+                    email.setTo(organizacion.getEmail());
+                    email.setSubject(subject);
+                    email.setText(content);
+                    
+                    mailSender.send(email);
+
+            }     
                             
 }
 
