@@ -131,7 +131,7 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (8,'andmecsan','cliente');
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('prueba1', 'prueba1', TRUE);
 INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (4,'andrea23', 'Ceballos', 'pepeceba@gmail.com','prueba1', 666777888);
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (12,'prueba1','cliente');
---INSERT INTO autoridades(id,usuario,autoridad) VALUES (10,'prueba1','organizacion');
+INSERT INTO autoridades(id,usuario,autoridad) VALUES (10,'prueba1','organizacion');
 
---INSERT INTO organizaciones(id,nombre_usuario, nombre_organizacion) VALUES (1, 'prueba1','PRIMO PEPE');
+INSERT INTO organizaciones(id,nombre_usuario, nombre_organizacion) VALUES (1, 'prueba1','PRIMO PEPE');
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (11,'pabgutceb','cliente');
