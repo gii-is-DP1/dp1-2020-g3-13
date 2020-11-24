@@ -18,11 +18,20 @@ public class Organizacion extends BaseEntity {
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nombre_organizacion", referencedColumnName = "nombre_organizacion")
-	private Peticion nombreOrganizacion;
+    @Column(name = "nombreOrganizacion")
+    @NotEmpty
+    private String nombreOrganizacion;
 
-    
+    @Column(name = "email")
+    @NotEmpty
+    private String email;
+
+    @Column(name = "cif")
+    @NotEmpty
+    private String cif;
+    @Column(name = "info")
+    @NotEmpty
+    private String info;
 
 
     
