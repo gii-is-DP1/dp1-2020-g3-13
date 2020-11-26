@@ -16,6 +16,7 @@ import org.springframework.samples.petclinic.service.AutoridadesService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.UsuarioService;
 import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -68,6 +69,22 @@ public class ClienteController {
 			return "redirect:/clientes/" /*+ admin.getId()*/;
 		}
     }
+
+    @GetMapping(value = "myprofile")
+    public String detallesCliente(ModelMap modelMap){
+
+        String vista="clientes/myprofile";
+       // Cliente cliente = clienteService.findClienteByUsuario();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Cliente cliente = clienteService.findClienteByUsuario(username);
+        System.out.println(cliente.getApellidos());
+        //Iterable<Cliente> clientes = clienteService.findCliente();
+        // Cliente cliente = clienteService.findClienteByUsuario();
+         modelMap.addAttribute("cliente", cliente);
+        return vista;
+    }
+
+    //SecurityContextHolder
     //TODO 
     @PostMapping(value = "/{clienteid}/edit")
     public String editCliente(@Valid Cliente cliente, BindingResult result, @PathVariable("clienteid") int clienteid, ModelMap model){
