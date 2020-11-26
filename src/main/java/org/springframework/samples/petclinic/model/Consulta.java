@@ -2,8 +2,11 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -27,4 +30,9 @@ public class Consulta extends NamedEntity{
     @Column(name = "fechaConsulta")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaConsulta;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nombre_evento", referencedColumnName = "nombreEvento")
+    private Evento evento;
+
 }
