@@ -35,7 +35,7 @@
                     <td><spring:url value="/usuarios/{usuarioId}/delete" var="deleteUrl">
                         <spring:param name="usuarioId" value="${usuarios.nombreUsuario}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Borrar Usuario</a></td>
+                    <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default" onclick="return confirm('¿Esta seguro de que quiere borrar el usuario?')">Borrar Usuario</a></td>
       
 <!--
                 <td> 

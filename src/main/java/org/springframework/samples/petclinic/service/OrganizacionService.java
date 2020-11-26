@@ -14,7 +14,7 @@ public class OrganizacionService {
         @Autowired
         private OrganizacionRepository organizacionRepo;
         @Autowired
-        private PeticionRepository peticionrepo;
+       // private PeticionRepository peticionrepo;
         @Transactional
         public int organizacionCount(){
             return (int) organizacionRepo.count();
@@ -32,5 +32,12 @@ public class OrganizacionService {
           //  peticionrepo.delete(peticionrepo.findPeticionByOrganizacion(organizacion.getNombreOrganizacion().getNombre_organizacion()));
 
         }
+
+           @Transactional      
+           public void saveOrganizacion(Organizacion organizacion) throws DataAccessException{
+            organizacionRepo.save(organizacion);
+
+       }
+   
     }
     
