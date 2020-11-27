@@ -34,6 +34,14 @@
                                                 <img class="img-responsive" src="/resources/images/icons/details.png" width="10%" />
 
                                             </a>
+                                            <li class="button">
+                                                <spring:url value="myprofile/delete" var="clienteUrl">                                  
+                                                </spring:url>
+                                                <a href="${fn:escapeXml(clienteUrl)}" class="btn btn-default">Eliminar cliente</a></button>
+                                                <c:out value="" /> 
+                                                </a>
+                                                </button>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
