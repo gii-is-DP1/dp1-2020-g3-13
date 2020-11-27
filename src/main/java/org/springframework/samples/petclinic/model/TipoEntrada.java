@@ -46,5 +46,6 @@ public class TipoEntrada extends BaseEntity{
     @Column(name = "numEntradas")
     @NotEmpty
     protected Integer numEntradas;
+
        
 }

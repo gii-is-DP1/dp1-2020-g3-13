@@ -16,9 +16,9 @@
         </tr>
         <tr>
             <th>Autoridades</th>
-            <td><c:forEach items="${usuario.autoridades}" var="autoridades">
-                <c:out value="${autoridades.autoridad} "/>
-            </c:forEach></td>
+            <td>
+                <c:out value="${usuario.autoridades.autoridad} "/>
+        </td>
             
         </tr>
     </table>

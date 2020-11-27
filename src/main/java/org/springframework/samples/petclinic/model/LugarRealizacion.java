@@ -22,13 +22,13 @@ import lombok.Data;
 @Table(name = "lugar_realizacion")
 public class LugarRealizacion extends BaseEntity{
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_admin", referencedColumnName="id")
-    private Admin admin;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
     private List<Actividad> actividades;
-    
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
+    private List<AlquilerEspacio> alquilerEspacio;
+
     @Column(name = "telefono")
     @NotNull
     private Integer telefono;
