@@ -7,6 +7,7 @@ import org.springframework.samples.petclinic.service.PeticionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -25,5 +26,11 @@ public class OrganizacionController {
         Iterable<Organizacion> organizaciones = organizacionService.findAll();
         modelMap.addAttribute("organizaciones", organizaciones);
         return vista;
+    }
+
+    @GetMapping(value = "/delete/{organizacionId}")
+    public String deleteOrganizacion(@PathVariable("organizacionId") int organizacionId, ModelMap model){
+        this.organizacionService.deleteOrganizacion(organizacionId);
+        return "redirect:/organizaciones";
     }
 }

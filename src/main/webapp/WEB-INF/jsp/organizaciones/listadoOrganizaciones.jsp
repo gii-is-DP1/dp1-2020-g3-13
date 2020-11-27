@@ -19,10 +19,11 @@
         <tbody>
         <c:forEach items="${organizaciones}" var="organizacion">
             <tr>
-                <td>
 
+                <td>
                     <c:out value="${organizacion.nombreOrganizacion}"/></a>
                 </td>
+
                 <td>
                     <c:out value="${organizacion.info}"/></a>
                 </td>
