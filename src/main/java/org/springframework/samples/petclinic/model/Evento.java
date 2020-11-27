@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -20,6 +21,15 @@ import lombok.Data;
 @Data
 @Table(name = "eventos")
 public class Evento extends BaseEntity{
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<Actividad> actividades;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<VentaEntrada> ventaEntrada;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<TipoEntrada> tipoEntradas;
 
     @Column(name = "tipoEvento")
     @NotEmpty
@@ -57,6 +67,13 @@ public class Evento extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_", referencedColumnName = "id")
     private List<TipoEntrada> tiposEntradas;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
+    private Organizacion organizacion;
+
+
+
 
        
 }

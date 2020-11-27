@@ -94,7 +94,8 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (2,'pabgutceb','admin');
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (3, 'Andrea', 'Mec San', 'andmecsan@gmail.com', 'andmecsan');
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (3,'andmecsan','admin');
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin) VALUES ('ConciertoEminem', 'Concierto', 'Cantan', '2021-06-11', 'muchas', 'Musica', '2021-06-11' );
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas) VALUES (8, 'Diurna', '2022-04-11', 15, '2022-05-10', 10);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (8, 'Diurna', '2022-04-11', 15, '2022-05-10', 10,1);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (9, 'Nocturna', '2022-04-11', 15, '2022-05-10', 10,1);
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('romflorod', 'romflorod', TRUE);
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (4, 'roman', 'flores rodriguez', 'romflorod@gmail.com', 'romflorod');
@@ -119,11 +120,9 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (1,'alebangon','admin');
 INSERT INTO usuarios(nombre_usuario,password,enabled) VALUES ('owner1','0wn3r',TRUE);
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (7,'owner1','owner');
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com', TRUE,'muy bonito', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
-INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,nombre_recinto) VALUES (1,'concierto de estopa', 'un buen concierto', '2020-12-12', '2020-12-12', 'caixaforum');
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,lugar_realizacion_id) VALUES (1,'concierto de estopa', 'un buen concierto', '2020-12-12', '2020-12-12', 1);
 
 --INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('andmecsan', 'andmecsan', TRUE);
-INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (3,'andrea23', 'Ceballos', 'pepeceba@gmail.com', 'andmecsan',  666777888);
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (8,'andmecsan','cliente');
 
 --INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (3, 'andrea', 'meca sanchez', 'andmecsan@alum.us.es', 'andmecsan');
 --INSERT INTO autoridades(id,usuario,autoridad) VALUES (9,'andmecsan','admin');
@@ -131,7 +130,3 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (8,'andmecsan','cliente');
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('prueba1', 'prueba1', TRUE);
 INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (4,'andrea23', 'Ceballos', 'pepeceba@gmail.com','prueba1', 666777888);
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (12,'prueba1','cliente');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (10,'prueba1','organizacion');
-
-INSERT INTO organizaciones(id,nombre_usuario, nombre_organizacion) VALUES (1, 'prueba1','PRIMO PEPE');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (11,'pabgutceb','cliente');

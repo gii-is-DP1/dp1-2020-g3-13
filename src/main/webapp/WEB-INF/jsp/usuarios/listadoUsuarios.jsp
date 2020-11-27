@@ -28,9 +28,8 @@
                 </td>
 
                 <td>
-                    <c:forEach items="${usuarios.autoridades}" var="autoridades">
-                        <c:out value="${autoridades.autoridad} "/>
-                    </c:forEach>
+                    <c:out value="${usuarios.autoridades.autoridad} "/>
+
                 </td>
                     <td><spring:url value="/usuarios/{usuarioId}/delete" var="deleteUrl">
                         <spring:param name="usuarioId" value="${usuarios.nombreUsuario}"/>
