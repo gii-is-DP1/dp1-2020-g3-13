@@ -94,7 +94,8 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (2,'pabgutceb','admin');
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (3, 'Andrea', 'Mec San', 'andmecsan@gmail.com', 'andmecsan');
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (3,'andmecsan','admin');
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin) VALUES ('ConciertoEminem', 'Concierto', 'Cantan', '2021-06-11', 'muchas', 'Musica', '2021-06-11' );
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas) VALUES (8, 'Diurna', '2022-04-11', 15, '2022-05-10', 10);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (8, 'Diurna', '2022-04-11', 15, '2022-05-10', 10,1);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (9, 'Nocturna', '2022-04-11', 15, '2022-05-10', 10,1);
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('romflorod', 'romflorod', TRUE);
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (4, 'roman', 'flores rodriguez', 'romflorod@gmail.com', 'romflorod');

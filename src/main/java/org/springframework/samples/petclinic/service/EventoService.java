@@ -22,4 +22,11 @@ public class EventoService {
     public Iterable<Evento> findAll(){
         return eventoRepository.findAll();
     }
+
+    public Evento findEventoById(int eventoId){
+        return eventoRepository.findById(eventoId).get();
+    }
+
+    
+    
 }

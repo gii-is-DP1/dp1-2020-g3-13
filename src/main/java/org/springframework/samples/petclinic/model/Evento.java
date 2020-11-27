@@ -21,6 +21,12 @@ import lombok.Data;
 @Table(name = "eventos")
 public class Evento extends BaseEntity{
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<VentaEntrada> ventaEntrada;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<TipoEntrada> tipoEntradas;
+
     @Column(name = "tipoEvento")
     @NotEmpty
     protected String tipoEvento;

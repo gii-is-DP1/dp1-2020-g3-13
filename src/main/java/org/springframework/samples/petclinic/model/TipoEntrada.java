@@ -19,9 +19,13 @@ import lombok.Data;
 @Table(name = "tipoentradas")
 public class TipoEntrada extends BaseEntity{
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "evento_id", referencedColumnName = "id")
+    private Evento evento;
+    
     @Column(name = "precio")
     @NotEmpty
-    protected Integer precio;
+    private Integer precio;
 
     @Column(name = "nombre")
     @NotEmpty
