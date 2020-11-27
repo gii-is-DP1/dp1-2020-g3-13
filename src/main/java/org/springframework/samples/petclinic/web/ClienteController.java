@@ -78,17 +78,22 @@ public class ClienteController {
         return vista;
     }
 
+    
+
     @GetMapping(value = "/myprofile/edit")
     public String initUpdateClienteForm(ModelMap model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Cliente clienteUpd = clienteService.findClienteByUsuario(username);
-        model.addAttribute(clienteUpd);
+        model.addAttribute("cliente",clienteUpd);
+
         return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
     }
 
     //TODO 
     @PostMapping(value = "/myprofile/edit")
     public String editCliente(@Valid Cliente cliente, BindingResult result, ModelMap model){
+
+
         Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 
 
@@ -97,23 +102,29 @@ public class ClienteController {
                 return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
               } else{
                   model.put("cliente", cliente);
-              System.out.println("he llegao");
-              BeanUtils.copyProperties(cliente, clienteActual, "email", "apellidos");
+
+            cliente.setId(clienteActual.getId());
+            cliente.setUsuario(clienteActual.getUsuario());
+            this.clienteService.saveCliente(cliente);
+                
+
                 try {
                     this.clienteService.saveCliente(clienteActual);
-                    System.out.println("he llegao213123");
+
                 } catch (Exception e) {
-                    result.rejectValue("name", "duplicate", "already exists");
+                  
 
                     return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
                 }
               return "redirect:/clientes/myprofile";
             }
         }
-        
+       
+
+    }
       
       
        // }
 
-    }
+    
     
