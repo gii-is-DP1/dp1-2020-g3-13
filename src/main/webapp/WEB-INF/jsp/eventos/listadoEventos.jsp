@@ -21,8 +21,10 @@
         <c:forEach items="${eventos}" var="evento">
             <tr>
                 <td>
-
-                    <c:out value="${evento.nombreEvento}"/></a>
+                    <spring:url value="/eventos/{eventosId}" var="eventoUrl">
+                    <spring:param name="eventosId" value="${evento.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(eventoUrl)}"><c:out value="${evento.nombreEvento}"/></a>    
                 </td>
                 <td>
                     <c:out value="${evento.tipoEvento}"/></a>
@@ -30,9 +32,9 @@
                 <td>
                     <c:out value="${evento.fechaInicio}"/>
                 </td>
-                
             </tr>
         </c:forEach>
+                         
         </tbody>
     </table>
 

@@ -15,8 +15,8 @@ import lombok.Data;
 @Entity
 @Table(name = "autoridades")
 public class Autoridades extends BaseEntity{
-    @ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "usuario")
+    @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuario", referencedColumnName = "nombreUsuario")
 	Usuario usuario;
 	
 	@Size(min = 3, max = 50)
