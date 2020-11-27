@@ -27,7 +27,13 @@
                                             <li>Nombre Usuario:
                                                 <c:out value="${cliente.usuario.nombreUsuario}" />
                                             </li>
+                                            <spring:url value="myprofile/edit" var="edicionUrl">
 
+                                            </spring:url>
+                                            <a href="${fn:escapeXml(edicionUrl)}">
+                                                <img class="img-responsive" src="/resources/images/icons/details.png" width="10%" />
+
+                                            </a>
                                         </ul>
                                     </div>
                                 </div>

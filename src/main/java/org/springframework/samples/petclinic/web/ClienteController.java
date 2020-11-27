@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    private static final String VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM ="clientes/createOrUpdateClienteForm";
+    private static final String VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM ="clientes/clienteUpdateForm";
     @Autowired
     private ClienteService clienteService;
     @Autowired
@@ -72,36 +72,48 @@ public class ClienteController {
 
     @GetMapping(value = "myprofile")
     public String detallesCliente(ModelMap modelMap){
-
         String vista="clientes/myprofile";
-       // Cliente cliente = clienteService.findClienteByUsuario();
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Cliente cliente = clienteService.findClienteByUsuario(username);
-        System.out.println(cliente.getApellidos());
-        //Iterable<Cliente> clientes = clienteService.findCliente();
-        // Cliente cliente = clienteService.findClienteByUsuario();
+        Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
          modelMap.addAttribute("cliente", cliente);
         return vista;
     }
 
-    //SecurityContextHolder
+    @GetMapping(value = "/myprofile/edit")
+    public String initUpdateClienteForm(ModelMap model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Cliente clienteUpd = clienteService.findClienteByUsuario(username);
+        model.addAttribute(clienteUpd);
+        return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
+    }
+
     //TODO 
-    @PostMapping(value = "/{clienteid}/edit")
-    public String editCliente(@Valid Cliente cliente, BindingResult result, @PathVariable("clienteid") int clienteid, ModelMap model){
-        if (result.hasErrors()) {
-            model.put("cliente", cliente);
-            return "/exception";
-        } else {
-            Cliente clienteUpdate = this.clienteService.findClienteByUsuario(cliente.getUsuario().toString());
-         //   Usuario usuarioUpdate = this.usuarioService.findUsuario();
-            BeanUtils.copyProperties(cliente, clienteUpdate,"nombre", "email", "apellidos", cliente.getUsuario().getPassword());
-          //  try {
-                this.clienteService.saveCliente(clienteUpdate);
-       //     } catch (DuplicatedPetNameException) {
-                //TODO: handle exception
-      //   }
+    @PostMapping(value = "/myprofile/edit")
+    public String editCliente(@Valid Cliente cliente, BindingResult result, ModelMap model){
+        Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+
+
+            if (result.hasErrors()) {
+                model.put("cliente", cliente);
+                return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
+              } else{
+                  model.put("cliente", cliente);
+              System.out.println("he llegao");
+              BeanUtils.copyProperties(cliente, clienteActual, "email", "apellidos");
+                try {
+                    this.clienteService.saveCliente(clienteActual);
+                    System.out.println("he llegao213123");
+                } catch (Exception e) {
+                    result.rejectValue("name", "duplicate", "already exists");
+
+                    return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
+                }
+              return "redirect:/clientes/myprofile";
+            }
         }
-        return "redirect:/";
+        
+      
+      
+       // }
+
     }
     
-}
