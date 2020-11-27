@@ -1,10 +1,15 @@
 package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -43,6 +48,16 @@ public class Evento extends BaseEntity{
     @Column(name = "fechaFin")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFin;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
+    private Organizacion organizacion;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<Actividad> actividades;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<TipoEntrada> tipoEntradas;
 
        
 }
