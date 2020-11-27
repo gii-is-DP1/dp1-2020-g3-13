@@ -47,8 +47,5 @@ public class TipoEntrada extends BaseEntity{
     @NotEmpty
     protected Integer numEntradas;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "evento_id", referencedColumnName = "id")
-    private Evento evento;
        
 }

@@ -22,6 +22,9 @@ import lombok.Data;
 public class Evento extends BaseEntity{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<Actividad> actividades;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<VentaEntrada> ventaEntrada;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
@@ -59,11 +62,8 @@ public class Evento extends BaseEntity{
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     private Organizacion organizacion;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<Actividad> actividades;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<TipoEntrada> tipoEntradas;
+
 
        
 }

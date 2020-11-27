@@ -122,14 +122,14 @@ public class ClienteController {
             }
         }
         @GetMapping(path ="myprofile/delete")
-        public String borrarPeticion(@Valid Cliente cliente, BindingResult result, ModelMap model){
-            System.out.println("kakakkak");
+        public String borrarCliente(@Valid Cliente cliente, BindingResult result, ModelMap model){
+ 
             Cliente clienteActual2 = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
             usuarioService.deleteUsuario(clienteActual2.getUsuario());
             clienteService.deleteCliente(clienteActual2);
-            model.addAttribute("message","event  succesfully deleted!"); 
 
-            return "redirect:/";
+
+            return "redirect:/logout";
     
         }
        
