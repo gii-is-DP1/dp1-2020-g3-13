@@ -55,15 +55,13 @@ public class UsuarioController {
         Cliente c = clienteService.findClienteByUsuario(usuarioId);
         Organizacion o = organizacionService.findOrganizacionByUsuario(usuarioId); 
 
-        for(Autoridades a: this.autoridadesService.listadoAutoridades(usuarioId)){
-            if(a.equals("cliente")){
+            if(u.getAutoridades().getAutoridad().equals("cliente")){
                 this.clienteService.deleteCliente(c);
             }
-            if(a.equals("organizacion")){
+            if(u.getAutoridades().getAutoridad().equals("organizacion")){
                 this.organizacionService.deleteOrganizacion(o);
             }
-            this.autoridadesService.deleteAutoridades(a);
-        }
+        
         this.usuarioService.deleteUsuario(u);
         return "redirect:/usuarios";
     }

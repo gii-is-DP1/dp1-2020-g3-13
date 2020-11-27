@@ -1,8 +1,10 @@
 package org.springframework.samples.petclinic.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -31,4 +33,7 @@ public class Peticion extends BaseEntity{
     @NotEmpty
     protected String info;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nombre_admin", referencedColumnName = "nombre_usuario")
+    private Admin admin;
 }
