@@ -1,9 +1,12 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -18,11 +21,23 @@ public class Organizacion extends BaseEntity {
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nombre_organizacion", referencedColumnName = "nombre_organizacion")
-	private Peticion nombreOrganizacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion")
+    private List<Evento> eventos;
 
-    
+    @Column(name = "nombreOrganizacion")
+    @NotEmpty
+    private String nombreOrganizacion;
+
+    @Column(name = "email")
+    @NotEmpty
+    private String email;
+
+    @Column(name = "cif")
+    @NotEmpty
+    private String cif;
+    @Column(name = "info")
+    @NotEmpty
+    private String info;
 
 
     

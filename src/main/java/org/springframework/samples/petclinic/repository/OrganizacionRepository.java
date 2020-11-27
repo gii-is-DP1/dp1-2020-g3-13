@@ -7,7 +7,8 @@ import org.springframework.samples.petclinic.model.Organizacion;
 public interface OrganizacionRepository extends CrudRepository<Organizacion, Integer>{
     
 
+   
     @Query("SELECT organizacion FROM Organizacion organizacion WHERE organizacion.usuario.nombreUsuario =:usuario")
     public Organizacion listadoOrganizacionByUsuario(String usuario);
-
+    public Organizacion findById(int id);
 }

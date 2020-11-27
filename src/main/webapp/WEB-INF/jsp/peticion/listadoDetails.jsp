@@ -30,12 +30,22 @@
 
                             </li>
                             <li class="button">
-                                <button type="submit"><spring:url value="/peticion/delete/{peticionid}" var="peticionUrl">
+                                <spring:url value="/peticion/delete/{peticionid}" var="peticionUrl">
                                     <spring:param name="peticionid" value="${peticion.id}" />
                                 </spring:url>
-                                <a href="${fn:escapeXml(peticionUrl)}">
-                                    <c:out value="" /> Rechazar
-                                </a></button>
+                                <a href="${fn:escapeXml(peticionUrl)}" class="btn btn-default" onclick="return confirm('¿Eliminar esta petición?\nCIF: ${peticion.cif}')">Eliminar organizacion</a></button>
+                                <c:out value="" /> Rechazar
+                                </a>
+                                </button>
+                            </li>
+                            <li class="button">
+                                <spring:url value="/peticion/{peticionid}/create" var="peticionUrl">
+                                    <spring:param name="peticionid" value="${peticion.id}" />
+                                </spring:url>
+                                <a href="${fn:escapeXml(peticionUrl)}" class="btn btn-default" onclick="return confirm('Â¿Crear esta nueva organizaciÃ³n?\nCIF: ${peticion.cif}')">Crear organizacion</a></button>
+                                <c:out value="" /> Aceptar
+                                </a>
+                                </button>
                             </li>
 
                         </ul>

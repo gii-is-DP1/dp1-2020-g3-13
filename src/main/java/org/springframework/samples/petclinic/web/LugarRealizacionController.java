@@ -56,7 +56,7 @@ public class LugarRealizacionController {
 			//creating owner, user and authorities
 			this.lugarRealizacionService.saveLugarRealizacion(lugarRealizacion);
 			
-			return "redirect:/lugaresRealizacion/" + lugarRealizacion.getId();
+			return "redirect:/lugaresRealizacion/";
 		}
 	}
 }
