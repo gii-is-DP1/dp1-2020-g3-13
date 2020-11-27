@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 //tienen que aperecer botones a www.paco.es/peticiones/listado/peticion concreto
@@ -131,7 +132,7 @@ public class PeticionController {
                 return res;
 
             }
-             
+            @SessionScope()
             //Envia un correo al destinatario dado con un asunto y contenido
             //Este metodo solo sirve para emails simples.
             public void sendEmail(Organizacion organizacion, String subject, String content) {
