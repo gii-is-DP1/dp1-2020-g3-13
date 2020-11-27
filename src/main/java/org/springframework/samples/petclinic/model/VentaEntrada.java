@@ -23,6 +23,11 @@ import lombok.Data;
 @Entity
 @Table(name = "ventaEntrada")
 public class VentaEntrada extends BaseEntity {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="cliente_id",referencedColumnName = "id")
+    private Cliente cliente;
+    @OneToOne(cascade = CascadeType.ALL)
+    private LineaFactura lf;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "evento_id", referencedColumnName = "id")
@@ -47,5 +52,6 @@ public class VentaEntrada extends BaseEntity {
     @Column(name = "dni")
     @NotEmpty
     protected String dni;
+    
     
 }

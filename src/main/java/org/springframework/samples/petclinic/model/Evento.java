@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -19,6 +21,9 @@ import lombok.Data;
 @Table(name = "eventos")
 public class Evento extends BaseEntity{
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<Actividad> actividades;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<VentaEntrada> ventaEntrada;
 
@@ -52,6 +57,13 @@ public class Evento extends BaseEntity{
     @Column(name = "fechaFin")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFin;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
+    private Organizacion organizacion;
+
+
+
 
        
 }

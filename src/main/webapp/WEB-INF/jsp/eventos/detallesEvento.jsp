@@ -8,7 +8,6 @@
 
     <h2>Detalles de <c:out value="${evento.nombreEvento}"/></h2>
 
-
     <table class="table table-striped">
         <tr>
             <th>Tipo de Evento</th>
