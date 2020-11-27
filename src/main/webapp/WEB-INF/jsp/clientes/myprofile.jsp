@@ -5,5 +5,38 @@
                 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-                
-                        <p>me quiero suicidar</p>
+
+                            <petclinic:layout pageName="clientes">
+
+                                <div class="centrar-datos">
+                                    <h2>Mi perfil</h2>
+                                    <div class="listar-Datos">
+                                        <ul>
+                                            <li>Nombre:
+                                                <c:out value="${cliente.nombre}" />
+                                            </li>
+                                            <li>Apellidos:
+                                                <c:out value="${cliente.apellidos}" />
+                                            </li>
+                                            <li>Email:
+                                                <c:out value="${cliente.email}" />
+                                            </li>
+                                            <li>Telefono:
+                                                <c:out value="${cliente.telefono}" />
+                                            </li>
+                                            <li>Nombre Usuario:
+                                                <c:out value="${cliente.usuario.nombreUsuario}" />
+                                            </li>
+                                            <spring:url value="myprofile/edit" var="edicionUrl">
+
+                                            </spring:url>
+                                            <a href="${fn:escapeXml(edicionUrl)}">
+                                                <img class="img-responsive" src="/resources/images/icons/details.png" width="10%" />
+
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                            </petclinic:layout>
