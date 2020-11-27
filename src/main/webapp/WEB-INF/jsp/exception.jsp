@@ -1,14 +1,18 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+    <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+        <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="error">
+            <petclinic:layout pageName="error">
 
-    <spring:url value="/resources/images/pets.png" var="petsImage"/>
-    <img src="${petsImage}"/>
+                <spring:url value="/resources/images/errorimage.png" var="errorImage" />
+                <img width="20%" src="${errorImage}" />
+                <br>
+                <br>
+                <br>
+                <br>
 
-    <h2>Something happened...</h2>
+                <h2>Illo, te has colao' ...</h2>
 
-    <p>${exception.message}</p>
+                <p>${exception.message}</p>
 
-</petclinic:layout>
+            </petclinic:layout>
