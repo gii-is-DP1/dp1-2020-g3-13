@@ -7,29 +7,36 @@
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
                             <petclinic:layout pageName="clientes">
-                                <h2>
-                                    <c:if test="${cliente['new']}">Registro de nuevo </c:if> Cliente
-                                </h2>
-                                <form:form modelAttribute="cliente" class="form-horizontal" id="add-cliente-form">
-                                    <div class="form-group has-feedback">
-                                        <petclinic:inputField label="Nombre de usuario" name="usuario.nombreUsuario" />
-                                        <petclinic:inputField label="Contraseña" name="usuario.password" />
-                                        <petclinic:inputField label="Nombre" name="nombre" />
-                                        <petclinic:inputField label="Apellidos" name="apellidos" />
-                                        <petclinic:inputField label="Email" name="email" />
-                                        <petclinic:inputField label="Teléfono" name="telefono" />
+
+                                <div class="centrar-datos">
+                                    <h2>Mi perfil</h2>
+                                    <div class="listar-Datos">
+                                        <ul>
+                                            <li>Nombre:
+                                                <c:out value="${cliente.nombre}" />
+                                            </li>
+                                            <li>Apellidos:
+                                                <c:out value="${cliente.apellidos}" />
+                                            </li>
+                                            <li>Email:
+                                                <c:out value="${cliente.email}" />
+                                            </li>
+                                            <li>Telefono:
+                                                <c:out value="${cliente.telefono}" />
+                                            </li>
+                                            <li>Nombre Usuario:
+                                                <c:out value="${cliente.usuario.nombreUsuario}" />
+                                            </li>
+                                            <spring:url value="myprofile/edit" var="edicionUrl">
+
+                                            </spring:url>
+                                            <a href="${fn:escapeXml(edicionUrl)}">
+                                                <img class="img-responsive" src="/resources/images/icons/details.png" width="10%" />
+
+                                            </a>
+                                        </ul>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <c:choose>
-                                                <c:when test="${cliente['new']}">
-                                                    <button class="btn btn-default" type="submit">Registrarse como cliente</button>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <button class="btn btn-default" type="submit">Editar cliente</button>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div>
-                                </form:form>
+                                </div>
+
+
                             </petclinic:layout>
