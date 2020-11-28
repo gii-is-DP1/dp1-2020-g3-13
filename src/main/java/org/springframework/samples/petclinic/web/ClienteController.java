@@ -72,66 +72,7 @@ public class ClienteController {
 		}
     }
 
-    @GetMapping(value = "myprofile")
-    public String detallesCliente(ModelMap modelMap){
-        String vista="clientes/myprofile";
-        Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-         modelMap.addAttribute("cliente", cliente);
-        return vista;
-    }
 
-    
-
-    @GetMapping(value = "/myprofile/edit")
-    public String initUpdateClienteForm(ModelMap model) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Cliente clienteUpd = clienteService.findClienteByUsuario(username);
-        model.addAttribute("cliente",clienteUpd);
-
-        return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
-    }
-
-    //TODO 
-    @PostMapping(value = "/myprofile/edit")
-    public String editCliente(@Valid Cliente cliente, BindingResult result, ModelMap model){
-
-
-        Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-
-
-            if (result.hasErrors()) {
-                model.put("cliente", cliente);
-                return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
-              } else{
-                  model.put("cliente", cliente);
-
-            cliente.setId(clienteActual.getId());
-            cliente.setUsuario(clienteActual.getUsuario());
-            this.clienteService.saveCliente(cliente);
-                
-
-                try {
-                    this.clienteService.saveCliente(clienteActual);
-
-                } catch (Exception e) {
-                  
-
-                    return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
-                }
-              return "redirect:/clientes/myprofile";
-            }
-        }
-        @GetMapping(path ="myprofile/delete")
-        public String borrarCliente(@Valid Cliente cliente, BindingResult result, ModelMap model){
- 
-            Cliente clienteActual2 = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-            usuarioService.deleteUsuario(clienteActual2.getUsuario());
-            clienteService.deleteCliente(clienteActual2);
-
-
-            return "redirect:/logout";
-    
-        }
        
 
     }

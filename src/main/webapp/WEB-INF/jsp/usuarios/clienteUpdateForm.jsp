@@ -9,7 +9,7 @@
                             <h2>
                                 <c:if test="${cliente['new']}">New </c:if> Cliente
                             </h2>
-                            <form:form modelAttribute="cliente" class="form-horizontal" action="/clientes/myprofile/edit">
+                            <form:form modelAttribute="cliente" class="form-horizontal" action="/usuarios/myprofile/edit">
 
                                 <div class="form-group has-feedback">
                                     <div class="form-group">
