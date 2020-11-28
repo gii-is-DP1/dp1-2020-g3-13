@@ -5,8 +5,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.repository.OrganizacionRepository;
 import org.springframework.samples.petclinic.repository.PeticionRepository;
+import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 public class OrganizacionService {
@@ -26,18 +28,21 @@ public class OrganizacionService {
         public Organizacion findOrganizacionByUsuario(String usuario) throws DataAccessException{
             return organizacionRepo.listadoOrganizacionByUsuario(usuario);
         }
-    
-        public void deleteOrganizacion(Organizacion organizacion) throws DataAccessException{
-            organizacionRepo.delete(organizacion);
+
+        public void deleteOrganizacion(Organizacion o) throws DataAccessException{
+            organizacionRepo.delete(o);
           //  peticionrepo.delete(peticionrepo.findPeticionByOrganizacion(organizacion.getNombreOrganizacion().getNombre_organizacion()));
 
         }
 
-           @Transactional      
+           @Transactional
            public void saveOrganizacion(Organizacion organizacion) throws DataAccessException{
             organizacionRepo.save(organizacion);
 
        }
-   
+
+
+
+
+
     }
-    

@@ -24,7 +24,7 @@ public class AdminService {
     @Transactional
 	public void saveAdmin(Admin admin) throws DataAccessException {
 		adminRepo.save(admin);
-}
+    }
 
     @Transactional(readOnly = true)
 	public Admin findById(int adminId) throws DataAccessException {
