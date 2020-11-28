@@ -70,63 +70,9 @@ public class OrganizacionController {
 		}
     }
 
-    @GetMapping(value = "/myprofile")
-    public String detallesOrganizacion(ModelMap modelMap){
-        String vista="organizaciones/myprofile";
-        Organizacion organizacion = organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-         modelMap.addAttribute("organizacion", organizacion);
-        return vista;
-    }
+
 
     
 
-    @GetMapping(value = "/myprofile/edit")
-    public String initUpdateOrganizacionForm(ModelMap model) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Organizacion organizacionUpd = organizacionService.findOrganizacionByUsuario(username);
-        model.addAttribute("organizacion",organizacionUpd);
-
-        return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
-    }
-
-    @PostMapping(value = "/myprofile/edit")
-    public String editOrganizacion(@Valid Organizacion organizacion, BindingResult result, ModelMap model){
-
-
-        Organizacion org = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-
-
-            if (result.hasErrors()) {
-                model.put("organizacion", organizacion);
-                return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
-              } else{
-                  model.put("organizacion", organizacion);
-
-            organizacion.setId(org.getId());
-            organizacion.setUsuario(org.getUsuario());
-            this.organizacionService.saveOrganizacion(organizacion);
-                
-
-                try {
-                    this.organizacionService.saveOrganizacion(org);
-
-                } catch (Exception e) {
-                  
-
-                    return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
-                }
-              return "redirect:/organizaciones/myprofile";
-            }
-        }
-        @GetMapping(path ="myprofile/delete")
-        public String borrarOrganizacion(@Valid Organizacion organizacion, BindingResult result, ModelMap model){
- 
-            Organizacion org2 = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-            usuarioService.deleteUsuario(org2.getUsuario());
-            organizacionService.deleteOrganizacion(org2);
-
-
-            return "redirect:/logout";
     
-        }
 }
