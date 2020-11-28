@@ -26,9 +26,6 @@ public class EventoService {
         return eventoRepository.findAll();
     }
 
-    public Optional<Evento> findEventoById(int eventoId){
-        return eventoRepository.findById(eventoId);
-    }
 
 	public void save(@Valid Evento evento) {
 
@@ -39,7 +36,7 @@ public class EventoService {
         eventoRepository.delete(evento);
     }
 
-    public Evento findEventoById(int eventoId){
+    public Evento findEventoById(int eventoId) {
         return eventoRepository.findById(eventoId).get();
     }
 

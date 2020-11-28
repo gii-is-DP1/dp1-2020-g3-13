@@ -45,42 +45,7 @@ public class EventoController {
     }
 
 
-    @GetMapping(path="/new")
-    public String crearEvento(ModelMap modelMap){
-        String vista = "eventos/editarEvento";
-        modelMap.addAttribute("eventos", new Evento());
-        return vista;
-    }
-
-    @PostMapping(path="/save")
-    public String guardarEvento(@Valid Evento evento, BindingResult resultado, ModelMap modelMap){
-        String vista = "eventos/listadoEventos";
-        if(resultado.hasErrors())
-        {
-            modelMap.addAttribute("evento", evento);
-            return "eventos/editarEvento";
-        }
-        else
-        {
-            eventoService.save(evento);
-            modelMap.addAttribute("message", "Evento creado correctamente");
-        }
-        return vista;
-    }
-
-    @GetMapping(path="/delete/{eventoId}")
-    public String borrarEvento(@PathParam("eventoid") int eventoId, ModelMap modelMap){
-        String vista="eventos/listadoEventos";;
-        Optional<Evento> evento = eventoService.findEventoById(eventoId);
-        if(evento.isPresent()){
-            eventoService.delete(evento.get());
-            modelMap.addAttribute("message", "Evento eliminado correctamente");
-        }else{
-            modelMap.addAttribute("message", "No se pudo encontrar el evento");
-        }
-        return vista;
-
-    }
+    
 
 
 
