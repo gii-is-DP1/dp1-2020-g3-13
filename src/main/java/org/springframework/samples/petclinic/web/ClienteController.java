@@ -15,7 +15,6 @@ import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.service.AutoridadesService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.UsuarioService;
-import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 import org.springframework.samples.petclinic.service.UsuarioService;
 import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -141,3 +140,5 @@ public class ClienteController {
 
     
     
+
+       

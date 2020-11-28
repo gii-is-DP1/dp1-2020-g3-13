@@ -130,3 +130,9 @@ INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,f
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('prueba1', 'prueba1', TRUE);
 INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (4,'andrea23', 'Ceballos', 'pepeceba@gmail.com','prueba1', 666777888);
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (12,'prueba1','cliente');
+
+INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('pakitocena123', 'chipirones', TRUE);
+INSERT INTO organizaciones(id,cif, email, info, nombre_organizacion, nombre_usuario) VALUES (5,'A1373B', 'cenitaspaco@gmail.com','empresa de cenas', 'Paco el cenas', 'pakitocena123');
+INSERT INTO autoridades(id,usuario,autoridad) VALUES (15,'pakitocena123','organizacion');
+
+
