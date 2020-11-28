@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UsuarioController {
     private static final String VIEWS_CREATE_FORM = "usuarios/createUsuarioForm";
     private static final String VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM ="usuarios/clienteUpdateForm";
+    private static final String VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM ="usuarios/organizacionUpdateForm";
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
@@ -74,9 +75,18 @@ public class UsuarioController {
 
     @GetMapping(value = "/myprofile")
     public String detallesUsuario(ModelMap modelMap){
-        String vista="usuarios/myprofile";
-        Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-         modelMap.addAttribute("cliente", cliente);
+        String vista = "redirect:/usuarios/myprofile";
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if(!(clienteService.findClienteByUsuario(username)==null)){
+            vista="usuarios/myProfileClientes";
+            Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+            modelMap.addAttribute("cliente", cliente);
+        }if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
+            vista="usuarios/myProfileOrganizaciones";
+            Organizacion organizacion = organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+            modelMap.addAttribute("organizacion", organizacion);
+            return vista;
+        }
         return vista;
     }
 
@@ -84,21 +94,27 @@ public class UsuarioController {
 
     @GetMapping(value = "/myprofile/edit")
     public String initUpdateClienteForm(ModelMap model) {
+  
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Cliente clienteUpd = clienteService.findClienteByUsuario(username);
-        model.addAttribute("cliente",clienteUpd);
-
-        return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
+        if(!(clienteService.findClienteByUsuario(username)==null)){
+            Cliente clienteUpd = clienteService.findClienteByUsuario(username);
+            model.addAttribute("cliente",clienteUpd);
+            return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
+        }
+        if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
+            Organizacion org = organizacionService.findOrganizacionByUsuario(username);
+            model.addAttribute("organizacion",org);
+            return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
+        }
+        return "redirect:/usuarios/myprofile";
     }
 
     //TODO 
     @PostMapping(value = "/myprofile/edit")
-    public String editCliente(@Valid Cliente cliente, BindingResult result, ModelMap model){
-
-
-        Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-
-
+    public String editCliente(Cliente cliente, Organizacion organizacion, BindingResult result, ModelMap model){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if(!(clienteService.findClienteByUsuario(username)==null)){
+            Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
             if (result.hasErrors()) {
                 model.put("cliente", cliente);
                 return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
@@ -106,30 +122,112 @@ public class UsuarioController {
                   model.put("cliente", cliente);
 
             cliente.setId(clienteActual.getId());
-            cliente.setUsuario(clienteActual.getUsuario());
-            this.clienteService.saveCliente(cliente);
-                
+            cliente.getUsuario().setEnabled(true);
 
+            this.clienteService.saveCliente(cliente);
                 try {
                     this.clienteService.saveCliente(clienteActual);
 
                 } catch (Exception e) {
-                  
-
                     return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
                 }
-              return "redirect:/usuarios/myprofile";
+            }
+        }
+        if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
+            Organizacion org = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+            if (result.hasErrors()) {
+                model.put("organizacion", organizacion);
+                return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
+              } else{
+                  model.put("organizacion", organizacion);
+            organizacion.setId(org.getId());
+            organizacion.getUsuario().setEnabled(true);
+
+            this.organizacionService.saveOrganizacion(organizacion);
+                try {
+                    this.organizacionService.saveOrganizacion(org);
+                } catch (Exception e) {
+                    return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
+                }
+        }
+    }
+        return "redirect:/usuarios/myprofile";
+        }
+        
+    
+
+        @GetMapping(path ="myprofile/delete")
+        public String borrarCliente( ModelMap model){
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!(clienteService.findClienteByUsuario(username)==null)){
+                Cliente clienteActual2 = this.clienteService.findClienteByUsuario(username);
+                usuarioService.deleteUsuario(clienteActual2.getUsuario());
+                clienteService.deleteCliente(clienteActual2);
+            }if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
+                Organizacion org2 = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+                usuarioService.deleteUsuario(org2.getUsuario());
+                organizacionService.deleteOrganizacion(org2);
+
+            }
+            return "redirect:/logout";
+    
+        }
+/*
+        @GetMapping(value = "/myprofile/edit")
+    public String initUpdateOrganizacionForm(ModelMap model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Organizacion organizacionUpd = organizacionService.findOrganizacionByUsuario(username);
+        model.addAttribute("organizacion",organizacionUpd);
+
+        return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
+    }
+
+    @PostMapping(value = "/myprofile/edit")
+    public String editOrganizacion(@Valid Organizacion organizacion, BindingResult result, ModelMap model){
+
+
+        Organizacion org = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+
+
+            if (result.hasErrors()) {
+                model.put("organizacion", organizacion);
+                return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
+              } else{
+                  model.put("organizacion", organizacion);
+
+            organizacion.setId(org.getId());
+            organizacion.setUsuario(org.getUsuario());
+            this.organizacionService.saveOrganizacion(organizacion);
+                
+
+                try {
+                    this.organizacionService.saveOrganizacion(org);
+
+                } catch (Exception e) {
+                  
+
+                    return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
+                }
+              return "redirect:/organizaciones/myprofile";
             }
         }
         @GetMapping(path ="myprofile/delete")
-        public String borrarCliente(@Valid Cliente cliente, BindingResult result, ModelMap model){
+        public String borrarOrganizacion(@Valid Organizacion organizacion, BindingResult result, ModelMap model){
  
-            Cliente clienteActual2 = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-            usuarioService.deleteUsuario(clienteActual2.getUsuario());
-            clienteService.deleteCliente(clienteActual2);
+            Organizacion org2 = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+            usuarioService.deleteUsuario(org2.getUsuario());
+            organizacionService.deleteOrganizacion(org2);
 
 
             return "redirect:/logout";
     
         }
+            @GetMapping(value = "/myprofile")
+    public String detallesOrganizacion(ModelMap modelMap){
+        String vista="organizaciones/myprofile";
+        Organizacion organizacion = organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+         modelMap.addAttribute("organizacion", organizacion);
+        return vista;
+    }
+        */
 }

@@ -9,7 +9,7 @@
                             <h2>
                                 <c:if test="${organizacion['new']}">New </c:if> Organizacion
                             </h2>
-                            <form:form modelAttribute="organizacion" class="form-horizontal" action="/organizaciones/myprofile/edit">
+                            <form:form modelAttribute="organizacion" class="form-horizontal" action="/usuarios/myprofile/edit">
 
                                 <div class="form-group has-feedback">
                                     <div class="form-group">
@@ -23,6 +23,8 @@
                                     <petclinic:inputField label="email" name="email" />
                                     <petclinic:inputField label="cif" name="cif" />
                                     <petclinic:inputField label="info" name="info" />
+                                    <petclinic:inputField label="usuario" name="usuario.nombreUsuario" />
+                                    <petclinic:inputField label="contraseña" name="usuario.password" />
 
 
                                 </div>
