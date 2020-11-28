@@ -6,9 +6,12 @@
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
+                            <head>
+                                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                            </head>
                             <petclinic:layout pageName="peticion/new">
                                 <h2>
-                                    <c:if test="${peticion['new']}">New </c:if> Peticion
+                                    <c:if test="${peticion['new']}">Registrarse como Organización </c:if>
                                 </h2>
                                 <form:form modelAttribute="peticion" class="form-horizontal" id="add-admin-form">
                                     <div class="form-group has-feedback">
