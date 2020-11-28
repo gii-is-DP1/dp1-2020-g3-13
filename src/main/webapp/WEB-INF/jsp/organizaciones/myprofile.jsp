@@ -6,26 +6,25 @@
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-                            <petclinic:layout pageName="clientes">
-
+                            <petclinic:layout pageName="organizaciones ">
                                 <div class="centrar-datos">
                                     <h2>Mi perfil</h2>
                                     <div class="listar-Datos">
                                         <ul>
                                             <li>Nombre:
-                                                <c:out value="${cliente.nombre}" />
+                                                <c:out value="${organizacion.nombreOrganizacion}" />
                                             </li>
-                                            <li>Apellidos:
-                                                <c:out value="${cliente.apellidos}" />
+                                            <li>Cif:
+                                                <c:out value="${organizacion.cif}" />
                                             </li>
                                             <li>Email:
-                                                <c:out value="${cliente.email}" />
+                                                <c:out value="${organizacion.email}" />
                                             </li>
-                                            <li>Telefono:
-                                                <c:out value="${cliente.telefono}" />
+                                            <li>Info:
+                                                <c:out value="${organizacion.info}" />
                                             </li>
                                             <li>Nombre Usuario:
-                                                <c:out value="${cliente.usuario.nombreUsuario}" />
+                                                <c:out value="${organizacion.usuario.nombreUsuario}" />
                                             </li>
                                             <spring:url value="myprofile/edit" var="edicionUrl">
 
@@ -35,9 +34,9 @@
 
                                             </a>
                                             <li class="button">
-                                                <spring:url value="myprofile/delete" var="clienteUrl">                                  
+                                                <spring:url value="myprofile/delete" var="organizacionUrl">                                  
                                                 </spring:url>
-                                                <a href="${fn:escapeXml(clienteUrl)}" class="btn btn-default">Eliminar cliente</a></button>
+                                                <a href="${fn:escapeXml(organizacionUrl)}" class="btn btn-default">Eliminar organizacion</a></button>
                                                 <c:out value="" /> 
                                                 </a>
                                                 </button>

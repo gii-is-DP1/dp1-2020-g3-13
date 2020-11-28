@@ -91,8 +91,7 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<p>
-												<a href="/clientes/myprofile" class="btn btn-primary btn-block">My Profile</a>
-
+												<a href="/usuarios/myprofile" class="btn btn-primary btn-block">My Profile</a>
 											</p>
 										</div>
 									</div>
