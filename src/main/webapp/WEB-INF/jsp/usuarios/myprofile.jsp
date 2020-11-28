@@ -6,8 +6,8 @@
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-                            <petclinic:layout pageName="clientes">
-
+                            <petclinic:layout pageName="usuarios">
+                            
                                 <div class="centrar-datos">
                                     <h2>Mi perfil</h2>
                                     <div class="listar-Datos">
