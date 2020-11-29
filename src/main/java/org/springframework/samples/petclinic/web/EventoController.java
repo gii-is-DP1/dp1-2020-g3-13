@@ -42,6 +42,13 @@ public class EventoController {
         return vista;
     }
 
+    @GetMapping("/{eventosId}")
+    public ModelAndView showEvento(@PathVariable("eventosId") int eventosId) {
+        ModelAndView mav = new ModelAndView("eventos/detallesEvento");
+        mav.addObject(this.eventoService.findEventoById(eventosId));
+        return mav;
+    }
+
     @GetMapping(value="/new")
     public String crearEvento(ModelMap modelMap){
         String vista="eventos/editarEvento";
