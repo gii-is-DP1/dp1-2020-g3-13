@@ -24,8 +24,7 @@
                                     <petclinic:inputField label="telefono" name="telefono" />
                                     <petclinic:inputField label="apellidos" name="apellidos" />
                                     
-                                    <petclinic:inputField label="contraseña" name="usuario.password" />
-
+                                    
 
                                 </div>
                                 <div class="form-group">
