@@ -80,7 +80,7 @@ public class PeticionController {
                  Optional<Peticion> peti = peticionServ.findPeticionById(peticionid);
                  peticionServ.deletePeticion(peti.get());
                  modelMap.addAttribute("message","event  succesfully deleted!"); 
-                 return "redirect:/peticion/listado";
+                 return "redirect:/peticion";
          
              }
            
