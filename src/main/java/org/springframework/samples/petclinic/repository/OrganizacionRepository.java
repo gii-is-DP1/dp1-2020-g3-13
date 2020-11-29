@@ -10,5 +10,5 @@ public interface OrganizacionRepository extends CrudRepository<Organizacion, Int
    
     @Query("SELECT organizacion FROM Organizacion organizacion WHERE organizacion.usuario.nombreUsuario =:usuario")
     public Organizacion listadoOrganizacionByUsuario(String usuario);
-
+    public Organizacion findById(int id);
 }

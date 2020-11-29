@@ -11,9 +11,10 @@
     <table id="eventosTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Evento</th>
+            <th style="width: 200px;">Evento</th>
             <th style="width: 200px;">TipoEvento</th>
             <th style="width: 200px;">FechaInicio</th>
+
 
         </tr>
         </thead>
@@ -32,6 +33,7 @@
                 <td>
                     <c:out value="${evento.fechaInicio}"/>
                 </td>
+        
             </tr>
         </c:forEach>
                          
