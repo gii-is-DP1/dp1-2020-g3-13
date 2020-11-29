@@ -25,7 +25,6 @@ public class Factura extends BaseEntity{
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFactura;
 
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_lineaFactura", referencedColumnName = "id")
     private List<LineaFactura> lineasFacturas;

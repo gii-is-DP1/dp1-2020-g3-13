@@ -7,8 +7,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.VentaEntrada;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.VentaEntradaService;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +28,9 @@ public class VentaEntradaController {
     @Autowired
 	private VentaEntradaService ventaEntradaService;
 	@Autowired
-    private EventoService eventoService;
+	private EventoService eventoService;
+	@Autowired
+	private ClienteService clienteService;
     
     @GetMapping(value ="/ventaEntradas")
 	public String initCreationForm(Map<String,Object> model) {
@@ -41,6 +46,7 @@ public class VentaEntradaController {
 		}
 		else {
 			ventaEntrada.setEvento(eventoService.findEventoById(eventoId));
+			ventaEntrada.setCliente(clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName()));
 			this.ventaEntradaService.saveEntrada(ventaEntrada);
 
 			
