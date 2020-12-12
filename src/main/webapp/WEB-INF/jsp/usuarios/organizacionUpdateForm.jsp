@@ -23,7 +23,6 @@
                                     <petclinic:inputField label="email" name="email" />
                                     <petclinic:inputField label="cif" name="cif" />
                                     <petclinic:inputField label="info" name="info" />
-                                    <petclinic:inputField label="usuario" name="usuario.nombreUsuario" />
                                     <petclinic:inputField label="contraseña" name="usuario.password" />
 
 

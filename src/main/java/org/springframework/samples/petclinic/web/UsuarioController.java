@@ -122,7 +122,7 @@ public class UsuarioController {
                   model.put("cliente", cliente);
 
             cliente.setId(clienteActual.getId());
-            cliente.getUsuario().setEnabled(true);
+            cliente.setUsuario(clienteActual.getUsuario());
 
             this.clienteService.saveCliente(cliente);
                 try {
