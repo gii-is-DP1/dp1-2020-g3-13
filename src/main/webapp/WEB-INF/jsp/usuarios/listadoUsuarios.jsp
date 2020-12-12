@@ -9,7 +9,9 @@
     <h2>Usuarios</h2>
 
     <table id="usuariosTable" class="table table-striped">
+        <p>Numero de usuarios: <c:out value="${usuarios.size()} "/></p>
         <thead>
+        
         <tr>
             <th style="width: 150px;">Nombre de usuario</th>
             <th style="width: 200px;">Autoridades</th>

@@ -11,7 +11,7 @@
                 <br>
                 <br>
 
-                <h2>Illo, te has colao' ...</h2>
+                <h2>Algo ha salido mal...</h2>
 
                 <p>${exception.message}</p>
 
