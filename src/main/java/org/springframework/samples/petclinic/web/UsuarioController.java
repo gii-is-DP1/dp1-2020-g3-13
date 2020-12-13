@@ -113,24 +113,19 @@ public class UsuarioController {
     @PostMapping(value = "/myprofile/edit")
     public String editCliente(Cliente cliente, Organizacion organizacion, BindingResult result, ModelMap model){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+
         if(!(clienteService.findClienteByUsuario(username)==null)){
-            Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
             if (result.hasErrors()) {
                 model.put("cliente", cliente);
                 return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
               } else{
                   model.put("cliente", cliente);
-
-            cliente.setId(clienteActual.getId());
-            cliente.setUsuario(clienteActual.getUsuario());
-
-            this.clienteService.saveCliente(cliente);
                 try {
-                    this.clienteService.saveCliente(clienteActual);
-
+                    this.clienteService.modifyUsuarioCliente(cliente, clienteActual);
                 } catch (Exception e) {
                     return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
-                }
+                 }
             }
         }
         if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
@@ -140,13 +135,9 @@ public class UsuarioController {
                 return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
               } else{
                   model.put("organizacion", organizacion);
-            organizacion.setId(org.getId());
-            organizacion.getUsuario().setEnabled(true);
-
-            this.organizacionService.saveOrganizacion(organizacion);
                 try {
-                    this.organizacionService.saveOrganizacion(org);
-                } catch (Exception e) {
+                   this.organizacionService.modifyUsuarioOrganizacion(organizacion, org);
+                 } catch (Exception e) {
                     return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
                 }
         }

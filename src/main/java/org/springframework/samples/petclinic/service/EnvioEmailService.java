@@ -19,7 +19,6 @@ import jdk.internal.org.jline.utils.Log;
 //Lineas 205 - 213
 @Service
 public class EnvioEmailService {
-    @Autowired
     private JavaMailSender mailSender;
     @Scope
     //Pasamos por parametro: destinatario, asunto y el mensaje

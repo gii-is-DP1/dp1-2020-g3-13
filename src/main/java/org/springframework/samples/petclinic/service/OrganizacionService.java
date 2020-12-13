@@ -42,6 +42,13 @@ public class OrganizacionService {
        }
 
 
+       
+	public void modifyUsuarioOrganizacion(Organizacion organizacion, Organizacion org) throws DataAccessException{
+		organizacion.setId(org.getId());
+		organizacion.setUsuario(org.getUsuario());
+		// organizacion.getUsuario().setEnabled(true);
+	    saveOrganizacion(organizacion);
+	}
 
 
 
