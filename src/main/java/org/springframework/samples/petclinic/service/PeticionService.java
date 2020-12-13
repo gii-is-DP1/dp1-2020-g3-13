@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,12 @@ public void deleteOrganizacion(int organizacionId) {
     }
 	public void deletePeticion(Peticion peticion) {
          peticionRepo.delete(peticion);
-	}
+    }
+    
+    public void createPeticion(Peticion peticion){
+        peticion.setFecha(LocalDate.now());
+        savePeticion(peticion);
+    }
 
 }
 

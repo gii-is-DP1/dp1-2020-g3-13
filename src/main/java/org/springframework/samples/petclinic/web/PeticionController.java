@@ -68,8 +68,7 @@ public class PeticionController {
         if(result.hasErrors()){
             return VIEWS_CREATE_FORM;
         }else{
-            peticion.setFecha(LocalDate.now());
-            this.peticionServ.savePeticion(peticion);
+            this.peticionServ.createPeticion(peticion);
             return "redirect:/"; 
         }
 
