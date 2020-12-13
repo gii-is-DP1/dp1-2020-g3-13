@@ -53,7 +53,6 @@ public class EventoController {
     public String crearEvento(ModelMap modelMap){
         String vista="eventos/editarEvento";
         modelMap.addAttribute("evento", new Evento());
-        System.out.println("hola");
         return vista;
     }
     
