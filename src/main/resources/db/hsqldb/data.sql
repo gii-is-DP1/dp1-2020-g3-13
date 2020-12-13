@@ -5,10 +5,10 @@
 
 
 -- INSERT INTO organizaciones(id, cif, email, info, password, usuario, nombre_organizacion,fk_peticion) VALUES (1,'690321145', 'antonio@elbola.es','EMPRESA DE BALONES CUADRADOS','pelotasCuadradas','antBola', 'BALON CUADRADO',1);
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion) VALUES (1,'6969696969','CasaPepe@gmailTest.com','EMPRESA DE VINO SIN ALCOHOL','Casa Pepe');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion) VALUES (2,'96969696','FrancisquitoCantaor@gmailTest.com','cisquito el cantaor','francisco pepe');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion) VALUES (3, '666666666','travis@scott.com','Conciertos de trap','Travis Scott');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion) VALUES (4,'9999999','yung@beef.com','conciertos de trap español','Ternera joven');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (1,'6969696969','CasaPepe@gmailTest.com','EMPRESA DE VINO SIN ALCOHOL','Casa Pepe','2020-12-03');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (2,'96969696','FrancisquitoCantaor@gmailTest.com','cisquito el cantaor','francisco pepe','2020-12-12');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (3, '666666666','travis@scott.com','Conciertos de trap','Travis Scott','2020-11-23');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'9999999','yung@beef.com','conciertos de trap español','Ternera joven','2020-11-05');
 
 
 INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');

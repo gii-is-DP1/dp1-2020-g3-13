@@ -1,16 +1,13 @@
 package org.springframework.samples.petclinic.web;
-import java.io.File;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Peticion;
 import org.springframework.samples.petclinic.model.Usuario;
@@ -61,6 +58,7 @@ public class PeticionController {
     @GetMapping(value="/new")
     public String initCreationForm(Map<String, Object> model){
         Peticion peticion = new Peticion();
+       
         model.put("peticion", peticion);
 		return VIEWS_CREATE_FORM;
 
@@ -70,6 +68,7 @@ public class PeticionController {
         if(result.hasErrors()){
             return VIEWS_CREATE_FORM;
         }else{
+            peticion.setFecha(LocalDate.now());
             this.peticionServ.savePeticion(peticion);
             return "redirect:/"; 
         }
