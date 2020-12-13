@@ -10,18 +10,25 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LugarRealizacionService {
+    @Autowired
     private LugarRealizacionRepository lugarRealizacionRepository;
 
-    @Autowired
-    public LugarRealizacionService(LugarRealizacionRepository lugarRealizacionRepository){
-        this.lugarRealizacionRepository = lugarRealizacionRepository;
+    //@Autowired
+    // public LugarRealizacionService(LugarRealizacionRepository lugarRealizacionRepository){
+    //     this.lugarRealizacionRepository = lugarRealizacionRepository;
+    // }
+
+    @Transactional
+    public int lugaresCount(){
+        return (int) lugarRealizacionRepository.count();
     }
     @Transactional
     public void saveLugarRealizacion(LugarRealizacion lugarRealizacion){
         lugarRealizacionRepository.save(lugarRealizacion);
     }
 
-    public Iterable<LugarRealizacion> findAll(){
+    @Transactional
+    public Iterable<LugarRealizacion> findAll() throws DataAccessException{
         return lugarRealizacionRepository.findAll();
     }
 

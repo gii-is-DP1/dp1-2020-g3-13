@@ -2,20 +2,17 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Nested;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.samples.petclinic.model.Peticion;
 import org.springframework.samples.petclinic.repository.PeticionRepository;
 
@@ -38,6 +35,21 @@ public class PeticionServiceTest {
                         .count();
         Long b =peticionRepo.count();
         assertEquals(b, a);
+    }
+
+    @Test
+    public void createPeticionTest(){
+        Integer antes = (int) peticionRepo.count();
+        Peticion peti = new Peticion();
+        peti.setNombre_organizacion("nombre_organizacion");
+        peti.setFecha(LocalDate.now());
+        peti.setCif("cif");
+        peti.setEmail("email@email.email");
+        peti.setInfo("info");
+        peticionService.createPeticion(peti);
+        Integer ahora = (int) peticionRepo.count();
+        assertEquals(ahora, antes+1);
+        
     }
 }
 
