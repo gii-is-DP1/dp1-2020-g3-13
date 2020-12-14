@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    private static final String VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM ="clientes/clienteUpdateForm";
+    private static final String VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM ="clientes/createOrUpdateClienteForm";
     @Autowired
     private ClienteService clienteService;
     @Autowired
@@ -67,7 +67,7 @@ public class ClienteController {
             this.clienteService.saveCliente(cliente);
             autoridadesService.saveAuthorities(usuario.getNombreUsuario(), "cliente");
 			
-			return "redirect:/clientes/" /*+ admin.getId()*/;
+			return "redirect:/login" /*+ admin.getId()*/;
 		}
     }
 

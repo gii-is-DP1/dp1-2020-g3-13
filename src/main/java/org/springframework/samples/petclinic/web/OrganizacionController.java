@@ -9,6 +9,7 @@ import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.service.AutoridadesService;
+import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.samples.petclinic.service.PeticionService;
 import org.springframework.samples.petclinic.service.UsuarioService;
@@ -31,6 +32,9 @@ public class OrganizacionController {
     private PeticionService peticionservice;
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private EventoService eventoService;
 
     @Autowired
     private AutoridadesService autoridadesService;

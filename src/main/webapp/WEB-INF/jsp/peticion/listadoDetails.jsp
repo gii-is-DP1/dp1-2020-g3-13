@@ -26,6 +26,10 @@
                                 <c:out value="${peticion.email}" />
                             </li>
                             <li>
+                                <label>Fecha:</label>
+                                <c:out value="${peticion.fecha}" />
+                            </li>
+                            <li>
                                 <label>Opciones:</label>
 
                             </li>
