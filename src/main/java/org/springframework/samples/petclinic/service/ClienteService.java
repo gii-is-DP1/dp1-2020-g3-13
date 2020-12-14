@@ -37,4 +37,10 @@ public class ClienteService {
     public void deleteCliente(Cliente cliente) throws DataAccessException{
         clienteRepo.delete(cliente);
     }
+
+    public void modifyUsuarioCliente(Cliente cliente, Cliente clienteActual) throws DataAccessException{
+		cliente.setId(clienteActual.getId());
+		cliente.setUsuario(clienteActual.getUsuario());
+        saveCliente(cliente);
+    }
 }

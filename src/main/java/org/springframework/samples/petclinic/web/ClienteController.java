@@ -67,7 +67,7 @@ public class ClienteController {
             this.clienteService.saveCliente(cliente);
             autoridadesService.saveAuthorities(usuario.getNombreUsuario(), "cliente");
 			
-			return "redirect:/clientes/" /*+ admin.getId()*/;
+			return "redirect:/login" /*+ admin.getId()*/;
 		}
     }
 

@@ -11,6 +11,7 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.AutoridadesRepository;
+import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.AutoridadesService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -40,6 +41,8 @@ public class UsuarioController {
     private ClienteService clienteService;
     @Autowired
     private OrganizacionService organizacionService;
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping()
     public String listadoUsuarios(ModelMap modelMap){
@@ -55,7 +58,7 @@ public class UsuarioController {
 		mav.addObject("usuario", this.usuarioService.findUsuario(usuarioId));
 		return mav;
     }
-
+/*
     @GetMapping(value = "/{usuarioId}/delete")
     public String deleteUsuario(@PathVariable("usuarioId") String usuarioId, ModelMap model){ 
         Usuario u = usuarioService.findUsuario(usuarioId);
@@ -70,6 +73,12 @@ public class UsuarioController {
             }
         
         this.usuarioService.deleteUsuario(u);
+        return "redirect:/usuarios";
+    }
+*/
+    @GetMapping(value = "/{usuarioId}/delete")
+    public String deleteUsuario(@PathVariable("usuarioId") String usuarioId, ModelMap model){ 
+        adminService.deleteUsuario(usuarioId);
         return "redirect:/usuarios";
     }
 
@@ -113,24 +122,19 @@ public class UsuarioController {
     @PostMapping(value = "/myprofile/edit")
     public String editCliente(Cliente cliente, Organizacion organizacion, BindingResult result, ModelMap model){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+
         if(!(clienteService.findClienteByUsuario(username)==null)){
-            Cliente clienteActual = this.clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
             if (result.hasErrors()) {
                 model.put("cliente", cliente);
                 return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
               } else{
                   model.put("cliente", cliente);
-
-            cliente.setId(clienteActual.getId());
-            cliente.getUsuario().setEnabled(true);
-
-            this.clienteService.saveCliente(cliente);
                 try {
-                    this.clienteService.saveCliente(clienteActual);
-
+                    this.clienteService.modifyUsuarioCliente(cliente, clienteActual);
                 } catch (Exception e) {
                     return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
-                }
+                 }
             }
         }
         if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
@@ -140,13 +144,9 @@ public class UsuarioController {
                 return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
               } else{
                   model.put("organizacion", organizacion);
-            organizacion.setId(org.getId());
-            organizacion.getUsuario().setEnabled(true);
-
-            this.organizacionService.saveOrganizacion(organizacion);
                 try {
-                    this.organizacionService.saveOrganizacion(org);
-                } catch (Exception e) {
+                   this.organizacionService.modifyUsuarioOrganizacion(organizacion, org);
+                 } catch (Exception e) {
                     return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
                 }
         }

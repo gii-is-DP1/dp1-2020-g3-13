@@ -1,18 +1,18 @@
 package org.springframework.samples.petclinic.web;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Peticion;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.service.AutoridadesService;
+import org.springframework.samples.petclinic.service.EnvioEmailService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.samples.petclinic.service.PeticionService;
 import org.springframework.stereotype.Controller;
@@ -25,20 +25,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
+
+
 //tienen que aperecer botones a www.paco.es/peticiones/listado/peticion concreto
 
 @Controller
 @RequestMapping("/peticion")//seria la pagina donde estan todas las peticiones
+
 public class PeticionController {
     @Autowired
     private JavaMailSender mailSender;
-    private static final String VIEWS_CREATE_FORM = "peticion/CreatePeticionForm";
     @Autowired
     private AutoridadesService autoridadesService;
     @Autowired
     private PeticionService peticionServ;
     @Autowired
     private OrganizacionService organizacionService;
+    @Autowired
+    private EnvioEmailService envioEmailService;
+
+    private static final String VIEWS_CREATE_FORM = "peticion/CreatePeticionForm";
 
     @GetMapping()
     public String ListadoPeticiones(ModelMap modelmap){
@@ -52,6 +58,7 @@ public class PeticionController {
     @GetMapping(value="/new")
     public String initCreationForm(Map<String, Object> model){
         Peticion peticion = new Peticion();
+       
         model.put("peticion", peticion);
 		return VIEWS_CREATE_FORM;
 
@@ -61,7 +68,7 @@ public class PeticionController {
         if(result.hasErrors()){
             return VIEWS_CREATE_FORM;
         }else{
-            this.peticionServ.savePeticion(peticion);
+            this.peticionServ.createPeticion(peticion);
             return "redirect:/"; 
         }
 
@@ -80,7 +87,7 @@ public class PeticionController {
                  Optional<Peticion> peti = peticionServ.findPeticionById(peticionid);
                  peticionServ.deletePeticion(peti.get());
                  modelMap.addAttribute("message","event  succesfully deleted!"); 
-                 return "redirect:/peticion/listado";
+                 return "redirect:/peticion";
          
              }
            
@@ -105,7 +112,8 @@ public class PeticionController {
                 this.organizacionService.saveOrganizacion(newOrg); 
                 autoridadesService.saveAuthorities(newUsuario.getNombreUsuario(), "organizacion");
                 peticionServ.deletePeticion(peti.get());
-                sendEmail(newOrg, "Yes we can", "Chavales, podemos mandar emails, toma tu password: "+newOrg.getUsuario().getPassword() +"y tu usuario: "+newOrg.getUsuario().getNombreUsuario());
+                envioEmailService.sendEmailSimple(newOrg, "Petición de Organización", "Hola ! Desde Qplan queremos darte la bienvenida después de aceptar tu petición\nYa puedes iniciar sesión en la web con las siguientes credenciales\nUsuario: "+newOrg.getUsuario().getNombreUsuario()+ "\nContraseña: " + newOrg.getUsuario().getPassword() +"\n¡Bienvenid@!");
+                //sendEmail(newOrg, "Petición QPlan aceptada", "<html><body><h3>Hola, "+newOrg.getUsuario().getPassword() +"welcome to the Chipping Sodbury On-the-Hill message boards!</h3>");
                 //Redirecciona a la lista de peticiones
                 return "redirect:/peticion";
                       
@@ -115,7 +123,7 @@ public class PeticionController {
                 //Por defecto es una contraseña de 20 caracteres pero se podría modificar
             private static String generaContraseña(){
                 String password = "";
-                String patron = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#/123456789";
+                String patron = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
                 Random r = new Random();
                 for (int i = 0; i<20; i++){
                     password += patron.charAt(r.nextInt(patron.length()));
@@ -123,6 +131,7 @@ public class PeticionController {
                 return password;
 
             }
+
                 //El metodo genera un usuario automaticamente a partir del nombre de organizacion
                 //Se podria modificar o simplemente dar como usuario el CIF
             private static String generaUsuario(String nombreOrganizacion, String cif) {
@@ -132,20 +141,14 @@ public class PeticionController {
                 return res;
 
             }
-            @SessionScope()
-            //Envia un correo al destinatario dado con un asunto y contenido
-            //Este metodo solo sirve para emails simples.
-            public void sendEmail(Organizacion organizacion, String subject, String content) {
 
-                    SimpleMailMessage email = new SimpleMailMessage();
-        
-                    email.setTo(organizacion.getEmail());
-                    email.setSubject(subject);
-                    email.setText(content);
-                    
-                    mailSender.send(email);
 
-            }     
+
+
+
+ 
+
+  
                             
 }
 
