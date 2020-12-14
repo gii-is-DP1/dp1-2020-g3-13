@@ -25,6 +25,10 @@ public class UsuarioService {
 	@Autowired
 	private OrganizacionService organizacionService;
 
+	@Transactional
+    public int usuarioCount(){
+        return (int) usuarioRepository.count();
+    }
 	@Autowired
 	public UsuarioService(UsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
