@@ -11,6 +11,7 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.AutoridadesRepository;
+import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.AutoridadesService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -40,6 +41,8 @@ public class UsuarioController {
     private ClienteService clienteService;
     @Autowired
     private OrganizacionService organizacionService;
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping()
     public String listadoUsuarios(ModelMap modelMap){
@@ -55,7 +58,7 @@ public class UsuarioController {
 		mav.addObject("usuario", this.usuarioService.findUsuario(usuarioId));
 		return mav;
     }
-
+/*
     @GetMapping(value = "/{usuarioId}/delete")
     public String deleteUsuario(@PathVariable("usuarioId") String usuarioId, ModelMap model){ 
         Usuario u = usuarioService.findUsuario(usuarioId);
@@ -70,6 +73,12 @@ public class UsuarioController {
             }
         
         this.usuarioService.deleteUsuario(u);
+        return "redirect:/usuarios";
+    }
+*/
+    @GetMapping(value = "/{usuarioId}/delete")
+    public String deleteUsuario(@PathVariable("usuarioId") String usuarioId, ModelMap model){ 
+        adminService.deleteUsuario(usuarioId);
         return "redirect:/usuarios";
     }
 
