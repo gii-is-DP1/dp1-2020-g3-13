@@ -69,4 +69,11 @@ public class EventoServiceTest {
         this.eventoService.delete(evento);
         assertEquals((int) eventoRepository.count(),cantidad-1);
     }
+
+    @Test
+    public void deberiaEditarEventos(){
+        Evento evento = this.eventoRepository.findAll().iterator().next();
+        evento.setCategoria("evento de prueba");
+        assertEquals("evento de prueba", evento.getCategoria());
+    }
 }
