@@ -41,6 +41,10 @@ public class EventoService {
         return eventoRepository.findById(eventoId).get();
     }
 
+    public void modifyEvento(Evento evento, Evento eventoActual) throws DataAccessException{
+		evento.setId(eventoActual.getId());
+        save(evento);
+    }
     
     
 }
