@@ -22,14 +22,6 @@ import lombok.Data;
 @Table(name = "eventos")
 public class Evento extends BaseEntity{
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<Actividad> actividades;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<VentaEntrada> ventaEntrada;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<TipoEntrada> tipoEntradas;
 
     @Column(name = "tipoEvento")
     @NotEmpty
@@ -59,20 +51,24 @@ public class Evento extends BaseEntity{
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFin;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_consulta", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<Actividad> actividades;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<VentaEntrada> ventaEntrada;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<TipoEntrada> tipoEntradas;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<Consulta> consultas;
-
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_", referencedColumnName = "id")
-    private List<TipoEntrada> tiposEntradas;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     private Organizacion organizacion;
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    private List<Sponsor> sponsors;
 
 
        

@@ -55,7 +55,7 @@ public class EventoServiceTest {
         evento.setNombreEvento("nombreEvento");
         evento.setOrganizacion(eventoCreado.getOrganizacion());
         evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        evento.setTiposEntradas(new ArrayList<TipoEntrada>());
+        evento.setTipoEntradas(new ArrayList<TipoEntrada>());
         evento.setVentaEntrada(new ArrayList<VentaEntrada>());
         evento.setTipoEvento("tipoEvento");
         this.eventoService.save(evento);
