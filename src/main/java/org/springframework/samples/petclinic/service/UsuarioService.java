@@ -46,7 +46,7 @@ public class UsuarioService {
 	
 	public Usuario findUsuario(String usuarioID) {
 	//	return usuarioRepository.findBynombreUsuario(usuarioID);
-		return usuarioRepository.findById(usuarioID).get();
+		return usuarioRepository.findById(usuarioID).orElse(null);
 	}
 
 	public void deleteUsuario(Usuario usuario) throws DataAccessException{
