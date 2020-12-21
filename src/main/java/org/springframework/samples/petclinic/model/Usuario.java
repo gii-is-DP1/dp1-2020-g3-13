@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -20,10 +21,11 @@ import lombok.Data;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @Column(name = "nombreUsuario")
-    String nombreUsuario;
-
-    String password;
+    @Column(name = "nombreUsuario") 
+    @NotEmpty(message = "no puede estar vacio")
+    private String nombreUsuario;
+    @NotEmpty
+    protected String password;
 	boolean enabled;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")

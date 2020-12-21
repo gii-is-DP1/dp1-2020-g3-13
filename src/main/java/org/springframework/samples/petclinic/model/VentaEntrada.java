@@ -23,24 +23,26 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "ventaEntrada", uniqueConstraints={
-    @UniqueConstraint(columnNames = {"evento_id", "nombreAsistente"})
+    @UniqueConstraint(columnNames = {"id_evento", "nombreAsistente"})
 })
 public class VentaEntrada extends BaseEntity {
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="cliente_id",referencedColumnName = "id")
+    @JoinColumn(name="id_cliente",referencedColumnName = "id")
     private Cliente cliente;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ventaEntrada")
+    @JoinColumn(name = "id_linea_factura", referencedColumnName = "id")
     private LineaFactura lf;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "evento_id", referencedColumnName = "id")
+    @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
 
     @NotNull
     private Integer numTarjeta;
     
     @DateTimeFormat(pattern = "yyyy/MM/dd")
+    //@NotNull
     private LocalDate fechaCaducidad;
 
     @NotEmpty
