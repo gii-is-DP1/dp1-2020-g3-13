@@ -21,10 +21,10 @@ import lombok.Data;
 public class Factura extends BaseEntity{
     @Column(name="precioTotal")
     @NotEmpty
-    protected Double precioTotal;
+    private Double precioTotal;
     @Column(name="usuarioAsociado")
     @NotEmpty
-    protected String usuarioAsocidado;
+    private String usuarioAsocidado;
     @Column(name = "fechaFactura")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFactura;
