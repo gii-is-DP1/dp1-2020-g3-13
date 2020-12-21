@@ -55,7 +55,7 @@ public class EventoServiceTest {
         evento.setNombreEvento("nombreEvento");
         evento.setOrganizacion(eventoCreado.getOrganizacion());
         evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        evento.setTiposEntradas(new ArrayList<TipoEntrada>());
+        evento.setTipoEntradas(new ArrayList<TipoEntrada>());
         evento.setVentaEntrada(new ArrayList<VentaEntrada>());
         evento.setTipoEvento("tipoEvento");
         this.eventoService.save(evento);
@@ -68,5 +68,12 @@ public class EventoServiceTest {
         int cantidad = (int) eventoRepository.count();
         this.eventoService.delete(evento);
         assertEquals((int) eventoRepository.count(),cantidad-1);
+    }
+
+    @Test
+    public void deberiaEditarEventos(){
+        Evento evento = this.eventoRepository.findAll().iterator().next();
+        evento.setCategoria("evento de prueba");
+        assertEquals("evento de prueba", evento.getCategoria());
     }
 }

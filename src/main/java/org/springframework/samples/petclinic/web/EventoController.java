@@ -10,7 +10,9 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.model.VentaEntrada;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,15 +30,28 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/eventos")
 public class EventoController {
 
+    private static final String VIEWS_EVENTO_CREATE_OR_UPDATE_FORM = "eventos/editarEvento";
+
     @Autowired
     private EventoService eventoService;
 
     @Autowired
     private OrganizacionService organizacionService;
+    @Autowired
+    private ClienteService clienteService;
 
     @GetMapping
     public String listadoEventos(ModelMap modelMap){
-        String vista = "eventos/listadoEventos";
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        String vista = "eventos/";
+        if(!(clienteService.findClienteByUsuario(usuario)==null) || usuario=="anonymousUser"){
+            vista = "eventos/listadoEventos";
+        }else if(!(organizacionService.findOrganizacionByUsuario(usuario)==null)){
+            vista = "eventos/listadoEventosOrganizacion";
+        }else{
+            vista = "eventos/listadoEventosAdmin";
+        }
+        
         Iterable<Evento> eventos = eventoService.findAll();
         modelMap.addAttribute("eventos", eventos);
         return vista;
@@ -72,7 +87,30 @@ public class EventoController {
         
     }
 
-   
+    @GetMapping(value = "/{eventoId}/edit")
+	public String initUpdateEventoForm(@PathVariable("eventoId") int eventoId, ModelMap modelMap) {
+		Evento evento = this.eventoService.findEventoById(eventoId);
+		modelMap.addAttribute(evento);
+		return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
+	}
+    @PostMapping(value = "/{eventoId}/edit")
+	public String processUpdateEventoForm(@Valid Evento evento, BindingResult result,
+			@PathVariable("eventoId") int eventoId) {
+		if (result.hasErrors()) {
+			return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
+		}
+		else {
+			this.eventoService.modifyEvento(evento, this.eventoService.findEventoById(eventoId));
+			return "redirect:/eventos/{eventoId}";
+		}
+
+
+    }
+    @GetMapping(value = "/delete/{eventoId}")
+    public String deleteEvento(@PathVariable("eventoId") int eventoId, ModelMap model){
+        this.eventoService.delete(eventoService.findEventoById(eventoId));
+        return "redirect:/eventos";
+    }
     
 
 
