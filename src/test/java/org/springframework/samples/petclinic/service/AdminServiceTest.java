@@ -25,6 +25,6 @@ public class AdminServiceTest {
         int count = usuarioService.usuarioCount();
         adminService.deleteUsuario("Test_delete");
         assertEquals(count-1, usuarioService.usuarioCount());
-        //assertEquals(null, usuarioService.findUsuario("Test_delete"));
+        assertEquals(null, usuarioService.findUsuario("Test_delete"));
     }
 }

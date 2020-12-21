@@ -12,6 +12,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "factura")
 public class Factura extends BaseEntity{

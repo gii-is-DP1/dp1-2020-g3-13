@@ -17,7 +17,8 @@ import lombok.Data;
 @Table(name = "lineaFactura")
 public class LineaFactura extends BaseEntity{
     @OneToOne(cascade = CascadeType.ALL)
-    private VentaEntrada entrada;
+    @JoinColumn(name = "id_venta_entrada", referencedColumnName = "id")
+    private VentaEntrada ventaEntrada;
     @Column(name = "precio")
     @NotEmpty
     protected Integer precio;
