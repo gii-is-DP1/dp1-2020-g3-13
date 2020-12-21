@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.model.TipoEntrada;
@@ -31,15 +32,11 @@ public class CarritoService {
 
 
     @Transactional
-
-
-
-
-    private void anadirCarrito(TipoEntrada entrada, Cliente cliente) throws DataAccessException{
+    public void anadirCarrito(Entrada entrada, Cliente cliente) throws DataAccessException{
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
-        linea.setPrecio(entrada.getPrecio());
-        linea.setTipoEntrada(entrada);
+        linea.setPrecio(entrada.getTipoEntrada().getPrecio());
+        linea.setTipoEntrada(entrada.getTipoEntrada());
         Carrito carrito = new Carrito();
        for (int i = 0; i < carritoRepo.count(); i++) {
           if(cliente == carritoRepo.findById(i).get().getCliente()){
@@ -58,10 +55,11 @@ public class CarritoService {
            carrito.setLineasFacturas(lineasFacturas);
        }
       
+       carritoRepo.save(carrito);
     }
 
     @Transactional
-    private Factura generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
+    public Factura generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carrito.getLineasFacturas();
        factura.setLineasFacturas(lineas);

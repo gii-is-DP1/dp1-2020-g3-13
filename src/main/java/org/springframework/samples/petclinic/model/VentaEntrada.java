@@ -30,13 +30,12 @@ public class VentaEntrada extends BaseEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_cliente",referencedColumnName = "id")
     private Cliente cliente;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ventaEntrada")
-    @JoinColumn(name = "id_linea_factura", referencedColumnName = "id")
-    private LineaFactura lf;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private LineaFactura lf;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_evento", referencedColumnName = "id")
-    private Evento evento;
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "evento_id", referencedColumnName = "id")
+    // private Evento evento;
 
     @NotNull
     private Integer numTarjeta;
@@ -49,15 +48,6 @@ public class VentaEntrada extends BaseEntity {
     private String nombreTitular;
 
     @NotNull
-    private Integer cvv;
-
-    @Column(name = "nombreAsistente")
-    @NotEmpty
-    protected String nombreAsistente;
-
-    @Column(name = "dni")
-    @NotEmpty
-    protected String dni;
-    
+    private Integer cvv;    
     
 }

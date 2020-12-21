@@ -31,6 +31,7 @@ import lombok.Data;
 @Data
 @Table(name = "clientes")
 public class Cliente extends Persona{
+
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cliente")
    private  List<VentaEntrada> entradas;
 
