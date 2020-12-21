@@ -22,14 +22,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "ventaEntrada", uniqueConstraints={
-    @UniqueConstraint(columnNames = {"id_evento", "nombreAsistente"})
-})
+@Table(name = "ventaEntrada")
+
 public class VentaEntrada extends BaseEntity {
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_cliente",referencedColumnName = "id")
     private Cliente cliente;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Entrada entrada;
     // @OneToOne(cascade = CascadeType.ALL)
     // private LineaFactura lf;
 

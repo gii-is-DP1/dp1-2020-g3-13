@@ -50,8 +50,12 @@ public class VentaEntradaController {
 			return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
 		}
 		else {
+<<<<<<< HEAD
 			model.put("ventaEntrada", ventaEntrada);
 			ventaEntrada.setEvento(eventoService.findEventoById(eventoId));
+=======
+			// ventaEntrada.setEvento(eventoService.findEventoById(eventoId));
+>>>>>>> andmecsan
 			ventaEntrada.setCliente(clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName()));
 			this.ventaEntradaService.saveEntrada(ventaEntrada);
 
