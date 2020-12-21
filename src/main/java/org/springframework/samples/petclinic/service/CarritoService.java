@@ -29,7 +29,15 @@ public class CarritoService {
     private FacturaService facturaService;
     @Autowired
     private LineaFacturaService lineaService;
+    @Autowired
+    private ClienteService clienteService;
 
+
+
+    @Transactional 
+    public Iterable<Carrito> listadoObjetosCarrito(String nombreUsuario){
+       return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
+    }
 
     @Transactional
     public void anadirCarrito(Entrada entrada, Cliente cliente) throws DataAccessException{

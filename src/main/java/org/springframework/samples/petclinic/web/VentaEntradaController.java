@@ -46,7 +46,7 @@ public class VentaEntradaController {
 			return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
 		}
 		else {
-			ventaEntrada.setEvento(eventoService.findEventoById(eventoId));
+			// ventaEntrada.setEvento(eventoService.findEventoById(eventoId));
 			ventaEntrada.setCliente(clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName()));
 			this.ventaEntradaService.saveEntrada(ventaEntrada);
 

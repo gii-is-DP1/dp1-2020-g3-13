@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.web;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.VentaEntrada;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
@@ -19,38 +20,24 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
-@RequestMapping("/carrito")
 public class CarritoController {
 
-    @Autowired
+    // private static final String VIEWS_CARRITO = null;
+	@Autowired
     private CarritoService carritoService;
     @Autowired
     private FacturaService facturaService;
     @Autowired
     private VentaEntradaService ventaEntradaService;
     @Autowired
-    private ClienteService clienteService;
+	private ClienteService clienteService;
     
     
-
-    @GetMapping(value ="/comprar")
-	public String initCreationForm(Map<String,Object> model) {
-		VentaEntrada venta = new VentaEntrada();
-		model.put("ventaEntrada", venta);
-		return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
-	}
-
-    @PostMapping(value = "/comprar")
-	public String processCreationForm(VentaEntrada ventaEntrada,@PathVariable("eventoId") int eventoId, BindingResult result) {
-		if (result.hasErrors()) {
-			return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
-		}
-		else {
-			ventaEntrada.setCliente(clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName()));
-			this.ventaEntradaService.saveEntrada(ventaEntrada);
-
-			
-			return "redirect:/eventos" /*+ admin.getId()*/;
-		}
+    @GetMapping()
+	public String miCarrito(ModelMap modelMap) {
+		String vista="carrito/miCarrito";
+        Iterable<Carrito> carrito = carritoService.listadoObjetosCarrito(SecurityContextHolder.getContext().getAuthentication().getName());
+        modelMap.addAttribute("carrito", carrito);
+        return vista;
 	}
 }
