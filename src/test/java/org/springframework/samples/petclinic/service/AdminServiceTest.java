@@ -12,10 +12,19 @@ import org.springframework.stereotype.Service;
 public class AdminServiceTest {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Test
     public void testCountWithInitialDataAdmin(){
         int count = adminService.adminCount();
         assertEquals(count, 1);
+    }
+    @Test
+    public void testEliminarUsuario(){
+        int count = usuarioService.usuarioCount();
+        adminService.deleteUsuario("Test_delete");
+        assertEquals(count-1, usuarioService.usuarioCount());
+        assertEquals(null, usuarioService.findUsuario("Test_delete"));
     }
 }

@@ -19,6 +19,8 @@ import jdk.internal.org.jline.utils.Log;
 //Lineas 205 - 213
 @Service
 public class EnvioEmailService {
+    //Si fijamos el valor requerido como falso, entonces en el momento de 'wiring' , Spring dejará el bean sin cablear si la dependencia no se resuelve. De acuerdo con las mejores prácticas de Spring, debemos evitar establecer el valor requerido
+    @Autowired(required=false)
     private JavaMailSender mailSender;
     @Scope
     //Pasamos por parametro: destinatario, asunto y el mensaje

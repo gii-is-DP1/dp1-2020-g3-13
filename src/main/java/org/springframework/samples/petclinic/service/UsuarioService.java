@@ -25,6 +25,10 @@ public class UsuarioService {
 	@Autowired
 	private OrganizacionService organizacionService;
 
+	@Transactional
+    public int usuarioCount(){
+        return (int) usuarioRepository.count();
+    }
 	@Autowired
 	public UsuarioService(UsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
@@ -42,7 +46,7 @@ public class UsuarioService {
 	
 	public Usuario findUsuario(String usuarioID) {
 	//	return usuarioRepository.findBynombreUsuario(usuarioID);
-		return usuarioRepository.findById(usuarioID).get();
+		return usuarioRepository.findById(usuarioID).orElse(null);
 	}
 
 	public void deleteUsuario(Usuario usuario) throws DataAccessException{
