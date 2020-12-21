@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -21,8 +22,11 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "ventaEntrada")
+@Table(name = "ventaEntrada", uniqueConstraints={
+    @UniqueConstraint(columnNames = {"evento_id", "nombreAsistente"})
+})
 public class VentaEntrada extends BaseEntity {
+    
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="cliente_id",referencedColumnName = "id")
     private Cliente cliente;
