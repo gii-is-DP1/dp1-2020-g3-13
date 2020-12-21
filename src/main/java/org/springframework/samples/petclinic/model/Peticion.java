@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,7 +25,8 @@ public class Peticion extends BaseEntity{
 
   //@OneToOne(cascade = CascadeType.ALL, mappedBy = "organizacion")
   //private Organizacion organizacion;
-
+    @NotNull
+    @Email(message = "El formato del email no es válido")
     @Column(name = "email")
     @NotEmpty
     protected String email;
