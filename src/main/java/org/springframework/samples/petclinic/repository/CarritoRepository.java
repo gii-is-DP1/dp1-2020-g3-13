@@ -11,7 +11,7 @@ public interface CarritoRepository extends CrudRepository<Carrito, Integer> {
     
     
     @Query("SELECT carrito FROM Carrito carrito WHERE carrito.cliente.usuario.nombreUsuario =:usuario")
-    public Iterable<Carrito> dimeCarritoDeUsuario(String usuario);
+    public Carrito dimeCarritoDeUsuario(String usuario);
 
 
 }

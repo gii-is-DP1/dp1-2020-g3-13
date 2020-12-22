@@ -20,9 +20,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
+@RequestMapping("/carrito")
 public class CarritoController {
-
-    // private static final String VIEWS_CARRITO = null;
 	@Autowired
     private CarritoService carritoService;
     @Autowired
@@ -36,7 +35,7 @@ public class CarritoController {
     @GetMapping()
 	public String miCarrito(ModelMap modelMap) {
 		String vista="carrito/miCarrito";
-        Iterable<Carrito> carrito = carritoService.listadoObjetosCarrito(SecurityContextHolder.getContext().getAuthentication().getName());
+        Carrito carrito = carritoService.listadoObjetosCarrito(SecurityContextHolder.getContext().getAuthentication().getName());
         modelMap.addAttribute("carrito", carrito);
         return vista;
 	}
