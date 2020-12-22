@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -24,8 +25,9 @@ import lombok.Data;
 @Table(name = "ventaEntrada")
 
 public class VentaEntrada extends BaseEntity {
+    
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="cliente_id",referencedColumnName = "id")
+    @JoinColumn(name="id_cliente",referencedColumnName = "id")
     private Cliente cliente;
     @OneToOne(cascade = CascadeType.ALL)
     private Entrada entrada;
@@ -40,6 +42,7 @@ public class VentaEntrada extends BaseEntity {
     private Integer numTarjeta;
     
     @DateTimeFormat(pattern = "yyyy/MM/dd")
+    //@NotNull
     private LocalDate fechaCaducidad;
 
     @NotEmpty

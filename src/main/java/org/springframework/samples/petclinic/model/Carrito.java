@@ -20,7 +20,6 @@ public class Carrito extends BaseEntity{
 
     
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_lineaFactura", referencedColumnName = "id")
     private List<LineaFactura> lineasFacturas;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -26,7 +26,7 @@ public class TipoEntrada extends BaseEntity{
     
     @Column(name = "precio")
     @NotEmpty
-    private Integer precio;
+    private Double precio;
 
     @Column(name = "nombre")
     @NotEmpty

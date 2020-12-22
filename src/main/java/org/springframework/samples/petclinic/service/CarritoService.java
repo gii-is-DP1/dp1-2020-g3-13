@@ -35,7 +35,7 @@ public class CarritoService {
 
 
     @Transactional 
-    public Iterable<Carrito> listadoObjetosCarrito(String nombreUsuario){
+    public Carrito listadoObjetosCarrito(String nombreUsuario){
        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
     }
 
@@ -45,26 +45,35 @@ public class CarritoService {
         linea.setCantidad(1);
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
         linea.setTipoEntrada(entrada.getTipoEntrada());
+        entrada.setLineaFactura(linea);
         Carrito carrito = new Carrito();
-       for (int i = 0; i < carritoRepo.count(); i++) {
-          if(cliente == carritoRepo.findById(i).get().getCliente()){
-            carrito = carritoRepo.findById(i).get();
-            carrito.getLineasFacturas().add(linea);
-            break;
+        if(carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario()) != null){
+                carrito = carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario());
+                linea.setCarrito(carrito);
+                carrito.getLineasFacturas().add(linea);     
+        }else{
+            
+            carrito.setCliente(cliente);
+            List<LineaFactura> lineasFacturas = new ArrayList<>();
+            linea.setCarrito(carrito);
+            lineasFacturas.add(linea);
+            carrito.setLineasFacturas(lineasFacturas);
+        }
+        double total = 0.0;
+        for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
+            total += carrito.getLineasFacturas().get(i).getPrecio();
+        }
+        carrito.setTotal(total);
 
-          }
-           
-       }
-
-       if(carrito.getCliente()==null){
-           carrito.setCliente(cliente);
-           List<LineaFactura> lineasFacturas = new ArrayList<>();
-           lineasFacturas.add(linea);
-           carrito.setLineasFacturas(lineasFacturas);
-       }
-      
-       carritoRepo.save(carrito);
+        System.out.println("JOAQUIN AQUI" + total);
+        carritoRepo.save(carrito);
     }
+
+
+      
+ 
+
+
 
     @Transactional
     public Factura generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
