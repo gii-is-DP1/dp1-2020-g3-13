@@ -26,9 +26,9 @@ import lombok.Data;
 
 public class VentaEntrada extends BaseEntity {
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_cliente",referencedColumnName = "id")
-    private Cliente cliente;
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name="id_cliente",referencedColumnName = "id")
+    // private Cliente cliente;
     @OneToOne(cascade = CascadeType.ALL)
     private Entrada entrada;
     // @OneToOne(cascade = CascadeType.ALL)
@@ -38,17 +38,17 @@ public class VentaEntrada extends BaseEntity {
     // @JoinColumn(name = "evento_id", referencedColumnName = "id")
     // private Evento evento;
 
-    @NotNull
+    // @NotNull
     private Integer numTarjeta;
     
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     //@NotNull
     private LocalDate fechaCaducidad;
 
-    @NotEmpty
+    // @NotEmpty
     private String nombreTitular;
 
-    @NotNull
+    // @NotNull
     private Integer cvv;    
     
 }

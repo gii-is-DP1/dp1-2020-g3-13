@@ -33,7 +33,7 @@ import lombok.Data;
 public class Cliente extends Persona{
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cliente")
-    private  List<VentaEntrada> entradas;
+    private  List<Entrada> entradas;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")

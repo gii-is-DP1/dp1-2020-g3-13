@@ -11,8 +11,6 @@
     <h2>Compra Entradas</h2>
     <form:form modelAttribute="ventaEntrada" class="form-horizontal" id="add-ventaEntrada-form">
     <div class="form-group has-feedback">
-        <petclinic:inputField label="Nombre Asistente" name="nombreAsistente"/>
-        <petclinic:inputField label="DNI" name="dni"/>
         <petclinic:inputField label="Titular Tarjeta" name="nombreTitular"/>
         <petclinic:inputField label="Numero Tajeta" name="numTarjeta"/>
         <petclinic:inputField label="Fecha Caducidad" name="fechaCaducidad"/>

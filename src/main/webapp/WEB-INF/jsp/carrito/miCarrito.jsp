@@ -10,35 +10,45 @@
                         </h2>
 
                         <h3>¿Qué llevo en mi carrito?</h3>
-                        <p> Total: </p>
-                        <c:out value="${carrito.total}" />
-
-
-                        <c:forEach items="${carrito.lineasFacturas}" var="lineasFacturas">
-                            <!--   <c:forEach items="${lineasFactura.tipoEntrada}" var="tipoEntrada">-->
-                            <p>
-                                Nombre entrada:
-                                <c:out value="${carrito.lineasFacturas.cantidad}" />
-                            </p>
-                            <!--  <p>Precio:
-                                    <c:out value="${tipoEntradas.precio} " />EUR </p>
-                                </div>
-                                <p>Fecha inicio:
-                                    <c:out value="${tipoEntradas.fechaInicio}" />
+                      
+                            <!-- <div class="cuadro-carrito"></div> -->
+                            <c:forEach items="${carrito.lineasFacturas}" var="lineasFacturas">
+                                <p>
+                                    Evento:
+                                        <c:out value="${lineasFacturas.tipoEntrada.evento.nombreEvento}" />
                                 </p>
-                                <p>Fecha Fin:
-                                    <c:out value="${tipoEntradas.fechaFin}" />
+                                <p>
+                                    Asistente:
+                                        <c:out value="${lineasFacturas.entrada.nombreAsistente}" />
                                 </p>
-                                <spring:url value="/eventos/{eventoId}/{tipoEntradaId}/entrada" var="ventaUrl">
-                                    <spring:param name="eventoId" value="${evento.id}" />
-                                    <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
-                                </spring:url>
-                                <a href="${fn:escapeXml(ventaUrl)}">
-                                    <c:out value="Comprar" /><br></a>
-                                -->
-                            <!--    </c:forEach>-->
-                        </c:forEach>
+                                <p>
+                                   DNI:
+                                        <c:out value="${lineasFacturas.entrada.dni}" />
+                                </p>
+                                <p>
+                                  Tipo Entrada:
+                                        <c:out value="${lineasFacturas.tipoEntrada.nombre}" />
+                                </p>
+                                <p>
+                                    Fecha Inicio:
+                                        <c:out value="${lineasFacturas.tipoEntrada.fechaInicio}" />
+                                </p>
+                                <p>
+                                    Precio:
+                                        <c:out value="${lineasFacturas.precio}" />
+                                </p>
+                                <p>
+                                    Cantidad:
+                                        <c:out value="${lineasFacturas.cantidad}" />
+                                </p>
+                            </c:forEach>
+                            <p> Total: </p>
+                            <c:out value="${carrito.total}" />
 
-
+                            <spring:url value="/carrito/{carritoId}/finalizarCompra" var="ventaUrl">
+                                            <spring:param name="carritoId" value="${carrito.id}" />
+                                        </spring:url>
+                                        <a href="${fn:escapeXml(ventaUrl)}">
+                                            <c:out value="Comprar" /><br></a>
 
                     </petclinic:layout>

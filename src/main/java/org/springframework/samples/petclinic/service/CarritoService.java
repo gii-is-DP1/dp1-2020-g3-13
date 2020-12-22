@@ -46,6 +46,8 @@ public class CarritoService {
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
         linea.setTipoEntrada(entrada.getTipoEntrada());
         entrada.setLineaFactura(linea);
+        entrada.setCliente(cliente);
+        linea.setEntrada(entrada);
         Carrito carrito = new Carrito();
         if(carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario()) != null){
                 carrito = carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario());
@@ -64,19 +66,23 @@ public class CarritoService {
             total += carrito.getLineasFacturas().get(i).getPrecio();
         }
         carrito.setTotal(total);
-
-        System.out.println("JOAQUIN AQUI" + total);
         carritoRepo.save(carrito);
     }
-
-
-      
  
+    @Transactional
+    public Carrito findCarritoById(int carritoId) throws DataAccessException{
+        return carritoRepo.findById(carritoId).orElse(null);
+    }
+
+    @Transactional
+    public void deleteCarrito(Carrito carrito) throws DataAccessException{
+        carritoRepo.delete(carrito);
+    }
 
 
 
     @Transactional
-    public Factura generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
+    public void generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carrito.getLineasFacturas();
        factura.setLineasFacturas(lineas);
@@ -91,7 +97,8 @@ public class CarritoService {
         factura.setFechaFactura(LocalDate.now());
         String usuarioAsocidado = cliente.getUsuario().getNombreUsuario();
         factura.setUsuarioAsocidado(usuarioAsocidado);
-        return factura;
+        System.out.println("entra");
+
     }
     
 
