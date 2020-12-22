@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Controller
 @RequestMapping("/carrito")
 public class CarritoController {
+    // private static final String VIEWS_CARRITO = null;
 	@Autowired
     private CarritoService carritoService;
     @Autowired
@@ -30,8 +31,7 @@ public class CarritoController {
     private VentaEntradaService ventaEntradaService;
     @Autowired
 	private ClienteService clienteService;
-    
-    
+	
     @GetMapping()
 	public String miCarrito(ModelMap modelMap) {
 		String vista="carrito/miCarrito";

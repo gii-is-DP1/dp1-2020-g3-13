@@ -17,7 +17,6 @@ import lombok.Data;
 @Entity
 @Table(name = "carrito")
 public class Carrito extends BaseEntity{
-
     
     @OneToMany(cascade = CascadeType.ALL)
     private List<LineaFactura> lineasFacturas;
