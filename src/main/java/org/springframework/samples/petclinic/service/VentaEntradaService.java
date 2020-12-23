@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.VentaEntrada;
 import org.springframework.samples.petclinic.repository.VentaEntradaRepository;
@@ -30,12 +31,12 @@ public class VentaEntradaService {
     public void finalizarCompra(int carritoId, Cliente cliente, VentaEntrada ventaEntrada) throws DataAccessException{
             Carrito carrito = carritoService.findCarritoById(carritoId);
             Entrada entrada = new Entrada();
-            for (int i = 0; i < carrito.getLineasFacturas().size()-1; i++) {
+            for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
                 TipoEntrada lineaActual = carrito.getLineasFacturas().get(i).getTipoEntrada();
-                lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
+                //lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
                 entrada =carrito.getLineasFacturas().get(i).getEntrada();  
                 ventaEntrada.setEntrada(entrada);
-    
+
             }
             carritoService.generarFacturaCarrito(carrito, cliente);
 
