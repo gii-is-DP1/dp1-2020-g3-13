@@ -32,13 +32,15 @@ public class VentaEntradaService {
             Carrito carrito = carritoService.findCarritoById(carritoId);
             Entrada entrada = new Entrada();
             for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
-                TipoEntrada lineaActual = carrito.getLineasFacturas().get(i).getTipoEntrada();
+                //TipoEntrada lineaActual = carrito.getLineasFacturas().get(i).getTipoEntrada();
                 //lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
                 entrada =carrito.getLineasFacturas().get(i).getEntrada();  
                 ventaEntrada.setEntrada(entrada);
 
             }
             carritoService.generarFacturaCarrito(carrito, cliente);
+            carrito.getLineasFacturas().clear();
+            carrito.setTotal(0.0);
 
        
 
@@ -47,7 +49,6 @@ public class VentaEntradaService {
 
     @Transactional
     public void saveEntrada(VentaEntrada ventaEntrada) throws DataAccessException{
-        System.out.println("no lo hace");
         //List<VentaEntrada> entradas = eventoService.findEventoById(ventaEntrada.getEvento().getId()).getVentaEntrada();
         //Boolean existe = false;
         //int i = 0;
@@ -58,7 +59,6 @@ public class VentaEntradaService {
         //}
         //if(existe== true){
         ventaEntradaRepository.save(ventaEntrada);
-        System.out.println("si lo hace");
         //}
     }
 }
