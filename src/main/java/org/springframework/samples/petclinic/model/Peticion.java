@@ -25,9 +25,9 @@ public class Peticion extends BaseEntity{
 
   //@OneToOne(cascade = CascadeType.ALL, mappedBy = "organizacion")
   //private Organizacion organizacion;
-    @NotNull
-    @Email(message = "El formato del email no es válido")
+  
     @Column(name = "email")
+    @Email(message = "El formato del email no es válido")
     @NotEmpty
     protected String email;
     @Column(name = "nombre_organizacion")

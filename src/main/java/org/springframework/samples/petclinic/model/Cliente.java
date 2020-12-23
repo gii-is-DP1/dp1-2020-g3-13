@@ -37,6 +37,7 @@ public class Cliente extends Persona{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
+    @Valid
     private Usuario usuario;
     
 
