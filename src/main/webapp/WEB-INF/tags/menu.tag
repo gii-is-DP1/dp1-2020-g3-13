@@ -24,14 +24,14 @@
 
 				<petclinic:menuItem active="${name eq 'home'}" url="/"
 					title="home page">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					<span>Home</span>
+					<span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+					<span>Inicio</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'owners'}" url="/eventos"
 					title="find owners">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Eventos</span>
+					<span class="bi bi-camera-reels" aria-hidden="true"></span>
+					<span> Eventos</span>
 				</petclinic:menuItem>
 
 			<!--	<petclinic:menuItem active="${name eq 'vets'}" url="/vets"

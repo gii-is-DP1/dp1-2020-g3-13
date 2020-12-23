@@ -26,20 +26,21 @@ public class VentaEntradaService {
 
 
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     public void finalizarCompra(int carritoId, Cliente cliente, VentaEntrada ventaEntrada) throws DataAccessException{
-        Carrito carrito = carritoService.findCarritoById(carritoId);
-        Entrada entrada = new Entrada();
-        for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
-            TipoEntrada lineaActual = carrito.getLineasFacturas().get(i).getTipoEntrada();
-            lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
-            entrada =carrito.getLineasFacturas().get(i).getEntrada();  
-            ventaEntrada.setEntrada(entrada);
+            Carrito carrito = carritoService.findCarritoById(carritoId);
+            Entrada entrada = new Entrada();
+            for (int i = 0; i < carrito.getLineasFacturas().size()-1; i++) {
+                TipoEntrada lineaActual = carrito.getLineasFacturas().get(i).getTipoEntrada();
+                lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
+                entrada =carrito.getLineasFacturas().get(i).getEntrada();  
+                ventaEntrada.setEntrada(entrada);
+    
+            }
+            carritoService.generarFacturaCarrito(carrito, cliente);
 
-        }
-        
-        carritoService.generarFacturaCarrito(carrito, cliente);
-        System.out.println("entra");
+       
+
 
     }
 

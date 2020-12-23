@@ -45,7 +45,6 @@ public class VentaEntradaController {
 		model.put("ventaEntrada", venta);
 		return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
 	}
-
     @PostMapping(value = "/finalizarCompra")
 	public String processCreationForm(VentaEntrada ventaEntrada, @PathVariable("carritoId") int carritoId, BindingResult result, ModelMap model) {
 		if (result.hasFieldErrors()) {
@@ -53,19 +52,10 @@ public class VentaEntradaController {
 			return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
 		}
 		else {
-			try {
-				Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+			Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 				ventaEntradaService.finalizarCompra(carritoId, cliente, ventaEntrada);
 				// ventaEntradaService.saveEntrada(ventaEntrada);
-			System.out.println("entro");
-			} catch (Exception e) {
-				
-			}
-			
-
-			
-
-			return "redirect:/eventos" /*+ admin.getId()*/;
+			return "redirect:/eventos";
 		}
 
 	}
