@@ -86,6 +86,7 @@ public class CarritoService {
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carrito.getLineasFacturas();
        factura.setLineasFacturas(lineas);
+
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();
@@ -97,7 +98,10 @@ public class CarritoService {
         factura.setFechaFactura(LocalDate.now());
         String usuarioAsocidado = cliente.getUsuario().getNombreUsuario();
         factura.setUsuarioAsocidado(usuarioAsocidado);
-        System.out.println("entra");
+        for (LineaFactura lineaFactura : lineas) {
+            lineaFactura.setFactura(factura);
+        }
+        facturaRepo.save(factura);
 
     }
     

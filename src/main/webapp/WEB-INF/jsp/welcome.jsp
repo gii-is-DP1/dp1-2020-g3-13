@@ -3,8 +3,13 @@
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
                 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->
-
+                <div class="hero">
+                    <h1 class="nombre-sitio">QPlan</h1>
+                </div>
                 <petclinic:layout pageName="home">
+
+
+
                     <h2>
                         <fmt:message key="welcome" />
                     </h2>
