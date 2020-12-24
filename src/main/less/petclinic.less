@@ -20,6 +20,7 @@
 @spring-light-grey: #f1f1f1;
 /** Colores propios **/
 @color-naranja-uno: #fe4918;
+@color-naranja-dos: #0c0c0c;
 @body-bg:                           @spring-light-grey;
 @text-color:                        @spring-brown;
 @link-color:                        @spring-dark-green;
@@ -250,13 +251,65 @@ hr {
   border-top: 1px dotted @spring-brown;
 }
 
+
+
+
+
+
 @import "typography.less";
 @import "header.less";
 @import "responsive.less";
 
 
 /** EDICION **/
+/** Calendario Eventos**/
+.calendario::after{
+  clear:both;
+  display: block;
+  content: '';
+}
 
+.calendario h3{
+  background-color: @color-naranja-dos;
+  clear: both;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.evento{
+  width: 50%;
+  float: left;
+  border: 2px solid #e1e1e1;
+  transition: all .3s ease;
+}
+
+@media only screen and (min-width:768px) {
+  div.evento {
+    width: 33.3%;
+    min-height: 240px;
+    padding-top: 20px;
+  }
+}
+
+.evento:hover{
+  background-color: #e1e1e1;
+  -webkit-transform: scale(1.1);
+}
+
+.evento p.tituloEvento{
+
+  color: #ff5400;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.evento p{
+  text-align: center;
+  font-size: 1.19em;
+}
+
+//.evento p.categoriaEvento p.tipoEvento p.tipoEvento
 /*
 .seccion {
   padding: 3rem 0;
@@ -291,4 +344,3 @@ hr {
   }
 }
 */
-
