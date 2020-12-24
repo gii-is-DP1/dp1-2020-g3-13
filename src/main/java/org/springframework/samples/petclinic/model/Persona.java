@@ -3,11 +3,8 @@ package org.springframework.samples.petclinic.model;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;
-<<<<<<< Updated upstream
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-=======
->>>>>>> Stashed changes
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
