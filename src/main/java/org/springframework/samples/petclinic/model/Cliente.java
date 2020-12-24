@@ -1,5 +1,4 @@
 package org.springframework.samples.petclinic.model;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,21 +11,22 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+
+import org.springframework.samples.petclinic.model.Persona;
 
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
-
-import javax.persistence.Column;
-
-
 import lombok.Data;
+
+
 
 @Entity
 @Data
@@ -40,13 +40,12 @@ public class Cliente extends Persona{
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     @Valid
     private Usuario usuario;
-    
 
 
     @Column(name = "telefono")
     @NotNull
     @Range(min=100000000,max = 999999999, message = "Número de teléfono no válido   ")
-    protected Integer telefono;
+    private Integer telefono;
 
       
 }
