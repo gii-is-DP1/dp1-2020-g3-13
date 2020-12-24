@@ -36,7 +36,6 @@ public class VentaEntradaService {
                 //lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
                 entrada =carrito.getLineasFacturas().get(i).getEntrada();  
                 ventaEntrada.setEntrada(entrada);
-
             }
             carritoService.generarFacturaCarrito(carrito, cliente);
             carrito.getLineasFacturas().clear();
