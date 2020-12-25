@@ -22,6 +22,7 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 
+<!-- ************* MENU PARA CUALQUIER USUARIO ************* -->
 				<petclinic:menuItem active="${name eq 'home'}" url="/"
 					title="Página de inicio">
 					<span class="glyphicon glyphicon-film" aria-hidden="true"></span>
@@ -33,6 +34,8 @@
 					<span class="bi bi-camera-reels" aria-hidden="true"></span>
 					<span> Eventos</span>
 				</petclinic:menuItem>
+
+<!-- ************* MENU PARA ADMIN ************* -->
 			<sec:authorize access='hasAnyAuthority("admin")'>
 					<petclinic:menuItem active="${name eq 'owners'}" url="/peticion"
 						title="Página de gestión de peticiones">
@@ -52,6 +55,14 @@
 						title="Página de gestión de lugares de realizacion">
 						<span class="bi bi-camera-reels" aria-hidden="true"></span>
 						<span>G. Lugares de Realización</span>
+					</petclinic:menuItem>
+			</sec:authorize>
+			<!-- ************* MENU PARA ORGANIZACION ************* -->
+						<sec:authorize access='hasAnyAuthority("organizacion")'>
+					<petclinic:menuItem active="${name eq 'owners'}" url="/eventos/nuevo"
+						title="Página de creacion de eventos">
+						<span class="bi bi-camera-reels" aria-hidden="true"></span>
+						<span>Crear Evento</span>
 					</petclinic:menuItem>
 			</sec:authorize>
 
@@ -76,7 +87,7 @@
 
 				
 				<!-- ****************** Menu como cliente  ****************** -->
-				<sec:authorize access='hasAnyAuthority("cliente")'>
+				<sec:authorize access='hasAnyAuthority("cliente, organizacion")'>
 				
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>

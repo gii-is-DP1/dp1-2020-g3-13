@@ -52,7 +52,7 @@ public class ActividadController {
         }else {
             actividadService.anadirActividadAEvento(evento, actividad);
             actividadService.guardarActividad(actividad);
-            String vistaExponente = "redirect:/eventos/{evento_id}/actividades" + "{" + actividad.getId() + "}";
+            String vistaExponente = "redirect:/eventos/{evento_id}/actividades/" + actividad.getId()+"/nuevo";
             modelMap.addAttribute("message", "Actividad guardada satisfactoriamente!");
             return vistaExponente;
         }
