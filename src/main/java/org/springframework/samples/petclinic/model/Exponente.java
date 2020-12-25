@@ -10,9 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.annotations.ManyToAny;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,10 +23,10 @@ public class Exponente extends BaseEntity{
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Actividad> actividades;
     
-    @Column(name = "nombreExpo")
+    @Column(name = "nombreExponente")
     @NotEmpty
     protected String nombreExponente;
-    @Column(name = "apellidosExpo")
+    @Column(name = "apellidosExponente")
     @NotEmpty
     protected String apellidosExponente;
     @Column(name = "alias")

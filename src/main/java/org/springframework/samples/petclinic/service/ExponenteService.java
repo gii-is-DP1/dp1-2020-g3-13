@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Exponente;
@@ -67,5 +66,3 @@ public class ExponenteService {
 
 
     }
-    
-}
