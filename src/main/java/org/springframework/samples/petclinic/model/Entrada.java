@@ -16,7 +16,6 @@ import lombok.Data;
 @Table(name = "entrada")
 public class Entrada extends BaseEntity{
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_cliente",referencedColumnName = "id")
     private Cliente cliente;
@@ -24,8 +23,8 @@ public class Entrada extends BaseEntity{
     @OneToOne(cascade = CascadeType.ALL)
     private TipoEntrada tipoEntrada;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private LineaFactura lineaFactura;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private LineaFactura lineaFactura;
 
     @OneToOne(cascade = CascadeType.ALL)
     private VentaEntrada ventaEntrada;

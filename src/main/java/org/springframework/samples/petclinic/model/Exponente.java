@@ -13,8 +13,11 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.ManyToAny;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "exponente")
 public class Exponente extends BaseEntity{
@@ -25,5 +28,10 @@ public class Exponente extends BaseEntity{
     @Column(name = "nombreExpo")
     @NotEmpty
     protected String nombreExponente;
+    @Column(name = "apellidosExpo")
+    @NotEmpty
+    protected String apellidosExponente;
+    @Column(name = "alias")
+    protected String alias;
     
 }
