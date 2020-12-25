@@ -12,3 +12,8 @@
 <spring:url value="/webjars/bootstrap/3.3.6/js/bootstrap.min.js" var="bootstrapJs"/>
 <script src="${bootstrapJs}"></script>
 
+<spring:url value="/resources/js/jquery.lettering.js" var="jqueryLettering"/>
+<script type="text/javascript" src="${jqueryLettering}"></script>
+<spring:url value="/resources/js/funcionesJavascript.js" var="javascriptPrincipal"/>
+<script type="text/javascript" src="${javascriptPrincipal}"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

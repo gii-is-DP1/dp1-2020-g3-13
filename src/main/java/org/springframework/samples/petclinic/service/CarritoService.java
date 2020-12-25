@@ -13,7 +13,6 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.LineaFactura;
-import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.repository.CarritoRepository;
 import org.springframework.samples.petclinic.repository.FacturaRepository;
 import org.springframework.stereotype.Service;
@@ -85,8 +84,8 @@ public class CarritoService {
     public void generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carrito.getLineasFacturas();
-       factura.setLineasFacturas(lineas);
-
+       List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
+       factura.setLineasFacturas(listaLineasDeFactura);
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();
@@ -100,6 +99,7 @@ public class CarritoService {
         factura.setUsuarioAsocidado(usuarioAsocidado);
         for (LineaFactura lineaFactura : lineas) {
             lineaFactura.setFactura(factura);
+            factura.getLineasFacturas().add(lineaFactura);
         }
         facturaRepo.save(factura);
 

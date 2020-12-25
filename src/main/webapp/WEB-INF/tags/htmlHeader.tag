@@ -14,19 +14,18 @@ PetClinic :: a Spring Framework demonstration
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags --%>
 
-    <spring:url value="/resources/images/favicon.png" var="favicon"/>
+    <spring:url value="/resources/images/iconoQplan.png" var="favicon"/>
     <link rel="shortcut icon" type="image/x-icon" href="${favicon}">
 
-    <title>PetClinic :: a Spring Framework demonstration</title>
+    <title>QPlan - Tu hogar de eventos</title>
+
 
     <%-- CSS generated from LESS --%>
     <spring:url value="/resources/css/petclinic.css" var="petclinicCss"/>
     <link href="${petclinicCss}" rel="stylesheet"/>
-    <spring:url value="/resources/js/jquery.lettering.js" var="javascriptLettering"/>
-    <script src="${javascriptLettering}"></script>
-    <script type="text/javascript" src="/resources/js/funcionesJavascript.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Oswald&family=PT+Sans&display=swap" rel="stylesheet">
-
+    <spring:url value="/webjars/jquery-ui/1.11.4/jquery-ui.theme.min.css" var="jQueryUiThemeCss"/>
+    <link href="${jQueryUiThemeCss}" rel="stylesheet"/>
 
     <%-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --%>
     <!--[if lt IE 9]>
@@ -38,6 +37,5 @@ PetClinic :: a Spring Framework demonstration
     <!-- Only datepicker is used -->
     <spring:url value="/webjars/jquery-ui/1.11.4/jquery-ui.min.css" var="jQueryUiCss"/>
     <link href="${jQueryUiCss}" rel="stylesheet"/>
-    <spring:url value="/webjars/jquery-ui/1.11.4/jquery-ui.theme.min.css" var="jQueryUiThemeCss"/>
-    <link href="${jQueryUiThemeCss}" rel="stylesheet"/>
+
 </head>

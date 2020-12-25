@@ -4,8 +4,20 @@
             <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
                 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->
                 <div class="hero">
-                    <h1 class="nombre-sitio">QPlan</h1>
+                    <div class="contenido-header">
+                        <div class="informacion-evento">
+                            <nav class="redes-sociales">
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </nav>
+                            <h1 class="nombre-sitio">QPlan</h1>
+                        </div>
+                    </div>
                 </div>
+
                 <petclinic:layout pageName="home">
 
 
