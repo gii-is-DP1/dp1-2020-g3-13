@@ -64,14 +64,14 @@ public class EventoController {
         return mav;
     }
 
-    @GetMapping(value="/new")
+    @GetMapping(value="/nuevo")
     public String crearEvento(ModelMap modelMap){
         String vista="eventos/editarEvento";
         modelMap.addAttribute("evento", new Evento());
         return vista;
     }
     
-    @PostMapping(value="/new")
+    @PostMapping(value="/nuevo")
     public String guardarEvento(@Valid Evento evento, BindingResult resultado, ModelMap modelMap){
         Organizacion org = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
         if(resultado.hasErrors()){
