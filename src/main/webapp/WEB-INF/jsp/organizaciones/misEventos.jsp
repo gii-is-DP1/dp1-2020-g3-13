@@ -7,7 +7,7 @@
 
                         <petclinic:layout pageName="eventos">
                             <section class="seccion contenedor">
-                                <h2>Calendario de Eventos</h2>
+                                <h2>Mis Eventos</h2>
 
                                 <div class="calendario">
                                     <h3>
@@ -41,10 +41,6 @@
                                             <spring:url value="/eventos/{eventosId}" var="eventoUrl">
                                                 <spring:param name="eventosId" value="${evento.id}" />
                                             </spring:url>
-                                            <a href="${fn:escapeXml(eventoUrl)}">
-                                                <p class="enlaceEvento"> <i class="fas fa-plus"></i> A&ntilde;dir entrada
-                                                </p>
-                                            </a>
                                         </div>
                                     </c:forEach>
                                 </tbody>

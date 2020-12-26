@@ -25,7 +25,7 @@ public class OrganizacionService {
         public Iterable<Organizacion> findAll(){
             return organizacionRepo.findAll();
         }
-        public Organizacion findOrganizacionByUsuario(String usuario) throws DataAccessException{
+        public Organizacion encuentraOrganizacionByUsuario(String usuario) throws DataAccessException{
             return organizacionRepo.listadoOrganizacionByUsuario(usuario);
         }
 

@@ -47,7 +47,7 @@ public class AdminService {
     public void deleteUsuario(String usuarioId){
         Usuario u = usuarioService.findUsuario(usuarioId);
         Cliente c = clienteService.findClienteByUsuario(usuarioId);
-        Organizacion o = organizacionService.findOrganizacionByUsuario(usuarioId); 
+        Organizacion o = organizacionService.encuentraOrganizacionByUsuario(usuarioId); 
 
             if(u.getAutoridades().getAutoridad().equals("cliente")){
                 this.clienteService.deleteCliente(c);

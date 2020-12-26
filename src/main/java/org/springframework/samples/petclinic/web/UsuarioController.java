@@ -90,9 +90,9 @@ public class UsuarioController {
             vista="usuarios/myProfileClientes";
             Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
             modelMap.addAttribute("cliente", cliente);
-        }if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
+        }if(!(organizacionService.encuentraOrganizacionByUsuario(username)==null)){
             vista="usuarios/myProfileOrganizaciones";
-            Organizacion organizacion = organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+            Organizacion organizacion = organizacionService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
             modelMap.addAttribute("organizacion", organizacion);
             return vista;
         }
@@ -110,8 +110,8 @@ public class UsuarioController {
             model.addAttribute("cliente",clienteUpd);
             return VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM;
         }
-        if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
-            Organizacion org = organizacionService.findOrganizacionByUsuario(username);
+        if(!(organizacionService.encuentraOrganizacionByUsuario(username)==null)){
+            Organizacion org = organizacionService.encuentraOrganizacionByUsuario(username);
             model.addAttribute("organizacion",org);
             return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
         }
@@ -137,8 +137,8 @@ public class UsuarioController {
                  }
             }
         }
-        if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
-            Organizacion org = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+        if(!(organizacionService.encuentraOrganizacionByUsuario(username)==null)){
+            Organizacion org = this.organizacionService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
             if (result.hasErrors()) {
                 model.put("organizacion", organizacion);
                 return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
@@ -163,8 +163,8 @@ public class UsuarioController {
                 Cliente clienteActual2 = this.clienteService.findClienteByUsuario(username);
                 usuarioService.deleteUsuario(clienteActual2.getUsuario());
                 clienteService.deleteCliente(clienteActual2);
-            }if(!(organizacionService.findOrganizacionByUsuario(username)==null)){
-                Organizacion org2 = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+            }if(!(organizacionService.encuentraOrganizacionByUsuario(username)==null)){
+                Organizacion org2 = this.organizacionService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
                 usuarioService.deleteUsuario(org2.getUsuario());
                 organizacionService.deleteOrganizacion(org2);
 
