@@ -40,8 +40,10 @@
                                     <div class="col-sm-offset-2 col-sm-10">
 
                                         <button class="btn btn-default" type="submit">Guardar evento</button>
+                                        
 
                                     </div>
+                                    
                                 </div>
                             </form:form>
                         </jsp:body>

@@ -20,6 +20,7 @@ import lombok.Data;
 @Entity
 @Table(name = "factura")
 public class Factura extends BaseEntity{
+
     @Column(name="precioTotal")
     @NotNull
     private Double precioTotal;

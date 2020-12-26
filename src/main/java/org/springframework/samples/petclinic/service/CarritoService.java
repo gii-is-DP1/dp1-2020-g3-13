@@ -44,7 +44,7 @@ public class CarritoService {
         linea.setCantidad(1);
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
         linea.setTipoEntrada(entrada.getTipoEntrada());
-        entrada.setLineaFactura(linea);
+        // entrada.setLineaFactura(linea);
         entrada.setCliente(cliente);
         linea.setEntrada(entrada);
         Carrito carrito = new Carrito();
@@ -96,7 +96,8 @@ public class CarritoService {
         factura.setPrecioTotal(precioTotal);
         factura.setFechaFactura(LocalDate.now());
         String usuarioAsocidado = cliente.getUsuario().getNombreUsuario();
-        factura.setUsuarioAsocidado(usuarioAsocidado);
+        factura.setUsuarioAsocidado(usuarioAsocidado); 
+        factura.setLineasFacturas(lineas);
         for (LineaFactura lineaFactura : lineas) {
             lineaFactura.setFactura(factura);
             factura.getLineasFacturas().add(lineaFactura);
