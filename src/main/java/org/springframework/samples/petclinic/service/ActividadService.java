@@ -31,14 +31,10 @@ public class ActividadService {
         public Actividad findById(int id){
             return actividadRepo.findById(id).orElse(null);
         }
-            //  FALLA
         public Boolean contieneExponente(Exponente exponente, Actividad actividad){
             Boolean res = false;
-            System.out.println("es true222");
             for (int i = 0; i < actividad.getExponentes().size(); i++) {
-                System.out.println("es true3333");
-                if(actividad.getExponentes().get(i).getNombreExponente() == exponente.getNombreExponente() && actividad.getExponentes().get(i).getApellidosExponente() == exponente.getApellidosExponente() && actividad.getExponentes().get(i).getAlias() == exponente.getAlias()) {
-                    System.out.println("es true");
+                if(actividad.getExponentes().get(i).getNombreExponente().equals(exponente.getNombreExponente()) && actividad.getExponentes().get(i).getApellidosExponente().equals(exponente.getApellidosExponente()) && actividad.getExponentes().get(i).getAlias().equals(exponente.getAlias())) {
                     res = true;
                     break;
                 }
@@ -46,20 +42,10 @@ public class ActividadService {
             return res;
         }
 
-
-        
-
-
-        @Autowired
-        private EventoService eventoService;
-
         @Transactional
         public void guardarActividad(Actividad actividad){
             actividadRepo.save(actividad);
         }
-
-        
-
 
         @Transactional
         public void anadirActividadAEvento(Evento evento, Actividad actividad) throws DataAccessException{
@@ -69,14 +55,11 @@ public class ActividadService {
                 actividad.setEvento(evento);
                 listaActividades.add(actividad);
                 evento.setActividades(listaActividades);
-                
             }else{
                 List<Actividad> listaActividadesActual = evento.getActividades();
                 actividad.setEvento(evento);
                 listaActividadesActual.add(actividad);
-                
             }
-            //eventoService.save(evento);
         }
 
 }
