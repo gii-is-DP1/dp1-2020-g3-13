@@ -16,7 +16,7 @@
             <petclinic:inputField label="Contraseña" name="usuario.password"/>
             <petclinic:inputField label="Nombre" name="nombreOrganizacion"/>
             <petclinic:inputField label="Cif" name="cif"/>
-            <petclinic:inputField label="email" name="email"/>
+            <petclinic:inputField label="Email" name="email"/>
             <petclinic:inputField label="Info" name="info"/>
         </div>
         <div class="form-group">
