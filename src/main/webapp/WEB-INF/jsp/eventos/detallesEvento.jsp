@@ -83,6 +83,9 @@
                                         <p>Fecha Fin:
                                             <c:out value="${tipoEntradas.fechaFin}" />
                                         </p>
+                                        <p>Entradas disponibles:
+                                            <c:out value="${tipoEntradas.numEntradas}" />
+                                        </p>
                                         <spring:url value="/eventos/{eventoId}/{tipoEntradaId}/entrada" var="ventaUrl">
                                             <spring:param name="eventoId" value="${evento.id}" />
                                             <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
