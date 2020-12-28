@@ -23,6 +23,8 @@ public class VentaEntradaService {
     private VentaEntradaRepository ventaEntradaRepository;
     @Autowired
     private CarritoService carritoService;
+    @Autowired
+    private VentaEntradaService ventaEntradaService;
 
 
 
@@ -36,6 +38,7 @@ public class VentaEntradaService {
                 //lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
                 entrada =carrito.getLineasFacturas().get(i).getEntrada();  
                 ventaEntrada.setEntrada(entrada);
+                ventaEntradaService.saveEntrada(ventaEntrada);
             }
             carritoService.generarFacturaCarrito(carrito, cliente);
             carrito.getLineasFacturas().clear();

@@ -27,6 +27,7 @@ public class Entrada extends BaseEntity{
     // private LineaFactura lineaFactura;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_ventaEntrada", referencedColumnName = "id")
     private VentaEntrada ventaEntrada;
 
     @Column(name = "nombreAsistente")
