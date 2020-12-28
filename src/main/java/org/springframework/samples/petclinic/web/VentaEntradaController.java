@@ -56,7 +56,6 @@ public class VentaEntradaController {
 		else {
 			Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 				ventaEntradaService.finalizarCompra(carritoId, cliente, ventaEntrada);
-				tipoEntrada.setNumEntradas(tipoEntrada.getNumEntradas()-1);
 				// ventaEntradaService.saveEntrada(ventaEntrada);
 			return "redirect:/eventos";
 		}
