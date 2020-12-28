@@ -37,7 +37,7 @@ public class Consulta extends NamedEntity{
     private LocalDate fechaConsulta;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nombre_evento", referencedColumnName = "nombreEvento")
+    @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -22,36 +23,32 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "ventaEntrada")
+
 public class VentaEntrada extends BaseEntity {
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="cliente_id",referencedColumnName = "id")
-    private Cliente cliente;
+    
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name="id_cliente",referencedColumnName = "id")
+    // private Cliente cliente;
     @OneToOne(cascade = CascadeType.ALL)
-    private LineaFactura lf;
+    private Entrada entrada;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private LineaFactura lf;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "evento_id", referencedColumnName = "id")
-    private Evento evento;
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "evento_id", referencedColumnName = "id")
+    // private Evento evento;
 
-    @NotNull
+    // @NotNull
     private Integer numTarjeta;
     
     @DateTimeFormat(pattern = "yyyy/MM/dd")
+    //@NotNull
     private LocalDate fechaCaducidad;
 
-    @NotEmpty
+    // @NotEmpty
     private String nombreTitular;
 
-    @NotNull
-    private Integer cvv;
-
-    @Column(name = "nombreAsistente")
-    @NotEmpty
-    protected String nombreAsistente;
-
-    @Column(name = "dni")
-    @NotEmpty
-    protected String dni;
-    
+    // @NotNull
+    private Integer cvv;    
     
 }

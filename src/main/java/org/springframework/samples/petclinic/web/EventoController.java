@@ -46,7 +46,7 @@ public class EventoController {
         String vista = "eventos/";
         if(!(clienteService.findClienteByUsuario(usuario)==null) || usuario=="anonymousUser"){
             vista = "eventos/listadoEventos";
-        }else if(!(organizacionService.findOrganizacionByUsuario(usuario)==null)){
+        }else if(!(organizacionService.encuentraOrganizacionByUsuario(usuario)==null)){
             vista = "eventos/listadoEventosOrganizacion";
         }else{
             vista = "eventos/listadoEventosAdmin";
@@ -64,16 +64,16 @@ public class EventoController {
         return mav;
     }
 
-    @GetMapping(value="/new")
+    @GetMapping(value="/nuevo")
     public String crearEvento(ModelMap modelMap){
         String vista="eventos/editarEvento";
         modelMap.addAttribute("evento", new Evento());
         return vista;
     }
     
-    @PostMapping(value="/new")
+    @PostMapping(value="/nuevo")
     public String guardarEvento(@Valid Evento evento, BindingResult resultado, ModelMap modelMap){
-        Organizacion org = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+        Organizacion org = this.organizacionService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
         if(resultado.hasErrors()){
             modelMap.addAttribute("evento", evento);
             return "eventos/editarEvento";

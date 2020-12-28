@@ -1,11 +1,13 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.BaseEntity;
+import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.service.AutoridadesService;
@@ -36,6 +38,7 @@ public class OrganizacionController {
     @Autowired
     private EventoService eventoService;
 
+
     @Autowired
     private AutoridadesService autoridadesService;
     private static final String VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM ="organizaciones/organizacionUpdateForm";
@@ -56,7 +59,18 @@ public class OrganizacionController {
 		Organizacion organizacion = new Organizacion();
 		model.put("organizacion", organizacion);
 		return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
-	}
+    }
+    
+    @GetMapping(value="/misEventos")
+    public String listadoDeMisEventos(ModelMap modelMap){
+        String vista = "/organizaciones/misEventos";
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        Organizacion organizacion = organizacionService.encuentraOrganizacionByUsuario(usuario);
+        List<Evento> misEventos = eventoService.listadoEventosDeOrganizacion(organizacion.getId());
+        modelMap.addAttribute("eventos", misEventos);
+        return vista;
+    
+    }
 
     @PostMapping(value = "/new")
 	public String processCreationForm(@Valid Organizacion organizacion, BindingResult result) {

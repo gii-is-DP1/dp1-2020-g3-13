@@ -21,8 +21,6 @@ import lombok.Data;
 @Data
 @Table(name = "eventos")
 public class Evento extends BaseEntity{
-
-
     @Column(name = "tipoEvento")
     @NotEmpty
     protected String tipoEvento;
@@ -52,10 +50,11 @@ public class Evento extends BaseEntity{
     private LocalDate fechaFin;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    // @JoinColumn(name = "actividades_id", referencedColumnName = "id")
     private List<Actividad> actividades;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<VentaEntrada> ventaEntrada;
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    // private List<VentaEntrada> ventaEntrada;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<TipoEntrada> tipoEntradas;

@@ -13,7 +13,7 @@
         <tr>
             <th style="width: 200px;">Evento</th>
             <th style="width: 200px;">TipoEvento</th>
-            <th style="width: 200px;">FechaInicio111111111111111111111111111111111111</th>
+            <th style="width: 200px;">FechaInicio</th>
 
 
         </tr>

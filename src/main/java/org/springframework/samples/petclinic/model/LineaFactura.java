@@ -6,6 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
@@ -16,17 +17,28 @@ import lombok.Data;
 @Data
 @Table(name = "lineaFactura")
 public class LineaFactura extends BaseEntity{
+
     @OneToOne(cascade = CascadeType.ALL)
-    private VentaEntrada entrada;
+    private TipoEntrada tipoEntrada;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_entrada", referencedColumnName = "id")
+    private Entrada entrada;
+
     @Column(name = "precio")
-    @NotEmpty
-    protected Integer precio;
+    @NotNull
+    protected Double precio;
 
     @Column(name = "cantidad")
-    @NotEmpty
+    @NotNull
     protected Integer cantidad;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_factura", referencedColumnName = "id")
     private Factura factura;
+
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_carrito", referencedColumnName = "id")
+    private Carrito carrito;
 }

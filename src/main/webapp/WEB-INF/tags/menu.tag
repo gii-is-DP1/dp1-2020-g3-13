@@ -22,37 +22,102 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 
+<!-- ************* MENU PARA CUALQUIER USUARIO ************* -->
 				<petclinic:menuItem active="${name eq 'home'}" url="/"
-					title="home page">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					<span>Home</span>
+					title="Página de inicio">
+					<span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+					<span>Inicio</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'owners'}" url="/eventos"
-					title="find owners">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Eventos</span>
+					title="Página de eventos">
+					<span class="bi bi-camera-reels" aria-hidden="true"></span>
+					<span> Eventos</span>
 				</petclinic:menuItem>
 
-			<!--	<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
-					title="veterinarians">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Veterinarians</span> 
-				</petclinic:menuItem> -->
+<!-- ************* MENU PARA ADMIN ************* -->
+			<sec:authorize access='hasAnyAuthority("admin")'>
+					<petclinic:menuItem active="${name eq 'owners'}" url="/peticion"
+						title="Página de gestión de peticiones">
+						<span class="bi bi-camera-reels" aria-hidden="true"></span>
+						<span>G. Peticiones</span>
+					</petclinic:menuItem>
+			</sec:authorize>
+			<sec:authorize access='hasAnyAuthority("admin")'>
+					<petclinic:menuItem active="${name eq 'owners'}" url="/usuarios"
+						title="Página de gestión de usuarios">
+						<span class="bi bi-camera-reels" aria-hidden="true"></span>
+						<span>G. Usuarios</span>
+					</petclinic:menuItem>
+			</sec:authorize>
+			<sec:authorize access='hasAnyAuthority("admin")'>
+					<petclinic:menuItem active="${name eq 'owners'}" url="/lugaresRealizacion"
+						title="Página de gestión de lugares de realizacion">
+						<span class="bi bi-camera-reels" aria-hidden="true"></span>
+						<span>G. Lugares de Realización</span>
+					</petclinic:menuItem>
+			</sec:authorize>
+			<!-- ************* MENU PARA ORGANIZACION ************* -->
+						<sec:authorize access='hasAnyAuthority("organizacion")'>
+					<petclinic:menuItem active="${name eq 'owners'}" url="/eventos/nuevo"
+						title="Página de creacion de eventos">
+						<span class="bi bi-camera-reels" aria-hidden="true"></span>
+						<span>Crear Evento</span>
+					</petclinic:menuItem>
+			</sec:authorize>
+
 				
+
 
 			</ul>
 
 
 
-
+			<!--Menu sin iniciar sesión-->
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
 					<li><a href="<c:url value="/login" />">Login</a></li>
 					<li><a href="<c:url value="/clientes/new" />">Registrarme</a></li>
 					<li><a href="<c:url value="/peticion/new" />">Registro organizacion</a></li>
 				</sec:authorize>
-				<sec:authorize access="isAuthenticated()">
+				<sec:authorize access='hasAnyAuthority("cliente")'>
+					<li><a href="<c:url value="/carrito" />"><span
+					class="glyphicon glyphicon-shopping-cart"></span> Mi cesta</a></li>
+				</sec:authorize>
+
+				
+				<!-- ****************** Menu como cliente  ****************** -->
+				<sec:authorize access='hasAnyAuthority("cliente, organizacion")'>
+				
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>
+							<strong><sec:authentication property="name" /></strong> <span
+							class="glyphicon glyphicon-chevron-down"></span>
+					</a>
+						<ul class="dropdown-menu">
+                            <li> 
+								<div class="navbar-login navbar-login-session">
+									<div class="row">
+										<div class="col-lg-12">
+											<p>
+											<a href="<c:url value="/logout" />"
+													class="btn btn-primary btn-block btn-sm">Logout</a>
+											</p>
+											<p>
+											<a href="<c:url value="/usuarios/myprofile" />"
+													class="btn btn-primary btn-block btn-sm">Mi perfil</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+
+						</ul></li>
+				</sec:authorize>
+
+
+				<!-- ****************** Menu como administrador  ****************** -->
+				<sec:authorize access='hasAnyAuthority("admin")'>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>
 							<strong><sec:authentication property="name" /></strong> <span
@@ -62,16 +127,9 @@
 							<li>
 								<div class="navbar-login">
 									<div class="row">
-										<div class="col-lg-4">
-											<p class="text-center">
-												<span class="glyphicon glyphicon-user icon-size"></span>
-											</p>
-										</div>
-										<div class="col-lg-8">
-											<p class="text-left">
-												<strong><sec:authentication property="name" /></strong>
-											</p>
-											<p class="text-left">
+
+										<div class="col-lg-12">
+											<p>
 												<a href="<c:url value="/logout" />"
 													class="btn btn-primary btn-block btn-sm">Logout</a>
 											</p>
@@ -79,26 +137,11 @@
 									</div>
 								</div>
 							</li>
-							<li class="divider"></li>
-
-                            <li> 
-								<div class="navbar-login navbar-login-session">
-									<div class="row">
-										<div class="col-lg-12">
-											<p>
-												<a href="/usuarios/myprofile" class="btn btn-primary btn-block">My Profile</a>
-											</p>
-										</div>
-									</div>
-								</div>
-							</li>
-
+							
 						</ul></li>
 				</sec:authorize>
+
 			</ul>
 		</div>
-
-
-
 	</div>
 </nav>
