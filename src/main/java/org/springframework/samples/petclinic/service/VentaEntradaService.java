@@ -13,6 +13,7 @@ import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.VentaEntrada;
+import org.springframework.samples.petclinic.repository.EntradaRepository;
 import org.springframework.samples.petclinic.repository.VentaEntradaRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class VentaEntradaService {
     @Autowired
     private CarritoService carritoService;
     @Autowired
-    private VentaEntradaService ventaEntradaService;
+    private EntradaRepository entradaRepo;
 
 
 
@@ -36,11 +37,12 @@ public class VentaEntradaService {
             for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
                 //TipoEntrada lineaActual = carrito.getLineasFacturas().get(i).getTipoEntrada();
                 //lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
+
                 entrada =carrito.getLineasFacturas().get(i).getEntrada();  
-                ventaEntrada.setEntrada(entrada);
-                ventaEntradaService.saveEntrada(ventaEntrada);
+                entrada.setVentaEntrada(ventaEntrada);
             }
             carritoService.generarFacturaCarrito(carrito, cliente);
+            ventaEntradaRepository.save(ventaEntrada);
             carrito.getLineasFacturas().clear();
             carrito.setTotal(0.0);
 
@@ -51,7 +53,7 @@ public class VentaEntradaService {
 
     @Transactional
     public void saveEntrada(VentaEntrada ventaEntrada) throws DataAccessException{
-        //List<VentaEntrada> entradas = eventoService.findEventoById(ventaEntrada.getEvento().getId()).getVentaEntrada();
+       // List<VentaEntrada> entradas = eventoService.findEventoById(ventaEntrada.getEvento().getId()).getVentaEntrada();
         //Boolean existe = false;
         //int i = 0;
         //while(i<entradas.size()&&existe==false){
