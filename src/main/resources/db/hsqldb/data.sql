@@ -58,7 +58,7 @@ INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,f
 --INSERT INTO autoridades(id,usuario,autoridad) VALUES (9,'andmecsan','admin');
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('prueba1', 'prueba1', TRUE);
-INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (2,'andrea23', 'Ceballos', 'pepeceba@gmail.com','prueba1', 666777888);
+INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (2,'andrea23', 'Ceballos', 'pepeceba@gmail.com','prueba1', '666777888');
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (7,'prueba1','cliente');
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('pakitocena', 'chipirones', TRUE);
@@ -66,7 +66,7 @@ INSERT INTO organizaciones(id,cif, email, info, nombre_organizacion, nombre_usua
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (10,'pakitocena','organizacion');
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('Test_delete', 'test', TRUE);
-INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (1,'andrea23', 'Ceballos', 'pepeceba@gmail.com','Test_delete', 666777888);
+INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (1,'andrea23', 'Ceballos', 'pepeceba@gmail.com','Test_delete', '666777888');
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (8,'Test_delete','cliente');
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('Test_delete2', 'test', TRUE);

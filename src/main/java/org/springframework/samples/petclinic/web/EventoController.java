@@ -44,22 +44,30 @@ public class EventoController {
     public String listadoEventos(ModelMap modelMap){
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         String vista = "eventos/";
+        Iterable<Evento> eventos = eventoService.findAll();
         if(!(clienteService.findClienteByUsuario(usuario)==null) || usuario=="anonymousUser"){
+            eventos = eventoService.findAll();
             vista = "eventos/listadoEventos";
         }else if(!(organizacionService.encuentraOrganizacionByUsuario(usuario)==null)){
+            eventos = eventoService.listadoEventosDeOrganizacion(organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
             vista = "eventos/listadoEventosOrganizacion";
         }else{
+            eventos = eventoService.findAll();
             vista = "eventos/listadoEventosAdmin";
         }
         
-        Iterable<Evento> eventos = eventoService.findAll();
+
         modelMap.addAttribute("eventos", eventos);
         return vista;
     }
 
     @GetMapping("/{eventosId}")
     public ModelAndView showEvento(@PathVariable("eventosId") int eventosId) {
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         ModelAndView mav = new ModelAndView("eventos/detallesEvento");
+        if(!(clienteService.findClienteByUsuario(usuario)==null)){
+            mav.setViewName("eventos/detallesEventoCliente");
+        }
         mav.addObject(this.eventoService.findEventoById(eventosId));
         return mav;
     }
