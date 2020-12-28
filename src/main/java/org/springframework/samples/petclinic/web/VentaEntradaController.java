@@ -9,8 +9,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.VentaEntrada;
-import org.springframework.samples.petclinic.model.TipoEntrada;
-
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
@@ -48,7 +46,7 @@ public class VentaEntradaController {
 		return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
 	}
     @PostMapping(value = "/finalizarCompra")
-	public String processCreationForm(VentaEntrada ventaEntrada,TipoEntrada tipoEntrada, @PathVariable("carritoId") int carritoId, BindingResult result, ModelMap model) {
+	public String processCreationForm(VentaEntrada ventaEntrada, @PathVariable("carritoId") int carritoId, BindingResult result, ModelMap model) {
 		if (result.hasFieldErrors()) {
 			model.put("ventaEntrada", ventaEntrada);
 			return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
