@@ -22,42 +22,33 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "ventaEntrada", uniqueConstraints={
-    @UniqueConstraint(columnNames = {"id_evento", "nombreAsistente"})
-})
+@Table(name = "ventaEntrada")
+
 public class VentaEntrada extends BaseEntity {
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_cliente",referencedColumnName = "id")
-    private Cliente cliente;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ventaEntrada")
-    @JoinColumn(name = "id_linea_factura", referencedColumnName = "id")
-    private LineaFactura lf;
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name="id_cliente",referencedColumnName = "id")
+    // private Cliente cliente;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Entrada entrada;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private LineaFactura lf;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_evento", referencedColumnName = "id")
-    private Evento evento;
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "evento_id", referencedColumnName = "id")
+    // private Evento evento;
 
-    @NotNull
+    // @NotNull
     private Integer numTarjeta;
     
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     //@NotNull
     private LocalDate fechaCaducidad;
 
-    @NotEmpty
+    // @NotEmpty
     private String nombreTitular;
 
-    @NotNull
-    private Integer cvv;
-
-    @Column(name = "nombreAsistente")
-    @NotEmpty
-    protected String nombreAsistente;
-
-    @Column(name = "dni")
-    @NotEmpty
-    protected String dni;
-    
+    // @NotNull
+    private Integer cvv;    
     
 }

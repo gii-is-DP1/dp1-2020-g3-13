@@ -15,8 +15,12 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+// @Data
+@Getter
+@Setter
 @Entity
 @Table(name = "actividad")
 public class Actividad extends BaseEntity{

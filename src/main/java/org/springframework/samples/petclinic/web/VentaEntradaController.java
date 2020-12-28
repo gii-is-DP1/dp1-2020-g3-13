@@ -6,8 +6,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.VentaEntrada;
+import org.springframework.samples.petclinic.model.TipoEntrada;
+
+import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.VentaEntradaService;
@@ -23,7 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/eventos/{eventoId}")
+@RequestMapping("/carrito/{carritoId}")
 public class VentaEntradaController {
 
     private static final String VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM = "eventos/createVentaEntrada";
@@ -34,27 +38,27 @@ public class VentaEntradaController {
 	private EventoService eventoService;
 	@Autowired
 	private ClienteService clienteService;
+	@Autowired
+	private CarritoService carritoService;
     
-    @GetMapping(value ="/ventaEntradas")
+    @GetMapping(value ="/finalizarCompra")
 	public String initCreationForm(Map<String,Object> model) {
 		VentaEntrada venta = new VentaEntrada();
 		model.put("ventaEntrada", venta);
 		return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
 	}
-
-    @PostMapping(value = "/ventaEntradas")
-	public String processCreationForm(@Valid VentaEntrada ventaEntrada,@PathVariable("eventoId") int eventoId, BindingResult result, ModelMap model) {
+    @PostMapping(value = "/finalizarCompra")
+	public String processCreationForm(VentaEntrada ventaEntrada,TipoEntrada tipoEntrada, @PathVariable("carritoId") int carritoId, BindingResult result, ModelMap model) {
 		if (result.hasFieldErrors()) {
 			model.put("ventaEntrada", ventaEntrada);
 			return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
 		}
 		else {
-			model.put("ventaEntrada", ventaEntrada);
-			ventaEntrada.setEvento(eventoService.findEventoById(eventoId));
-			ventaEntrada.setCliente(clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName()));
-			this.ventaEntradaService.saveEntrada(ventaEntrada);
-
-			return "redirect:/eventos" /*+ admin.getId()*/;
+			Cliente cliente = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+				ventaEntradaService.finalizarCompra(carritoId, cliente, ventaEntrada);
+				tipoEntrada.setNumEntradas(tipoEntrada.getNumEntradas()-1);
+				// ventaEntradaService.saveEntrada(ventaEntrada);
+			return "redirect:/eventos";
 		}
 
 	}

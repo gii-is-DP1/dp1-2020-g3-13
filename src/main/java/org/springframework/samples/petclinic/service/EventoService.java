@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -46,5 +47,9 @@ public class EventoService {
         save(evento);
     }
     
+    public List<Evento> listadoEventosDeOrganizacion(int id_organizacion){
+        return eventoRepository.listadoEventosDeOrganizacion(id_organizacion);
+    }
+
     
 }

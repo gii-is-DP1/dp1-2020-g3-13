@@ -23,6 +23,8 @@
                                     <petclinic:inputField label="email" name="email" />
                                     <petclinic:inputField label="telefono" name="telefono" />
                                     <petclinic:inputField label="apellidos" name="apellidos" />
+                                    <petclinic:inputField label="nombreUsuario" name="usuario.nombreUsuario" />
+
                                     
                                     
 
