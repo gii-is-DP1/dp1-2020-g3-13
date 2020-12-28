@@ -36,7 +36,7 @@ private LugarRealizacionRepository lugarRepo;
         lugar.setDireccion("direccion");
         lugar.setEmail("email");
         lugar.setNombre_recinto("nombre_recinto");
-        lugar.setTelefono(7867657);
+        lugar.setTelefono(786765887);
         lugarService.saveLugarRealizacion(lugar);
         assertEquals(count+1, lugarService.lugaresCount());
         assertEquals(lugar, lugarService.findById(lugar.getId()));

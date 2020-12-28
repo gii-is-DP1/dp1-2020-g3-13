@@ -21,7 +21,7 @@ public class SponsorService {
     private SponsorRepository sponsorRepository;
 
     @Transactional
-    public int tipoEntradaCount(){
+    public int sponsorCount(){
         return (int) sponsorRepository.count();
     }
 
