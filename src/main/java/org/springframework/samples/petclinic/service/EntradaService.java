@@ -24,5 +24,10 @@ public class EntradaService {
         entrada.setTipoEntrada(tipoEntrada);
         entradaRepo.save(entrada);
     }
+
+    @Transactional
+    public Entrada findEntradaByNombreAsistente(String nombreAsistente){
+        return entradaRepo.findEntradaByNombreAsistente(nombreAsistente);
+    }
     
 }
