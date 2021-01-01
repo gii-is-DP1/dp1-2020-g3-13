@@ -26,6 +26,10 @@ public class LugarRealizacionService {
     public void saveLugarRealizacion(LugarRealizacion lugarRealizacion){
         lugarRealizacionRepository.save(lugarRealizacion);
     }
+    public void modifyLugaRealizacion(LugarRealizacion lugarRealizacion, LugarRealizacion LugarRealizacionact) throws DataAccessException{
+		lugarRealizacion.setId(LugarRealizacionact.getId());
+        saveLugarRealizacion(lugarRealizacion);
+    }
 
     @Transactional
     public Iterable<LugarRealizacion> findAll() throws DataAccessException{
