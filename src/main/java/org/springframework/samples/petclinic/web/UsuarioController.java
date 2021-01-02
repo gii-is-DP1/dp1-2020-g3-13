@@ -117,6 +117,13 @@ public class UsuarioController {
         }
         return "redirect:/usuarios/myprofile";
     }
+    @GetMapping(value = "/myprofile/facturas")
+    public String facturas(ModelMap modelMap){
+        //String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        //modelMap.addAttribute("usuario", usuario);
+        String vista="usuarios/myProfileFacturas";
+        return vista;
+    }
 
     //TODO 
     @PostMapping(value = "/myprofile/edit")

@@ -13,7 +13,7 @@
                                 <form:form modelAttribute="cliente" class="form-horizontal" id="add-cliente-form">
                                     <div class="form-group has-feedback">
                                         <petclinic:inputField label="Nombre de usuario" name="usuario.nombreUsuario" />
-                                        <petclinic:inputField label="Contraseña" name="usuario.password" />
+                                        <petclinic:passwordField label="Contraseña" name="usuario.password" />
                                         <petclinic:inputField label="Nombre" name="nombre" />
                                         <petclinic:inputField label="Apellidos" name="apellidos" />
                                         <petclinic:inputField label="Email" name="email" />
