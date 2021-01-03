@@ -25,8 +25,11 @@ public class LineaFactura extends BaseEntity{
     @JoinColumn(name = "id_entrada", referencedColumnName = "id")
     private Entrada entrada;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_alquilerEspacio", referencedColumnName = "id")
+    private AlquilerEspacio alquilerEspacio;
+
     @Column(name = "precio")
-    @NotNull
     protected Double precio;
 
     @Column(name = "cantidad")

@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,17 @@ public class EventoService {
 
             }
         return entradas; 
+        }
+
+        //Muestra primeros 6 eventos o menos para la página de inicio
+        public List<Evento> eventosDeInicio(){
+            List<Evento> res = new ArrayList<Evento>();
+            Iterator<Evento> iteradorEventos = eventoRepository.findAll().iterator();
+            int contador = 0;
+            while(iteradorEventos.hasNext() && contador < 6){
+                res.add(iteradorEventos.next());
+            }
+            return res;
         }
 
 

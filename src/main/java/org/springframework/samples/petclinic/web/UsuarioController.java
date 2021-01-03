@@ -8,12 +8,16 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Autoridades;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.AutoridadesRepository;
 import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.AutoridadesService;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.FacturaService;
+import org.springframework.samples.petclinic.service.LineaFacturaService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.samples.petclinic.service.UsuarioService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,7 +47,8 @@ public class UsuarioController {
     private OrganizacionService organizacionService;
     @Autowired
     private AdminService adminService;
-
+    @Autowired
+    private FacturaService facturaService;
     @GetMapping()
     public String listadoUsuarios(ModelMap modelMap){
         String vista = "/usuarios/listadoUsuarios";
@@ -119,13 +124,17 @@ public class UsuarioController {
     }
     @GetMapping(value = "/myprofile/facturas")
     public String facturas(ModelMap modelMap){
-        //String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
-        //modelMap.addAttribute("usuario", usuario);
+        Usuario usuario = usuarioService.findUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+        Organizacion org = organizacionService.encuentraOrganizacionByUsuario(usuario.getNombreUsuario());
+        List<Factura> facts = usuario.getFacturas();
+        facturaService.calculaPrecioTotal(facts);
+        modelMap.addAttribute("usuario", usuario);
+        modelMap.addAttribute("organizacion", org);
         String vista="usuarios/myProfileFacturas";
         return vista;
     }
 
-    //TODO 
+    //TODO
     @PostMapping(value = "/myprofile/edit")
     public String editCliente(Cliente cliente, Organizacion organizacion, BindingResult result, ModelMap model){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();

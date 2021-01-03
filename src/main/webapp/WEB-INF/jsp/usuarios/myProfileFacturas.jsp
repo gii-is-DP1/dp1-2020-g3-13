@@ -5,11 +5,14 @@
                 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-
+                            
+                            <style type="text/css">
+                            h2 { color:#ff7300;font-weight:bold;font-family:Calibri;font-size:20 }
+                            </style>
                             <petclinic:layout pageName="facturas">
                                 <div class="centrar-datos">
-                                    <h2>Mis Facturas</h2>
                                     <div class="listar-Datos">
+                                        <h2>Facturas de la organizacion <c:out value="${org.nombreOrganizacion}" /></h2>
                                         <c:forEach items="${usuario.facturas}" var="factura">
                                         <ul>
                                             <li>Precio Total:
@@ -18,9 +21,11 @@
                                             <li>Fecha de la factura:
                                                 <c:out value="${factura.fechaFactura}" />
                                             </li>
-                                            <li>Líneas de la factura:
-                                                <c:forEach items="${factura.lineasFactura}" var="lineas">
-                                                    <c:out value="${lineas}"/>
+                                            <li>Lineas de la factura:<br>
+                                                <c:forEach items="${factura.lineasFacturas}" var="lineas">
+                                                <p>-Lugar Alquilado: <c:out value="${lineas.alquilerEspacio.lugarRealizacion.nombre_recinto}"/></p>
+                                                <p>-Dias: <c:out value="${lineas.cantidad}"/></p>
+                                                <p>-Precio: <c:out value="${lineas.alquilerEspacio.precio}"/></p>                                 
                                                 </c:forEach>
                                             </li>
                                         </ul>
