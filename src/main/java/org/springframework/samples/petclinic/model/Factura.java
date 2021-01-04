@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -24,13 +25,13 @@ public class Factura extends BaseEntity{
     @Column(name="precioTotal")
     @NotNull
     private Double precioTotal;
-    @Column(name="usuarioAsociado")
-    @NotEmpty
-    private String usuarioAsocidado;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nombreUsuario", referencedColumnName = "nombreUsuario")
+    private Usuario usuario;
     @Column(name = "fechaFactura")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFactura;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
     private List<LineaFactura> lineasFacturas;
 }

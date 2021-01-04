@@ -8,6 +8,19 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="ventaEntrada">
+
+    <jsp:attribute name="customScript">
+        <script>
+            $(function() {
+                $("#fechaCaducidad").datepicker({
+                    dateFormat: 'yy/mm/dd'
+                });
+            });
+        </script>
+
+    </jsp:attribute>
+    
+    <jsp:body>
     <h2>Compra Entradas</h2>
     <form:form modelAttribute="ventaEntrada" class="form-horizontal" id="add-ventaEntrada-form">
     <div class="form-group has-feedback">
@@ -22,4 +35,5 @@
         </div>
     </div>
 </form:form>
+</jsp:body>
 </petclinic:layout>
