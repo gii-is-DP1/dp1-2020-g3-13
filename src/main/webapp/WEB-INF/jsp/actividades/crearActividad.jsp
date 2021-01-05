@@ -30,7 +30,7 @@
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
                                         <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
                                         <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
-                                        <petclinic:inputField label="LugarRealizacionId" name="lugarRealizacion" />
+º                                       <petclinic:inputField label="LugarRealizacionId" name="lugarRealizacion" />
 
                                     </div>
                                     <div class="form-group">
