@@ -70,7 +70,7 @@ public class ClienteServiceTest {
         cliente.setApellidos("prueba");
         cliente.setEmail("prueba@gmail.com");
         cliente.setNombre("prueba");
-        cliente.setTelefono(56874845);
+        cliente.setTelefono("568748459");
         clienteService.saveCliente(cliente);
        
         int count2= (int) clienteRepo.count();
