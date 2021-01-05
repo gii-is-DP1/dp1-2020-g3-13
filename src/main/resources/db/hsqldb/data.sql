@@ -51,6 +51,8 @@ INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'999
 INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');
 
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com', TRUE,'muy bonito', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (2,10000000, 2010, 'bilindo', 'la palmera', 'ayuda@bilindo.com', TRUE,'muy muy bonito', 'https://www.diariodesevilla.es/2019/02/06/sevilla/terraza-Bilindo-formada-Plaza-America_1325577931_94584854_667x375.jpg');
+
 INSERT INTO alquiler_espacio(id, precio, id_lugar_realizacion) VALUES (1, 50, 1);
 INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,lugar_realizacion_id) VALUES (1,'concierto de estopa', 'un buen concierto', '2020-12-12', '2020-12-12', 1);
 
