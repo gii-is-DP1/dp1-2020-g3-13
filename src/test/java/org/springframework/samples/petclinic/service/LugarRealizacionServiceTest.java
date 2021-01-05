@@ -34,11 +34,18 @@ private LugarRealizacionRepository lugarRepo;
         lugar.setAforo(41);
         lugar.setCaracteristicas("caracteristicas");
         lugar.setDireccion("direccion");
-        lugar.setEmail("email");
+        lugar.setEmail("email@email.com");
         lugar.setNombre_recinto("nombre_recinto");
         lugar.setTelefono(786765887);
         lugarService.saveLugarRealizacion(lugar);
         assertEquals(count+1, lugarService.lugaresCount());
         assertEquals(lugar, lugarService.findById(lugar.getId()));
+    }
+    @Test
+    public void testModificaLugares(){
+        LugarRealizacion lRealizacion= lugarService.findById(1);
+        lRealizacion.setAforo(3013);
+        lugarService.saveLugarRealizacion(lRealizacion);
+        assertEquals(3013, lRealizacion.getAforo());
     }
 }

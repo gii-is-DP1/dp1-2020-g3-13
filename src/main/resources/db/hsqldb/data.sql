@@ -65,6 +65,7 @@ INSERT INTO linea_factura(id, id_alquiler_espacio, cantidad, id_factura) VALUES 
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Eminem', 'Eminem concert for valor', '2021-06-11', '6M', 'Musica', '2021-06-11', 1);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Eem', 'Game Awards', '2023-06-11', '6M', 'Musica', '2021-06-11' , 1);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concito de Eminem', 'Animal crossing', '2022-06-11', '6M', 'Musica', '2021-06-11', 1);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concito el cerdito', 'animales felices', '2022-01-11', '2M', 'Musica clasica', '2021-01-11', 2);
 
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (8, 'Diurna', '2022-04-11', 15, '2022-05-10', 10,1);
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (9, 'Nocturna', '2022-04-11', 15, '2022-05-10', 10,1);
