@@ -55,7 +55,7 @@ public class ActividadController {
             return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
         }else {
             actividadService.anadirActividadAEvento(evento, actividad);
-            actividadService.AñadirLugarRealizacionActividad(actividad,1);
+            actividadService.AñadirLugarRealizacionActividad(actividad,actividad.getLugarRealizacion().getId());
             actividadService.guardarActividad(actividad);
             String vistaExponente = "redirect:/eventos/{evento_id}/actividades/" + actividad.getId()+"/nuevo";
             modelMap.addAttribute("message", "Actividad guardada satisfactoriamente!");

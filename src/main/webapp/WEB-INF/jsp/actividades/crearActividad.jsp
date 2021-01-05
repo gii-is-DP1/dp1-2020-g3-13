@@ -7,6 +7,20 @@
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
                             <petclinic:layout pageName="actividades">
+                                <jsp:attribute name="customScript">
+                                     <script>
+                                $(function() {
+                                    $("#fechaInicio").datepicker({
+                                        dateFormat: 'yy/mm/dd'
+                                    });
+                                    $("#fechaFin").datepicker({
+                                        dateFormat: 'yy/mm/dd'
+                                    });
+                                });
+                                     </script>
+
+                        </jsp:attribute>
+                        <jsp:body>
                                 <h2>
                                     Anade actividades a tu Evento
                                 </h2>
@@ -16,6 +30,7 @@
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
                                         <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
                                         <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
+                                        <petclinic:inputField label="LugarRealizacionId" name="lugarRealizacion" />
 
                                     </div>
                                     <div class="form-group">
@@ -31,4 +46,6 @@
                                         </div>
                                     </div>
                                 </form:form>
+                            </jsp:body>
+
                             </petclinic:layout>
