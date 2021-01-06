@@ -44,8 +44,8 @@ public class Cliente extends Persona{
 
     @Column(name = "telefono")
     @NotNull
-    @Range(min=100000000,max = 999999999, message = "Número de teléfono no válido   ")
-    private Integer telefono;
+    @Size(min=9,max = 9, message = "Número de teléfono no válido   ")
+    private String telefono;
 
       
 }

@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -7,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -59,4 +61,24 @@ public class LugarRealizacionController {
 			return "redirect:/lugaresRealizacion/";
 		}
 	}
+	@GetMapping(value = "/{lugarRealizacionId}/edit")
+    public String initUpdateLugarRealizacionForm(@PathVariable("lugarRealizacionId") int lugarRealizacionId, ModelMap modelMap) {
+			LugarRealizacion lugarRealizacion= this.lugarRealizacionService.findById(lugarRealizacionId);
+			modelMap.addAttribute(lugarRealizacion);
+          
+            return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
+       
+    }
+
+    //TODO 
+    @PostMapping(value = "/{lugarRealizacionId}/edit")
+    public String editLugarRealizacion(@Valid LugarRealizacion lugarRealizacion, BindingResult result, ModelMap model,@PathVariable("lugarRealizacionId") int lugarRealizacionId){
+		String vista = "";
+				if(result.hasErrors()){
+			return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
+		}else{
+			this.lugarRealizacionService.modifyLugaRealizacion(lugarRealizacion, this.lugarRealizacionService.findById(lugarRealizacionId));
+			return "redirect:/lugaresRealizacion/";		}
+
+}
 }

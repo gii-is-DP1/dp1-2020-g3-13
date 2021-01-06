@@ -95,9 +95,8 @@ public class CarritoService {
        }
         factura.setPrecioTotal(precioTotal);
         factura.setFechaFactura(LocalDate.now());
-        String usuarioAsocidado = cliente.getUsuario().getNombreUsuario();
-        factura.setUsuarioAsocidado(usuarioAsocidado); 
-        factura.setLineasFacturas(lineas);
+        factura.setUsuario(cliente.getUsuario()); 
+      //  factura.setLineasFacturas(lineas);
         for (LineaFactura lineaFactura : lineas) {
             lineaFactura.setFactura(factura);
             factura.getLineasFacturas().add(lineaFactura);

@@ -63,6 +63,18 @@
 
                                     </c:forEach>
                                 </td>
+                            <tr>
+                                <th>Sponsors</th>
+                                <td>
+                                    <div class="cuadro-sponsor"></div>
+                                    <c:forEach items="${evento.sponsors}" var="sponsor">
+                                        <a href="https://www.cocacola.es/es/home/" target="_self">    
+                                    <img src="${sponsor.urlLogo}" width=15%></a>
+                                    </div>
+
+                                    </c:forEach>
+                                </td>
+                            </tr>
                             </tr>
                             <tr>
                                 <th>Tipos de entrada</th>
@@ -83,6 +95,11 @@
                                         <p>Fecha Fin:
                                             <c:out value="${tipoEntradas.fechaFin}" />
                                         </p>
+                                        <p>Entradas disponibles:
+                                            <c:out value="${tipoEntradas.numEntradas}" />
+                                        </p>
+                                        
+
                                         <spring:url value="/eventos/{eventoId}/{tipoEntradaId}/entrada" var="ventaUrl">
                                             <spring:param name="eventoId" value="${evento.id}" />
                                             <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
@@ -100,6 +117,11 @@
                      </spring:url>
                         <a href="${fn:escapeXml(actividadesUrl)}">
                         <c:out value="Anadir actividades" /><br></a>
+                        <spring:url value="{eventoId}/sponsors/nuevo" var="sponsorUrl">
+                        <spring:param name="eventoId" value="${evento.id}" />
+                     </spring:url>
+                        <a href="${fn:escapeXml(sponsorUrl)}">
+                        <c:out value="Anadir Sponsors" /><br></a>
 
 
                     </petclinic:layout>

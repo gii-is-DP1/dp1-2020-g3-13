@@ -50,6 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/tipoentradas/**").permitAll()
 		.antMatchers("/carrito/**").hasAnyAuthority("cliente")
 		.antMatchers("/actividades/**").hasAnyAuthority("organizacion")
+		.antMatchers("/facturas").hasAnyAuthority("organizacion")
 
 				.anyRequest().denyAll()
 				.and()
