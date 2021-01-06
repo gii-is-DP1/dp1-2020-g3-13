@@ -41,7 +41,7 @@ public class PeticionServiceTest {
     public void createPeticionTest(){
         Integer antes = (int) peticionRepo.count();
         Peticion peti = new Peticion();
-        peti.setNombre_organizacion("nombre_organizacion");
+        peti.setNombre_organizacion("pacopepe");
         peti.setFecha(LocalDate.now());
         peti.setCif("cif");
         peti.setEmail("email@email.email");
@@ -50,5 +50,12 @@ public class PeticionServiceTest {
         Integer ahora = (int) peticionRepo.count();
         assertEquals(ahora, antes+1);
         
+    }
+    @Test
+    public void deletePeticionTest(){
+        Integer prev=  (int) peticionRepo.count();
+        peticionRepo.delete(peticionService.findPeticionById(1).get());
+        assertEquals(prev-1, (int)peticionRepo.count());
+    
     }
 }

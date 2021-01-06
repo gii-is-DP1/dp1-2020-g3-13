@@ -8,6 +8,8 @@ import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.EventoService;
+import org.springframework.samples.petclinic.service.LugarRealizacionService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,8 @@ public class ActividadController {
     private ActividadService actividadService;
     @Autowired
     private EventoService eventoService;
+    @Autowired
+    private LugarRealizacionService lugarRealizacionService;
 
     @GetMapping
     public String listadoActividades(ModelMap modelMap){
@@ -51,6 +55,7 @@ public class ActividadController {
             return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
         }else {
             actividadService.anadirActividadAEvento(evento, actividad);
+            actividadService.AñadirLugarRealizacionActividad(actividad,actividad.getLugarRealizacion().getId());
             actividadService.guardarActividad(actividad);
             String vistaExponente = "redirect:/eventos/{evento_id}/actividades/" + actividad.getId()+"/nuevo";
             modelMap.addAttribute("message", "Actividad guardada satisfactoriamente!");

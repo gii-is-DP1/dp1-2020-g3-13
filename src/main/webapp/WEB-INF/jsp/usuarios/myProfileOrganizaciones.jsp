@@ -41,6 +41,14 @@
                                                 </a>
                                                 </button>
                                             </li>
+                                            <li class="button">
+                                                <spring:url value="myprofile/facturas" var="facturaUrl">                                  
+                                                </spring:url>
+                                                <a href="${fn:escapeXml(facturaUrl)}" class="btn btn-default">Facturas</a></button>
+                                                <c:out value="" /> 
+                                                </a>
+                                                </button>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

@@ -29,5 +29,8 @@ public class Usuario {
 	boolean enabled;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
-	private Autoridades autoridades;
+    private Autoridades autoridades;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Factura> facturas;
 }

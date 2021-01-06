@@ -75,4 +75,5 @@ public class EventoServiceTest {
         evento.setCategoria("evento de prueba");
         assertEquals("evento de prueba", evento.getCategoria());
     }
+   
 }
