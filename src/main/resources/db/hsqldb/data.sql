@@ -58,7 +58,7 @@ INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,d
 INSERT INTO alquiler_espacio(id, precio, id_lugar_realizacion) VALUES (1, 50, 1);
 INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,lugar_realizacion_id) VALUES (1,'concierto de estopa', 'un buen concierto', '2020-12-12', '2020-12-12', 1);
 
-INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(1,'2020-03-03', 15.6,'alebangon');
+INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(1,'2020-03-03',15.6,'alebangon');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(2,'2020-05-03', 1.6,'romflorod');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(3,'2020-09-03', 5.6,'ezepersos');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(4,'2020-02-03', 68.1,'andmecsan');
@@ -73,18 +73,18 @@ INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medid
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Mac Miller', 'ya no tan felices', '2022-06-11', '2M', 'Musica', '2021-01-11', 2);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Tupac', 'estaba de parranda', '2022-08-11', '2M', 'Musica', '2021-01-11', 2);
 
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (8, 'Diurna', '2022-04-11', 15, '2022-05-10', 10,1);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (9, 'Nocturna', '2022-04-11', 15, '2022-05-10', 10,1);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (5, 'Diurna', '2023-06-11', 15, '2023-06-11', 10,2);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (8, 'Nocturna', '2023-06-11', 15, '2023-06-11', 10,2);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (6, 'Diurna', '2022-10-11', 15, '2022-10-11', 10,3);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (7, 'Nocturna', '2022-10-11', 15, '2022-10-11', 10,3);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (4, 'Diurna', '2022-08-01', 15, '2022-08-01', 10,4);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (7, 'Nocturna', '2022-08-01', 15, '2022-08-01', 10,4);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (6, 'Diurna', '2022-06-11', 15, '2022-06-11', 10,5);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (9, 'Nocturna', '2022-06-11', 15, '2022-06-11', 10,5);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (7, 'Diurna', '2022-08-11', 15, '2022-08-11', 10,6);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, descuento, fecha_fin, num_entradas, evento_id) VALUES (9, 'Nocturna', '2022-08-11', 15, '2022-08-11', 10,6);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'DIURNA', '2022-04-11', '2022-05-10', 10,1);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-04-11', '2022-05-10', 10,1);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (5, 'DIURNA', '2023-06-11', '2023-06-11', 10,2);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'NOCTURNA', '2023-06-11', '2023-06-11', 10,2);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6, 'DIURNA', '2022-10-11', '2022-10-11', 10,3);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'NOCTURNA', '2022-10-11', '2022-10-11', 10,3);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (4, 'DIURNA', '2022-08-01', '2022-08-01', 10,4);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'NOCTURNA', '2022-08-01', '2022-08-01', 10,4);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6, 'DIURNA', '2022-06-11', '2022-06-11', 10,5);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-06-11', '2022-06-11', 10,5);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'DIURNA', '2022-08-11', '2022-08-11', 10,6);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-08-11', '2022-08-11', 10,6);
 
 
 

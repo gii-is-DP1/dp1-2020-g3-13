@@ -1,12 +1,17 @@
 package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,27 +30,28 @@ public class TipoEntrada extends BaseEntity{
     private Evento evento;
     
     @Column(name = "precio")
-    @NotEmpty
+    @NotNull
     private Double precio;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "nombre")
-    @NotEmpty
-    protected String nombre;
+    @NotNull
+    private NombreTiposEntrada nombre;
 
     @Column(name = "fechaInicio")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private LocalDate fechaInicio;
+    @DateTimeFormat(pattern = "yyyy/MM/dd' 'HH:mm")
+    private LocalDateTime fechaInicio;
 
-    @Column(name = "descuento")
-    @NotEmpty
-    protected Integer descuento;
+    // @Column(name = "descuento")
+    // @NotEmpty
+    // protected Integer descuento;
 
     @Column(name = "fechaFin")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private LocalDate fechaFin;
+    @DateTimeFormat(pattern = "yyyy/MM/dd' 'HH:mm")
+    private LocalDateTime fechaFin;
 
     @Column(name = "numEntradas")
-    @NotEmpty
+    @NotNull
     protected Integer numEntradas;
 
        
