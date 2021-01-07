@@ -31,9 +31,8 @@ public class Actividad extends BaseEntity{
     @Column(name = "tematicaActividad")
     @NotEmpty
     protected String tematicaActividad;
-
-    @Column(name = "descripcionActividad")
-    @NotEmpty
+    //Comprueba que la descripcion de la actividad no sea vacía y esté entre 30 y 400 caracteres
+    @DescripcionActividadRestriccion
     protected String descripcionActividad;
     @Column(name = "fechaInicio")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
