@@ -35,7 +35,7 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void deleteClienteTest(){
+    public void deberiaBorrarClienteTest(){
         Integer clienteAntes = (int) clienteRepo.count();
         clienteService.deleteCliente(clienteService.findClienteByUsuario("prueba1"));
         Integer clienteDespues = (int) clienteRepo.count();
@@ -44,7 +44,7 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void modifyClienteTest(){
+    public void deberiaModificarClienteTest(){
         Cliente clienteActual = this.clienteService.findCliente().iterator().next();
         Cliente clienteConModificacion = clienteActual;
         clienteConModificacion.setApellidos("Apellido prueba");

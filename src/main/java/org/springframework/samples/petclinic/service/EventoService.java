@@ -21,13 +21,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventoService {
     
-
     @Autowired
     private EventoRepository eventoRepository;
     @Autowired
     private TipoEntradaService tipoEntradaService;
 
-    @Transactional
+
+    
     public int eventosCount(){
         return (int) eventoRepository.count();
     }
