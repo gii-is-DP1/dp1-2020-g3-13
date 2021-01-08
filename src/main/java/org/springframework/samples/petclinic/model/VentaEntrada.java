@@ -28,7 +28,7 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.Validadores.FechaFinActividadRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechaInicioRestriccion;
-import org.springframework.samples.petclinic.model.Validadores.NumeroTarjetaRestriccion;
+//import org.springframework.samples.petclinic.model.Validadores.NumeroTarjetaRestriccion;
 
 import lombok.Data;
 

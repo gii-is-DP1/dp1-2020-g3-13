@@ -31,7 +31,10 @@ public class CarritoService {
     @Autowired
     private ClienteService clienteService;
 
-
+    @Transactional
+    public long carritoCount(){
+        return carritoRepo.count();
+    }
 
     @Transactional 
     public Carrito listadoObjetosCarrito(String nombreUsuario){
