@@ -1,6 +1,6 @@
+
 package org.springframework.samples.petclinic.model.Validadores;
 
-import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -8,13 +8,16 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Documented
-@Constraint(validatedBy = DescripcionActividadValidador.class)
-@Target( { ElementType.METHOD, ElementType.FIELD })
+
+@Constraint(validatedBy = fechaFinActividadValidador.class)
+@Target( { ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DescripcionActividadRestriccion {
-    String message() default "El nombre de la temática debe estar comprendido entre 15 y 400 caracteres, además de no estar vacío";
+public @interface FechaFinActividadRestriccion {
+    String message() default "La fecha de inicio debe ser posterior a la actual";
+    String field();
+    String fieldMatch();
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default{};
-    
+
+     
 }

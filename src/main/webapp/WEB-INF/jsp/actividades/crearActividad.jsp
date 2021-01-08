@@ -26,7 +26,8 @@
                                 </h2>
                                 <form:form modelAttribute="actividad" class="form-horizontal" id="add-actividad-form">
                                     <div class="form-group has-feedback">
-                                        <petclinic:inputField label="Temática" name="tematicaActividad" />
+                                        <petclinic:inputField label="Temática" name="tematicaActividad"/>
+                                        <form:errors path="tematicaActividad" cssClass="error" />
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
                                         <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
                                         <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
