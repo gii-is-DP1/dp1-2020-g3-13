@@ -5,7 +5,7 @@
                 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-
+                        <%@ page contentType="text/html; charset=UTF-8" %>
                             <petclinic:layout pageName="actividades">
                                 <jsp:attribute name="customScript">
                                      <script>
@@ -27,11 +27,10 @@
                                 <form:form modelAttribute="actividad" class="form-horizontal" id="add-actividad-form">
                                     <div class="form-group has-feedback">
                                         <petclinic:inputField label="Temática" name="tematicaActividad"/>
-                                        <form:errors path="tematicaActividad" cssClass="error" />
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
                                         <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
                                         <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
-º                                       <petclinic:inputField label="LugarRealizacionId" name="lugarRealizacion" />
+                                       <petclinic:inputField label="LugarRealizacionId" name="lugarRealizacion" />
 
                                     </div>
                                     <div class="form-group">
