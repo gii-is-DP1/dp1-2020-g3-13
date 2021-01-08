@@ -42,6 +42,16 @@ public class CarritoService {
     }
 
     @Transactional
+    public Integer contadorElementosCarrito(Carrito carrito){
+        return carrito.getLineasFacturas().size();
+    }
+
+    @Transactional
+    public Carrito dimeCarritoUsuario(String nombreUsuario){
+        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
+    }
+
+    @Transactional
     public void anadirCarrito(Entrada entrada, Cliente cliente) throws DataAccessException{
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
