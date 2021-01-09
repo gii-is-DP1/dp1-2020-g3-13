@@ -18,7 +18,8 @@ public class ActividadService {
 
         @Autowired
         private ActividadRepository actividadRepo;
-
+        @Autowired
+        private LugarRealizacionService lugarRealizacionService;
         @Transactional
         public int actividadesCount(){
             return (int) actividadRepo.count();
@@ -60,6 +61,10 @@ public class ActividadService {
                 actividad.setEvento(evento);
                 listaActividadesActual.add(actividad);
             }
+        }
+        @Transactional
+        public void AñadirLugarRealizacionActividad(Actividad actividad, Integer idLugar) throws DataAccessException{
+            actividad.setLugarRealizacion(lugarRealizacionService.findById(idLugar));
         }
 
 }
