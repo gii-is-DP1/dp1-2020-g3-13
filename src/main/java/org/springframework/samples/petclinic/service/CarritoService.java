@@ -26,11 +26,24 @@ public class CarritoService {
     private FacturaRepository facturaRepo;
 
 
-
+    @Transactional
+    public long carritoCount(){
+        return carritoRepo.count();
+    }
 
     @Transactional 
     public Carrito listadoObjetosCarrito(String nombreUsuario){
        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
+    }
+
+    @Transactional
+    public Integer contadorElementosCarrito(Carrito carrito){
+        return carrito.getLineasFacturas().size();
+    }
+
+    @Transactional
+    public Carrito dimeCarritoUsuario(String nombreUsuario){
+        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
     }
 
     @Transactional

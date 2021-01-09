@@ -3,6 +3,7 @@
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                    <%@ page contentType="text/html; charset=UTF-8" %>
 
                     <petclinic:layout pageName="evento">
 
@@ -79,49 +80,43 @@
                             <tr>
                                 <th>Tipos de entrada</th>
                                 <td>
-                                    <div class="cuadro-entrada"></div>
-                                    <c:forEach items="${evento.tipoEntradas}" var="tipoEntradas">
-
-                                        <h3>
-                                            Tipo de entrada:
-                                            <c:out value="${tipoEntradas.nombre}" />
-                                        </h3>
-                                        <p>Precio:
-                                            <c:out value="${tipoEntradas.precio} " />EUR </p>
-                                        </div>
-                                        <p>Fecha inicio:
-                                            <c:out value="${tipoEntradas.fechaInicio}" />
-                                        </p>
-                                        <p>Fecha Fin:
-                                            <c:out value="${tipoEntradas.fechaFin}" />
-                                        </p>
-                                        <p>Entradas disponibles:
-                                            <c:out value="${tipoEntradas.numEntradas}" />
-                                        </p>
-                                        
-
-                                        <spring:url value="/eventos/{eventoId}/{tipoEntradaId}/entrada" var="ventaUrl">
-                                            <spring:param name="eventoId" value="${evento.id}" />
-                                            <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
-                                        </spring:url>
-                                        <a href="${fn:escapeXml(ventaUrl)}">
-                                            <c:out value="Comprar" /><br></a>
-
-                                    </c:forEach>
-                                </td>
-
+                                <div class="cuadro-entrada"></div>
+                                <c:forEach items="${evento.tipoEntradas}" var="tipoEntradas">
+                                    <p>Tipo de entrada:
+                                        <c:out value="${tipoEntradas.nombre}" />
+                                    </p>
+                                    <p>Precio:
+                                        <c:out value="${tipoEntradas.precio} " />EUR </p>
+                                    </div>
+                                    <p>Fecha inicio:
+                                        <c:out value="${tipoEntradas.fechaInicio}" />
+                                    </p>
+                                    <p>Fecha Fin:
+                                        <c:out value="${tipoEntradas.fechaFin}" />
+                                    </p>
+                                    <p>Entradas disponibles:
+                                        <c:out value="${tipoEntradas.numEntradas}" />
+                                    </p>
+                                </c:forEach>
+                            </td>
                             </tr>
                         </table>
                         <spring:url value="{eventoId}/actividades/nuevo" var="actividadesUrl">
                         <spring:param name="eventoId" value="${evento.id}" />
                      </spring:url>
                         <a href="${fn:escapeXml(actividadesUrl)}">
-                        <c:out value="Anadir actividades" /><br></a>
+                        <c:out value="Añadir actividades" /><br></a>
                         <spring:url value="{eventoId}/sponsors/nuevo" var="sponsorUrl">
                         <spring:param name="eventoId" value="${evento.id}" />
                      </spring:url>
                         <a href="${fn:escapeXml(sponsorUrl)}">
-                        <c:out value="Anadir Sponsors" /><br></a>
+                        <c:out value="Añadir Sponsors" /><br></a>
 
+
+                        <spring:url value="{eventoId}/tipoEntradas/nuevo" var="tipoEntradasUrl">
+                        <spring:param name="eventoId" value="${evento.id}" />
+                    </spring:url>
+                        <a href="${fn:escapeXml(tipoEntradasUrl)}">
+                        <c:out value="Añadir Tipos de Entradas" /><br></a>
 
                     </petclinic:layout>

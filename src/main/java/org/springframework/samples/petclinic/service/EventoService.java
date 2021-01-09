@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -20,13 +21,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventoService {
     
-
     @Autowired
     private EventoRepository eventoRepository;
     @Autowired
     private TipoEntradaService tipoEntradaService;
 
-    @Transactional
+
+    
     public int eventosCount(){
         return (int) eventoRepository.count();
     }
@@ -46,7 +47,7 @@ public class EventoService {
     }
 
     public Evento findEventoById(int eventoId) {
-        return eventoRepository.findById(eventoId).get();
+        return eventoRepository.findById(eventoId).orElse(null);
     }
 
     public void modifyEvento(Evento evento, Evento eventoActual) throws DataAccessException{
