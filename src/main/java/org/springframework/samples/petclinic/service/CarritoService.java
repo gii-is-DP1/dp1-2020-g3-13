@@ -24,12 +24,7 @@ public class CarritoService {
     private CarritoRepository carritoRepo;
     @Autowired
     private FacturaRepository facturaRepo;
-    @Autowired
-    private FacturaService facturaService;
-    @Autowired
-    private LineaFacturaService lineaService;
-    @Autowired
-    private ClienteService clienteService;
+
 
     @Transactional
     public long carritoCount(){

@@ -34,8 +34,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class PeticionController {
     @Autowired
-    private JavaMailSender mailSender;
-    @Autowired
     private AutoridadesService autoridadesService;
     @Autowired
     private PeticionService peticionServ;

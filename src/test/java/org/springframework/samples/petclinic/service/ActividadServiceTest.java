@@ -4,6 +4,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,8 @@ public class ActividadServiceTest {
         act.setTematicaActividad("Lorem ipsum");
         act.setDescripcionActividad("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus, lacus ut convallis suscipit, leo lectus porttitor felis, dictum pharetra ante eros eu dolor. Praesent aliquet accumsan tincidunt. Fusce vel accumsan orci, volutpat vehicula turpis. Suspendisse iaculis convallis varius. Sed vitae ipsum eros. Quisque vel lectus varius, varius massa at, maximus dui.");
         act.setId(Integer.MAX_VALUE);
-        act.setFechaInicio(LocalDate.now().plusDays(1));
-        act.setFechaFin(LocalDate.now().plusDays(2));
+        act.setFechaInicio(LocalDateTime.now().plusDays(1));
+        act.setFechaFin(LocalDateTime.now().plusDays(2));
         int count = actividadService.actividadesCount();
         actividadRepo.save(act);
         assertEquals(count + 1, actividadService.actividadesCount());
