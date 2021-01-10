@@ -24,7 +24,6 @@ public class SponsorServiceTest {
 
         int count = sponsorService.sponsorCount();
         Sponsor sponsor = new Sponsor();
-        sponsor.setCategoria("Coches");
         sponsor.setEmpresa("Mercedes");
         sponsor.setUrlWeb("https://www.mercedes-benz.com/en/");
         sponsor.setUrlLogo("https://lezebre.lu/images/detailed/17/30356-Mercedes-Benz.png");

@@ -18,7 +18,7 @@ public class AlquilerEspacio extends BaseEntity{
 
     @Column(name = "precio")
     @NotEmpty
-    protected Integer precio;
+    protected Double precio;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_lugar_realizacion", referencedColumnName = "id")

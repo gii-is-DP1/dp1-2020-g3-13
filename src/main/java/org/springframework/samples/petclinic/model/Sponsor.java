@@ -32,9 +32,6 @@ public class Sponsor extends BaseEntity {
     @NotEmpty
     private String urlLogo;
 
-    @Column(name = "categoria")
-    @NotEmpty
-    private String categoria;
 
 
 

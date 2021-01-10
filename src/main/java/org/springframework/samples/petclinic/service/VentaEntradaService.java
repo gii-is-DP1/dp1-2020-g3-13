@@ -24,8 +24,6 @@ public class VentaEntradaService {
     private VentaEntradaRepository ventaEntradaRepository;
     @Autowired
     private CarritoService carritoService;
-    @Autowired
-    private EntradaRepository entradaRepo;
 
 
 
