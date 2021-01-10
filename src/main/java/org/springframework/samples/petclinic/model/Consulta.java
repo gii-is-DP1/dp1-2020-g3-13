@@ -18,7 +18,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="consulta")
-public class Consulta extends NamedEntity{
+public class Consulta extends BaseEntity{
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
