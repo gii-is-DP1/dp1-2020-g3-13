@@ -28,7 +28,7 @@ public class TipoEntrada extends BaseEntity {
     @Column(name = "precio")
     @Range(min = 0, max = Integer.MAX_VALUE, message = "El precio debe ser superior o igual a 0")
     private Double precio;
-
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "nombre")
     private NombreTiposEntrada nombre;

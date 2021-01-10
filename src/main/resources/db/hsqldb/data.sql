@@ -48,7 +48,7 @@ INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (3, '66
 INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'9999999','yung@beef.com','conciertos de trap español','Ternera joven','2020-11-05');
 
 
-INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');
+INSERT INTO consulta(id, asunto, descripcion, fecha_consulta) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03');
 
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com', TRUE,'muy bonito', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (2,690321658, 2010, 'bilindo', 'la palmera', 'ayuda@bilindo.com', TRUE,'muy muy bonito', 'https://www.diariodesevilla.es/2019/02/06/sevilla/terraza-Bilindo-formada-Plaza-America_1325577931_94584854_667x375.jpg');
