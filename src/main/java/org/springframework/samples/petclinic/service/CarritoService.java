@@ -24,18 +24,26 @@ public class CarritoService {
     private CarritoRepository carritoRepo;
     @Autowired
     private FacturaRepository facturaRepo;
-    @Autowired
-    private FacturaService facturaService;
-    @Autowired
-    private LineaFacturaService lineaService;
-    @Autowired
-    private ClienteService clienteService;
 
 
+    @Transactional
+    public long carritoCount(){
+        return carritoRepo.count();
+    }
 
     @Transactional 
     public Carrito listadoObjetosCarrito(String nombreUsuario){
        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
+    }
+
+    @Transactional
+    public Integer contadorElementosCarrito(Carrito carrito){
+        return carrito.getLineasFacturas().size();
+    }
+
+    @Transactional
+    public Carrito dimeCarritoUsuario(String nombreUsuario){
+        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
     }
 
     @Transactional
