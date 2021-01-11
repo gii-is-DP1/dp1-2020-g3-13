@@ -19,8 +19,6 @@ public class ExponenteService {
 
     @Autowired
     private ExponenteRepository exponenteRepo;
-    @Autowired 
-    private ExponenteService exponenteService;
     @Autowired
     private ActividadService actividadService;
 
@@ -69,7 +67,7 @@ public class ExponenteService {
             if(encuentraExponente(exponente)!=null){
 
                 if(actividadService.contieneExponente(exponente, actividad)==false){
-                    exponente = exponenteService.buscaExponente(exponente);
+                    exponente = buscaExponente(exponente);
                     actividad.getExponentes().add(exponente);
                     List<Actividad> actividadesActual =exponente.getActividades();
                     System.out.println(exponente.getActividades().size());

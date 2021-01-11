@@ -19,11 +19,6 @@ public class UsuarioService {
 
 	private UsuarioRepository usuarioRepository;
 	
-	@Autowired
-	private ClienteService clienteService;
-
-	@Autowired
-	private OrganizacionService organizacionService;
 
 	@Transactional
     public int usuarioCount(){

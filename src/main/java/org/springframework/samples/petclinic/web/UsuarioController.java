@@ -40,8 +40,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
-    private AutoridadesService autoridadesService;
-    @Autowired
     private ClienteService clienteService;
     @Autowired
     private OrganizacionService organizacionService;

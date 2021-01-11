@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import javax.print.DocFlavor.STRING;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
@@ -51,6 +52,8 @@ public class ActividadController {
         Iterable<LugarRealizacion> lugaresRealizacion = lugarRealizacionService.findAll();
         List<LugarRealizacion> lugaresLista= new ArrayList<LugarRealizacion>();
         lugaresRealizacion.forEach(lugaresLista::add);
+        List<Integer> listaIds = lugarRealizacionService.listaIdLugarRealizacion();
+        modelMap.addAttribute("listaId", listaIds);
         modelMap.addAttribute("lugaresRealizacion", lugaresLista);
         modelMap.addAttribute("actividad", new Actividad());
         return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
