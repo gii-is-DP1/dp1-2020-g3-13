@@ -72,6 +72,7 @@ INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medid
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Lil Peep', 'estamos felices', '2022-08-01', '2M', 'Musica', '2021-01-11', 2);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Mac Miller', 'ya no tan felices', '2022-06-11', '2M', 'Musica', '2021-01-11', 2);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Tupac', 'estaba de parranda', '2022-08-11', '2M', 'Musica', '2021-01-11', 2);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Canserbero', 'estaba de fiesta', '2010-08-11', '2M', 'Musica', '2011-01-11', 2);
 
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'DIURNA', '2022-04-11', '2022-05-10', 10,1);
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-04-11', '2022-05-10', 10,1);
@@ -85,6 +86,7 @@ INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, 
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-06-11', '2022-06-11', 10,5);
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'DIURNA', '2022-08-11', '2022-08-11', 10,6);
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-08-11', '2022-08-11', 10,6);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2010-08-11', '2010-08-11', 10,7);
 
 
 
