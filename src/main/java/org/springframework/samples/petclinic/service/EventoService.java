@@ -77,6 +77,7 @@ public class EventoService {
             int contador = 0;
             while(iteradorEventos.hasNext() && contador < 6){
                 res.add(iteradorEventos.next());
+                contador++;
             }
             return res;
         }
