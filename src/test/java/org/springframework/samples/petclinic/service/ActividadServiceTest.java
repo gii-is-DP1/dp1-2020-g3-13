@@ -11,10 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Actividad;
+import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
+import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class ActividadServiceTest {
@@ -22,6 +26,8 @@ public class ActividadServiceTest {
     private ActividadService actividadService;
     @Autowired
     private ActividadRepository actividadRepo;
+    @Autowired 
+    EventoRepository eventoRepo;
 
     @Test
     public void testCountWithInitialDataActividad() {
@@ -59,5 +65,16 @@ public class ActividadServiceTest {
         exp.setApellidosExponente("apellidosExponente");
         act.getExponentes().add(exp);
         assertEquals(actividadService.contieneExponente(exp, act), true);
+    }
+    @Test
+    public void añadeActividadTest(){
+        Evento eventoTest= eventoRepo.findById(1).get();
+        Actividad actTest = new Actividad();
+        actTest.setDescripcionActividad("test uno");
+        List<Exponente> listTest= new ArrayList<Exponente>();
+        actTest.setExponentes(listTest);
+        actTest.setFechaFin(LocalDateTime.now());
+        actividadService.anadirActividadAEvento(eventoTest, actTest);
+        assertEquals(eventoTest.getActividades().get(0).getDescripcionActividad(), "test uno");        
     }
 }
