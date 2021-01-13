@@ -20,7 +20,8 @@ public class Entrada extends BaseEntity{
     @JoinColumn(name="id_cliente",referencedColumnName = "id")
     private Cliente cliente;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_tipoEntrada", referencedColumnName = "id")
     private TipoEntrada tipoEntrada;
 
     // @OneToOne(cascade = CascadeType.ALL)
