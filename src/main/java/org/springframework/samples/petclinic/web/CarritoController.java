@@ -25,12 +25,6 @@ public class CarritoController {
     // private static final String VIEWS_CARRITO = null;
 	@Autowired
     private CarritoService carritoService;
-    @Autowired
-    private FacturaService facturaService;
-    @Autowired
-    private VentaEntradaService ventaEntradaService;
-    @Autowired
-	private ClienteService clienteService;
 	
     @GetMapping()
 	public String miCarrito(ModelMap modelMap) {

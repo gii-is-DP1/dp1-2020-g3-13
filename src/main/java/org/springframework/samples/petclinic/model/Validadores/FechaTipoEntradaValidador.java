@@ -1,16 +1,24 @@
 package org.springframework.samples.petclinic.model.Validadores;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
+import org.springframework.samples.petclinic.service.EventoService;
 
 public class FechaTipoEntradaValidador implements ConstraintValidator<FechaTipoEntradaRestriccion, Object> {
 
     private String fechaInicio;
     private String fechaFin;
     private String nombreEntrada;
+    @Autowired
+    private EventoService eventoService;
 
     @Override
     public void initialize(FechaTipoEntradaRestriccion fecha) {
@@ -21,10 +29,10 @@ public class FechaTipoEntradaValidador implements ConstraintValidator<FechaTipoE
 
     @Override
     public boolean isValid(Object objeto, ConstraintValidatorContext context) {
-
         Object campoFechaInicio = new BeanWrapperImpl(objeto).getPropertyValue(fechaInicio);
         Object campoFechaFin = new BeanWrapperImpl(objeto).getPropertyValue(fechaFin);
         Object campoNombre = new BeanWrapperImpl(objeto).getPropertyValue(nombreEntrada);
+        
         LocalDateTime fechaInicio = LocalDateTime.parse(campoFechaInicio.toString());
         LocalDateTime fechaFin = LocalDateTime.parse(campoFechaFin.toString());
         NombreTiposEntrada nombreEntrada = NombreTiposEntrada.valueOf(campoNombre.toString());
@@ -52,7 +60,7 @@ public class FechaTipoEntradaValidador implements ConstraintValidator<FechaTipoE
                 if (fechaInicio
                         .isAfter(LocalDateTime.of(fechaInicio.getYear(), fechaInicio.getMonth(),
                                 fechaInicio.getDayOfMonth(), 15, 59))
-                        || fechaInicio.getDayOfMonth() != fechaFin.getDayOfMonth()) {
+                        || fechaInicio.getDayOfMonth() != fechaFin.getDayOfMonth() || fechaFin.isAfter(LocalDateTime.of(fechaFin.getYear(), fechaFin.getMonth(), fechaFin.getDayOfMonth(), 15, 59))) {
                     res = false;
                 }
                 break;

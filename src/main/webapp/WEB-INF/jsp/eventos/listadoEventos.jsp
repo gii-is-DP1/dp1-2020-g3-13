@@ -42,7 +42,7 @@
                                                 <spring:param name="eventosId" value="${evento.id}" />
                                             </spring:url>
                                             <a href="${fn:escapeXml(eventoUrl)}">
-                                                <p class="enlaceEvento"> <i class="fas fa-plus"></i> A&ntilde;dir entrada
+                                                <p class="enlaceEvento"> <i class="fas fa-plus"></i> A&ntilde;adir entrada
                                                 </p>
                                             </a>
                                         </div>

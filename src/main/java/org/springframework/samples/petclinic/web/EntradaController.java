@@ -1,8 +1,10 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import java.util.List;
 
 @Controller
 @RequestMapping("/eventos/{eventoId}/{tipoEntradasId}")
@@ -41,10 +43,15 @@ public class EntradaController {
 
     @PostMapping(value = "/entrada")
 	public String processCreationForm(Entrada entrada, @PathVariable("tipoEntradasId") int tipoEntradaId, BindingResult result) {
+		Carrito car= carritoService.dimeCarritoUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+		List<String> nAsists= carritoService.dimeNombreAsistentes(car);
+		
 		if (result.hasErrors()) {
 			return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 		}
-		else {
+		else if(entradaService.existeElNombreEnElCarro(nAsists, entrada.getNombreAsistente())){
+			return "/entradas/errorAsistente";
+		}else{
 		   entradaService.crearEntrada(entrada, tipoEntradaId);
 		   Cliente cliente  = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		   carritoService.anadirCarrito(entrada, cliente);

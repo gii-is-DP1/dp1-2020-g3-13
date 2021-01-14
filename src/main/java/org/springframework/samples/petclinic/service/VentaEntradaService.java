@@ -16,6 +16,7 @@ import org.springframework.samples.petclinic.model.VentaEntrada;
 import org.springframework.samples.petclinic.repository.EntradaRepository;
 import org.springframework.samples.petclinic.repository.VentaEntradaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class VentaEntradaService {
@@ -24,8 +25,6 @@ public class VentaEntradaService {
     private VentaEntradaRepository ventaEntradaRepository;
     @Autowired
     private CarritoService carritoService;
-    @Autowired
-    private EntradaRepository entradaRepo;
 
     @Transactional
     public long ventaEntradaCount() {
@@ -37,6 +36,7 @@ public class VentaEntradaService {
         Carrito carrito = carritoService.findCarritoById(carritoId);
         Entrada entrada = new Entrada();
         for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
+           
             // TipoEntrada lineaActual =
             // carrito.getLineasFacturas().get(i).getTipoEntrada();
             // lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);

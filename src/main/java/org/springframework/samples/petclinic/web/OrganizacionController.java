@@ -31,16 +31,10 @@ public class OrganizacionController {
     @Autowired
     private OrganizacionService organizacionService;
     @Autowired
-    private PeticionService peticionservice;
-    @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
     private EventoService eventoService;
-
-
     @Autowired
     private AutoridadesService autoridadesService;
+
     private static final String VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM ="organizaciones/organizacionUpdateForm";
 
     
@@ -54,13 +48,6 @@ public class OrganizacionController {
     }
 
 
-    @GetMapping(value = "/new")
-	public String initCreationForm(Map<String,Object> model) {
-		Organizacion organizacion = new Organizacion();
-		model.put("organizacion", organizacion);
-		return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
-    }
-    
     @GetMapping(value="/misEventos")
     public String listadoDeMisEventos(ModelMap modelMap){
         String vista = "/organizaciones/misEventos";
@@ -71,6 +58,14 @@ public class OrganizacionController {
         return vista;
     
     }
+/*    
+    @GetMapping(value = "/new")
+	public String initCreationForm(Map<String,Object> model) {
+		Organizacion organizacion = new Organizacion();
+		model.put("organizacion", organizacion);
+		return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
+    }
+    
 
     @PostMapping(value = "/new")
 	public String processCreationForm(@Valid Organizacion organizacion, BindingResult result) {
@@ -84,9 +79,11 @@ public class OrganizacionController {
             this.organizacionService.saveOrganizacion(organizacion);
             autoridadesService.saveAuthorities(usuario.getNombreUsuario(), "organizacion");
 			
-			return "redirect:/organizacion/" /*+ admin.getId()*/;
-		}
-    }
+			return "redirect:/organizacion/" /*+ admin.getId()\*\/;
+        }
+        
+        
+    }*/
 
 
 

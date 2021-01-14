@@ -48,12 +48,12 @@ INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (3, '66
 INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'9999999','yung@beef.com','conciertos de trap español','Ternera joven','2020-11-05');
 
 
-INSERT INTO consulta(id, name, asunto, descripcion, fecha_consulta) VALUES(1, 'test', 'test_asunto', 'test_descripcion', '2020-03-03');
+INSERT INTO consulta(id, asunto, descripcion, fecha_consulta) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03');
 
-INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com', TRUE,'muy bonito', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
-INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (2,690321658, 2010, 'bilindo', 'la palmera', 'ayuda@bilindo.com', TRUE,'muy muy bonito', 'https://www.diariodesevilla.es/2019/02/06/sevilla/terraza-Bilindo-formada-Plaza-America_1325577931_94584854_667x375.jpg');
-INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (3,685458962, 3500, 'EL PLANTI', 'SAN FRANCISCO JAVIER', 'PLANTI@RAP.com', TRUE,'CONCIERTOS URBANOS', 'https://pbs.twimg.com/media/CJ82gS-XAAEKWeB.jpg');
-INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,disponibilidad,caracteristicas,url_foto) VALUES (4,666666666, 600000, 'ESTADIO OLIMPICO', 'LA CARTUJA', 'ESTADIO@OLIMPICO.com', TRUE,'GRAN AFORO', 'https://multimedia.andalucia.org/fotos/image_200818.jpeg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com','muy bonito', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (2,690321658, 2010, 'bilindo', 'la palmera', 'ayuda@bilindo.com','muy muy bonito', 'https://www.diariodesevilla.es/2019/02/06/sevilla/terraza-Bilindo-formada-Plaza-America_1325577931_94584854_667x375.jpg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (3,685458962, 3500, 'EL PLANTI', 'SAN FRANCISCO JAVIER', 'PLANTI@RAP.com','CONCIERTOS URBANOS', 'https://pbs.twimg.com/media/CJ82gS-XAAEKWeB.jpg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (4,666666666, 600000, 'ESTADIO OLIMPICO', 'LA CARTUJA', 'ESTADIO@OLIMPICO.com','GRAN AFORO', 'https://multimedia.andalucia.org/fotos/image_200818.jpeg');
 
 INSERT INTO alquiler_espacio(id, precio, id_lugar_realizacion) VALUES (1, 50, 1);
 INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,lugar_realizacion_id) VALUES (1,'concierto de estopa', 'un buen concierto', '2020-12-12', '2020-12-12', 1);
@@ -72,6 +72,7 @@ INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medid
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Lil Peep', 'estamos felices', '2022-08-01', '2M', 'Musica', '2021-01-11', 2);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Mac Miller', 'ya no tan felices', '2022-06-11', '2M', 'Musica', '2021-01-11', 2);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Tupac', 'estaba de parranda', '2022-08-11', '2M', 'Musica', '2021-01-11', 2);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Canserbero', 'estaba de fiesta', '2010-08-11', '2M', 'Musica', '2011-01-11', 2);
 
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'DIURNA', '2022-04-11', '2022-05-10', 10,1);
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-04-11', '2022-05-10', 10,1);
@@ -85,6 +86,7 @@ INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, 
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-06-11', '2022-06-11', 10,5);
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'DIURNA', '2022-08-11', '2022-08-11', 10,6);
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-08-11', '2022-08-11', 10,6);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2010-08-11', '2010-08-11', 10,7);
 
 
 

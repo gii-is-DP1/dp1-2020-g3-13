@@ -34,9 +34,6 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
     @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
     private AutoridadesService autoridadesService;
 
     @GetMapping()

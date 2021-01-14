@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class OrganizacionTest {
+public class OrganizacionServiceTest {
     @Autowired
     private OrganizacionService organizacionService;
     @Autowired
