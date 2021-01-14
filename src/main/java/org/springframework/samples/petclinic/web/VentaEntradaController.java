@@ -33,11 +33,7 @@ public class VentaEntradaController {
     @Autowired
 	private VentaEntradaService ventaEntradaService;
 	@Autowired
-	private EventoService eventoService;
-	@Autowired
 	private ClienteService clienteService;
-	@Autowired
-	private CarritoService carritoService;
     
     @GetMapping(value ="/finalizarCompra")
 	public String initCreationForm(Map<String,Object> model) {

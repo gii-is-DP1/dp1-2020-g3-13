@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,18 +25,26 @@ public class CarritoService {
     private CarritoRepository carritoRepo;
     @Autowired
     private FacturaRepository facturaRepo;
-    @Autowired
-    private FacturaService facturaService;
-    @Autowired
-    private LineaFacturaService lineaService;
-    @Autowired
-    private ClienteService clienteService;
 
 
+    @Transactional
+    public long carritoCount(){
+        return carritoRepo.count();
+    }
 
     @Transactional 
     public Carrito listadoObjetosCarrito(String nombreUsuario){
        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
+    }
+
+    @Transactional
+    public Integer contadorElementosCarrito(Carrito carrito){
+        return carrito.getLineasFacturas().size();
+    }
+
+    @Transactional
+    public Carrito dimeCarritoUsuario(String nombreUsuario){
+        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
     }
 
     @Transactional
@@ -48,6 +57,10 @@ public class CarritoService {
         entrada.setCliente(cliente);
         linea.setEntrada(entrada);
         Carrito carrito = new Carrito();
+        LocalDateTime fechaActual;
+        
+
+        
         if(carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario()) != null){
                 carrito = carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario());
                 linea.setCarrito(carrito);
@@ -104,6 +117,20 @@ public class CarritoService {
         facturaRepo.save(factura);
 
     }
-    
+    @Transactional
+    public List<String> dimeNombreAsistentes(Carrito car){
+        if(car==null){
+            return new ArrayList<>();
+        }else{
+        List<String>nombreAsist= new ArrayList<>();
+        List<LineaFactura> lf=  car.getLineasFacturas();
+        int i =0;
+        while(lf.size()-1>=i){
+            nombreAsist.add(lf.get(i).getEntrada().getNombreAsistente());
+            i++;
+        }
+        return nombreAsist;
+    }
 
+}
 }

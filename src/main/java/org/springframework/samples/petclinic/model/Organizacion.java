@@ -29,7 +29,7 @@ public class Organizacion extends BaseEntity {
     @Column(name = "nombreOrganizacion")
     @NotEmpty
     private String nombreOrganizacion;
-    @NotNull
+
     @Email(message = "El formato del email no es válido")
     @Column(name = "email")
     @NotEmpty

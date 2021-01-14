@@ -15,7 +15,7 @@ public class OrganizacionService {
 
         @Autowired
         private OrganizacionRepository organizacionRepo;
-        @Autowired
+
        // private PeticionRepository peticionrepo;
         @Transactional
         public int organizacionCount(){

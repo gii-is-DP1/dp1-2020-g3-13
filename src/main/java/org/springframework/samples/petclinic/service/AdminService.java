@@ -30,19 +30,11 @@ public class AdminService {
         return adminRepo.findAll();
     }
 
-    @Transactional
-	public void saveAdmin(Admin admin) throws DataAccessException {
-		adminRepo.save(admin);
-    }
-
     @Transactional(readOnly = true)
 	public Admin findById(int adminId) throws DataAccessException {
 		return adminRepo.findById(adminId);
     }
     
-    public void deleteAdmin(int adminId) {
-        adminRepo.delete(adminRepo.findById(adminId));
-    }
 
     public void deleteUsuario(String usuarioId){
         Usuario u = usuarioService.findUsuario(usuarioId);

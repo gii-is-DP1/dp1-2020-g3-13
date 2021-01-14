@@ -56,6 +56,10 @@ public class LugarRealizacionService {
     public Iterable<LugarRealizacion> findAll() throws DataAccessException{
         return lugarRealizacionRepository.findAll();
     }
+    @Transactional
+    public void borrarLugarRealizacion(LugarRealizacion lugarRealizacion) throws DataAccessException{
+        lugarRealizacionRepository.delete(lugarRealizacion);    
+    }
 
     @Transactional
 	public LugarRealizacion findById(int lugarId) throws DataAccessException {
