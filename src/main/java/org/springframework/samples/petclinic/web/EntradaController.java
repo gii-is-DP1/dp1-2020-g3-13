@@ -42,10 +42,11 @@ public class EntradaController {
 	}
 
     @PostMapping(value = "/entrada")
-	public String processCreationForm(Entrada entrada, @PathVariable("tipoEntradasId") int tipoEntradaId, BindingResult result) {
+	public String processCreationForm(Entrada entrada,@PathVariable("eventoId") int eventoId,@PathVariable("tipoEntradasId") int tipoEntradaId, BindingResult result) {
 		Carrito car= carritoService.dimeCarritoUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-		List<String> nAsists= carritoService.dimeNombreAsistentes(car);
-		
+		List<String> nAsists= carritoService.dimeNombreAsistentes(car,eventoId);
+		System.out.println(nAsists.toString());
+		System.out.println("==============================");
 		if (result.hasErrors()) {
 			return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 		}

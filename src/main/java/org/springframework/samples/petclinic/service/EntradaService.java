@@ -40,7 +40,6 @@ public class EntradaService {
             }
             i++;
         }
-        System.out.println(res);
         return res;
     }
 }
