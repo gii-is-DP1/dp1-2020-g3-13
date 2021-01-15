@@ -117,6 +117,20 @@ public class CarritoService {
         facturaRepo.save(factura);
 
     }
-    
+    @Transactional
+    public List<String> dimeNombreAsistentes(Carrito car){
+        if(car==null){
+            return new ArrayList<>();
+        }else{
+        List<String>nombreAsist= new ArrayList<>();
+        List<LineaFactura> lf=  car.getLineasFacturas();
+        int i =0;
+        while(lf.size()-1>=i){
+            nombreAsist.add(lf.get(i).getEntrada().getNombreAsistente());
+            i++;
+        }
+        return nombreAsist;
+    }
 
+}
 }
