@@ -1,17 +1,17 @@
 package org.springframework.samples.petclinic.web;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import java.util.Optional;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
-import org.springframework.samples.petclinic.model.Usuario;
-import org.springframework.samples.petclinic.model.VentaEntrada;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -65,11 +65,17 @@ public class EventoController {
     public ModelAndView showEvento(@PathVariable("eventosId") int eventosId) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         ModelAndView mav = new ModelAndView("eventos/detallesEvento");
-        if(!(clienteService.findClienteByUsuario(usuario)==null)){
-            mav.setViewName("eventos/detallesEventoCliente");
+        if(this.eventoService.findEventoById(eventosId).getFechaInicio().isBefore(LocalDate.now())){
+            mav.setViewName("eventos/eventoFinalizado");
+            return mav;
+        }
+        else{
+            if(!(clienteService.findClienteByUsuario(usuario)==null)){
+                mav.setViewName("eventos/detallesEventoCliente");
+            } 
         }
         mav.addObject(this.eventoService.findEventoById(eventosId));
-        return mav;
+            return mav;
     }
 
     @GetMapping(value="/nuevo")

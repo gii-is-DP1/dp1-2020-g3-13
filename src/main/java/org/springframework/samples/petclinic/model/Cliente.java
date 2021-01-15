@@ -44,7 +44,8 @@ public class Cliente extends Persona{
 
     @Column(name = "telefono")
     @NotNull
-    @Size(min=9,max = 9, message = "Número de teléfono no válido   ")
+    @Size(min=9, message = "Número de teléfono no válido")
+    @Digits(fraction = 0, integer = 9, message = "Número de teléfono no válido")
     private String telefono;
 
       

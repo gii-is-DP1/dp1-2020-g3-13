@@ -20,7 +20,6 @@
                                         <petclinic:inputField label="Empresa: " name="empresa" />
                                         <petclinic:inputField label="Url del logo: " name="urlLogo" />
                                         <petclinic:inputField label="Url de la empresa: " name="urlWeb" />
-                                        <petclinic:inputField label="Categoria: " name="categoria" />
 
 
                                     </div>

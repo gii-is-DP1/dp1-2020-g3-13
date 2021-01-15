@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Carrito extends BaseEntity{
     private Cliente cliente;
 
     @Column(name = "total")
+    @Min(value = 0)
     private Double total;
     
 }

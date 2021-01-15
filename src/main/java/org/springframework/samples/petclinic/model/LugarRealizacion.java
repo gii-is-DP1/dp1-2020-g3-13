@@ -50,9 +50,6 @@ public class LugarRealizacion extends BaseEntity{
     @NotEmpty
     private String email;
 
-    @Column(name = "disponibilidad")
-    private Boolean disponibilidad;
-
     @Column(name = "caracteristicas")
     @NotEmpty
     private String caracteristicas;

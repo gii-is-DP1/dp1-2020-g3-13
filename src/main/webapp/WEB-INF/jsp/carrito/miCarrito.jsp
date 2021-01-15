@@ -15,7 +15,7 @@
                             <c:forEach items="${carrito.lineasFacturas}" var="lineasFacturas">
                                 <p>
                                     Evento:
-                                        <c:out value="${lineasFacturas.tipoEntrada.evento.nombreEvento}" />
+                                        <c:out value="${lineasFacturas.entrada.tipoEntrada.evento.nombreEvento}" />
                                 </p>
                                 <p>
                                     Asistente:
@@ -27,11 +27,11 @@
                                 </p>
                                 <p>
                                   Tipo Entrada:
-                                        <c:out value="${lineasFacturas.tipoEntrada.nombre}" />
+                                        <c:out value="${lineasFacturas.entrada.tipoEntrada.nombre}" />
                                 </p>
                                 <p>
                                     Fecha Inicio:
-                                        <c:out value="${lineasFacturas.tipoEntrada.fechaInicio}" />
+                                        <c:out value="${lineasFacturas.entrada.tipoEntrada.fechaInicio}" />
                                 </p>
                                 <p>
                                     Precio:
