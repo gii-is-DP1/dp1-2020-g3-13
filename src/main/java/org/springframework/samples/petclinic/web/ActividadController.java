@@ -69,6 +69,7 @@ public class ActividadController {
             actividadService.anadirActividadAEvento(evento, actividad);
             
             actividadService.AñadirLugarRealizacionActividad(actividad,lugarRealizacionId);
+            
             actividadService.guardarActividad(actividad);
             String vistaExponente = "redirect:/eventos/{evento_id}/actividades/" + actividad.getId()+"/nuevo";
             modelMap.addAttribute("message", "Actividad guardada satisfactoriamente!");
