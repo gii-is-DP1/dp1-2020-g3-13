@@ -10,10 +10,10 @@
                                 <jsp:attribute name="customScript">
                                      <script>
                                 $(function() {
-                                    $("#fechaInicio").datepicker({
+                                    $("#fechaInicio")({
                                         dateFormat: 'yy/mm/dd'
                                     });
-                                    $("#fechaFin").datepicker({
+                                    $("#fechaFin")({
                                         dateFormat: 'yy/mm/dd'
                                     });
                                 });
