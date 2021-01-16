@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/peticion/new").anonymous().antMatchers("/peticion/**").hasAnyAuthority("admin")
 				.antMatchers("/usuarios/myprofile/**").hasAnyAuthority("cliente", "organizacion")
 				.antMatchers("/usuarios/**").hasAnyAuthority("admin").antMatchers("/clientes/new").anonymous()
-				.antMatchers("/consultas/**").permitAll().antMatchers("/clientes/**").hasAnyAuthority("admin")
+				.antMatchers("/consultas/{id_evento}/nuevo").hasAnyAuthority("cliente").antMatchers("/clientes/**").hasAnyAuthority("admin")
 				.antMatchers("/organizaciones/**").hasAnyAuthority("admin").antMatchers("/eventos").permitAll()
 				.antMatchers("/eventos/nuevo/**").hasAnyAuthority("organizacion").antMatchers("/eventos/**")
 				.hasAnyAuthority("organizacion", "cliente", "admin").antMatchers("/tipoentradas/**").permitAll()
