@@ -10,6 +10,7 @@ import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
 import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.EventoService;
+import org.springframework.samples.petclinic.service.ExponenteService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,8 @@ public class ActividadController {
 
     @Autowired
     private ActividadService actividadService;
+    @Autowired
+    private ExponenteService exponenteService;
     @Autowired
     private EventoService eventoService;
     @Autowired
