@@ -1,8 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
-import javax.print.DocFlavor.STRING;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
@@ -12,7 +10,6 @@ import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.ExponenteService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -29,7 +26,7 @@ import java.util.List;
 public class ActividadController {
 
     private static final String VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM = "actividades/crearActividad";
-    
+    private static final String VIEWS_ACTIVIDAD_LISTA_ACTIVIDADES = "actividades/EventoLista";
 
     @Autowired
     private ActividadService actividadService;
@@ -42,7 +39,7 @@ public class ActividadController {
 
     @GetMapping
     public String listadoActividades(ModelMap modelMap){
-        String vista = "actividades/EventoLista";
+        String vista = VIEWS_ACTIVIDAD_LISTA_ACTIVIDADES;
         Iterable<Actividad> actividades = actividadService.findAll();
         modelMap.addAttribute("actividades", actividades);
         return vista;
@@ -50,8 +47,6 @@ public class ActividadController {
     
     @GetMapping(value="/nuevo")
     public String crearActividad(ModelMap modelMap){
-        //String vista="eventos/{eventoId}/actividades/nuevo";
-        //usuarioService.findAll().iterator().forEachRemaining(actualList::add);
         Iterable<LugarRealizacion> lugaresRealizacion = lugarRealizacionService.findAll();
         List<LugarRealizacion> lugaresLista= new ArrayList<LugarRealizacion>();
         lugaresRealizacion.forEach(lugaresLista::add);
