@@ -33,10 +33,10 @@ public class ConsultaValidadores {
         Validator validator = createValidator();
 		    Set<ConstraintViolation<Consulta>> constraintViolations = validator.validate(consulta);
 
-		    assertThat(constraintViolations.size()).isEqualTo(2);
+		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("asunto");
-	  	    assertThat(violation.getMessage()).isEqualTo("El campo asunto no puede estar vacio");
+	  	    assertThat(violation.getMessage()).isEqualTo("El asunto no puede estar vacio");
     }
 
     @Test
@@ -51,23 +51,9 @@ public class ConsultaValidadores {
 		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("asunto");
-	  	    assertThat(violation.getMessage()).isEqualTo("El campo asunto no puede ser nulo");
+	  	    assertThat(violation.getMessage()).isEqualTo("El asunto no puede estar vacio");
     }
 
-    @Test
-    void noDeberiaValidarAsuntoConMenosde3Caracteres(){
-        Consulta consulta  = new Consulta();
-        consulta.setAsunto("Er");
-        consulta.setDescripcion("Aquí se detalla la consulta en sí");
-        
-        Validator validator = createValidator();
-		    Set<ConstraintViolation<Consulta>> constraintViolations = validator.validate(consulta);
-
-		    assertThat(constraintViolations.size()).isEqualTo(1);
-		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
-		    assertThat(violation.getPropertyPath().toString()).isEqualTo("asunto");
-            assertThat(violation.getMessage()).isEqualTo("El campo asunto debe estar comprendido entre 3 y 30 caracteres, además de no estar vacío");
-    }
 
     @Test
     void noDeberiaValidarAsuntoConMasde30Caracteres(){
@@ -81,27 +67,12 @@ public class ConsultaValidadores {
 		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("asunto");
-            assertThat(violation.getMessage()).isEqualTo("El campo asunto debe estar comprendido entre 3 y 30 caracteres, además de no estar vacío");
+            assertThat(violation.getMessage()).isEqualTo("El asunto no debe superar los 30 caracteres");
     }
 
 
     @Test
     void noDeberiaValidarDescripcionVacia(){
-        Consulta consulta  = new Consulta();
-        consulta.setAsunto("Error inicio de sesion");
-        consulta.setDescripcion(" ");
-        
-        Validator validator = createValidator();
-		    Set<ConstraintViolation<Consulta>> constraintViolations = validator.validate(consulta);
-
-		    assertThat(constraintViolations.size()).isEqualTo(2);
-		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
-		    assertThat(violation.getPropertyPath().toString()).isEqualTo("descripcion");
-	  	    assertThat(violation.getMessage()).isEqualTo("El campo descripicion no puede estar vacio");
-    }
-
-    @Test
-    void noDeberiaValidarDescripcionNula(){
         Consulta consulta  = new Consulta();
         consulta.setAsunto("Error inicio de sesion");
         consulta.setDescripcion(null);
@@ -112,22 +83,22 @@ public class ConsultaValidadores {
 		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("descripcion");
-	  	    assertThat(violation.getMessage()).isEqualTo("El campo descripicion no puede ser nulo");
+	  	    assertThat(violation.getMessage()).isEqualTo("La descripcion no puede estar vacia");
     }
 
     @Test
-    void noDeberiaValidarDescripcionConMenosDe20Caracteres(){
+    void noDeberiaValidarDescripcionConMenosDe15Caracteres(){
         Consulta consulta  = new Consulta();
-        consulta.setAsunto("Error inicio de sesion");
+        consulta.setAsunto("Error inicio");
         consulta.setDescripcion("No funciona");
         
         Validator validator = createValidator();
 		    Set<ConstraintViolation<Consulta>> constraintViolations = validator.validate(consulta);
 
-		    assertThat(constraintViolations.size()).isEqualTo(2);
+		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("descripcion");
-	  	    assertThat(violation.getMessage()).isEqualTo("El campo descripicion debe estar comprendido entre 20 y 250 caracteres, además de no estar vacío");
+	  	    assertThat(violation.getMessage()).isEqualTo("La descripción debe estar comprendida entre 15 y 400 caracteres");
     }
 
     @Test
@@ -139,10 +110,10 @@ public class ConsultaValidadores {
         Validator validator = createValidator();
 		    Set<ConstraintViolation<Consulta>> constraintViolations = validator.validate(consulta);
 
-		    assertThat(constraintViolations.size()).isEqualTo(2);
+		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("descripcion");
-	  	    assertThat(violation.getMessage()).isEqualTo("El campo descripicion debe estar comprendido entre 20 y 250 caracteres, además de no estar vacío");
+	  	    assertThat(violation.getMessage()).isEqualTo("La descripción debe estar comprendida entre 15 y 400 caracteres");
     }
 
 
