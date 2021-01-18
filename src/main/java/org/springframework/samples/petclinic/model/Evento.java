@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -69,6 +71,8 @@ public class Evento extends BaseEntity{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<Sponsor> sponsors;
+
+    private Boolean esPublico;
 
 
        
