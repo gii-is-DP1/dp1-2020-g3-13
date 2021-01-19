@@ -24,7 +24,7 @@ void noDeberiaValidarNombreEnBlanco(){
 		VentaEntrada ventaEntrada = new VentaEntrada();
         // ventaEntrada.setNombreTitular(" ");
         ventaEntrada.setCvv("111");
-        ventaEntrada.setNumTarjeta("123456789123");
+        ventaEntrada.setNumTarjeta("1234567891232342");
         ventaEntrada.setFechaCaducidad(LocalDate.of(2021, 03, 12));
 
 		Validator validator = createValidator();
@@ -53,12 +53,12 @@ void noDeberiaValidarNumTarjetaEnBlanco(){
 		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta no puede estar vacio");
 }
 @Test
-void noDeberiaValidarNumTarjetaDeMas12Digitos(){
+void noDeberiaValidarNumTarjetaDeMas16Digitos(){
     // LocaleContextHolder.setLocale(Locale.ENGLISH);
 		VentaEntrada ventaEntrada = new VentaEntrada();
         ventaEntrada.setNombreTitular("Persona de Prueba");
         ventaEntrada.setCvv("111");
-        ventaEntrada.setNumTarjeta("1234567891234");
+        ventaEntrada.setNumTarjeta("123456789132342");
         ventaEntrada.setFechaCaducidad(LocalDate.of(2021, 03, 12));
 
 		Validator validator = createValidator();
@@ -67,7 +67,7 @@ void noDeberiaValidarNumTarjetaDeMas12Digitos(){
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("numTarjeta");
-		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta debe ser un numero de menos de 12 digitos");
+		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta debe ser un numero de mas 16 digitos");
 }
 @Test
 void noDeberiaValidarNumTarjetaDeMenos12Digitos(){
@@ -84,7 +84,7 @@ void noDeberiaValidarNumTarjetaDeMenos12Digitos(){
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("numTarjeta");
-		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta debe ser un numero de mas 12 digitos");
+		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta debe ser un numero de mas 16 digitos");
 }
 @Test
 void noDeberiaValidarNumTarjetaConLetras(){
@@ -98,10 +98,10 @@ void noDeberiaValidarNumTarjetaConLetras(){
 		Validator validator = createValidator();
 		Set<ConstraintViolation<VentaEntrada>> constraintViolations = validator.validate(ventaEntrada);
 
-		assertThat(constraintViolations.size()).isEqualTo(1);
+		assertThat(constraintViolations.size()).isEqualTo(2);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("numTarjeta");
-		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta debe ser un numero de menos de 12 digitos");
+		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta debe ser un numero de menos de 16 digitos");
 }
 
 @Test
@@ -110,7 +110,7 @@ void noDeberiaValidarFechaEnBlanco(){
 		VentaEntrada ventaEntrada = new VentaEntrada();
         ventaEntrada.setNombreTitular("Persona de Prueba");
         ventaEntrada.setCvv("111");
-        ventaEntrada.setNumTarjeta("123456789123");
+        ventaEntrada.setNumTarjeta("1234567891232342");
 
 		Validator validator = createValidator();
 		Set<ConstraintViolation<VentaEntrada>> constraintViolations = validator.validate(ventaEntrada);
@@ -127,7 +127,7 @@ void noDeberiaValidarFechaAnteriorHoy(){
 		VentaEntrada ventaEntrada = new VentaEntrada();
         ventaEntrada.setNombreTitular("Persona de Prueba");
         ventaEntrada.setCvv("111");
-        ventaEntrada.setNumTarjeta("123456789123");
+        ventaEntrada.setNumTarjeta("1234567891232342");
         ventaEntrada.setFechaCaducidad(LocalDate.of(1990, 03, 12));
 
 
@@ -145,16 +145,16 @@ void noDeberiaValidarCVVEnBlanco(){
 		VentaEntrada ventaEntrada = new VentaEntrada();
         ventaEntrada.setNombreTitular("Persona de Prueba");
         ventaEntrada.setCvv(" ");
-        ventaEntrada.setNumTarjeta("123456789123");
+        ventaEntrada.setNumTarjeta("1234567891232342");
         ventaEntrada.setFechaCaducidad(LocalDate.of(2021, 03, 12));
 
 		Validator validator = createValidator();
 		Set<ConstraintViolation<VentaEntrada>> constraintViolations = validator.validate(ventaEntrada);
 
-		assertThat(constraintViolations.size()).isEqualTo(1);
+		assertThat(constraintViolations.size()).isEqualTo(2);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("cvv");
-		assertThat(violation.getMessage()).isEqualTo("El CVV no puede estar vacio");
+		assertThat(violation.getMessage()).isEqualTo("El CVV no debe tener mas de 3 digitos");
 }
 @Test
 void noDeberiaValidarCVVDeMasDe3Digitos(){
@@ -162,7 +162,7 @@ void noDeberiaValidarCVVDeMasDe3Digitos(){
 		VentaEntrada ventaEntrada = new VentaEntrada();
         ventaEntrada.setNombreTitular("Persona de Prueba");
         ventaEntrada.setCvv("3333");
-        ventaEntrada.setNumTarjeta("123456789123");
+        ventaEntrada.setNumTarjeta("1234567891232342");
         ventaEntrada.setFechaCaducidad(LocalDate.of(2021, 03, 12));
 
 		Validator validator = createValidator();
@@ -179,7 +179,7 @@ void noDeberiaValidarCVVDeMenosDe3Digitos(){
 		VentaEntrada ventaEntrada = new VentaEntrada();
         ventaEntrada.setNombreTitular("Persona de Prueba");
         ventaEntrada.setCvv("33");
-        ventaEntrada.setNumTarjeta("123456789123");
+        ventaEntrada.setNumTarjeta("1234567891232342");
         ventaEntrada.setFechaCaducidad(LocalDate.of(2021, 03, 12));
 
 		Validator validator = createValidator();
@@ -196,7 +196,7 @@ void noDeberiaValidarCVVConLetras(){
 		VentaEntrada ventaEntrada = new VentaEntrada();
         ventaEntrada.setNombreTitular("Persona de Prueba");
         ventaEntrada.setCvv("33l");
-        ventaEntrada.setNumTarjeta("123456789123");
+        ventaEntrada.setNumTarjeta("1234567891232342");
         ventaEntrada.setFechaCaducidad(LocalDate.of(2021, 03, 12));
 
 		Validator validator = createValidator();

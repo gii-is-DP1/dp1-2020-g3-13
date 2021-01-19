@@ -1,22 +1,14 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
-import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.VentaEntrada;
-import org.springframework.samples.petclinic.repository.EntradaRepository;
 import org.springframework.samples.petclinic.repository.VentaEntradaRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class VentaEntradaService {

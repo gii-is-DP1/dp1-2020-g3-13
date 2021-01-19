@@ -1,14 +1,12 @@
 package org.springframework.samples.petclinic.model.Validadores;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Evento;
+//import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
 import org.springframework.samples.petclinic.service.EventoService;
 
@@ -17,14 +15,17 @@ public class FechaTipoEntradaValidador implements ConstraintValidator<FechaTipoE
     private String fechaInicio;
     private String fechaFin;
     private String nombreEntrada;
-    @Autowired
-    private EventoService eventoService;
+    //private String evento_id;
+    //@Autowired
+    //private EventoService eventoService;
 
     @Override
-    public void initialize(FechaTipoEntradaRestriccion fecha) {
-        this.fechaInicio = fecha.fechaInicio();
-        this.fechaFin = fecha.fechaFin();
-        this.nombreEntrada = fecha.nombreEntrada();
+    public void initialize(FechaTipoEntradaRestriccion TipoEntrada) {
+        this.fechaInicio = TipoEntrada.fechaInicio();
+        this.fechaFin = TipoEntrada.fechaFin();
+        this.nombreEntrada = TipoEntrada.nombreEntrada();
+        //this.evento_id = TipoEntrada.evento_id();
+
     }
 
     @Override
@@ -32,7 +33,7 @@ public class FechaTipoEntradaValidador implements ConstraintValidator<FechaTipoE
         Object campoFechaInicio = new BeanWrapperImpl(objeto).getPropertyValue(fechaInicio);
         Object campoFechaFin = new BeanWrapperImpl(objeto).getPropertyValue(fechaFin);
         Object campoNombre = new BeanWrapperImpl(objeto).getPropertyValue(nombreEntrada);
-        
+        //Object campoEventoId = new BeanWrapperImpl(objeto).getPropertyValue(evento_id);
         LocalDateTime fechaInicio = LocalDateTime.parse(campoFechaInicio.toString());
         LocalDateTime fechaFin = LocalDateTime.parse(campoFechaFin.toString());
         NombreTiposEntrada nombreEntrada = NombreTiposEntrada.valueOf(campoNombre.toString());
