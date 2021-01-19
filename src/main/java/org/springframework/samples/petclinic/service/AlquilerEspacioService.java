@@ -18,7 +18,7 @@ public class AlquilerEspacioService {
     public int alquilerEspacioCount(){
         return (int) alquilerEspacioRepository.count();
     }
-
+    @Transactional
     public Iterable<AlquilerEspacio> findAll(){
         return alquilerEspacioRepository.findAll();
     }
