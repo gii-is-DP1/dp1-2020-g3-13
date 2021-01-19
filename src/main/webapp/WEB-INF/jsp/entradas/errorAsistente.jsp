@@ -1,4 +1,8 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,9 +12,9 @@
 
                                   
                 
-                    <h1 style="text-align: center; color:rgb(194, 19, 6)" >No puede comprar entrada para el mismo asistnte</h1>
+                    <h1 style="text-align: center; color:rgb(194, 19, 6)" >No puede comprar más de una entrada para el mismo asistente</h1>
                     <h3 style="text-align: center;">
-                    <a href="/eventos" title="Pagina de eventos"  > Volver al listado de eventos
+                    <a href="javascript:history.back()"> Volver a la vista de compras</a>
                     
                     </a>
                     </h3>

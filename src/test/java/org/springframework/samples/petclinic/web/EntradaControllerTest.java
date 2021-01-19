@@ -38,9 +38,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//@SpringBootTest
+@SpringBootTest
 @AutoConfigureMockMvc
-@WebMvcTest(EntradaController.class)
+
 public class EntradaControllerTest {
 
     private static final int TEST_ENTRADA_ID = 1;
@@ -126,11 +126,11 @@ public class EntradaControllerTest {
 
     @Test
     void testCrearEntradaForm() throws Exception {
-        // SimpleGrantedAuthority authority = new SimpleGrantedAuthority("cliente");
-        // List<SimpleGrantedAuthority> aut = new ArrayList<>();
-        // aut.add(authority);
-        // UsernamePasswordAuthenticationToken auth1 = new UsernamePasswordAuthenticationToken(luzCusMo.getNombreUsuario(), luzCusMo.getPassword(), aut);
-        // SecurityContextHolder.getContext().setAuthentication(auth1);
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("cliente");
+        List<SimpleGrantedAuthority> aut = new ArrayList<>();
+        aut.add(authority);
+        UsernamePasswordAuthenticationToken auth1 = new UsernamePasswordAuthenticationToken(luzCusMo.getNombreUsuario(), luzCusMo.getPassword(), aut);
+        SecurityContextHolder.getContext().setAuthentication(auth1);
 
         mockMvc.perform(get("/eventos/8/1/entrada")).andExpect(status().isOk())
         .andExpect(view().name(VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM)).andExpect(model().attributeExists("entrada"));

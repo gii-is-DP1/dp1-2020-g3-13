@@ -118,7 +118,7 @@ public class CarritoService {
 
     }
     @Transactional
-    public List<String> dimeNombreAsistentes(Carrito car){
+    public List<String> dimeNombreAsistentes(Carrito car,int eventoId){
         if(car==null){
             return new ArrayList<>();
         }else{
@@ -126,7 +126,9 @@ public class CarritoService {
         List<LineaFactura> lf=  car.getLineasFacturas();
         int i =0;
         while(lf.size()-1>=i){
+            if(lf.get(i).getEntrada().getTipoEntrada().getEvento().getId()==eventoId){
             nombreAsist.add(lf.get(i).getEntrada().getNombreAsistente());
+        }
             i++;
         }
         return nombreAsist;
