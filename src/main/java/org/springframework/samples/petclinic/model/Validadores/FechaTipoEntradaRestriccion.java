@@ -17,6 +17,7 @@ public @interface FechaTipoEntradaRestriccion {
     String fechaInicio();
     String fechaFin();
     String nombreEntrada();
+    //String evento_id();
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default{};
 

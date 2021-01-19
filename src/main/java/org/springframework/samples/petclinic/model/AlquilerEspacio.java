@@ -7,12 +7,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "alquilerEspacio")
 public class AlquilerEspacio extends BaseEntity{
 
