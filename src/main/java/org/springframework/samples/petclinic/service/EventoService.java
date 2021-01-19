@@ -11,6 +11,7 @@ import javax.validation.constraints.Null;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
@@ -25,6 +26,8 @@ public class EventoService {
     private EventoRepository eventoRepository;
     @Autowired
     private TipoEntradaService tipoEntradaService;
+    @Autowired
+    private ClienteService clienteService;
 
 
     
@@ -69,6 +72,19 @@ public class EventoService {
             }
         return entradas; 
         }
+
+    public void anadirEventoAFav(Evento evento, String nombreUsuario){
+        Cliente cliente =clienteService.findClienteByUsuario(nombreUsuario);
+        if(cliente.getEventosFavoritos()==null){
+            List<Evento> listaEventos = new ArrayList<>();
+            listaEventos.add(evento);
+            
+        }else{
+            List<Evento> listaActual =cliente.getEventosFavoritos();
+            listaActual.add(evento);
+        }
+        clienteService.saveCliente(cliente);
+    }
 
         //Muestra primeros 6 eventos o menos para la página de inicio
         public List<Evento> eventosDeInicio(){
