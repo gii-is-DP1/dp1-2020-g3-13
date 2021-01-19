@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "tipoentradas")
 @FechaTipoEntradaRestriccion(
-    //evento_id = "evento_id", 
+    //evento_id = "evento_id"
     fechaInicio = "fechaInicio", fechaFin = "fechaFin", nombreEntrada = "nombre", message = "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento")
 public class TipoEntrada extends BaseEntity {
 

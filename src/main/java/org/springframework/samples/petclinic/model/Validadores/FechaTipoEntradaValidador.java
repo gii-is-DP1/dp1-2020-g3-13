@@ -17,7 +17,7 @@ public class FechaTipoEntradaValidador implements ConstraintValidator<FechaTipoE
     private String nombreEntrada;
     //private String evento_id;
     //@Autowired
-    //private EventoService eventoService;
+    private EventoService eventoService;
 
     @Override
     public void initialize(FechaTipoEntradaRestriccion TipoEntrada) {
