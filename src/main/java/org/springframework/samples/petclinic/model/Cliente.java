@@ -35,6 +35,8 @@ public class Cliente extends Persona{
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cliente")
     private  List<Entrada> entradas;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Evento> eventosFavoritos;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
