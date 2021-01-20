@@ -177,11 +177,11 @@ public class UsuarioController {
     
         } 
 
-        @GetMapping(path ="myprofile/eventosFavoritos/{eventosFavId}/borrar")
-        public String borrarEventoFav( ModelMap model, @PathVariable("eventosFavId") int eventosId){
+        @GetMapping(path ="myprofile/eventosFavoritos/{eventosId}/borrar")
+        public String borrarEventoFav( ModelMap model, @PathVariable("eventosId") int eventosId){
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             Cliente cliente = clienteService.findClienteByUsuario(username);
-            Evento evento = cliente.getEventosFavoritos().get(eventosId);
+            Evento evento = eventoService.findEventoById(eventosId);
             eventoService.borrarEventoFav(evento, cliente);
             
             return "redirect:/usuarios/myprofile/eventosFavoritos";

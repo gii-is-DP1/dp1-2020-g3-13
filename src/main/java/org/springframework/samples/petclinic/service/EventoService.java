@@ -86,9 +86,11 @@ public class EventoService {
         clienteService.saveCliente(cliente);
     }
     public void borrarEventoFav(Evento evento, Cliente cliente){
-        //Cliente cliente = clienteService.findClienteByUsuario(nombreUsuario);
-        //Evento ev =cliente.getEventosFavoritos().get(i);
-        cliente.getEventosFavoritos().remove(evento);
+        for(int i=0; i<cliente.getEventosFavoritos().size();i++){
+            if(cliente.getEventosFavoritos().get(i).getId().equals(evento.getId())){
+                cliente.getEventosFavoritos().remove(i);
+            }        
+        }   
         clienteService.saveCliente(cliente);
         
     }
