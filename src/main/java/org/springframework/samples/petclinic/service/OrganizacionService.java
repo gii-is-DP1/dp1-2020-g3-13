@@ -36,17 +36,17 @@ public class OrganizacionService {
            @Transactional
            public void saveOrganizacion(Organizacion organizacion) throws DataAccessException{
             organizacionRepo.save(organizacion);
-
        }
-
-
        
 	public void modifyUsuarioOrganizacion(Organizacion organizacion, Organizacion org) throws DataAccessException{
 		organizacion.setId(org.getId());
 		organizacion.setUsuario(org.getUsuario());
-		// organizacion.getUsuario().setEnabled(true);
 	    saveOrganizacion(organizacion);
-	}
+    }
+    @Transactional
+    public Organizacion findOrganizacionById(int organizacionId){
+        return organizacionRepo.findById(organizacionId);
+    }
 
 
 

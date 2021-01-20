@@ -8,7 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Autoridades;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Usuario;
-import org.springframework.samples.petclinic.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Service;
 public class ClienteServiceTest {
     @Autowired
     private ClienteService clienteService;
-    @Autowired
-    private ClienteRepository clienteRepo;
     @Test
     public void testCountWithInitialData(){
         int count= clienteService.clienteCount();
@@ -26,9 +23,9 @@ public class ClienteServiceTest {
 
     @Test
     public void deberiaBorrarClienteTest(){
-        Integer clienteAntes = (int) clienteRepo.count();
-        clienteService.deleteCliente(clienteService.findClienteByUsuario("prueba1"));
-        Integer clienteDespues = (int) clienteRepo.count();
+        int clienteAntes = clienteService.clienteCount();
+        clienteService.deleteCliente(clienteService.findClienteByUsuario("cliente1"));
+        int clienteDespues = clienteService.clienteCount();
         assertEquals(clienteAntes-1, clienteDespues);
 
     }
@@ -62,8 +59,7 @@ public class ClienteServiceTest {
         cliente.setNombre("prueba");
         cliente.setTelefono("568748459");
         clienteService.saveCliente(cliente);
-       
-        int count2= (int) clienteRepo.count();
+        int count2 = clienteService.clienteCount();
         assertEquals(count+1, count2);
         assertEquals(cliente, clienteService.findClienteByUsuario("prueba"));
 

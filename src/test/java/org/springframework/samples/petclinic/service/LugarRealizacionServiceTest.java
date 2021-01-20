@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
-import org.springframework.samples.petclinic.repository.LugarRealizacionRepository;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -17,13 +16,11 @@ public class LugarRealizacionServiceTest {
 
 @Autowired
 private LugarRealizacionService lugarService;
-@Autowired
-private LugarRealizacionRepository lugarRepo;
 
     @Test
     public void shouldFindLugares(){
-        Long a = StreamSupport.stream(lugarService.findAll().spliterator(), false).count();
-        Long b =lugarRepo.count();
+        int a = (int) StreamSupport.stream(lugarService.findAll().spliterator(), false).count();
+        int b = lugarService.lugaresCount();
         assertEquals(b, a);
     }
 
