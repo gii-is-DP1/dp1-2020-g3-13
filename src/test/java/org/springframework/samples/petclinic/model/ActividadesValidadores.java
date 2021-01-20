@@ -24,7 +24,7 @@ public class ActividadesValidadores {
     @Test
     void noDeberiaValidarTematicaActividadVacio(){
         Actividad actividad = new Actividad();
-        actividad.setTematicaActividad(" ");
+        actividad.setTematicaActividad("  ");
         actividad.setDescripcionActividad("Esto es la descripcion de una actividad propuesta para un evento especifico");
         actividad.setFechaFin(LocalDateTime.of(2031, 01, 12, 20, 00));
         actividad.setFechaInicio(LocalDateTime.of(2031, 01, 12, 12, 00));
@@ -32,7 +32,7 @@ public class ActividadesValidadores {
         Validator validator = createValidator();
 		    Set<ConstraintViolation<Actividad>> constraintViolations = validator.validate(actividad);
 
-		    assertThat(constraintViolations.size()).isEqualTo(2);
+		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Actividad> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("tematicaActividad");
 	  	  assertThat(violation.getMessage()).isEqualTo("El nombre de la temática debe estar comprendido entre 2 y 30 caracteres, además de no estar vacío");

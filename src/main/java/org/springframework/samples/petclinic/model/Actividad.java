@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,18 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.model.Validadores.FechaFinActividadRestriccion;
-import org.springframework.samples.petclinic.model.Validadores.FechaInicioRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechaInicioTimeRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechasActividadRestriccion;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-// @Data
 @Getter
 @Setter
 @Entity

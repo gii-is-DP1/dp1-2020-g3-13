@@ -43,7 +43,6 @@ public class TipoEntradaController {
     @PostMapping(value = "/nuevo")
     public String listadoTiposEntrada(@Valid TipoEntrada tipoEntrada, @PathVariable("evento_id") int eventoId ,BindingResult resultado, ModelMap modelMap){
         Evento evento = eventoService.findEventoById(eventoId);
-
         if(resultado.hasErrors()){
             modelMap.addAttribute("tipoEntrada", tipoEntrada);
             List<NombreTiposEntrada> nombre =  Arrays.asList(NombreTiposEntrada.values());

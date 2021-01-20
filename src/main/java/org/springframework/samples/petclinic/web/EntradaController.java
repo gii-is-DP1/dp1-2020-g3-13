@@ -46,7 +46,6 @@ public class EntradaController {
 		Carrito car= carritoService.dimeCarritoUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		List<String> nAsists= carritoService.dimeNombreAsistentes(car,eventoId);
 		System.out.println(nAsists.toString());
-		System.out.println("==============================");
 		if (result.hasErrors()) {
 			return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 		}
