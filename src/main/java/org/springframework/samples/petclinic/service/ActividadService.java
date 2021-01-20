@@ -20,8 +20,7 @@ public class ActividadService {
         private ActividadRepository actividadRepo;
         @Autowired
         private LugarRealizacionService lugarRealizacionService;
-        @Autowired
-        private ExponenteService exponenteService;
+
 
         public int actividadesCount(){
             return (int) actividadRepo.count();

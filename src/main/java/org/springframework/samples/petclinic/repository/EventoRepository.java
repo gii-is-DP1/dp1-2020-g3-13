@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.model.Evento;
-import org.springframework.samples.petclinic.model.Organizacion;
 
 public interface EventoRepository extends CrudRepository<Evento, Integer>{
     

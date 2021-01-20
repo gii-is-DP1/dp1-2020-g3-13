@@ -19,7 +19,7 @@ public class VentaEntradaService {
     @Autowired
     private CarritoService carritoService;
     @Autowired
-    private EntradaRepository entradaRepo;
+    private EntradaService entradaService;
     @Autowired
     private TipoEntradaService tipoEntrSer;
 
@@ -29,19 +29,21 @@ public class VentaEntradaService {
     }
 
     @Transactional
+    //Guarda cada entrada que hay en el carrito, reduce los numeros de entrada disponibles y vacía el carrito
     public void finalizarCompra(int carritoId, Cliente cliente, VentaEntrada ventaEntrada) throws DataAccessException {
         Carrito carrito = carritoService.findCarritoById(carritoId);
         Entrada entrada = new Entrada();
         for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
             entrada = carrito.getLineasFacturas().get(i).getEntrada();
-            entradaRepo.save(entrada);
+            entradaService.guardarEntrada(entrada);
             TipoEntrada tipoEntrada = entrada.getTipoEntrada();
             tipoEntrada.setNumEntradas(tipoEntrada.getNumEntradas()-1);
             tipoEntrSer.guardar(tipoEntrada);
             
         }
-
+        //Genera la factura del cliente
         carritoService.generarFacturaCarrito(carrito, cliente);
+        //Vacía el carrito para una nueva compra
         carritoService.actualizaCarritoAcero(carrito);
         
 
@@ -49,18 +51,7 @@ public class VentaEntradaService {
 
     @Transactional
     public void guardaVentaEntrada(VentaEntrada ventaEntrada) throws DataAccessException {
-        // List<VentaEntrada> entradas =
-        // eventoService.findEventoById(ventaEntrada.getEvento().getId()).getVentaEntrada();
-        // Boolean existe = false;
-        // int i = 0;
-        // while(i<entradas.size()&&existe==false){
-        // if(entradas.get(i).getNombreAsistente()==ventaEntrada.getNombreAsistente()){
-        // existe = true;
-        // }
-        // }
-        // if(existe== true){
         ventaEntradaRepository.save(ventaEntrada);
-        // }
     }
 
 }

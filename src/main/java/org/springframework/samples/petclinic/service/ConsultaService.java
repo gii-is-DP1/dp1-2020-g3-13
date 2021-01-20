@@ -9,7 +9,6 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Consulta;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.repository.ConsultaRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +18,6 @@ public class ConsultaService {
     private ConsultaRepository consultaRepository;
     @Autowired
     private EventoService eventoService;
-    @Autowired
-    private ClienteService clienteService;
 
     @Transactional
     public int consultasCount() {
