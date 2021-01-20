@@ -17,6 +17,7 @@ import org.springframework.samples.petclinic.repository.AutoridadesRepository;
 import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.AutoridadesService;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.LineaFacturaService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -48,6 +49,8 @@ public class UsuarioController {
     private AdminService adminService;
     @Autowired
     private FacturaService facturaService;
+    @Autowired
+    private EventoService eventoService;
     @GetMapping()
     public String listadoUsuarios(ModelMap modelMap){
         String vista = "/usuarios/listadoUsuarios";
@@ -156,8 +159,7 @@ public class UsuarioController {
             model.addAttribute("cliente", cliente);
             String vista  = "usuarios/eventosFavoritos";
             return vista;
-        }    
-
+        }
         @GetMapping(path ="myprofile/delete")
         public String borrarCliente( ModelMap model){
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -172,6 +174,17 @@ public class UsuarioController {
 
             }
             return "redirect:/logout";
+    
+        } 
+
+        @GetMapping(path ="myprofile/eventosFavoritos/{eventosFavId}/borrar")
+        public String borrarEventoFav( ModelMap model, @PathVariable("eventosFavId") int eventosId){
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            Cliente cliente = clienteService.findClienteByUsuario(username);
+            Evento evento = cliente.getEventosFavoritos().get(eventosId);
+            eventoService.borrarEventoFav(evento, cliente);
+            
+            return "redirect:/usuarios/myprofile/eventosFavoritos";
     
         }
 }

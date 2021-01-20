@@ -85,6 +85,13 @@ public class EventoService {
         }
         clienteService.saveCliente(cliente);
     }
+    public void borrarEventoFav(Evento evento, Cliente cliente){
+        //Cliente cliente = clienteService.findClienteByUsuario(nombreUsuario);
+        //Evento ev =cliente.getEventosFavoritos().get(i);
+        cliente.getEventosFavoritos().remove(evento);
+        clienteService.saveCliente(cliente);
+        
+    }
 
         //Muestra primeros 6 eventos o menos para la página de inicio
         public List<Evento> eventosDeInicio(){

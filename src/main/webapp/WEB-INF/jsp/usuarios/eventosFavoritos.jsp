@@ -19,6 +19,10 @@
                 <c:out value="${eventos.fechaInicio} " />
             <h3>Fecha de Fin:</h3>
             <c:out value="${eventos.fechaFin}" />
+            <spring:url value="/usuarios/myprofile/eventosFavoritos/{eventosFavId}/borrar" var="borrarFavUrl">
+                    <spring:param name="eventosFavId" value="${cliente.eventosFavoritos.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(borrarFavUrl)}" class="btn btn-default">Borrar Evento</a>
             
             </c:forEach>
     </table>

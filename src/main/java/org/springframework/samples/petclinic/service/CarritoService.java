@@ -60,6 +60,7 @@ public class CarritoService {
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
+        //linea.setTipoEntrada(entrada.getTipoEntrada());
         // entrada.setLineaFactura(linea);
         entrada.setCliente(cliente);
         linea.setEntrada(entrada);
@@ -142,4 +143,9 @@ public class CarritoService {
     }
 
 }
+
+    @Transactional
+    public void guardarCarrito(Carrito car){
+        carritoRepo.save(car);
+    }
 }

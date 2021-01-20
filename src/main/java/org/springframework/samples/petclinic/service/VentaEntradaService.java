@@ -29,6 +29,18 @@ public class VentaEntradaService {
     }
 
     @Transactional
+    public void actualizaTipoEntrada(Carrito carrito, int lineaId){
+            TipoEntrada tipoEntrada= carrito.getLineasFacturas().get(lineaId).getEntrada().getTipoEntrada();
+            Evento ev = tipoEntrada.getEvento();
+            Integer numActual = tipoEntrada.getNumEntradas();
+            numActual = numActual-1;
+            tipoEntrada.setNumEntradas(numActual);
+            tipoService.guardar(tipoEntrada);
+            carritoService.guardarCarrito(carrito);
+        
+    }
+
+    @Transactional
     public void finalizarCompra(int carritoId, Cliente cliente, VentaEntrada ventaEntrada) throws DataAccessException {
         Carrito carrito = carritoService.findCarritoById(carritoId);
         Entrada entrada = new Entrada();
@@ -46,6 +58,7 @@ public class VentaEntradaService {
         
 
     }
+    
 
     @Transactional
     public void guardaVentaEntrada(VentaEntrada ventaEntrada) throws DataAccessException {
