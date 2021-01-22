@@ -30,13 +30,13 @@
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
                                         <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
                                         <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
-                                        <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${listaId}" />
+                                        <!-- <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${listaId}" />
                                        <p> Elige lugar</p>
                                         <select name="lugarRealizacionId" >
                                             <c:forEach items="${lugaresRealizacion}" var="lugarRealizacion">
                                                   <option value="${lugarRealizacion.id}"> <c:out value="${lugarRealizacion.nombre_recinto}"></c:out> </option>
                                                 </c:forEach>
-                                        </select>
+                                        </select> -->
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">

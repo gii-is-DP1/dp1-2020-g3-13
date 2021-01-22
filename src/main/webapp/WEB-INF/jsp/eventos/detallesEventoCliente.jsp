@@ -3,6 +3,7 @@
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                <%@ page contentType="text/html; charset=UTF-8" %>
 
                     <petclinic:layout pageName="evento">
 
@@ -100,7 +101,15 @@
                         </table>
                         <spring:url value="{eventoId}/actividades/nuevo" var="actividadesUrl">
                         <spring:param name="eventoId" value="${evento.id}" />
-                     </spring:url>
+                        </spring:url>
+                        <form action="favoritos" method="POST">
+                            <spring:url value="/eventos/{eventoId}/añadirEventosFavoritos" var="favoritosUrl">
+                            <spring:param name="eventoId" value="${evento.id}" />
+                            </spring:url>
+                            <a href="${fn:escapeXml(favoritosUrl)}">
+                            <c:out value="Añadir a favoritos" /><br></a>
+                        </form>
+                        
 
 
 

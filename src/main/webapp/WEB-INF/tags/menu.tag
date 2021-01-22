@@ -84,6 +84,9 @@
 					<li><a href="<c:url value="/carrito" />"><span
 					class="glyphicon glyphicon-shopping-cart"></span> Mi cesta</a></li>
 				</sec:authorize>
+				<sec:authorize access='hasAnyAuthority("cliente")'>
+					<li><a href="<c:url value="/usuarios/myprofile/eventosFavoritos" />"><i class="glyphicon glyphicon-heart"></i> Favoritos</a></li>
+				</sec:authorize>
 
 				
 				<!-- ****************** Menu como cliente  ****************** -->

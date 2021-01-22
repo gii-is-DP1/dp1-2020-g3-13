@@ -5,20 +5,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "alquilerEspacio")
 public class AlquilerEspacio extends BaseEntity{
 
-    @Column(name = "precio")
+    @Column(name = "precioTotal")
     @NotEmpty
-    protected Double precio;
+    protected Double precioTotal;
+
+    @Column(name = "fechaInicioReserva")
+    @NotEmpty
+    protected LocalDateTime fechaInicioReserva;
+
+    @Column(name = "fechaFinReserva")
+    @NotEmpty
+    protected LocalDateTime fechaFinReserva;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_lugar_realizacion", referencedColumnName = "id")

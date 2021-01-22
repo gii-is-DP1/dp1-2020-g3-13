@@ -5,13 +5,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
-import lombok.Data;
-
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "entrada")
 public class Entrada extends BaseEntity{
@@ -23,13 +23,6 @@ public class Entrada extends BaseEntity{
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_tipoEntrada", referencedColumnName = "id")
     private TipoEntrada tipoEntrada;
-
-    // @OneToOne(cascade = CascadeType.ALL)
-    // private LineaFactura lineaFactura;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_VentaEntrada",referencedColumnName = "id")
-    private VentaEntrada ventaEntrada;
 
     @Column(name = "nombreAsistente")
     @NotEmpty

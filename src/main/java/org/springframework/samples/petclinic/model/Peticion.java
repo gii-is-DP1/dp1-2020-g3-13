@@ -10,17 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Range;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "peticion")
 public class Peticion extends BaseEntity{
