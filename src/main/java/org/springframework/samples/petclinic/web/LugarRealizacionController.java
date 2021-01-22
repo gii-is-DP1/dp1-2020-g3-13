@@ -59,4 +59,23 @@ public class LugarRealizacionController {
 			return "redirect:/lugaresRealizacion/";
 		}
 	}
+	@GetMapping(value = "/{lugarRealizacionId}/edit")
+    public String initUpdateLugarRealizacionForm(@PathVariable("lugarRealizacionId") int lugarRealizacionId, ModelMap modelMap) {
+			LugarRealizacion lugarRealizacion= this.lugarRealizacionService.findById(lugarRealizacionId);
+			modelMap.addAttribute(lugarRealizacion);
+          
+            return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
+       
+    }
+
+    //TODO 
+    @PostMapping(value = "/{lugarRealizacionId}/edit")
+    public String editLugarRealizacion(@Valid LugarRealizacion lugarRealizacion, BindingResult result, ModelMap model,@PathVariable("lugarRealizacionId") int lugarRealizacionId){
+		if(result.hasErrors()){
+			return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
+		}else{
+			this.lugarRealizacionService.modifyLugaRealizacion(lugarRealizacion, this.lugarRealizacionService.findById(lugarRealizacionId));
+			return "redirect:/lugaresRealizacion/";		}
+
+}
 }

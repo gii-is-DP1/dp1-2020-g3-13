@@ -22,4 +22,9 @@ public class LineaFacturaService {
     public Iterable<LineaFactura> findAll(){
         return lineaFacturaRepository.findAll();
     }
+
+    public void save(LineaFactura lineaFactura){
+         lineaFacturaRepository.save(lineaFactura);
+
+    }
 }

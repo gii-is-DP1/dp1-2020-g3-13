@@ -7,18 +7,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "alquilerEspacio")
 public class AlquilerEspacio extends BaseEntity{
 
     @Column(name = "precio")
     @NotEmpty
-    protected Integer precio;
+    protected Double precio;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_lugar_realizacion", referencedColumnName = "id")

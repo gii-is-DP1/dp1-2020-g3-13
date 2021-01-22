@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 

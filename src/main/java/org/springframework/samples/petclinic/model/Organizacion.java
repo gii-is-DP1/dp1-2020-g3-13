@@ -11,11 +11,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-import lombok.Data;
-
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name= "organizaciones")  
 public class Organizacion extends BaseEntity {    
@@ -29,7 +29,7 @@ public class Organizacion extends BaseEntity {
     @Column(name = "nombreOrganizacion")
     @NotEmpty
     private String nombreOrganizacion;
-    @NotNull
+
     @Email(message = "El formato del email no es válido")
     @Column(name = "email")
     @NotEmpty

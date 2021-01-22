@@ -8,21 +8,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "eventos")
 public class Evento extends BaseEntity{
-
-
     @Column(name = "tipoEvento")
     @NotEmpty
     protected String tipoEvento;
@@ -52,10 +48,12 @@ public class Evento extends BaseEntity{
     private LocalDate fechaFin;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    
+    // @JoinColumn(name = "actividades_id", referencedColumnName = "id")
     private List<Actividad> actividades;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<VentaEntrada> ventaEntrada;
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    // private List<VentaEntrada> ventaEntrada;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<TipoEntrada> tipoEntradas;
@@ -63,12 +61,14 @@ public class Evento extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<Consulta> consultas;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     private Organizacion organizacion;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<Sponsor> sponsors;
+
+    private Boolean esPublico;
 
 
        

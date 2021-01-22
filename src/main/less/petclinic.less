@@ -18,7 +18,9 @@
 @spring-brown:      #34302D;
 @spring-grey:       #838789;
 @spring-light-grey: #f1f1f1;
-
+/** Colores propios **/
+@color-naranja-uno: #fe4918;
+@color-naranja-dos: #0c0c0c;
 @body-bg:                           @spring-light-grey;
 @text-color:                        @spring-brown;
 @link-color:                        @spring-dark-green;
@@ -27,10 +29,10 @@
 @navbar-default-link-color:         @spring-light-grey;
 @navbar-default-link-active-color:  @spring-light-grey;
 @navbar-default-link-hover-color:   @spring-light-grey;
-@navbar-default-link-hover-bg:      @spring-green;
+@navbar-default-link-hover-bg:      @color-naranja-uno;
 @navbar-default-toggle-icon-bar-bg: @spring-light-grey;
 @navbar-default-toggle-hover-bg:    transparent;
-@navbar-default-link-active-bg:     @spring-green;
+@navbar-default-link-active-bg:     @color-naranja-uno;
 
 @border-radius-base:             0;
 @border-radius-large:            0;
@@ -46,8 +48,20 @@
 @nav-tabs-border-color:                   @spring-brown;
 
 @pagination-active-bg:                    @spring-brown;
-@pagination-active-border:                @spring-green;
+@pagination-active-border:                @color-naranja-uno;
 @table-border-color:                      @spring-brown;
+
+html{
+  box-sizing: border-box;
+  /* 1rem = 10px */
+  font-size: 62.5%;
+}
+.hero {
+  background-image: url(/resources/images/encabezado2.jpg);
+  height: 85vh;
+  background-position: top center;
+  background-size: cover;
+}
 
 .table > thead > tr > th {
   background-color: lighten(@spring-brown, 3%);
@@ -82,6 +96,7 @@
 }
 
 
+
 .container .text-muted {
   margin: 20px 0;
 }
@@ -100,6 +115,7 @@ code {
 h1 {
   margin-bottom: 15px
 }
+
 
 .index-page--subtitle {
   font-size: 16px;
@@ -235,6 +251,126 @@ hr {
   border-top: 1px dotted @spring-brown;
 }
 
+
+
+
+
+
 @import "typography.less";
 @import "header.less";
 @import "responsive.less";
+
+
+/** EDICION **/
+/** Calendario Eventos**/
+.calendario::after{
+  clear:both;
+  display: block;
+  content: '';
+}
+
+.calendario h3{
+  background-color: @color-naranja-dos;
+  clear: both;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.evento{
+  width: 100%;
+  float: left;
+  border: 2px solid #e1e1e1;
+  transition: all .3s ease;
+  height: 240px;
+}
+
+@media only screen and (min-width:768px) {
+  div.evento {
+    width: 33.3%;
+    min-height: 240px;
+    padding-top: 20px;
+    height: 330px;
+  }
+}
+
+  div.eventoDetalles{
+    width: 100%;
+    min-height: 240px;
+    padding-top: 20px;
+  }
+
+.evento:hover{
+  background-color: #e1e1e1;
+  -webkit-transform: scale(1.1);
+}
+
+.evento p.tituloEvento{
+
+  color: #ff5400;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.evento p{
+  text-align: center;
+  font-size: 1.19em;
+}
+
+.contenido-descriptivo {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.contenido-video {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+.contenido-programa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+//.evento p.categoriaEvento p.tipoEvento p.tipoEvento
+/*
+.seccion {
+  padding: 3rem 0;
+}
+
+.seccion p {
+  font-size: 1.9rem;
+  text-align: center;
+}
+.contenedor {
+  width: 98%;
+  margin: 0 auto;
+}
+
+
+@media (min-width: 480px) {
+  .contenedor {
+      width: 95%;
+  }
+}
+
+@media (min-width: 768px) {
+  .contenedor {
+      width: 90%;
+  }
+}
+
+@media (min-width: 992px) {
+  .contenedor {
+      width: 90%;
+      max-width: 160rem;
+  }
+}
+*/

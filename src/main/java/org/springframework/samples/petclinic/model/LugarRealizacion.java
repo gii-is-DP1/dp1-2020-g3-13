@@ -6,22 +6,22 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "lugar_realizacion")
 public class LugarRealizacion extends BaseEntity{
 
+// CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
     private List<Actividad> actividades;
@@ -48,9 +48,6 @@ public class LugarRealizacion extends BaseEntity{
     @Column(name = "email")
     @NotEmpty
     private String email;
-
-    @Column(name = "disponibilidad")
-    private Boolean disponibilidad;
 
     @Column(name = "caracteristicas")
     @NotEmpty
