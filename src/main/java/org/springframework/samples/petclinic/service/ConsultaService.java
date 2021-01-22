@@ -1,6 +1,9 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -38,4 +41,37 @@ public class ConsultaService {
         consultaRepository.save(consulta);
 
     }
+    @Transactional
+    //Devuelve todas las consultas que se han realizado a los eventos de 
+    //la organizacion cuyo id es el que se ha pasado por parametros
+	public List<Consulta> devuelveTodasLasConsultasDeOrganizacionConId(int id) {
+    List<Consulta> listaConsultasOrganizacion = new ArrayList<Consulta>();
+    Iterator<Consulta> consultas = findAll().iterator();
+        while(consultas.hasNext()){
+            Consulta consultaIterada = consultas.next();
+            if(consultaIterada.getEvento().getOrganizacion().getId().equals(id)){
+                listaConsultasOrganizacion.add(consultaIterada);
+
+            }
+
+        }
+        return listaConsultasOrganizacion;
+}
+
+@Transactional
+//Devuelve todas las consultas que se han realizado a los eventos del 
+//cliente cuyo id es el que se ha pasado por parametros
+public List<Consulta> devuelveTodasLasConsultasDeClienteConId(int id) {
+List<Consulta> listaConsultasCliente = new ArrayList<Consulta>();
+Iterator<Consulta> consultas = findAll().iterator();
+    while(consultas.hasNext()){
+        Consulta consultaIterada = consultas.next();
+        if(consultaIterada.getCliente().getId().equals(id)){
+            listaConsultasCliente.add(consultaIterada);
+
+        }
+
+    }
+    return listaConsultasCliente;
+}
 }
