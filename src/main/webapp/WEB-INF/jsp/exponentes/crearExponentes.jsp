@@ -36,7 +36,7 @@
                                 </form:form>
                                 <spring:url value="/eventos/{eventoId}" var="volverAEvento">
                                     <spring:param name="eventoId" value="${evento.id}" />
-                                </spring:url>
+                            </spring:url>
                                 <c:choose>
                                     <c:when test="${not empty listaExponentes}">
                                     <h3 style="text-align: center; color:rgb(6, 194, 59); size:20;">Ya hay un exponente,pulse boton terminar de añadir, para crear la actividad correctamente</h3>

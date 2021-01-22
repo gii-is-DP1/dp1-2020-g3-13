@@ -55,6 +55,9 @@ public class LugarRealizacion extends BaseEntity{
 
     @Column(name = "url_foto")
     private String urlFoto;
+    
+    @Column(name = "precioHora")
+    private Double precio;
 
 
 

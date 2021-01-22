@@ -4,6 +4,7 @@
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
                     <%@ page contentType="text/html; charset=UTF-8" %>
+                    
 
                     <petclinic:layout pageName="evento">
 
@@ -60,6 +61,12 @@
                                     <c:forEach items="${evento.actividades}" var="actividad">
                                         <p>Tematica:
                                             <c:out value="${actividad.tematicaActividad} " /></p>
+                                            <spring:url value="{eventoId}/actividades/{actividadId}" var="detallesActividadesUrl">
+                                            <spring:param name="eventoId" value="${evento.id}" />
+                                            <spring:param name="actividadId" value="${actividad.id}" />
+                                            </spring:url>
+                                            <a href="${fn:escapeXml(detallesActividadesUrl)}">
+                                            <c:out value="Ver mas" /><br></a>
                                         </div>
 
                                     </c:forEach>

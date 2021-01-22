@@ -8,6 +8,7 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.VentaEntrada;
+import org.springframework.samples.petclinic.repository.EntradaRepository;
 import org.springframework.samples.petclinic.repository.VentaEntradaRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class VentaEntradaService {
             Integer numActual = tipoEntrada.getNumEntradas();
             numActual = numActual-1;
             tipoEntrada.setNumEntradas(numActual);
-            tipoService.guardar(tipoEntrada);
+            tipoEntrSer.guardar(tipoEntrada);
             carritoService.guardarCarrito(carrito);
         
     }
@@ -52,11 +53,8 @@ public class VentaEntradaService {
             tipoEntrSer.guardar(tipoEntrada);
             
         }
-
         carritoService.generarFacturaCarrito(carrito, cliente);
         carritoService.actualizaCarritoAcero(carrito);
-        
-
     }
     
 
