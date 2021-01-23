@@ -102,7 +102,6 @@ public class CarritoService {
         // entrada.setCliente(cliente);
         //linea.setEntrada(entrada);
         Carrito carrito = new Carrito();
-        LocalDateTime fechaActual;
         if(carritoRepo.dimeCarritoDeUsuario(organizacion.getUsuario().getNombreUsuario()) != null){
             carrito = carritoRepo.dimeCarritoDeUsuario(organizacion.getUsuario().getNombreUsuario());
             linea.setCarrito(carrito);

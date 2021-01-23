@@ -17,12 +17,6 @@ public class EntradaService {
     @Autowired
     private TipoEntradaRepository tipoEntradaRepo;
 
-
-    @Transactional
-    public void guardarEntrada(Entrada entrada){
-        entradaRepo.save(entrada);
-    }
-
     @Transactional
     public void crearEntrada(Entrada entrada, Integer tipoEntradaId) throws DataAccessException{
         TipoEntrada tipoEntrada = tipoEntradaRepo.findById(tipoEntradaId).orElse(null);
