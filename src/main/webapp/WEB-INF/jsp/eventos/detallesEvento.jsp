@@ -76,7 +76,7 @@
                                 <td>
                                     <div class="cuadro-sponsor"></div>
                                     <c:forEach items="${evento.sponsors}" var="sponsor">
-                                        <a href="https://www.cocacola.es/es/home/" target="_self">    
+                                        <a href="${sponsor.urlWeb}" target="_self">    
                                     <img src="${sponsor.urlLogo}" width=15%></a>
                                     </div>
 

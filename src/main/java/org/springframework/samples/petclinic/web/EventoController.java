@@ -58,14 +58,21 @@ public class EventoController {
     public ModelAndView showEvento(@PathVariable("eventosId") int eventosId) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         ModelAndView mav = new ModelAndView("eventos/detallesEvento");
-        if(this.eventoService.findEventoById(eventosId).getFechaInicio().isBefore(LocalDate.now())){
+        Evento evento = this.eventoService.findEventoById(eventosId);
+        if(evento.getFechaInicio().isBefore(LocalDate.now())){
             mav.setViewName("eventos/eventoFinalizado");
             return mav;
-        }
-        else{
+        }else{
             if(!(clienteService.findClienteByUsuario(usuario)==null)){
                 mav.setViewName("eventos/detallesEventoCliente");
-            } 
+            } else{
+                Organizacion org = organizacionService.encuentraOrganizacionByUsuario(usuario);
+                if(!(organizacionService.encuentraOrganizacionByUsuario(usuario)==null)){
+                if(evento.getOrganizacion()!=org){
+                    mav.setViewName("eventos/organizacionSinPermiso");
+                    }
+                }
+            }
         }
         mav.addObject(this.eventoService.findEventoById(eventosId));
             return mav;
