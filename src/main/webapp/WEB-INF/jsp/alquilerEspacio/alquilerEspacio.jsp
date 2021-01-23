@@ -8,7 +8,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
     <!-- TODO -->
-<petclinic:layout pageName="alquilarLugares">
+<petclinic:layout pageName="alquilarlugarSeleccionado">
     <jsp:body>
         <h2>
            ¿Quiere alquilar un espacio para su actividad?
@@ -25,7 +25,6 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-
                     <button class="btn btn-default" type="submit">Guardar Lugar</button>
                 </div>
 
@@ -35,48 +34,58 @@
         <spring:url value="/eventos/{eventoId}" var="volverAEvento">
             <spring:param name="eventoId" value="${evento.id}" />
     </spring:url>
-        <c:choose>
-            <c:when test="${not empty listaExponentes}">
-            <h3 style="text-align: center; color:rgb(6, 194, 59); size:20;">Ya hay un exponente,pulse boton terminar de añadir, para crear la actividad correctamente</h3>
-            <a href="${fn:escapeXml(volverAEvento)}" class="btn btn-default">Terminar de a&ntilde;adir</a>
-            </c:when>
-            <c:otherwise >
-                <h3 style="text-align: center; color:rgb(194, 19, 6); size:20;">Toda actividad requiere un mínimo de un exponente</h3>
-            </c:otherwise>
-        </c:choose>
         <!--Terminar !!!! -->
-        <table id="exponentesTabla" class="table table-striped">
+        <table id="detallerLugarTabla" class="table table-striped">
             <tr>
-                <th style="width: 150px;">Nombre exponente</th>
-                <th style="width: 200px;">Apellidos</th>
-                <th style="width: 200px;">Alias</th>
-                <th style="width: 200px;">Opciones</th>
+                <th style="width: 150px;">Nombre Recinto</th>
+                <th style="width: 200px;">Aforo</th>
+                <th style="width: 200px;">Dirección</th>
+                <th style="width: 200px;">Email de contacto</th>
+                <th style="width: 200px;">Teléfono de contacto</th>
+                <th style="width: 200px;">Características</th>
+                <th style="width: 200px;">Precio/Dia</th>
             </tr>
-            <c:forEach items="${listaExponentes}" var="exponente">
-
-
                 <tr>
                     <td>
 
-                        <c:out value="${exponente.nombreExponente}" />
+                        <c:out value="${lugarSeleccionado.nombre_recinto}" />
 
                     </td>
                     <td>
 
-                        <c:out value="${exponente.apellidosExponente}" />
+                        <c:out value="${lugarSeleccionado.aforo}" />
 
                     </td>
                     <td>
 
-                        <c:out value="${exponente.alias}" />
+                        <c:out value="${lugarSeleccionado.direccion}" />
+
+                    </td> 
+                    <td>
+
+                        <c:out value="${lugarSeleccionado.email}" />
 
                     </td>
+                    <td>
+
+                        <c:out value="${lugarSeleccionado.telefono}" />
+
+                    </td>
+                    <td>
+
+                        <c:out value="${lugarSeleccionado.caracteristicas}" />
+
+                    </td>
+                    <td>
+
+                        <c:out value="${lugarSeleccionado.precio}" />
+
+                    </td>
+                    
+                    
+                   
 
                 </tr>
-
-
-
-            </c:forEach>
         </table>
 
 

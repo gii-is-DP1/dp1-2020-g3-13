@@ -103,26 +103,32 @@ public class ActividadController {
     }
 
 	@GetMapping("/{actividadId}/alquilarEspacio")
-	public String alquilarEspacioForm(ModelMap model, @PathVariable("actividadId") int actividadId){
+	public String alquilarEspacioForm(ModelMap model, @PathVariable("actividadId") int actividadId, @PathVariable("evento_id") int eventoId){
         String vista = VIEW_ALQUILAR_ESPACIO;
         Actividad actividad = actividadService.findById(actividadId);
         AlquilerEspacio alquiler = new AlquilerEspacio();
+        Evento ev  = eventoService.findEventoById(eventoId);
         Iterable<LugarRealizacion> lugares = lugarRealizacionService.findAll();
+        model.addAttribute("lugarSeleccionado", actividad.getLugarRealizacion());
         model.addAttribute("lugares", lugares);
         model.addAttribute("alquilerEspacio", alquiler);
         model.addAttribute("actividad", actividad);
+        model.addAttribute("evento", ev);
 		return vista;
 	}
 	@PostMapping("/{actividadId}/alquilarEspacio")
-	public String alquilarEspacioProcesarForm(@Valid AlquilerEspacio alquiler, @PathVariable("actividadId") int actividadId, BindingResult result){
+	public String alquilarEspacioProcesarForm(@Valid AlquilerEspacio alquiler, @PathVariable("evento_id") int eventoId ,@PathVariable("actividadId") int actividadId, BindingResult result){
         Actividad actividad = actividadService.findById(actividadId);
+        System.out.println("=============================ENTRA============================");
         Organizacion org  = orgService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		if (result.hasErrors()) {
+          
 			return VIEW_ALQUILAR_ESPACIO;
 		}else {
+           
             alquilerService.alquilerLugarRealizacion(alquiler, actividad);
-            carritoService.anadirCarritoLugarRealizacion(alquiler, org);
-            return VIEW_ACTIVIDAD_DETALLES;
+            //carritoService.anadirCarritoLugarRealizacion(alquiler, org);
+            return VIEW_ALQUILAR_ESPACIO;
 		}
 		
 	 }

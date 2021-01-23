@@ -73,6 +73,8 @@ INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medid
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Fusce condimentum tincidunt turpis vel ultricies.', 'Book Club with Margaret Atwood', '2022-02-11', '2M', 'Musica', '2022-05-13', 2);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'ornare lacus suscipit eget. Pellentesque nec fermentum justo. Donec ultricies justo ac porttitor tempor.', 'Reconstruye tu negocio', '2022-08-11', '2M', 'Musica', '2022-08-12', 2);
 
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, evento_id) VALUES (2,'Eminen in live', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2021-04-11 10:00', '2021-04-11 13:00', 1);
+
 INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03',1,1);
 INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(2, 'test_asunto_2', 'test_descripcion_2', '2021-03-03',1,2);
 
