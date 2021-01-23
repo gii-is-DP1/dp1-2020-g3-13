@@ -1,25 +1,15 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Autoridades;
 import org.springframework.samples.petclinic.model.Cliente;
-import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
-import org.springframework.samples.petclinic.repository.AutoridadesRepository;
 import org.springframework.samples.petclinic.service.AdminService;
-import org.springframework.samples.petclinic.service.AutoridadesService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.FacturaService;
-import org.springframework.samples.petclinic.service.LineaFacturaService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.samples.petclinic.service.UsuarioService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
-    private static final String VIEWS_CREATE_FORM = "usuarios/createUsuarioForm";
+    //private static final String VIEWS_CREATE_FORM = "usuarios/createUsuarioForm";
     private static final String VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM ="usuarios/clienteUpdateForm";
     private static final String VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM ="usuarios/organizacionUpdateForm";
     @Autowired
@@ -155,7 +145,7 @@ public class UsuarioController {
         public String muestraEventosFavoritos(ModelMap model){
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             Cliente cliente = clienteService.findClienteByUsuario(username);
-            List<Evento> eventos = cliente.getEventosFavoritos();
+            //List<Evento> eventos = cliente.getEventosFavoritos();
             model.addAttribute("cliente", cliente);
             String vista  = "usuarios/eventosFavoritos";
             return vista;

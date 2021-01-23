@@ -12,7 +12,6 @@ import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.EventoService;
-import org.springframework.samples.petclinic.service.ExponenteService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,8 +38,6 @@ public class ActividadController {
 
     @Autowired
     private ActividadService actividadService;
-    @Autowired
-    private ExponenteService exponenteService;
     @Autowired
     private EventoService eventoService;
     @Autowired

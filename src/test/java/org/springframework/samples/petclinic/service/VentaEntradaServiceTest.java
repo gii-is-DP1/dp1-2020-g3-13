@@ -6,16 +6,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Carrito;
-import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.model.VentaEntrada;
-import org.springframework.samples.petclinic.repository.VentaEntradaRepository;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -67,7 +64,7 @@ public class VentaEntradaServiceTest {
         ventaEntrada.setFechaCaducidad(LocalDate.now().plusDays(30));
         ventaEntrada.setId(((int) ventaEntradaService.ventaEntradaCount()) + 1);
         ventaEntrada.setNombreTitular("nombreTitular");
-        ventaEntrada.setNumTarjeta("111122223333");
+        ventaEntrada.setNumTarjeta("1111222233334444");
         ventaEntradaService.guardaVentaEntrada(ventaEntrada);
         int numeroVentaEntradaDespues = (int) ventaEntradaService.ventaEntradaCount();
         assertEquals(numeroVentaEntradaAntes + 1, numeroVentaEntradaDespues);

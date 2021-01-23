@@ -45,6 +45,13 @@
                                                 <p class="enlaceEvento"> <i class="fas fa-plus"></i> A&ntilde;adir entrada
                                                 </p>
                                             </a>
+                                            <spring:url value="/consultas/{eventoId}/nuevo" var="nuevaConsultaUrl">
+                                            <spring:param name="eventoId" value="${evento.id}" />
+                                        </spring:url>
+                                        <a href="${fn:escapeXml(nuevaConsultaUrl)}">
+                                            <p class="enlaceEvento"> <i class="fas fa-ticket-alt"></i> Consulta
+                                            </p>
+                                        </a>
                                         </div>
                                     </c:forEach>
                                 </tbody>

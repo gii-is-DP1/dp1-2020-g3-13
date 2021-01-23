@@ -7,7 +7,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.repository.EntradaRepository;
-import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.repository.TipoEntradaRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -47,5 +46,10 @@ public class EntradaService {
             i++;
         }
         return res;
+    }
+
+    @Transactional
+    public void guardarEntrada(Entrada entrada){
+        entradaRepo.save(entrada);
     }
 }

@@ -1,14 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Map;
-
-import java.util.Optional;
-
 import javax.validation.Valid;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
@@ -81,7 +74,7 @@ public class EventoController {
     public String anadirEventosAFavorito(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         Evento evento =eventoService.findEventoById(eventosId);
-        ModelAndView mav = new ModelAndView("eventos/listadoEventos");
+      //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
         eventoService.anadirEventoAFav(evento, usuario);
         System.out.println("AQUI ENTRA=====================================================");
         eventoService.save(evento);
