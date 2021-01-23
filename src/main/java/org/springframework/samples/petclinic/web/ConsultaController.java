@@ -1,12 +1,16 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Consulta;
+import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ConsultaService;
+import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,25 +23,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/consultas")
 public class ConsultaController {
+
+    private static final String VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM = "consultas/nuevaConsulta";
+    private static final String VIEWS_LISTADO_CONSULTA_ORGANIZACION = "consultas/organizacionMisConsultas";
+    private static final String VIEWS_LISTADO_CONSULTA_CLIENTE = "consultas/clienteMisConsultas";
+
     @Autowired
     private ConsultaService consultaService;
     @Autowired
     private ClienteService clienteService;
     @Autowired
-    private static final String VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM = "consultas/nuevaConsulta";
+    private OrganizacionService organizacionService;
 
+   
+    //Crea la vista de un formulario de consulta
     @GetMapping(value = "/{evento_id}/nuevo")
-    public String listadoConsultas(ModelMap modelMap) {
-        System.out.println("ezequiel");
+    public String formularioConsultas(ModelMap modelMap) {
         Consulta consulta = new Consulta();
         modelMap.put("consulta", consulta);
         return VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM;
     }
-
+    //Manda una petición de creación de consulta y lo añade a la base de datos
     @PostMapping(value = "/{evento_id}/nuevo")
     public String guardarEConsulta(@Valid Consulta consulta, @PathVariable("evento_id") int eventoId,
             BindingResult resultado, ModelMap modelMap) {
-        System.out.println("hey");
         if (resultado.hasErrors()) {
             modelMap.addAttribute("consulta", consulta);
             return VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM;
@@ -49,5 +58,25 @@ public class ConsultaController {
         }
 
     }
+    // Crea una vista con todas las consultas dirigidas a la organización que está logeada
+    @GetMapping(value = "/organizacion/misConsultas")
+    public String listadoConsultasOrganizacion(ModelMap modelMap){
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        Organizacion organizacion = organizacionService.encuentraOrganizacionByUsuario(usuario);
+        List<Consulta> listadoConsultasOrganizacion = consultaService.devuelveTodasLasConsultasDeOrganizacionConId(organizacion.getId());
+        modelMap.addAttribute("consultas", listadoConsultasOrganizacion);
+        return VIEWS_LISTADO_CONSULTA_ORGANIZACION;
 
+    }
+
+    // Crea una vista con todas las consultas dirigidas a la organización que está logeada
+    @GetMapping(value = "/cliente/misConsultas")
+    public String listadoConsultasCliente(ModelMap modelMap){
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        Cliente cliente = clienteService.findClienteByUsuario(usuario);
+        List<Consulta> listadoConsultasCliente = consultaService.devuelveTodasLasConsultasDeClienteConId(cliente.getId());
+        modelMap.addAttribute("consultas", listadoConsultasCliente);
+        return VIEWS_LISTADO_CONSULTA_CLIENTE;
+
+    }
 }

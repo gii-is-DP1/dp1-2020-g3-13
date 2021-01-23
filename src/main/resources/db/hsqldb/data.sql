@@ -25,7 +25,7 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (6,'julibamon','admin');
 
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('cliente1', 'cliente1', TRUE);
-INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (2,'andrea23', 'Ceballos', 'pepeceba@gmail.com','cliente1', '666777888');
+INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (2,'andrea', 'Ceballos', 'AndreaCeballos@gmail.com','cliente1', '666777888');
 INSERT INTO autoridades(id,usuario,autoridad) VALUES (7,'cliente1','cliente');
 
 INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('organizacion1', 'organizacion1', TRUE);
@@ -42,21 +42,20 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (9,'Test_delete2','organiza
 
 
 
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (1,'6969696969','CasaPepe@gmailTest.com','EMPRESA DE VINO SIN ALCOHOL','Casa Pepe','2020-12-03');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (2,'96969696','FrancisquitoCantaor@gmailTest.com','cisquito el cantaor','francisco pepe','2020-12-12');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (3, '666666666','travis@scott.com','Conciertos de trap','Travis Scott','2020-11-23');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'9999999','yung@beef.com','conciertos de trap español','Ternera joven','2020-11-05');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (1,'6969696969','VinosEmpresa@gmailTest.com','Empresa de vinos','Vinos y Empresa','2020-12-03');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (2,'96969696','CantadoresDeAndalucia@gmailTest.com','Empresa de cantaores de Andalucía','Canta Andalucia','2020-12-12');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (3, '666666666','MilesSongs@example.com','Conciertos','Miles Songs','2020-11-23');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'9999999','ConcertForValor@beef.com','conciertos de todo el mundo','For Valor','2020-11-05');
 
 
-INSERT INTO consulta(id, asunto, descripcion, fecha_consulta) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03');
 
-INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com','muy bonito', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
-INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (2,690321658, 2010, 'bilindo', 'la palmera', 'ayuda@bilindo.com','muy muy bonito', 'https://www.diariodesevilla.es/2019/02/06/sevilla/terraza-Bilindo-formada-Plaza-America_1325577931_94584854_667x375.jpg');
-INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (3,685458962, 3500, 'EL PLANTI', 'SAN FRANCISCO JAVIER', 'PLANTI@RAP.com','CONCIERTOS URBANOS', 'https://pbs.twimg.com/media/CJ82gS-XAAEKWeB.jpg');
-INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (4,666666666, 600000, 'ESTADIO OLIMPICO', 'LA CARTUJA', 'ESTADIO@OLIMPICO.com','GRAN AFORO', 'https://multimedia.andalucia.org/fotos/image_200818.jpeg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus molestie ex, vitae cursus sapien elementum sed. Donec dolor sapien, egestas eget turpis in, fringilla bibendum neque. Pellentesque mi erat, aliquet', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (2,690321658, 2010, 'bilindo', 'Nervión Plaza', 'ayuda@bilindo.com','Proin id ante nec sapien facilisis finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'https://www.diariodesevilla.es/2019/02/06/sevilla/terraza-Bilindo-formada-Plaza-America_1325577931_94584854_667x375.jpg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (3,685458962, 3500, 'Nueva plaza', 'Av Nueva Zelanda', 'Nervion@gmail.com','Quisque ac scelerisque lectus. Sed commodo, quam vel luctus interdum, sem dolor pellentesque turpis, ac consectetur nunc lectus eget metus.', 'https://pbs.twimg.com/media/CJ82gS-XAAEKWeB.jpg');
+INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (4,666666666, 600000, 'Estadio La Cartuja', 'La Cartuja', 'Cartuja@gmail.com','Morbi tellus purus, varius non laoreet sit amet, sollicitudin ac nisl. Nam ullamcorper feugiat tortor, non vulputate mauris lacinia in.', 'https://multimedia.andalucia.org/fotos/image_200818.jpeg');
 
 INSERT INTO alquiler_espacio(id, precio, id_lugar_realizacion) VALUES (1, 50, 1);
-INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,lugar_realizacion_id) VALUES (1,'concierto de estopa', 'un buen concierto', '2020-12-12', '2020-12-12', 1);
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,lugar_realizacion_id) VALUES (1,'concierto de estopa', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2022-12-12', '2022-12-13', 1);
 
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(1,'2020-03-03',15.6,'alebangon');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(2,'2020-05-03', 1.6,'romflorod');
@@ -67,26 +66,29 @@ INSERT INTO linea_factura(id, id_alquiler_espacio, cantidad, id_factura) VALUES 
 
 -- EL CONCIERTO DE EMINEN NO SE PUEDE BORRAR QUE LO USAMOS PARA PRUEBAS
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Eminem', 'Eminem concert for valor', '2021-04-11', '6M', 'Musica', '2021-06-11', 1);
-INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de XXXTentacion', 'Game Awards', '2023-06-11', '6M', 'Musica', '2021-06-11' , 1);
-INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Juice WRLD', 'FLYING TOUR', '2022-10-11', '6M', 'Musica', '2021-06-11', 1);
-INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Lil Peep', 'estamos felices', '2022-08-01', '2M', 'Musica', '2021-01-11', 2);
-INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Mac Miller', 'ya no tan felices', '2022-06-11', '2M', 'Musica', '2021-01-11', 2);
-INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Tupac', 'estaba de parranda', '2022-08-11', '2M', 'Musica', '2021-01-11', 2);
-INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Concierto de Canserbero', 'estaba de fiesta', '2010-08-11', '2M', 'Musica', '2011-01-11', 2);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Fusce vel neque nunc. Mauris nec enim at justo semper lobortis. Sed et pulvinar turpis', 'The Late Morning Event Show', '2023-06-11', '6M', 'Musica', '2023-06-12' , 1);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'FITUR es la primera cita anual para los profesionales del turismo mundial', 'FITUR 2021', '2022-10-11', '6M', 'Musica', '2022-10-12', 1);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Maecenas eu pellentesque eros, sed pulvinar lacus. Proin tempus laoreet mauris', 'The 2021 Financial Checklist', '2022-04-13', '2M', 'Musica', '2022-04-13', 2);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Integer volutpat augue a quam eleifend euismod. Proin consequat imperdiet leo.', 'Master The Trade: Master Your Money and Mindset For Investing in 2021', '2022-06-11', '2M', 'Musica', '2022-06-15', 2);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Fusce condimentum tincidunt turpis vel ultricies.', 'Book Club with Margaret Atwood', '2022-02-11', '2M', 'Musica', '2022-05-13', 2);
+INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'ornare lacus suscipit eget. Pellentesque nec fermentum justo. Donec ultricies justo ac porttitor tempor.', 'Reconstruye tu negocio', '2022-08-11', '2M', 'Musica', '2022-08-12', 2);
 
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'DIURNA', '2022-04-11', '2022-05-10', 10,1);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-04-11', '2022-05-10', 10,1);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (5, 'DIURNA', '2023-06-11', '2023-06-11', 10,2);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'NOCTURNA', '2023-06-11', '2023-06-11', 10,2);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6, 'DIURNA', '2022-10-11', '2022-10-11', 10,3);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'NOCTURNA', '2022-10-11', '2022-10-11', 10,3);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (4, 'DIURNA', '2022-08-01', '2022-08-01', 10,4);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'NOCTURNA', '2022-08-01', '2022-08-01', 10,4);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6, 'DIURNA', '2022-06-11', '2022-06-11', 10,5);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-06-11', '2022-06-11', 10,5);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'DIURNA', '2022-08-11', '2022-08-11', 10,6);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-08-11', '2022-08-11', 10,6);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2010-08-11', '2010-08-11', 10,7);
+INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03',1,1);
+INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(2, 'test_asunto_2', 'test_descripcion_2', '2021-03-03',1,2);
+
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'DIURNA', '2021-04-11 09:00', '2021-04-11 12:00', 10,1);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2021-04-11 16:00', '2021-04-11 20:00', 10,1);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (5, 'DIURNA', '2023-06-11 09:00', '2023-06-11 12:00', 10,2);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'NOCTURNA', '2023-06-11 16:00', '2023-06-11 20:00', 10,2);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6, 'DIURNA', '2022-10-11 09:00', '2022-10-11 12:00', 10,3);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'NOCTURNA', '2022-10-11 16:00', '2022-10-11 20:00', 10,3);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (4, 'DIURNA', '2022-04-13 09:00', '2022-04-13 12:00', 10,4);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'NOCTURNA', '2022-04-13 16:00', '2022-04-13 20:00', 10,4);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6, 'DIURNA', '2022-06-11 09:00', '2022-06-11 12:00', 10,5);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-06-11 16:00', '2022-06-11 20:00', 10,5);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'DIURNA', '2022-02-11 09:00', '2022-02-11 12:00', 10,6);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-02-11 16:00', '2022-02-11 20:00', 10,6);
+INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-08-11 16:00', '2022-08-11 20:00', 10,7);
 
 
 

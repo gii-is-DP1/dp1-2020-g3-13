@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,16 +47,22 @@ public class CarritoService {
     }
 
     @Transactional
+    public void actualizaCarritoAcero(Carrito carrito){
+        carrito.getLineasFacturas().clear();
+        carrito.setTotal(0.0);
+        carritoRepo.save(carrito);
+
+        }
+
+    @Transactional
     public void anadirCarrito(Entrada entrada, Cliente cliente) throws DataAccessException{
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
-        linea.setTipoEntrada(entrada.getTipoEntrada());
         // entrada.setLineaFactura(linea);
         entrada.setCliente(cliente);
         linea.setEntrada(entrada);
         Carrito carrito = new Carrito();
-        LocalDateTime fechaActual;
         
 
         

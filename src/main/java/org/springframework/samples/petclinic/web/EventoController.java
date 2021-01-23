@@ -1,14 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Map;
-
-import java.util.Optional;
-
 import javax.validation.Valid;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
@@ -77,6 +70,36 @@ public class EventoController {
         mav.addObject(this.eventoService.findEventoById(eventosId));
             return mav;
     }
+    @GetMapping("/{eventosId}/añadirEventosFavoritos")
+    public String anadirEventosAFavorito(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        Evento evento =eventoService.findEventoById(eventosId);
+      //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
+        eventoService.anadirEventoAFav(evento, usuario);
+        System.out.println("AQUI ENTRA=====================================================");
+        eventoService.save(evento);
+        modelMap.addAttribute("message", "Evento añadido a favoritos!");
+        return "redirect:/eventos/";
+    }
+
+    // @PostMapping("/{eventosId}/añadirEventosFavoritos")
+    // public String anadirEventosAFavorito(@PathVariable("eventosId") int eventosId,BindingResult resultado, ModelMap modelMap) {
+    //     String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+    //     Evento evento =eventoService.findEventoById(eventosId);
+    //     if(resultado.hasErrors()){
+    //         System.out.println("AQUI ENTRA PRIMERO=====================================================");
+    //         modelMap.addAttribute("evento", evento);
+    //         return "eventos/listadoEventos";
+    //     }else {
+    //         eventoService.anadirEventoAFav(evento, usuario);
+    //         System.out.println("AQUI ENTRA=====================================================");
+    //         eventoService.save(evento);
+    //         modelMap.addAttribute("message", "Evento añadido a favoritos!");
+    //         return "redirect:/eventos/";
+    //     }
+
+
+    // }
 
     @GetMapping(value="/nuevo")
     public String crearEvento(ModelMap modelMap){
