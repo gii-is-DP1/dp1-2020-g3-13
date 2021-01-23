@@ -17,7 +17,11 @@
         <label class="col-sm-2 control-label">${label}</label>
 
         <div class="col-sm-10">
-            <form:select class="form-control" path="${name}" items="${names}" size="${size}"/>
+            <select name="${name}" >
+                <c:forEach items="${names}" var="items">
+                    <option value="${items.id}"> <c:out value="${items.nombre_recinto}"></c:out> </option>
+                        </c:forEach>
+            </select>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -52,6 +53,9 @@ public class ActividadController {
     @Autowired
     private OrganizacionService orgService;
 
+
+
+
     @GetMapping
     public String listadoActividades(ModelMap modelMap){
         String vista = VIEWS_ACTIVIDAD_LISTA_ACTIVIDADES;
@@ -75,6 +79,8 @@ public class ActividadController {
         List<LugarRealizacion> lugaresLista= new ArrayList<LugarRealizacion>();
         lugaresRealizacion.forEach(lugaresLista::add);
         List<Integer> listaIds = lugarRealizacionService.listaIdLugarRealizacion();
+        Iterable<LugarRealizacion> lugares = lugarRealizacionService.findAll();
+        modelMap.addAttribute("lugares", lugares);
         modelMap.addAttribute("listaId", listaIds);
         modelMap.addAttribute("lugaresRealizacion", lugaresLista);
         modelMap.addAttribute("actividad", new Actividad());
@@ -104,9 +110,11 @@ public class ActividadController {
         String vista = VIEW_ALQUILAR_ESPACIO;
         Actividad actividad = actividadService.findById(actividadId);
         AlquilerEspacio alquiler = new AlquilerEspacio();
+        Iterable<LugarRealizacion> lugares = lugarRealizacionService.findAll();
+        model.addAttribute("lugares", lugares);
         model.addAttribute("alquilerEspacio", alquiler);
         model.addAttribute("actividad", actividad);
-		return VIEW_ALQUILAR_ESPACIO;
+		return vista;
 	}
 	@PostMapping("/{actividadId}/alquilarEspacio")
 	public String alquilarEspacioProcesarForm(@Valid AlquilerEspacio alquiler, @PathVariable("actividadId") int actividadId, BindingResult result){

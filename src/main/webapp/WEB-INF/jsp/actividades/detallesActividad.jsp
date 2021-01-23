@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <th>¿Dónde se va a realizar?</th>
-            <td><c:out value="${actividad.lugarRealizacion.nombre}"/></td>
+            <td><c:out value="${actividad.lugarRealizacion.nombre_recinto}"/></td>
         </tr>
         <tr>
             <th>Exponentes</th>
