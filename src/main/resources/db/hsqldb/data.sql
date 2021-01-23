@@ -48,7 +48,6 @@ INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (3, '66
 INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'9999999','ConcertForValor@beef.com','conciertos de todo el mundo','For Valor','2020-11-05');
 
 
-INSERT INTO consulta(id, asunto, descripcion, fecha_consulta) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03');
 
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (1,695696847, 3000, 'caixaforum', 'Av reina mercedes', 'ayuda@caixaforum.com','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus molestie ex, vitae cursus sapien elementum sed. Donec dolor sapien, egestas eget turpis in, fringilla bibendum neque. Pellentesque mi erat, aliquet', 'https://www.elindependiente.com/wp-content/uploads/2018/02/caixaforum-barcelona-facana-656x368.jpg');
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (2,690321658, 2010, 'bilindo', 'Nervión Plaza', 'ayuda@bilindo.com','Proin id ante nec sapien facilisis finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'https://www.diariodesevilla.es/2019/02/06/sevilla/terraza-Bilindo-formada-Plaza-America_1325577931_94584854_667x375.jpg');
@@ -73,6 +72,11 @@ INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medid
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Integer volutpat augue a quam eleifend euismod. Proin consequat imperdiet leo.', 'Master The Trade: Master Your Money and Mindset For Investing in 2021', '2022-06-11', '2M', 'Musica', '2022-06-15', 2);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'Fusce condimentum tincidunt turpis vel ultricies.', 'Book Club with Margaret Atwood', '2022-02-11', '2M', 'Musica', '2022-05-13', 2);
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id) VALUES ('Concierto', 'ornare lacus suscipit eget. Pellentesque nec fermentum justo. Donec ultricies justo ac porttitor tempor.', 'Reconstruye tu negocio', '2022-08-11', '2M', 'Musica', '2022-08-12', 2);
+
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, evento_id) VALUES (2,'Eminen in live', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2021-04-11 10:00', '2021-04-11 13:00', 1);
+
+INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03',1,1);
+INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(2, 'test_asunto_2', 'test_descripcion_2', '2021-03-03',1,2);
 
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'DIURNA', '2021-04-11 09:00', '2021-04-11 12:00', 10,1);
 INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2021-04-11 16:00', '2021-04-11 20:00', 10,1);

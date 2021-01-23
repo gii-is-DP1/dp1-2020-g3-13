@@ -20,15 +20,15 @@ import lombok.Setter;
 public class AlquilerEspacio extends BaseEntity{
 
     @Column(name = "precioTotal")
-    @NotEmpty
+    // @NotEmpty
     protected Double precioTotal;
 
     @Column(name = "fechaInicioReserva")
-    @NotEmpty
+    // @NotEmpty
     protected LocalDateTime fechaInicioReserva;
 
     @Column(name = "fechaFinReserva")
-    @NotEmpty
+    // @NotEmpty
     protected LocalDateTime fechaFinReserva;
 
     @ManyToOne(cascade = CascadeType.ALL)

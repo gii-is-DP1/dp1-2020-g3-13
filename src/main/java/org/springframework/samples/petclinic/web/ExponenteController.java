@@ -1,7 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller

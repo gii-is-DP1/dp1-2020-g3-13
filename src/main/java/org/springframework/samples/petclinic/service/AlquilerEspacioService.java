@@ -38,12 +38,19 @@ public class AlquilerEspacioService {
     public void alquilerLugarRealizacion(AlquilerEspacio alquiler, Actividad actividad){
         //LugarRealizacion lugarRealizacion = actividad.getLugarRealizacion();
         LugarRealizacion lugar = alquiler.getLugarRealizacion();
+        System.out.println(lugar.getNombre_recinto());
         //alquiler.setLugarRealizacion(lugarRealizacion);
         alquiler.setFechaInicioReserva(actividad.getFechaInicio());
-        alquiler.setFechaInicioReserva(actividad.getFechaFin());
+        System.out.println(alquiler.getFechaInicioReserva());
+        alquiler.setFechaFinReserva(actividad.getFechaFin());
+        System.out.println(alquiler.getFechaFinReserva());
         actividad.setLugarRealizacion(lugar);
+        //alquiler.setLugarRealizacion(lugar);
+        System.out.println(alquiler.getLugarRealizacion().getNombre_recinto());
         long horas = HOURS.between(alquiler.getFechaInicioReserva(), alquiler.getFechaFinReserva());
+        System.out.println("=======================================================");
         double precioTotal = lugar.getPrecio() * horas;
+        System.out.println(precioTotal);
         alquiler.setPrecioTotal(precioTotal);
         guardarAlquilerEspacio(alquiler);
         actividadService.guardarActividad(actividad);

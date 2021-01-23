@@ -61,7 +61,7 @@ public class Evento extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<Consulta> consultas;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     private Organizacion organizacion;
 

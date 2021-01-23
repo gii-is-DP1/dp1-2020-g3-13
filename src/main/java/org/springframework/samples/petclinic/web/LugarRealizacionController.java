@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -10,7 +9,6 @@ import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
 import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -79,8 +77,7 @@ public class LugarRealizacionController {
     //TODO 
     @PostMapping(value = "/{lugarRealizacionId}/edit")
     public String editLugarRealizacion(@Valid LugarRealizacion lugarRealizacion, BindingResult result, ModelMap model,@PathVariable("lugarRealizacionId") int lugarRealizacionId){
-		String vista = "";
-				if(result.hasErrors()){
+		if(result.hasErrors()){
 			return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
 		}else{
 			this.lugarRealizacionService.modifyLugaRealizacion(lugarRealizacion, this.lugarRealizacionService.findById(lugarRealizacionId));
