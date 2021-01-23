@@ -19,16 +19,14 @@
                     <div class="col-sm-10">
                     </div>
                 </div>
-                <petclinic:inputField label="Seleccione donde le gustaría reservar: " name="nombreExponente" />
-                <petclinic:inputField label="Apellidos del exponente: " name="apellidosExponente" />
-                <petclinic:inputField label="Alias del exponente: " name="alias" />
-
+ 
+                <petclinic:selectField label="Seleccione donde le gustaría reservar: " name="lugarRealizacion" size="6" names="${lugares}"/>
 
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
 
-                    <button class="btn btn-default" type="submit">Guardar Exponente</button>
+                    <button class="btn btn-default" type="submit">Guardar Lugar</button>
                 </div>
 
 
