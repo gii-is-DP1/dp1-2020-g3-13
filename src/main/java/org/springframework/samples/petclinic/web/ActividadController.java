@@ -115,7 +115,7 @@ public class ActividadController {
         model.addAttribute("alquilerEspacio", alquiler);
         model.addAttribute("actividad", actividad);
         model.addAttribute("evento", ev);
-        model.addAttribute("alquiler", actividad.getLugarRealizacion().getAlquilerEspacio());
+       
 		return vista;
 	}
 	@PostMapping("/{actividadId}/alquilarEspacio")
@@ -127,29 +127,30 @@ public class ActividadController {
 		}else {
            
             alquilerService.alquilerLugarRealizacion(alquiler, actividad);
+            //alquilerService.guardarAlquilerEspacio(alquiler);
             return alquilarEspacioForm(model,actividadId, eventoId);
 		}
 		
      }
-     
-     @GetMapping("/{actividadId}/alquilarEspacio/{alquilerEspacioId}/confirmar")
-     public String alquilarEspacioConfirmar(ModelMap model, @PathVariable("actividadId") int actividadId,
-      @PathVariable("evento_id") int eventoId, @PathVariable("alquilerEspacioId") int alquilerEspacioId, BindingResult result){
+
+     @GetMapping("/{actividadId}/confirmar")
+     public String alquilarEspacioConfirmar(@PathVariable("actividadId") int actividadId,
+      @PathVariable("evento_id") int eventoId,ModelMap model){
+        AlquilerEspacio alquiler = (AlquilerEspacio) model.get("alquilerEspacio");
         Organizacion org  = orgService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-        AlquilerEspacio alquiler = alquilerService.encuentraAlquilerId(alquilerEspacioId);
         Evento ev  = eventoService.findEventoById(eventoId);
         Actividad actividad = actividadService.findById(actividadId);
         model.addAttribute("evento", ev);
-        model.addAttribute("alquiler", alquiler);
+        // model.addAttribute("alquiler", alquiler);
         model.addAttribute("actividad", actividad);
-        if (result.hasErrors()) {
-          
-			return VIEW_ALQUILAR_ESPACIO;
-		}else {
+            
+            alquilerService.guardarAlquilerEspacio(alquiler);
+           
+            actividadService.guardarActividad(actividad);
+            
             carritoService.anadirCarritoLugarRealizacion(alquiler, org);
+            System.out.println("***************************************************************************");
             return VIEW_EVENTO_DETALLES;
 		}
-
-     }
 
 }

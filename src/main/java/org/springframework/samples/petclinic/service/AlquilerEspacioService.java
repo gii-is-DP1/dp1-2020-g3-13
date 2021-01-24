@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 import static java.time.temporal.ChronoUnit.HOURS;
@@ -20,6 +22,8 @@ public class AlquilerEspacioService {
     private AlquilerEspacioRepository alquilerEspacioRepository;
     @Autowired
     private ActividadService actividadService;
+    @Autowired
+    private AlquilerEspacioService alquilerService;
 
     @Transactional
     public int alquilerEspacioCount(){
@@ -41,24 +45,30 @@ public class AlquilerEspacioService {
 
     @Transactional
     public void alquilerLugarRealizacion(AlquilerEspacio alquiler, Actividad actividad){
-        //LugarRealizacion lugarRealizacion = actividad.getLugarRealizacion();
+    //     List<AlquilerEspacio> lista = new ArrayList<>();
+    //     actividad.getLugarRealizacion().setAlquilerEspacio(lista);
+    //     //List<AlquilerEspacio> lista = actividad.getLugarRealizacion().getAlquilerEspacio();
+    //     System.out.println("==================================================================");
+    //    if(actividad.getLugarRealizacion().getAlquilerEspacio()!=null){
+    
+    //     if(actividad.getLugarRealizacion().getAlquilerEspacio().contains(alquiler)){
+    //         actividad.getLugarRealizacion().getAlquilerEspacio().remove(alquiler);
+    //             actividadService.guardarActividad(actividad);
+    //         }
+    //    }
+        // if(lista.contains(alquiler)){
+        //     lista.remove(alquiler);
+        //     //actividadService.guardarActividad(actividad);
+        // }
         LugarRealizacion lugar = alquiler.getLugarRealizacion();
-        System.out.println(lugar.getNombre_recinto());
-        //alquiler.setLugarRealizacion(lugarRealizacion);
         alquiler.setFechaInicioReserva(actividad.getFechaInicio());
-        System.out.println(alquiler.getFechaInicioReserva());
         alquiler.setFechaFinReserva(actividad.getFechaFin());
-        System.out.println(alquiler.getFechaFinReserva());
         actividad.setLugarRealizacion(lugar);
-        //alquiler.setLugarRealizacion(lugar);
-        System.out.println(alquiler.getLugarRealizacion().getNombre_recinto());
         long horas = HOURS.between(alquiler.getFechaInicioReserva(), alquiler.getFechaFinReserva());
-        Double precioLugar = lugar.getPrecio();
         double precioTotal = lugar.getPrecio() * horas;
-        System.out.println(precioTotal);
         alquiler.setPrecioTotal(precioTotal);
-        guardarAlquilerEspacio(alquiler);
-        actividadService.guardarActividad(actividad);
+        // guardarAlquilerEspacio(alquiler);
+        // actividadService.guardarActividad(actividad);
     }
 
 

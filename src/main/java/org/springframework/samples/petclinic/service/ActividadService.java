@@ -43,6 +43,10 @@ public class ActividadService {
             }
             return res;
         }
+        @Transactional
+        public Actividad encuentraActividadId(int actividadId){
+            return actividadRepo.findById(actividadId).orElse(null);
+        }
 
         @Transactional
         public void guardarActividad(Actividad actividad){

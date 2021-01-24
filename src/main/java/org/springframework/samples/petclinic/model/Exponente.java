@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -20,6 +21,7 @@ import lombok.Setter;
 public class Exponente extends BaseEntity{
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "actividad_id")
     private List<Actividad> actividades;
     
     @Column(name = "nombreExponente")

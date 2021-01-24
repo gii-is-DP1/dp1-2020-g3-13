@@ -97,27 +97,28 @@ public class CarritoService {
         linea.setCantidad(1);
         linea.setPrecio(alquiler.getPrecioTotal());
         linea.setAlquilerEspacio(alquiler);
-        //linea.setTipoEntrada(entrada.getTipoEntrada());
-        // entrada.setLineaFactura(linea);
-        // entrada.setCliente(cliente);
-        //linea.setEntrada(entrada);
+        System.out.println("============================================="+alquiler.getPrecioTotal());
         Carrito carrito = new Carrito();
         if(carritoRepo.dimeCarritoDeUsuario(organizacion.getUsuario().getNombreUsuario()) != null){
             carrito = carritoRepo.dimeCarritoDeUsuario(organizacion.getUsuario().getNombreUsuario());
             linea.setCarrito(carrito);
             carrito.getLineasFacturas().add(linea);     
             }else{
-                
+                System.out.println("------------------------------------------------------------------");
                 carrito.setOrganizacion(organizacion);
                 List<LineaFactura> lineasFacturas = new ArrayList<>();
                 linea.setCarrito(carrito);
                 lineasFacturas.add(linea);
                 carrito.setLineasFacturas(lineasFacturas);
+                System.out.println("================================="+linea.getAlquilerEspacio().getLugarRealizacion().getNombre_recinto());
             }
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             double total = 0.0;
+            
             for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
                 total += carrito.getLineasFacturas().get(i).getPrecio();
             }
+            System.out.println("=================================================================");
             carrito.setTotal(total);
             carritoRepo.save(carrito);
         }
