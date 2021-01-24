@@ -2,7 +2,6 @@ package org.springframework.samples.petclinic.repository;
 
 import org.springframework.samples.petclinic.model.Cliente;
 
-import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;

@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,18 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.model.Validadores.FechaFinActividadRestriccion;
-import org.springframework.samples.petclinic.model.Validadores.FechaInicioRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechaInicioTimeRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechasActividadRestriccion;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-// @Data
 @Getter
 @Setter
 @Entity
@@ -36,12 +28,12 @@ public class Actividad extends BaseEntity {
   @ManyToMany(cascade = CascadeType.ALL)
   private List<Exponente> exponentes;
 
-  @NotBlank(message = "El campo tematica no puede estar vacio")
+  @NotBlank(message = "El nombre de la temática debe estar comprendido entre 2 y 30 caracteres, además de no estar vacío")
   @Size(min = 2, max = 30, message = "El nombre de la temática debe estar comprendido entre 2 y 30 caracteres, además de no estar vacío")
   @Column(name = "tematicaActividad")
   protected String tematicaActividad;
 
-  @NotBlank(message = "El campo descripcion no puede estar vacio")
+  @NotBlank(message = "La descripción de la temática debe estar comprendida entre 15 y 400 caracteres, además de no estar vacío")
   @Size(min = 15, max = 400, message = "La descripción de la temática debe estar comprendida entre 15 y 400 caracteres, además de no estar vacío" )
   @Column(name = "descripcionActividad")
   protected String descripcionActividad;

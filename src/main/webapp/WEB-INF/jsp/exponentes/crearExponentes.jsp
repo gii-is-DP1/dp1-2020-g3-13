@@ -3,6 +3,8 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                    <%@page contentType="text/html"%>
+                        <%@page pageEncoding="UTF-8"%>
                     <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                         <petclinic:layout pageName="test">
                             <jsp:body>
@@ -34,9 +36,16 @@
                                 </form:form>
                                 <spring:url value="/eventos/{eventoId}" var="volverAEvento">
                                     <spring:param name="eventoId" value="${evento.id}" />
-                                </spring:url>
-                                <a href="${fn:escapeXml(volverAEvento)}" class="btn btn-default">Terminar de a&ntilde;adir</a>
-
+                            </spring:url>
+                                <c:choose>
+                                    <c:when test="${not empty listaExponentes}">
+                                    <h3 style="text-align: center; color:rgb(6, 194, 59); size:20;">Ya hay un exponente,pulse boton terminar de añadir, para crear la actividad correctamente</h3>
+                                    <a href="${fn:escapeXml(volverAEvento)}" class="btn btn-default">Terminar de a&ntilde;adir</a>
+                                    </c:when>
+                                    <c:otherwise >
+                                        <h3 style="text-align: center; color:rgb(194, 19, 6); size:20;">Toda actividad requiere un mínimo de un exponente</h3>
+                                    </c:otherwise>
+                                </c:choose>
                                 <!--Terminar !!!! -->
                                 <table id="exponentesTabla" class="table table-striped">
                                     <tr>

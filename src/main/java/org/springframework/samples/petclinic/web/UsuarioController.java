@@ -1,23 +1,16 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Autoridades;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
-import org.springframework.samples.petclinic.repository.AutoridadesRepository;
 import org.springframework.samples.petclinic.service.AdminService;
-import org.springframework.samples.petclinic.service.AutoridadesService;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.FacturaService;
-import org.springframework.samples.petclinic.service.LineaFacturaService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.samples.petclinic.service.UsuarioService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
-    private static final String VIEWS_CREATE_FORM = "usuarios/createUsuarioForm";
+    //private static final String VIEWS_CREATE_FORM = "usuarios/createUsuarioForm";
     private static final String VIEWS_CLIENTE_CREATE_OR_UPDATE_FORM ="usuarios/clienteUpdateForm";
     private static final String VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM ="usuarios/organizacionUpdateForm";
     @Autowired
@@ -47,6 +40,8 @@ public class UsuarioController {
     private AdminService adminService;
     @Autowired
     private FacturaService facturaService;
+    @Autowired
+    private EventoService eventoService;
     @GetMapping()
     public String listadoUsuarios(ModelMap modelMap){
         String vista = "/usuarios/listadoUsuarios";
@@ -61,24 +56,6 @@ public class UsuarioController {
 		mav.addObject("usuario", this.usuarioService.findUsuario(usuarioId));
 		return mav;
     }
-/*
-    @GetMapping(value = "/{usuarioId}/delete")
-    public String deleteUsuario(@PathVariable("usuarioId") String usuarioId, ModelMap model){ 
-        Usuario u = usuarioService.findUsuario(usuarioId);
-        Cliente c = clienteService.findClienteByUsuario(usuarioId);
-        Organizacion o = organizacionService.findOrganizacionByUsuario(usuarioId); 
-
-            if(u.getAutoridades().getAutoridad().equals("cliente")){
-                this.clienteService.deleteCliente(c);
-            }
-            if(u.getAutoridades().getAutoridad().equals("organizacion")){
-                this.organizacionService.deleteOrganizacion(o);
-            }
-        
-        this.usuarioService.deleteUsuario(u);
-        return "redirect:/usuarios";
-    }
-*/
     @GetMapping(value = "/{usuarioId}/delete")
     public String deleteUsuario(@PathVariable("usuarioId") String usuarioId, ModelMap model){ 
         adminService.deleteUsuario(usuarioId);
@@ -101,8 +78,6 @@ public class UsuarioController {
         }
         return vista;
     }
-
-    
 
     @GetMapping(value = "/myprofile/edit")
     public String initUpdateClienteForm(ModelMap model) {
@@ -167,9 +142,15 @@ public class UsuarioController {
     }
         return "redirect:/usuarios/myprofile";
         }
-        
-    
-
+        @GetMapping(path="myprofile/eventosFavoritos")
+        public String muestraEventosFavoritos(ModelMap model){
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            Cliente cliente = clienteService.findClienteByUsuario(username);
+            //List<Evento> eventos = cliente.getEventosFavoritos();
+            model.addAttribute("cliente", cliente);
+            String vista  = "usuarios/eventosFavoritos";
+            return vista;
+        }
         @GetMapping(path ="myprofile/delete")
         public String borrarCliente( ModelMap model){
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -185,63 +166,16 @@ public class UsuarioController {
             }
             return "redirect:/logout";
     
-        }
-/*
-        @GetMapping(value = "/myprofile/edit")
-    public String initUpdateOrganizacionForm(ModelMap model) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Organizacion organizacionUpd = organizacionService.findOrganizacionByUsuario(username);
-        model.addAttribute("organizacion",organizacionUpd);
+        } 
 
-        return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
-    }
-
-    @PostMapping(value = "/myprofile/edit")
-    public String editOrganizacion(@Valid Organizacion organizacion, BindingResult result, ModelMap model){
-
-
-        Organizacion org = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-
-
-            if (result.hasErrors()) {
-                model.put("organizacion", organizacion);
-                return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
-              } else{
-                  model.put("organizacion", organizacion);
-
-            organizacion.setId(org.getId());
-            organizacion.setUsuario(org.getUsuario());
-            this.organizacionService.saveOrganizacion(organizacion);
-                
-
-                try {
-                    this.organizacionService.saveOrganizacion(org);
-
-                } catch (Exception e) {
-                  
-
-                    return VIEWS_ORGANIZACION_CREATE_OR_UPDATE_FORM;
-                }
-              return "redirect:/organizaciones/myprofile";
-            }
-        }
-        @GetMapping(path ="myprofile/delete")
-        public String borrarOrganizacion(@Valid Organizacion organizacion, BindingResult result, ModelMap model){
- 
-            Organizacion org2 = this.organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-            usuarioService.deleteUsuario(org2.getUsuario());
-            organizacionService.deleteOrganizacion(org2);
-
-
-            return "redirect:/logout";
+        @GetMapping(path ="myprofile/eventosFavoritos/{eventosId}/borrar")
+        public String borrarEventoFav( ModelMap model, @PathVariable("eventosId") int eventosId){
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            Cliente cliente = clienteService.findClienteByUsuario(username);
+            Evento evento = eventoService.findEventoById(eventosId);
+            eventoService.borrarEventoFav(evento, cliente);
+            
+            return "redirect:/usuarios/myprofile/eventosFavoritos";
     
         }
-            @GetMapping(value = "/myprofile")
-    public String detallesOrganizacion(ModelMap modelMap){
-        String vista="organizaciones/myprofile";
-        Organizacion organizacion = organizacionService.findOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-         modelMap.addAttribute("organizacion", organizacion);
-        return vista;
-    }
-        */
 }

@@ -20,7 +20,8 @@ public class ActividadService {
         private ActividadRepository actividadRepo;
         @Autowired
         private LugarRealizacionService lugarRealizacionService;
-        @Transactional
+
+
         public int actividadesCount(){
             return (int) actividadRepo.count();
         }
@@ -45,7 +46,7 @@ public class ActividadService {
 
         @Transactional
         public void guardarActividad(Actividad actividad){
-            actividadRepo.save(actividad);
+                actividadRepo.save(actividad);
         }
 
         @Transactional

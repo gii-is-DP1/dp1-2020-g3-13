@@ -10,7 +10,6 @@ import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
-import org.springframework.samples.petclinic.repository.TipoEntradaRepository;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -18,8 +17,6 @@ public class TipoEntradaServiceTest {
 
     @Autowired
     private TipoEntradaService tipoEntradaService;
-    @Autowired
-    private TipoEntradaRepository tipoEntradaRepo;
     @Autowired
     private EventoService eventoService;
     @Autowired
@@ -37,7 +34,7 @@ public class TipoEntradaServiceTest {
     @Test
     public void deberiaContarTiposEntrada() {
         int countServ = tipoEntradaService.tipoEntradaCount();
-        int countRepo = (int) tipoEntradaRepo.count();
+        int countRepo = tipoEntradaService.tipoEntradaCount();
         assertEquals(countServ, countRepo);
     }
 

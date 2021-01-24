@@ -19,12 +19,18 @@ public class LineaFacturaService {
         return (int) lineaFacturaRepository.count();
     }
 
+    @Transactional
     public Iterable<LineaFactura> findAll(){
         return lineaFacturaRepository.findAll();
     }
-
+    @Transactional
     public void save(LineaFactura lineaFactura){
          lineaFacturaRepository.save(lineaFactura);
 
+    }
+
+    @Transactional
+    public void borrarLinea(LineaFactura linea){
+        lineaFacturaRepository.delete(linea);
     }
 }

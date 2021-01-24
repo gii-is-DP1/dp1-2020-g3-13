@@ -3,17 +3,14 @@ package org.springframework.samples.petclinic.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
-import javax.validation.constraints.Null;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Evento;
-import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.stereotype.Service;
@@ -25,6 +22,8 @@ public class EventoService {
     private EventoRepository eventoRepository;
     @Autowired
     private TipoEntradaService tipoEntradaService;
+    @Autowired
+    private ClienteService clienteService;
 
 
     
@@ -36,6 +35,15 @@ public class EventoService {
         return eventoRepository.findAll();
     }
 
+    public Iterable<Evento> encuentraTodosPublicos(){
+        Iterable<Evento> eventos = eventoRepository.findAll();
+        List<Evento> eventosRes = new ArrayList<Evento>();
+        for (Evento evento:eventos){
+            if (evento.getEsPublico()==true)
+                eventosRes.add(evento);
+        }
+        return eventosRes;
+    }
     @Transactional
 	public void save(Evento evento) throws DataAccessException {
 
@@ -70,10 +78,32 @@ public class EventoService {
         return entradas; 
         }
 
+    public void anadirEventoAFav(Evento evento, String nombreUsuario){
+        Cliente cliente =clienteService.findClienteByUsuario(nombreUsuario);
+        if(cliente.getEventosFavoritos()==null){
+            List<Evento> listaEventos = new ArrayList<>();
+            listaEventos.add(evento);
+            
+        }else{
+            List<Evento> listaActual =cliente.getEventosFavoritos();
+            listaActual.add(evento);
+        }
+        clienteService.saveCliente(cliente);
+    }
+    public void borrarEventoFav(Evento evento, Cliente cliente){
+        for(int i=0; i<cliente.getEventosFavoritos().size();i++){
+            if(cliente.getEventosFavoritos().get(i).getId().equals(evento.getId())){
+                cliente.getEventosFavoritos().remove(i);
+            }        
+        }   
+        clienteService.saveCliente(cliente);
+        
+    }
+
         //Muestra primeros 6 eventos o menos para la página de inicio
         public List<Evento> eventosDeInicio(){
             List<Evento> res = new ArrayList<Evento>();
-            Iterator<Evento> iteradorEventos = eventoRepository.findAll().iterator();
+            Iterator<Evento> iteradorEventos = encuentraTodosPublicos().iterator();
             int contador = 0;
             while(iteradorEventos.hasNext() && contador < 6){
                 res.add(iteradorEventos.next());
@@ -82,6 +112,12 @@ public class EventoService {
             return res;
         }
 
+        public void hacerPublico(int eventoId){
+            Evento evento = findEventoById(eventoId);
+            evento.setEsPublico(true);
+            eventoRepository.save(evento);
+
+        }
 
     
 }

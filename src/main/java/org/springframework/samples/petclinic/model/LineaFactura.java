@@ -6,24 +6,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Range;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "lineaFactura")
 public class LineaFactura extends BaseEntity{
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private TipoEntrada tipoEntrada;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_entrada", referencedColumnName = "id")

@@ -1,11 +1,10 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.ActividadService;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -34,10 +32,11 @@ public class ExponenteController {
     @GetMapping(value="/nuevo")
     public String guardarExponentes(ModelMap modelMap, @PathVariable("actividad_id") int actividadInt, @PathVariable("evento_id") int evento_id){
         Exponente nuevoExponente = new Exponente();
-     System.out.println(actividadService.findById(actividadInt).getExponentes().size());
-     modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
-     modelMap.addAttribute("exponente", nuevoExponente);
-     modelMap.addAttribute("listaExponentes", actividadService.findById(actividadInt).getExponentes());
+        Actividad actividad = actividadService.findById(actividadInt);
+        modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
+        modelMap.addAttribute("exponente", nuevoExponente);
+        modelMap.addAttribute("actividad", actividad);
+        modelMap.addAttribute("listaExponentes", actividadService.findById(actividadInt).getExponentes());
 
         return VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM;
     }

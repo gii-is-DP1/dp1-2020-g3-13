@@ -1,14 +1,14 @@
 package org.springframework.samples.petclinic.web;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
+import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,10 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/lugaresRealizacion")
 public class LugarRealizacionController {
 
-    private static final String VIEWS_LUGAR_CREATE_OR_UPDATE_FORM = "lugaresRealizacion/createOrUpdatelugaresForm";
+	private static final String VIEWS_LUGAR_CREATE_OR_UPDATE_FORM = "lugaresRealizacion/createOrUpdatelugaresForm";
+	
     
     @Autowired
-    private LugarRealizacionService lugarRealizacionService;
+	private LugarRealizacionService lugarRealizacionService;
+	@Autowired
+	private AlquilerEspacioService alquilerService;
 
     @GetMapping()
     public String listadoLugaresRealizacion(ModelMap modelMap){
@@ -40,7 +43,8 @@ public class LugarRealizacionController {
 		ModelAndView mav = new ModelAndView("lugaresRealizacion/detallesLugarRealizacion");
 		mav.addObject(this.lugarRealizacionService.findById(lugarId));
 		return mav;
-    }
+	}
+		
 
     @GetMapping(value = "/new")
 	public String initCreationForm(Map<String, Object> model) {
@@ -73,8 +77,7 @@ public class LugarRealizacionController {
     //TODO 
     @PostMapping(value = "/{lugarRealizacionId}/edit")
     public String editLugarRealizacion(@Valid LugarRealizacion lugarRealizacion, BindingResult result, ModelMap model,@PathVariable("lugarRealizacionId") int lugarRealizacionId){
-		String vista = "";
-				if(result.hasErrors()){
+		if(result.hasErrors()){
 			return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
 		}else{
 			this.lugarRealizacionService.modifyLugaRealizacion(lugarRealizacion, this.lugarRealizacionService.findById(lugarRealizacionId));

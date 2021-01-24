@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +8,17 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.LineaFactura;
+import org.springframework.samples.petclinic.model.LugarRealizacion;
+import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.repository.CarritoRepository;
 import org.springframework.samples.petclinic.repository.FacturaRepository;
+import org.springframework.samples.petclinic.web.OrganizacionController;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,16 +51,23 @@ public class CarritoService {
     }
 
     @Transactional
+    public void actualizaCarritoAcero(Carrito carrito){
+        carrito.getLineasFacturas().clear();
+        carrito.setTotal(0.0);
+        carritoRepo.save(carrito);
+
+        }
+
+    @Transactional
     public void anadirCarrito(Entrada entrada, Cliente cliente) throws DataAccessException{
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
-        linea.setTipoEntrada(entrada.getTipoEntrada());
+        //linea.setTipoEntrada(entrada.getTipoEntrada());
         // entrada.setLineaFactura(linea);
         entrada.setCliente(cliente);
         linea.setEntrada(entrada);
         Carrito carrito = new Carrito();
-        LocalDateTime fechaActual;
         
 
         
@@ -80,6 +90,37 @@ public class CarritoService {
         carrito.setTotal(total);
         carritoRepo.save(carrito);
     }
+
+    @Transactional
+    public void anadirCarritoLugarRealizacion(AlquilerEspacio alquiler, Organizacion organizacion) throws DataAccessException{
+        LineaFactura linea = new LineaFactura();
+        linea.setCantidad(1);
+        linea.setPrecio(alquiler.getPrecioTotal());
+        linea.setAlquilerEspacio(alquiler);
+        //linea.setTipoEntrada(entrada.getTipoEntrada());
+        // entrada.setLineaFactura(linea);
+        // entrada.setCliente(cliente);
+        //linea.setEntrada(entrada);
+        Carrito carrito = new Carrito();
+        if(carritoRepo.dimeCarritoDeUsuario(organizacion.getUsuario().getNombreUsuario()) != null){
+            carrito = carritoRepo.dimeCarritoDeUsuario(organizacion.getUsuario().getNombreUsuario());
+            linea.setCarrito(carrito);
+            carrito.getLineasFacturas().add(linea);     
+            }else{
+                
+                carrito.setOrganizacion(organizacion);
+                List<LineaFactura> lineasFacturas = new ArrayList<>();
+                linea.setCarrito(carrito);
+                lineasFacturas.add(linea);
+                carrito.setLineasFacturas(lineasFacturas);
+            }
+            double total = 0.0;
+            for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
+                total += carrito.getLineasFacturas().get(i).getPrecio();
+            }
+            carrito.setTotal(total);
+            carritoRepo.save(carrito);
+        }
  
     @Transactional
     public Carrito findCarritoById(int carritoId) throws DataAccessException{
@@ -135,4 +176,9 @@ public class CarritoService {
     }
 
 }
+
+    @Transactional
+    public void guardarCarrito(Carrito car){
+        carritoRepo.save(car);
+    }
 }
