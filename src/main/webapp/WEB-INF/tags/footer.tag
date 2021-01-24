@@ -14,6 +14,13 @@
 
 <spring:url value="/resources/js/jquery.lettering.js" var="jqueryLettering"/>
 <script type="text/javascript" src="${jqueryLettering}"></script>
+<spring:url value="/resources/js/moments.js" var="jqueryMoments"/>
+<script type="text/javascript" src="${jqueryMoments}"></script>
+<spring:url value="/resources/js/bootstrap-datetimepicker.min.js" var="jequeryMinBoostrap"/>
+<script type="text/javascript" src="${jequeryMinBoostrap}"></script>
+<spring:url value="/resources/js/bootsrap.min.js" var="jequeryMin"/>
+<script type="text/javascript" src="${jequeryMin}"></script>
+
 <spring:url value="/resources/js/funcionesJavascript.js" var="javascriptPrincipal"/>
 <script type="text/javascript" src="${javascriptPrincipal}"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
