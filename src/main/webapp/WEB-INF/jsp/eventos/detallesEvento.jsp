@@ -83,7 +83,7 @@
                                     </c:forEach>
                                 </td>
                             </tr>
-                            </tr>
+                            
                             <tr>
                                 <th>Tipos de entrada</th>
                                 <td>
@@ -125,5 +125,18 @@
                     </spring:url>
                         <a href="${fn:escapeXml(tipoEntradasUrl)}">
                         <c:out value="Añadir Tipos de Entradas" /><br></a>
-
+                        
+                        
+                        <spring:url value="/eventos/{eventoId}/hacerPublico" var="volverAEvento">
+                        <spring:param name="eventoId" value="${evento.id}" />
+                        </spring:url>
+                        <div class="publicar">
+                        <c:choose>
+                        <c:when test="${evento.esPublico}">
+                        </c:when>
+                        <c:otherwise >
+                        <a href="${fn:escapeXml(volverAEvento)}" class="btn btn-default">Hacer publico</a>
+                        </c:otherwise>
+                        </c:choose>
+                        </div>
                     </petclinic:layout>

@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
@@ -37,20 +39,22 @@ public class EventoController {
     public String listadoEventos(ModelMap modelMap){
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         String vista = "eventos/";
-        Iterable<Evento> eventos = eventoService.findAll();
         if(!(clienteService.findClienteByUsuario(usuario)==null) || usuario=="anonymousUser"){
-            eventos = eventoService.findAll();
+            Iterable<Evento> eventos = eventoService.encuentraTodosPublicos();
+            modelMap.addAttribute("eventos", eventos);
             vista = "eventos/listadoEventos";
         }else if(!(organizacionService.encuentraOrganizacionByUsuario(usuario)==null)){
-            eventos = eventoService.listadoEventosDeOrganizacion(organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
+            Iterable<Evento>eventos = eventoService.listadoEventosDeOrganizacion(organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
+            modelMap.addAttribute("eventos", eventos);
             vista = "eventos/listadoEventosOrganizacion";
         }else{
-            eventos = eventoService.findAll();
+            Iterable<Evento> eventos = eventoService.findAll();
+            modelMap.addAttribute("eventos", eventos);
             vista = "eventos/listadoEventosAdmin";
         }
         
 
-        modelMap.addAttribute("eventos", eventos);
+
         return vista;
     }
 
@@ -88,6 +92,13 @@ public class EventoController {
         modelMap.addAttribute("message", "Evento añadido a favoritos!");
         return "redirect:/eventos/";
     }
+    @GetMapping("/{eventosId}/hacerPublico")
+    public String hacerEventoPublico(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
+        eventoService.hacerPublico(eventosId);
+      //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
+        modelMap.addAttribute("message", "Evento añadido a favoritos!");
+        return "redirect:/eventos/{eventosId}";
+    }
 
     // @PostMapping("/{eventosId}/añadirEventosFavoritos")
     // public String anadirEventosAFavorito(@PathVariable("eventosId") int eventosId,BindingResult resultado, ModelMap modelMap) {
@@ -123,6 +134,7 @@ public class EventoController {
             return "eventos/editarEvento";
         }else {
             evento.setOrganizacion(org);
+            evento.setEsPublico(false);
             eventoService.save(evento);
             modelMap.addAttribute("message", "Evento guardado satisfactoriamente!");
             return "redirect:/eventos/";

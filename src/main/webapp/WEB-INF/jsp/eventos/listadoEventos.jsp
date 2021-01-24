@@ -16,7 +16,8 @@
                                 <tbody>
                                     <c:forEach items="${eventos}" var="evento">
                                         <div class="evento">
-
+                                            <c:choose>
+                                            <c:when test="${evento.esPublico}">
 
                                             <p class="tituloEvento">
                                                 <c:out value="${evento.nombreEvento}" />
@@ -47,11 +48,13 @@
                                             </a>
                                             <spring:url value="/consultas/{eventoId}/nuevo" var="nuevaConsultaUrl">
                                             <spring:param name="eventoId" value="${evento.id}" />
-                                        </spring:url>
-                                        <a href="${fn:escapeXml(nuevaConsultaUrl)}">
+                                            </spring:url>
+                                            <a href="${fn:escapeXml(nuevaConsultaUrl)}">
                                             <p class="enlaceEvento"> <i class="fas fa-ticket-alt"></i> Consulta
                                             </p>
-                                        </a>
+                                            </a>
+                                            </c:when>
+                                            </c:choose>
                                         </div>
                                     </c:forEach>
                                 </tbody>
