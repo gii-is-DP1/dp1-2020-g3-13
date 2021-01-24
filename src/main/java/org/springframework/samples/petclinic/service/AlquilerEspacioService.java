@@ -35,6 +35,11 @@ public class AlquilerEspacioService {
     }
 
     @Transactional
+    public AlquilerEspacio encuentraAlquilerId(int alquilerId){
+        return alquilerEspacioRepository.findById(alquilerId).orElse(null);
+    }
+
+    @Transactional
     public void alquilerLugarRealizacion(AlquilerEspacio alquiler, Actividad actividad){
         //LugarRealizacion lugarRealizacion = actividad.getLugarRealizacion();
         LugarRealizacion lugar = alquiler.getLugarRealizacion();
@@ -48,7 +53,7 @@ public class AlquilerEspacioService {
         //alquiler.setLugarRealizacion(lugar);
         System.out.println(alquiler.getLugarRealizacion().getNombre_recinto());
         long horas = HOURS.between(alquiler.getFechaInicioReserva(), alquiler.getFechaFinReserva());
-        System.out.println("=======================================================");
+        Double precioLugar = lugar.getPrecio();
         double precioTotal = lugar.getPrecio() * horas;
         System.out.println(precioTotal);
         alquiler.setPrecioTotal(precioTotal);

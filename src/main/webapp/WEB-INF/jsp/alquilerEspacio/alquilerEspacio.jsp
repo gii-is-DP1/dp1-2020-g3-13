@@ -25,15 +25,20 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-default" type="submit">Guardar Lugar</button>
+                    <button class="btn btn-default" type="submit">Seleccionar Lugar</button>
                 </div>
 
 
             </div>
         </form:form>
-        <spring:url value="/eventos/{eventoId}" var="volverAEvento">
-            <spring:param name="eventoId" value="${evento.id}" />
-    </spring:url>
+        <div>
+        <spring:url value="/eventos/{evento_id}/actividades/{actividadId}/alquilarEspacio/{alquilerEspacioId}/confirmar" var="confirmarUrl">
+            <spring:param name="evento_id" value="${evento.id}" />
+            <spring:param name="actividadId" value="${actividad.id}" />
+            <spring:param name="alquilerEspacioId" value="${alquiler.id}" />
+            <a href="${fn:escapeXml(confirmarUrl)}" class="btn btn-default">Confirmar Lugar y Añadir a Carrito</a>
+            </spring:url>
+            </div>
         <!--Terminar !!!! -->
         <table id="detallerLugarTabla" class="table table-striped">
             <tr>
@@ -81,12 +86,11 @@
                         <c:out value="${lugarSeleccionado.precio}" />
 
                     </td>
-                    
-                    
-                   
-
                 </tr>
+
+
         </table>
+
 
 
 
