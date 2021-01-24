@@ -66,6 +66,18 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th>Sponsors</th>
+                                <td>
+                                    <div class="cuadro-sponsor"></div>
+                                    <c:forEach items="${evento.sponsors}" var="sponsor">
+                                        <a href="${sponsor.urlWeb}" target="_self">    
+                                    <img src="${sponsor.urlLogo}" width=15%></a>
+                                    </div>
+
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Tipos de entrada</th>
                                 <td>
                                     <div class="cuadro-entrada"></div>

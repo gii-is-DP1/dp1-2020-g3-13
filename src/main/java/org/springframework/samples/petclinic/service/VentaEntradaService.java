@@ -45,9 +45,8 @@ public class VentaEntradaService {
         carritoService.generarFacturaCarrito(carrito, cliente);
         //Vacía el carrito para una nueva compra
         carritoService.actualizaCarritoAcero(carrito);
-        
-
     }
+    
 
     @Transactional
     public void guardaVentaEntrada(VentaEntrada ventaEntrada) throws DataAccessException {
