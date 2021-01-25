@@ -54,15 +54,15 @@ INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,c
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (3,685458962, 3500, 'Nueva plaza', 'Av Nueva Zelanda', 'Nervion@gmail.com','Quisque ac scelerisque lectus. Sed commodo, quam vel luctus interdum, sem dolor pellentesque turpis, ac consectetur nunc lectus eget metus.', 'https://pbs.twimg.com/media/CJ82gS-XAAEKWeB.jpg');
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto) VALUES (4,666666666, 600000, 'Estadio La Cartuja', 'La Cartuja', 'Cartuja@gmail.com','Morbi tellus purus, varius non laoreet sit amet, sollicitudin ac nisl. Nam ullamcorper feugiat tortor, non vulputate mauris lacinia in.', 'https://multimedia.andalucia.org/fotos/image_200818.jpeg');
 
--- INSERT INTO alquiler_espacio(id, precio, id_lugar_realizacion) VALUES (1, 50, 1);
+INSERT INTO alquiler_espacio(id, precio_total, id_lugar_realizacion) VALUES (1, 50, 1);
 INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,lugar_realizacion_id) VALUES (1,'concierto de estopa', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2022-12-12', '2022-12-13', 1);
 
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(1,'2020-03-03',15.6,'alebangon');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(2,'2020-05-03', 1.6,'romflorod');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(3,'2020-09-03', 5.6,'ezepersos');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(4,'2020-02-03', 68.1,'andmecsan');
--- INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(5,'2020-02-03', 68.1,'organizacion1');
--- INSERT INTO linea_factura(id, id_alquiler_espacio, cantidad, id_factura) VALUES (1, 1, 1, 5);
+INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(5,'2020-02-03', 68.1,'organizacion1');
+INSERT INTO linea_factura(id, id_alquiler_espacio, cantidad, id_factura) VALUES (1, 1, 1, 5);
 
 -- EL CONCIERTO DE EMINEN NO SE PUEDE BORRAR QUE LO USAMOS PARA PRUEBAS
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id, es_publico) VALUES ('Concierto', 'Concierto de Eminem', 'Eminem concert for valor', '2021-04-11', '6M', 'Musica', '2021-06-11', 1, TRUE);

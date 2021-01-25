@@ -20,7 +20,7 @@
                                 </h2>
                                 <form:form modelAttribute="tipoEntrada" class="form-horizontal" id="add-tipoEntrada-form">
                                     <div class="form-group has-feedback">
-                                        <petclinic:selectField label="Selecciona el tipo de Entrada" name="nombre" names="${NombreTipoEntrada}" size ="1"/>
+                                        <petclinic:selectFieldTipoEntrada label="Selecciona el tipo de Entrada" name="nombre" names="${NombreTipoEntrada}" size ="1"/>
                                         <petclinic:inputField label="Numero de entradas disponibles" name="numEntradas" />
                                         <petclinic:inputField id="datetimeInicio" label="Fecha de Inicio" name="fechaInicio" />
                                         <petclinic:inputField id="datetimeFin" label="Fecha de Fin" name="fechaFin" />
