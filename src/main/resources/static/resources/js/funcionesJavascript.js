@@ -6,10 +6,10 @@ $(function() {
     $('.ocultar').hide();
 
     $("#datetimeInicio").datetimepicker({
-        format: 'YYYY/MM/D HH:mm'
+        format: 'YYYY/MM/DD HH:mm'
     });
     $("#datetimeFin").datetimepicker({
-        format: 'YYYY/MM/D HH:mm'
+        format: 'YYYY/MM/DD HH:mm'
     });
 
 
