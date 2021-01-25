@@ -54,8 +54,8 @@ INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,c
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto,precio_dia) VALUES (3,685458962, 3500, 'Nueva plaza', 'Av Nueva Zelanda', 'Nervion@gmail.com','Quisque ac scelerisque lectus. Sed commodo, quam vel luctus interdum, sem dolor pellentesque turpis, ac consectetur nunc lectus eget metus.', 'https://pbs.twimg.com/media/CJ82gS-XAAEKWeB.jpg',12.0);
 INSERT INTO lugar_realizacion(id,telefono,aforo,nombre_recinto,direccion,email,caracteristicas,url_foto,precio_dia) VALUES (4,666666666, 600000, 'Estadio La Cartuja', 'La Cartuja', 'Cartuja@gmail.com','Morbi tellus purus, varius non laoreet sit amet, sollicitudin ac nisl. Nam ullamcorper feugiat tortor, non vulputate mauris lacinia in.', 'https://multimedia.andalucia.org/fotos/image_200818.jpeg',16.70);
 
--- INSERT INTO alquiler_espacio(id, precio, id_lugar_realizacion) VALUES (1, 50, 1);
---INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,lugar_realizacion_id) VALUES (1,'concierto de estopa', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2022-12-12', '2022-12-13', 1);
+INSERT INTO alquiler_espacio(id, precio_total, id_lugar_realizacion) VALUES (1, 50, 1);
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin,alquiler_espacio_id) VALUES (1,'concierto de estopa', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2022-12-12', '2022-12-13', 1);
 
 
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(1,'2020-03-03',15.6,'alebangon');
