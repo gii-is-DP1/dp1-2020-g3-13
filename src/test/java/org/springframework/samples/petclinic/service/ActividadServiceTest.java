@@ -27,12 +27,12 @@ public class ActividadServiceTest {
         assertEquals(count, 0);
     }
 
-    @Test
-    public void deberiaAñadirLugar() {
-        Actividad act = new Actividad();
-        actividadService.AñadirLugarRealizacionActividad(act, 1);
-        assertEquals(1, act.getLugarRealizacion().getId());
-    }
+    // @Test
+    // public void deberiaAñadirLugar() {
+    //     Actividad act = new Actividad();
+    //     actividadService.AñadirLugarRealizacionActividad(act, 1);
+    //     assertEquals(1, act.getLugarRealizacion().getId());
+    // }
 
     @Test
     public void deberiaAñadirActividad() {

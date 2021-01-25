@@ -15,38 +15,26 @@
                             <!-- <div class="cuadro-carrito"></div> -->
                             <c:forEach items="${carrito.lineasFacturas}" var="lineasFacturas">
                                 <p>
-                                    Evento:
-                                        <c:out value="${lineasFacturas.entrada.tipoEntrada.evento.nombreEvento}" />
-                                </p>
-                                <p>
-                                    Asistente:
-                                        <c:out value="${lineasFacturas.entrada.nombreAsistente}" />
-                                </p>
-                                <p>
-                                   DNI:
-                                        <c:out value="${lineasFacturas.entrada.dni}" />
-                                </p>
-                                <p>
-                                  Tipo Entrada:
-                                        <c:out value="${lineasFacturas.entrada.tipoEntrada.nombre}" />
+                                    Espacio Reservado:
+                                        <c:out value="${lineasFacturas.alquilerEspacio.lugarRealizacion.nombre_recinto}" />
                                 </p>
                                 <p>
                                     Fecha Inicio:
-                                        <c:out value="${lineasFacturas.entrada.tipoEntrada.fechaInicio}" />
+                                        <c:out value="${lineasFacturas.alquilerEspacio.fechaInicioReserva}" />
+                                </p>
+                                <p>
+                                    Fecha Fin:
+                                        <c:out value="${lineasFacturas.alquilerEspacio.fechaFinReserva}" />
                                 </p>
                                 <p>
                                     Precio:
                                         <c:out value="${lineasFacturas.precio}" />
                                 </p>
-                                <p>
-                                    Cantidad:
-                                        <c:out value="${lineasFacturas.cantidad}" />
-                                </p>
                             </c:forEach>
                             <p> Total: </p>
                             <c:out value="${carrito.total}" />
 
-                            <spring:url value="/carrito/{carritoId}/finalizarCompra" var="ventaUrl">
+                            <spring:url value="/carrito/{carritoId}/org/finalizarCompra" var="ventaUrl">
                                             <spring:param name="carritoId" value="${carrito.id}" />
                                         </spring:url>
                                         <a href="${fn:escapeXml(ventaUrl)}">

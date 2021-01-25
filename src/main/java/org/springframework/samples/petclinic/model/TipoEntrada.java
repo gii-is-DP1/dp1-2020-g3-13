@@ -48,5 +48,4 @@ public class TipoEntrada extends BaseEntity {
     @Column(name = "numEntradas")
     @Min(value = 1, message = "Debe tener al menos 1 entrada disponible para el evento")
     protected Integer numEntradas;
-
 }

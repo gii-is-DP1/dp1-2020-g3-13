@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
@@ -37,20 +39,22 @@ public class EventoController {
     public String listadoEventos(ModelMap modelMap){
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         String vista = "eventos/";
-        Iterable<Evento> eventos = eventoService.findAll();
         if(!(clienteService.findClienteByUsuario(usuario)==null) || usuario=="anonymousUser"){
-            eventos = eventoService.findAll();
+            Iterable<Evento> eventos = eventoService.encuentraTodosPublicos();
+            modelMap.addAttribute("eventos", eventos);
             vista = "eventos/listadoEventos";
         }else if(!(organizacionService.encuentraOrganizacionByUsuario(usuario)==null)){
-            eventos = eventoService.listadoEventosDeOrganizacion(organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
+            Iterable<Evento>eventos = eventoService.listadoEventosDeOrganizacion(organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
+            modelMap.addAttribute("eventos", eventos);
             vista = "eventos/listadoEventosOrganizacion";
         }else{
-            eventos = eventoService.findAll();
+            Iterable<Evento> eventos = eventoService.findAll();
+            modelMap.addAttribute("eventos", eventos);
             vista = "eventos/listadoEventosAdmin";
         }
         
 
-        modelMap.addAttribute("eventos", eventos);
+
         return vista;
     }
 
@@ -58,14 +62,21 @@ public class EventoController {
     public ModelAndView showEvento(@PathVariable("eventosId") int eventosId) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         ModelAndView mav = new ModelAndView("eventos/detallesEvento");
-        if(this.eventoService.findEventoById(eventosId).getFechaInicio().isBefore(LocalDate.now())){
+        Evento evento = this.eventoService.findEventoById(eventosId);
+        if(evento.getFechaInicio().isBefore(LocalDate.now())){
             mav.setViewName("eventos/eventoFinalizado");
             return mav;
-        }
-        else{
+        }else{
             if(!(clienteService.findClienteByUsuario(usuario)==null)){
                 mav.setViewName("eventos/detallesEventoCliente");
-            } 
+            } else{
+                Organizacion org = organizacionService.encuentraOrganizacionByUsuario(usuario);
+                if(!(organizacionService.encuentraOrganizacionByUsuario(usuario)==null)){
+                if(evento.getOrganizacion()!=org){
+                    mav.setViewName("eventos/organizacionSinPermiso");
+                    }
+                }
+            }
         }
         mav.addObject(this.eventoService.findEventoById(eventosId));
             return mav;
@@ -80,6 +91,13 @@ public class EventoController {
         eventoService.save(evento);
         modelMap.addAttribute("message", "Evento añadido a favoritos!");
         return "redirect:/eventos/";
+    }
+    @GetMapping("/{eventosId}/hacerPublico")
+    public String hacerEventoPublico(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
+        eventoService.hacerPublico(eventosId);
+      //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
+        modelMap.addAttribute("message", "Evento añadido a favoritos!");
+        return "redirect:/eventos/{eventosId}";
     }
 
     // @PostMapping("/{eventosId}/añadirEventosFavoritos")
@@ -116,6 +134,7 @@ public class EventoController {
             return "eventos/editarEvento";
         }else {
             evento.setOrganizacion(org);
+            evento.setEsPublico(false);
             eventoService.save(evento);
             modelMap.addAttribute("message", "Evento guardado satisfactoriamente!");
             return "redirect:/eventos/";
