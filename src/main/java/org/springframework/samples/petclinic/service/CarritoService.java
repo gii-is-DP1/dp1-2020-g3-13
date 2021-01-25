@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
@@ -28,6 +29,8 @@ public class CarritoService {
     private CarritoRepository carritoRepo;
     @Autowired
     private FacturaRepository facturaRepo;
+    @Autowired
+    private LineaFacturaService lineaService;
 
 
     @Transactional
@@ -40,9 +43,18 @@ public class CarritoService {
        return carritoRepo.dimeCarritoDeUsuario(nombreUsuario);
     }
 
+    @Transactional 
+    public Carrito listadoObjetosCarritoOrganizacion(String nombreUsuario){
+       return carritoRepo.dimeCarritoDeUsuarioOrganizacion(nombreUsuario);
+    }
+
     @Transactional
     public Integer contadorElementosCarrito(Carrito carrito){
         return carrito.getLineasFacturas().size();
+    }
+    @Transactional
+    public Carrito dimeCarritoOrganizacion(String nombreUsuario){
+        return carritoRepo.dimeCarritoDeUsuarioOrganizacion(nombreUsuario);
     }
 
     @Transactional
@@ -92,33 +104,29 @@ public class CarritoService {
     }
 
     @Transactional
-    public void anadirCarritoLugarRealizacion(AlquilerEspacio alquiler, Organizacion organizacion) throws DataAccessException{
+    public void anadirCarritoLugarRealizacion(Actividad actividad, Organizacion organizacion) throws DataAccessException{
+        AlquilerEspacio alquiler = actividad.getAlquilerEspacio();
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
         linea.setPrecio(alquiler.getPrecioTotal());
         linea.setAlquilerEspacio(alquiler);
-        System.out.println("============================================="+alquiler.getPrecioTotal());
         Carrito carrito = new Carrito();
-        if(carritoRepo.dimeCarritoDeUsuario(organizacion.getUsuario().getNombreUsuario()) != null){
-            carrito = carritoRepo.dimeCarritoDeUsuario(organizacion.getUsuario().getNombreUsuario());
+        if(carritoRepo.dimeCarritoDeUsuarioOrganizacion(organizacion.getUsuario().getNombreUsuario()) != null){
+            carrito = carritoRepo.dimeCarritoDeUsuarioOrganizacion(organizacion.getUsuario().getNombreUsuario());
             linea.setCarrito(carrito);
             carrito.getLineasFacturas().add(linea);     
             }else{
-                System.out.println("------------------------------------------------------------------");
                 carrito.setOrganizacion(organizacion);
                 List<LineaFactura> lineasFacturas = new ArrayList<>();
                 linea.setCarrito(carrito);
                 lineasFacturas.add(linea);
                 carrito.setLineasFacturas(lineasFacturas);
-                System.out.println("================================="+linea.getAlquilerEspacio().getLugarRealizacion().getNombre_recinto());
             }
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             double total = 0.0;
             
             for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
                 total += carrito.getLineasFacturas().get(i).getPrecio();
             }
-            System.out.println("=================================================================");
             carrito.setTotal(total);
             carritoRepo.save(carrito);
         }
@@ -131,6 +139,12 @@ public class CarritoService {
     @Transactional
     public void deleteCarrito(Carrito carrito) throws DataAccessException{
         carritoRepo.delete(carrito);
+    }
+
+    @Transactional
+    public void borrarLineaFactura(Carrito carrito, int lineaFacturaId) throws DataAccessException{
+        LineaFactura linea =carrito.getLineasFacturas().get(lineaFacturaId);
+        lineaService.borrarLinea(linea);
     }
 
 
@@ -151,6 +165,31 @@ public class CarritoService {
         factura.setPrecioTotal(precioTotal);
         factura.setFechaFactura(LocalDate.now());
         factura.setUsuario(cliente.getUsuario()); 
+      //  factura.setLineasFacturas(lineas);
+        for (LineaFactura lineaFactura : lineas) {
+            lineaFactura.setFactura(factura);
+            factura.getLineasFacturas().add(lineaFactura);
+        }
+        facturaRepo.save(factura);
+
+    }
+
+    @Transactional
+    public void generarFacturaCarritoOrg(Carrito carrito, Organizacion org) throws DataAccessException{
+       Factura factura = new Factura();
+       List<LineaFactura> lineas =  carrito.getLineasFacturas();
+       List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
+       factura.setLineasFacturas(listaLineasDeFactura);
+       Integer cont = 0;
+       Double precioTotal = 0.0;
+       Integer numLinea = lineas.size();
+       while(cont < numLinea){
+        precioTotal = precioTotal +lineas.get(cont).getPrecio();
+        cont++;
+       }
+        factura.setPrecioTotal(precioTotal);
+        factura.setFechaFactura(LocalDate.now());
+        factura.setUsuario(org.getUsuario()); 
       //  factura.setLineasFacturas(lineas);
         for (LineaFactura lineaFactura : lineas) {
             lineaFactura.setFactura(factura);

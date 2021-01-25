@@ -107,50 +107,29 @@ public class ActividadController {
 	public String alquilarEspacioForm(ModelMap model, @PathVariable("actividadId") int actividadId, @PathVariable("evento_id") int eventoId){
         String vista = VIEW_ALQUILAR_ESPACIO;
         Actividad actividad = actividadService.findById(actividadId);
-        AlquilerEspacio alquiler = new AlquilerEspacio();
         Evento ev  = eventoService.findEventoById(eventoId);
+        AlquilerEspacio alquiler = new AlquilerEspacio();
         Iterable<LugarRealizacion> lugares = lugarRealizacionService.findAll();
-        model.addAttribute("lugarSeleccionado", actividad.getLugarRealizacion());
+        // model.addAttribute("lugarSeleccionado", alquiler.getLugarRealizacion());
         model.addAttribute("lugares", lugares);
         model.addAttribute("alquilerEspacio", alquiler);
         model.addAttribute("actividad", actividad);
         model.addAttribute("evento", ev);
-       
 		return vista;
 	}
 	@PostMapping("/{actividadId}/alquilarEspacio")
 	public String alquilarEspacioProcesarForm(@Valid AlquilerEspacio alquiler, @PathVariable("evento_id") int eventoId ,@PathVariable("actividadId") int actividadId, BindingResult result, ModelMap model){
         Actividad actividad = actividadService.findById(actividadId);
+        Organizacion org  = orgService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		if (result.hasErrors()) {
-          
 			return VIEW_ALQUILAR_ESPACIO;
 		}else {
-           
-            alquilerService.alquilerLugarRealizacion(alquiler, actividad);
-            //alquilerService.guardarAlquilerEspacio(alquiler);
-            return alquilarEspacioForm(model,actividadId, eventoId);
+            alquilerService.alquilerLugarRealizacion(alquiler, actividad, org);
+            carritoService.anadirCarritoLugarRealizacion(actividad, org);
+            model.addAttribute("alquilerEspacio", alquiler);
+            return "redirect:/eventos/{evento_id}";
 		}
 		
      }
-
-     @GetMapping("/{actividadId}/confirmar")
-     public String alquilarEspacioConfirmar(@PathVariable("actividadId") int actividadId,
-      @PathVariable("evento_id") int eventoId,ModelMap model){
-        AlquilerEspacio alquiler = (AlquilerEspacio) model.get("alquilerEspacio");
-        Organizacion org  = orgService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-        Evento ev  = eventoService.findEventoById(eventoId);
-        Actividad actividad = actividadService.findById(actividadId);
-        model.addAttribute("evento", ev);
-        // model.addAttribute("alquiler", alquiler);
-        model.addAttribute("actividad", actividad);
-            
-            alquilerService.guardarAlquilerEspacio(alquiler);
-           
-            actividadService.guardarActividad(actividad);
-            
-            carritoService.anadirCarritoLugarRealizacion(alquiler, org);
-            System.out.println("***************************************************************************");
-            return VIEW_EVENTO_DETALLES;
-		}
 
 }

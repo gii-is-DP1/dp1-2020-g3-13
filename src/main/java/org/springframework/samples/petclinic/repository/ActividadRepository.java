@@ -6,6 +6,6 @@ import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.AlquilerEspacio;
 public interface ActividadRepository extends CrudRepository<Actividad, Integer>{
     
-    // @Query("SELECT alquilerEspacio FROM Actividad actividad WHERE actividad.lugarRealizacion.nombre_recinto =:nombreRecinto")
-    // public AlquilerEspacio encuentraAlquilerLugar(String nombreRecinto);
+    @Query("SELECT alquilerEspacio FROM Actividad actividad WHERE actividad.alquilerEspacio.id =:alquilerId")
+    public AlquilerEspacio encuentraAlquilerLugar(int alquilerId);
 }

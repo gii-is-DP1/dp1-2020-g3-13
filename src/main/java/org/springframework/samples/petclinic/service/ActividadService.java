@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
+import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
@@ -20,6 +21,8 @@ public class ActividadService {
         private ActividadRepository actividadRepo;
         @Autowired
         private LugarRealizacionService lugarRealizacionService;
+        @Autowired
+        private AlquilerEspacioService alquilerService;
 
 
         public int actividadesCount(){
@@ -52,6 +55,11 @@ public class ActividadService {
         public void guardarActividad(Actividad actividad){
                 actividadRepo.save(actividad);
         }
+        @Transactional
+        public void borrarAlquileres(Actividad actividad){
+            //AlquilerEspacio alq =actividadRepo.encuentraAlquilerLugar(alquiler.getId());
+            actividad.setAlquilerEspacio(null);
+        }
 
         @Transactional
         public void anadirActividadAEvento(Evento evento, Actividad actividad) throws DataAccessException{
@@ -67,9 +75,9 @@ public class ActividadService {
                 listaActividadesActual.add(actividad);
             }
         }
-        @Transactional
-        public void AñadirLugarRealizacionActividad(Actividad actividad, Integer idLugar) throws DataAccessException{
-            actividad.setLugarRealizacion(lugarRealizacionService.findById(idLugar));
-        }
+        // @Transactional
+        // public void AñadirLugarRealizacionActividad(Actividad actividad, Integer idLugar) throws DataAccessException{
+        //     actividad.setLugarRealizacion(lugarRealizacionService.findById(idLugar));
+        // }
 
 }
