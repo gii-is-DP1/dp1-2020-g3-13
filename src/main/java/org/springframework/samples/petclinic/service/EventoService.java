@@ -32,17 +32,12 @@ public class EventoService {
     }
 
     public Iterable<Evento> findAll(){
-        return eventoRepository.findAll();
+        return eventoRepository.listadoEventosOrdenadosPorFecha();
     }
 
     public Iterable<Evento> encuentraTodosPublicos(){
-        Iterable<Evento> eventos = eventoRepository.findAll();
-        List<Evento> eventosRes = new ArrayList<Evento>();
-        for (Evento evento:eventos){
-            if (evento.getEsPublico()==true)
-                eventosRes.add(evento);
-        }
-        return eventosRes;
+        Iterable<Evento> eventos = eventoRepository.listadoEventosOrdenadosPorFecha();
+        return eventos;
     }
     @Transactional
 	public void save(Evento evento) throws DataAccessException {
@@ -103,7 +98,7 @@ public class EventoService {
         //Muestra primeros 6 eventos o menos para la página de inicio
         public List<Evento> eventosDeInicio(){
             List<Evento> res = new ArrayList<Evento>();
-            Iterator<Evento> iteradorEventos = encuentraTodosPublicos().iterator();
+            Iterator<Evento> iteradorEventos = eventoRepository.listadoEventosOrdenadosPorFecha().iterator();
             int contador = 0;
             while(iteradorEventos.hasNext() && contador < 6){
                 res.add(iteradorEventos.next());
