@@ -74,4 +74,30 @@ Iterator<Consulta> consultas = findAll().iterator();
     }
     return listaConsultasCliente;
 }
+
+public Consulta sacaConsultaDeLista(List<Consulta> consultas, int consultaId) {
+    Iterator<Consulta> consultasIterador = consultas.iterator();
+    Consulta consulta = null;
+    while(consultasIterador.hasNext()){
+        Consulta consultaIterada = consultasIterador.next();
+        if(consultaIterada.getId().equals(consultaId)){
+            consulta = consultaIterada;
+            break;
+        }
+    }
+	return consulta;
+}
+
+public void aniadirRespuesta(Consulta consulta, int consultaId) {
+
+    Iterator<Consulta> consultasIterador = consultaRepository.findAll().iterator();
+    while(consultasIterador.hasNext()){
+        Consulta consultaIterada = consultasIterador.next();
+        if(consultaIterada.getId().equals(consultaId)){
+            consultaIterada.setRespuesta(consulta.getRespuesta());
+            consultaRepository.save(consultaIterada);
+            break;
+        }
+    }
+}
 }
