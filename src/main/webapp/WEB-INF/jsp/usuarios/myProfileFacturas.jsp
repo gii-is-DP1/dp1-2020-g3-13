@@ -25,7 +25,7 @@
                                                 <c:forEach items="${factura.lineasFacturas}" var="lineas">
                                                 <p>-Lugar Alquilado: <c:out value="${lineas.alquilerEspacio.lugarRealizacion.nombre_recinto}"/></p>
                                                 <p>-Dias: <c:out value="${lineas.cantidad}"/></p>
-                                                <p>-Precio: <c:out value="${lineas.alquilerEspacio.precio}"/></p>                                 
+                                                <p>-Precio: <c:out value="${lineas.alquilerEspacio.precioTotal}"/></p>                                 
                                                 </c:forEach>
                                             </li>
                                         </ul>

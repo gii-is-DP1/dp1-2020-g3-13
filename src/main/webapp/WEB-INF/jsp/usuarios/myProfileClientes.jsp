@@ -30,18 +30,17 @@
                                             <spring:url value="myprofile/edit" var="edicionUrl">
 
                                             </spring:url>
-                                            <a href="${fn:escapeXml(edicionUrl)}">
-                                                <img class="img-responsive" src="/resources/images/icons/details.png" width="10%" />
-
+                                            <a href="${fn:escapeXml(edicionUrl)}"class="btn btn-default">Editar perfil</a></button>
+                                            <c:out value="" /> 
                                             </a>
-                                            <li class="button">
+                                            
                                                 <spring:url value="myprofile/delete" var="clienteUrl">                                  
                                                 </spring:url>
                                                 <a href="${fn:escapeXml(clienteUrl)}" class="btn btn-default">Eliminar cliente</a></button>
                                                 <c:out value="" /> 
                                                 </a>
                                                 </button>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>

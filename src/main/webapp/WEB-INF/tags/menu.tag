@@ -89,7 +89,7 @@
 					<li><a href="<c:url value="/peticion/new" />">Registro organizacion</a></li>
 				</sec:authorize>
 				<sec:authorize access='hasAnyAuthority("cliente")'>
-					<li><a href="<c:url value="/carrito" />"><span
+					<li><a href="<c:url value="/carrito/cliente" />"><span
 					class="glyphicon glyphicon-shopping-cart"></span> Mi cesta</a></li>
 					<petclinic:menuItem active="${name eq 'owners'}" url="/consultas/cliente/misConsultas"
 						title="Página de consultas de clientes">
@@ -99,6 +99,9 @@
 				</sec:authorize>
 				<sec:authorize access='hasAnyAuthority("cliente")'>
 					<li><a href="<c:url value="/usuarios/myprofile/eventosFavoritos" />"><i class="glyphicon glyphicon-heart"></i> Favoritos</a></li>
+				</sec:authorize>
+				<sec:authorize access='hasAnyAuthority("organizacion")'>
+					<li><a href="<c:url value="/carrito/organizacion" />"><i class="glyphicon glyphicon-shopping-cart"></i>Mi cesta</a></li>
 				</sec:authorize>
 
 				

@@ -9,6 +9,8 @@
               description="Names in the list" %>
 <%@ attribute name="size" required="true" rtexprvalue="true"
               description="Size of Select" %>
+<%@ attribute name="onchange" required="false" rtexprvalue="true"
+              description="Size of Select" %>
 
 <spring:bind path="${name}">
     <c:set var="cssGroup" value="form-group ${status.error ? 'error' : '' }"/>
@@ -17,7 +19,7 @@
         <label class="col-sm-2 control-label">${label}</label>
 
         <div class="col-sm-10">
-            <select name="${name}" >
+            <select name="${name}" onchange="${onchange}">
                 <c:forEach items="${names}" var="items">
                     <option value="${items.id}"> <c:out value="${items.nombre_recinto}"></c:out> </option>
                         </c:forEach>
