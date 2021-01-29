@@ -27,14 +27,17 @@
                 <td>
                     <c:out value="${consulta.asunto}"/>
                 </td>
-                
                 <td>
-
                     <c:out value="${consulta.fechaConsulta}"/>
-
                 </td>
                 <td>
                     <input type="button" class="btn btn-default" value="Detalles consulta" onclick="btn_click('${consulta.evento.nombreEvento}','${consulta.asunto}','${consulta.descripcion}','${consulta.fechaConsulta}','${consulta.cliente.email}')"></input>
+                    <spring:url value="/consultas/organizacion/misConsultas/{consulta_id}" var="respuestaUrl">
+                    <spring:param name="consulta_id" value="${consulta.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(respuestaUrl)}" class="btn btn-default">Responder consulta</a>
+
+                    </div>
                 </td>
                 
 

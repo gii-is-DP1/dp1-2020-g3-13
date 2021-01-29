@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.samples.petclinic.model.Validadores.RespuestaLimiteOrganizacionRestriccion;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,5 +43,9 @@ public class Consulta extends BaseEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
+
+    //@RespuestaLimiteOrganizacionRestriccion
+    private String respuesta;
+
 
 }

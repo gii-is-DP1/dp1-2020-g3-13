@@ -27,6 +27,7 @@ public class ConsultaController {
     private static final String VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM = "consultas/nuevaConsulta";
     private static final String VIEWS_LISTADO_CONSULTA_ORGANIZACION = "consultas/organizacionMisConsultas";
     private static final String VIEWS_LISTADO_CONSULTA_CLIENTE = "consultas/clienteMisConsultas";
+    private static final String VIEWS_CONSULTA_REPLY = "consultas/organizacionMisConsultasRespuesta";
 
     @Autowired
     private ConsultaService consultaService;
@@ -77,6 +78,32 @@ public class ConsultaController {
         List<Consulta> listadoConsultasCliente = consultaService.devuelveTodasLasConsultasDeClienteConId(cliente.getId());
         modelMap.addAttribute("consultas", listadoConsultasCliente);
         return VIEWS_LISTADO_CONSULTA_CLIENTE;
+
+    }
+
+    // Crea una vista para la respuesta de la consulta
+    @GetMapping(value = "/organizacion/misConsultas/{consulta_id}")
+    public String respuestaConsulta(ModelMap modelMap, @PathVariable("consulta_id") int consultaId){
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Consulta> consultasOrganizacion = consultaService.devuelveTodasLasConsultasDeOrganizacionConId(organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
+        Consulta consulta = consultaService.sacaConsultaDeLista(consultasOrganizacion, consultaId);
+        modelMap.addAttribute("consulta", consulta);
+        return VIEWS_CONSULTA_REPLY;
+
+    }
+
+    @PostMapping(value = "/organizacion/misConsultas/{consulta_id}")
+    public String guardaRespuestaConsulta(ModelMap modelMap, @PathVariable("consulta_id") int consultaId, Consulta consulta, BindingResult resultado){
+            if (resultado.hasErrors()) {
+                modelMap.addAttribute("consulta", consulta);
+                return VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM;
+            } else {
+                consultaService.aniadirRespuesta(consulta, consultaId);
+                
+                
+                return "redirect:/eventos";
+            }
+        
 
     }
 }
