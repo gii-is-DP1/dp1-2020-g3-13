@@ -31,7 +31,7 @@ public class AlquilerEspacio extends BaseEntity{
     // @NotEmpty
     protected LocalDateTime fechaFinReserva;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_lugar_realizacion", referencedColumnName = "id")
     private LugarRealizacion lugarRealizacion;
      

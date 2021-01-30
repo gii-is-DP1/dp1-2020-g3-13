@@ -36,12 +36,12 @@ public class LineaFactura extends BaseEntity{
     @Range(min = 1, max = 1)
     protected Integer cantidad;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_factura", referencedColumnName = "id")
     private Factura factura;
 
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_carrito", referencedColumnName = "id")
     private Carrito carrito;
 }
