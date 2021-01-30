@@ -16,7 +16,7 @@
                 <th style="width: 200px;">Asunto</th>
                 <th style="width: 200px;">Descripcion</th>
                 <th style="width: 200px;">Fecha de la consulta</th>
-                <th style="width: 200px;">Email a comunicar</th>
+                <th style="width: 200px;">Ver detalles</th>
                 
             </tr>
         </thead>
@@ -36,7 +36,11 @@
                     <c:out value="${consulta.fechaConsulta}"/>
                 </td>
                 <td>
-                    <c:out value="${consulta.cliente.email}"/>
+                    <spring:url value="/consultas/cliente/misConsultas/{consulta_id}" var="detallesUrl">
+                    <spring:param name="consulta_id" value="${consulta.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(detallesUrl)}" class="btn btn-default">Ver detalles</a>
+
                 </td>
 
             </tr>

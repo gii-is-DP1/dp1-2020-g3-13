@@ -23,11 +23,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <c:choose>
-                                                <c:when test="${consulta['new']}">
                                                     <button class="btn btn-default" type="submit">a&ntilde;adir Consulta</button>
-                                                </c:when>
-                                            </c:choose>
                                         </div>
                                     </div>
                                 </form:form>

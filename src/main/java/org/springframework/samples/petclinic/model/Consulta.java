@@ -44,8 +44,7 @@ public class Consulta extends BaseEntity {
     @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
 
-    //@RespuestaLimiteOrganizacionRestriccion
+    // @RespuestaLimiteOrganizacionRestriccion
     private String respuesta;
-
 
 }

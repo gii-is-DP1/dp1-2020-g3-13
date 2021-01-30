@@ -28,6 +28,7 @@ public class ConsultaController {
     private static final String VIEWS_LISTADO_CONSULTA_ORGANIZACION = "consultas/organizacionMisConsultas";
     private static final String VIEWS_LISTADO_CONSULTA_CLIENTE = "consultas/clienteMisConsultas";
     private static final String VIEWS_CONSULTA_REPLY = "consultas/organizacionMisConsultasRespuesta";
+    private static final String VIEWS_DETALLES_CONSULTA_CLIENTE = "consultas/clienteMisRespuestas";
 
     @Autowired
     private ConsultaService consultaService;
@@ -36,15 +37,15 @@ public class ConsultaController {
     @Autowired
     private OrganizacionService organizacionService;
 
-   
-    //Crea la vista de un formulario de consulta
+    // Crea la vista de un formulario de consulta
     @GetMapping(value = "/{evento_id}/nuevo")
     public String formularioConsultas(ModelMap modelMap) {
         Consulta consulta = new Consulta();
         modelMap.put("consulta", consulta);
         return VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM;
     }
-    //Manda una petición de creación de consulta y lo añade a la base de datos
+
+    // Manda una petición de creación de consulta y lo añade a la base de datos
     @PostMapping(value = "/{evento_id}/nuevo")
     public String guardarEConsulta(@Valid Consulta consulta, @PathVariable("evento_id") int eventoId,
             BindingResult resultado, ModelMap modelMap) {
@@ -59,23 +60,28 @@ public class ConsultaController {
         }
 
     }
-    // Crea una vista con todas las consultas dirigidas a la organización que está logeada
+
+    // Crea una vista con todas las consultas dirigidas a la organización que está
+    // logeada
     @GetMapping(value = "/organizacion/misConsultas")
-    public String listadoConsultasOrganizacion(ModelMap modelMap){
+    public String listadoConsultasOrganizacion(ModelMap modelMap) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         Organizacion organizacion = organizacionService.encuentraOrganizacionByUsuario(usuario);
-        List<Consulta> listadoConsultasOrganizacion = consultaService.devuelveTodasLasConsultasDeOrganizacionConId(organizacion.getId());
+        List<Consulta> listadoConsultasOrganizacion = consultaService
+                .devuelveTodasLasConsultasDeOrganizacionConId(organizacion.getId());
         modelMap.addAttribute("consultas", listadoConsultasOrganizacion);
         return VIEWS_LISTADO_CONSULTA_ORGANIZACION;
 
     }
 
-    // Crea una vista con todas las consultas dirigidas a la organización que está logeada
+    // Crea una vista con todas las consultas dirigidas a l cliente que está
+    // logeado
     @GetMapping(value = "/cliente/misConsultas")
-    public String listadoConsultasCliente(ModelMap modelMap){
+    public String listadoConsultasCliente(ModelMap modelMap) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         Cliente cliente = clienteService.findClienteByUsuario(usuario);
-        List<Consulta> listadoConsultasCliente = consultaService.devuelveTodasLasConsultasDeClienteConId(cliente.getId());
+        List<Consulta> listadoConsultasCliente = consultaService
+                .devuelveTodasLasConsultasDeClienteConId(cliente.getId());
         modelMap.addAttribute("consultas", listadoConsultasCliente);
         return VIEWS_LISTADO_CONSULTA_CLIENTE;
 
@@ -83,9 +89,10 @@ public class ConsultaController {
 
     // Crea una vista para la respuesta de la consulta
     @GetMapping(value = "/organizacion/misConsultas/{consulta_id}")
-    public String respuestaConsulta(ModelMap modelMap, @PathVariable("consulta_id") int consultaId){
+    public String respuestaConsulta(ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<Consulta> consultasOrganizacion = consultaService.devuelveTodasLasConsultasDeOrganizacionConId(organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
+        List<Consulta> consultasOrganizacion = consultaService.devuelveTodasLasConsultasDeOrganizacionConId(
+                organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
         Consulta consulta = consultaService.sacaConsultaDeLista(consultasOrganizacion, consultaId);
         modelMap.addAttribute("consulta", consulta);
         return VIEWS_CONSULTA_REPLY;
@@ -93,17 +100,28 @@ public class ConsultaController {
     }
 
     @PostMapping(value = "/organizacion/misConsultas/{consulta_id}")
-    public String guardaRespuestaConsulta(ModelMap modelMap, @PathVariable("consulta_id") int consultaId, Consulta consulta, BindingResult resultado){
-            if (resultado.hasErrors()) {
-                modelMap.addAttribute("consulta", consulta);
-                return VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM;
-            } else {
-                consultaService.aniadirRespuesta(consulta, consultaId);
-                
-                
-                return "redirect:/eventos";
-            }
-        
+    public String guardaRespuestaConsulta(ModelMap modelMap, @PathVariable("consulta_id") int consultaId,
+            Consulta consulta, BindingResult resultado) {
+        if (resultado.hasErrors()) {
+            modelMap.addAttribute("consulta", consulta);
+            return VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM;
+        } else {
+            consultaService.aniadirRespuesta(consulta, consultaId);
+
+            return "redirect:/eventos";
+        }
+
+    }
+
+    @GetMapping(value = "/cliente/misConsultas/{consulta_id}")
+    public String verDetallesConsultaCliente(ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {
+        System.out.println("======================================");
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Consulta> consultasCliente = consultaService
+                .devuelveTodasLasConsultasDeClienteConId(clienteService.findClienteByUsuario(usuario).getId());
+        Consulta consulta = consultaService.sacaConsultaDeLista(consultasCliente, consultaId);
+        modelMap.addAttribute("consulta", consulta);
+        return VIEWS_DETALLES_CONSULTA_CLIENTE;
 
     }
 }
