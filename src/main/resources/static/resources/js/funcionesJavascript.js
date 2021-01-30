@@ -1,7 +1,17 @@
+
+
 $(function() {
     //Lettering
     $('.nombre-sitio').lettering();
     $('.ocultar').hide();
+
+    $("#datetimeInicio").datetimepicker({
+        format: 'YYYY/MM/DD HH:mm'
+    });
+    $("#datetimeFin").datetimepicker({
+        format: 'YYYY/MM/DD HH:mm'
+    });
+
 
     
     return false;
