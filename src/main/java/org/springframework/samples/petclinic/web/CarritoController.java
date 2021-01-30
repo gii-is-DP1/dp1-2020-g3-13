@@ -13,14 +13,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Controller
 @RequestMapping("/carrito")
 public class CarritoController {
-    // private static final String VIEWS_CARRITO = null;
+
 	@Autowired
     private CarritoService carritoService;
 	
-    @GetMapping()
+    @GetMapping("/cliente")
 	public String miCarrito(ModelMap modelMap) {
 		String vista="carrito/miCarrito";
         Carrito carrito = carritoService.listadoObjetosCarrito(SecurityContextHolder.getContext().getAuthentication().getName());
+        modelMap.addAttribute("carrito", carrito);
+        return vista;
+    }
+    
+    @GetMapping("/organizacion")
+	public String miCarritoOrg(ModelMap modelMap) {
+		String vista="carrito/miCarritoOrganizacion";
+        Carrito carrito = carritoService.listadoObjetosCarritoOrganizacion(SecurityContextHolder.getContext().getAuthentication().getName());
         modelMap.addAttribute("carrito", carrito);
         return vista;
 	}

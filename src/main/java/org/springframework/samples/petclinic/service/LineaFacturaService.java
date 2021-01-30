@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.repository.LineaFacturaRepository;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,11 @@ public class LineaFacturaService {
     public void save(LineaFactura lineaFactura){
          lineaFacturaRepository.save(lineaFactura);
 
+    }
+
+    @Transactional
+    public LineaFactura encuentraAlquilerEspacio(int alqId){
+        return lineaFacturaRepository.encuentraAlquiler(alqId);
     }
 
     @Transactional

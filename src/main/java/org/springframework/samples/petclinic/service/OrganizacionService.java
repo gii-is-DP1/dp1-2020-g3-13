@@ -47,6 +47,10 @@ public class OrganizacionService {
     public Organizacion findOrganizacionById(int organizacionId){
         return organizacionRepo.findById(organizacionId);
     }
+    @Transactional
+    public Organizacion findOrganizacionByUsuario(String usuario) throws DataAccessException{
+        return organizacionRepo.listadoOrganizacionByUsuario(usuario);
+    }
 
 
 

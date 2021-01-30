@@ -20,20 +20,13 @@
                     </div>
                 </div>
  
-                <petclinic:selectField label="Seleccione donde le gustaría reservar: " name="lugarRealizacion" size="6" names="${lugares}"/>
+                <petclinic:selectField label="Seleccione donde le gustaría reservar: " name="lugarRealizacion" size="6" names="${lugares}" onchange="miselect(lugarRealizacion)"/>
 
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-default" type="submit">Guardar Lugar</button>
-                </div>
+            
+        
 
-
-            </div>
-        </form:form>
-        <spring:url value="/eventos/{eventoId}" var="volverAEvento">
-            <spring:param name="eventoId" value="${evento.id}" />
-    </spring:url>
+             
         <!--Terminar !!!! -->
         <table id="detallerLugarTabla" class="table table-striped">
             <tr>
@@ -45,49 +38,61 @@
                 <th style="width: 200px;">Características</th>
                 <th style="width: 200px;">Precio/Dia</th>
             </tr>
-                <tr>
-                    <td>
-
-                        <c:out value="${lugarSeleccionado.nombre_recinto}" />
-
-                    </td>
-                    <td>
-
-                        <c:out value="${lugarSeleccionado.aforo}" />
-
-                    </td>
-                    <td>
-
-                        <c:out value="${lugarSeleccionado.direccion}" />
-
-                    </td> 
-                    <td>
-
-                        <c:out value="${lugarSeleccionado.email}" />
-
-                    </td>
-                    <td>
-
-                        <c:out value="${lugarSeleccionado.telefono}" />
-
-                    </td>
-                    <td>
-
-                        <c:out value="${lugarSeleccionado.caracteristicas}" />
-
-                    </td>
-                    <td>
-
-                        <c:out value="${lugarSeleccionado.precio}" />
-
-                    </td>
+            <tr>
                     
-                    
-                   
+                <td>
+                    <p id="nombreRecintoSeleccionado"></p>
+                </td>
+                <td>
+                    <p id="aforoSeleccionado"></p>
+                </td>
+                <td>
+                    <p id="direccionSeleccionado"></p>
+                </td> 
+                <td>
+                    <p id="emailSeleccionado"></p>
+                </td>
+                <td>
+                    <p id="telefonoContacto"></p>
+                </td>
+                <td>
+                    <p id="caracteristicasSeleccionado"></p>
+                </td>
+                <td>
+                    <p id="precioSeleccionado"></p>
+                </td>
+            </tr>
+        </table>         
+            <c:forEach items="${lugares}" var="items">
+                    <div style="display: none;">
+                        <p class="${items.id}nombreRecintoSeleccionado"><c:out value="${items.nombre_recinto}" /></p>
+                    </div>
+                    <div class="${items.id}aforoSeleccionado" style="display: none;">
+                        <c:out value="${items.aforo}" />
+                    </div>
+                    <div class="${items.id}direccionSeleccionado" style="display: none;">
+                        <c:out value="${items.direccion}" />
+                    </div>
+                    <div class="${items.id}emailSeleccionado" style="display: none;">
+                        <c:out value="${items.email}" />
+                    </div>
+                    <div class="${items.id}telefonoContacto" style="display: none;">
+                        <c:out value="${items.telefono}" />
+                    </div>
+                    <div class="${items.id}caracteristicasSeleccionado" style="display: none;">
+                        <c:out value="${items.caracteristicas}" />
+                    </div>
+                    <div class="${items.id}precioSeleccionado" style="display: none;">
+                        <c:out value="${items.precio}" />
+                    </div>
+            </c:forEach>      
 
-                </tr>
-        </table>
-
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-default" type="submit">Seleccionar Lugar</button>
+                </div>
+            </div>
+        </form:form>
 
 
     </jsp:body>
