@@ -60,6 +60,12 @@ public class ActividadService {
             //AlquilerEspacio alq =actividadRepo.encuentraAlquilerLugar(alquiler.getId());
             actividad.setAlquilerEspacio(null);
         }
+        @Transactional
+        public Actividad encuentraActividadPorAlquilerId(int alquilerEspacioId){
+            return actividadRepo.encuentraLugarAlquiler(alquilerEspacioId);
+        }
+
+
 
         @Transactional
         public void anadirActividadAEvento(Evento evento, Actividad actividad) throws DataAccessException{

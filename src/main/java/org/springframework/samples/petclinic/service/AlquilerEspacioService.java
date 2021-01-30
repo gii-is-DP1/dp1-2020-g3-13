@@ -65,5 +65,10 @@ public class AlquilerEspacioService {
             // actividadService.guardarActividad(actividad);
     }
 
+    @Transactional
+    public Actividad encuentraActividad(int alquilerId){
+        return alquilerEspacioRepository.encuentraActividadPorAlquilerId(alquilerId);
+    }
+
 
 }

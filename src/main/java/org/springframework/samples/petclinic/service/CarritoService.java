@@ -143,8 +143,9 @@ public class CarritoService {
 
     @Transactional
     public void borrarLineaFactura(Carrito carrito, int lineaFacturaId) throws DataAccessException{
-        LineaFactura linea =carrito.getLineasFacturas().get(lineaFacturaId);
-        lineaService.borrarLinea(linea);
+        LineaFactura linea = lineaService.encuentraLineaFactura(lineaFacturaId);
+        carrito.getLineasFacturas().remove(linea);
+
     }
 
 

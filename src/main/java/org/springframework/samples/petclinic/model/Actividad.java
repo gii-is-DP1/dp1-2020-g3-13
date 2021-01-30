@@ -57,7 +57,7 @@ public class Actividad extends BaseEntity {
   @JoinColumn(name = "alquiler_espacio_id", referencedColumnName = "id")
   private AlquilerEspacio alquilerEspacio;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne()
   @JoinColumn(name = "evento_id", referencedColumnName = "id")
   private Evento evento;
 

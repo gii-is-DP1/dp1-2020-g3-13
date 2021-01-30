@@ -21,6 +21,11 @@ public class LineaFacturaService {
     }
 
     @Transactional
+    public LineaFactura encuentraLineaFactura(int lineaFacturaId){
+        return lineaFacturaRepository.findById(lineaFacturaId).orElse(null);
+    }
+
+    @Transactional
     public Iterable<LineaFactura> findAll(){
         return lineaFacturaRepository.findAll();
     }
