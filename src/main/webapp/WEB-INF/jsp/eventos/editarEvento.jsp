@@ -30,10 +30,11 @@
                                     <petclinic:inputField label="Nombre" name="nombreEvento" />
                                     <petclinic:inputField label="Tipo de evento" name="tipoEvento" />
                                     <petclinic:inputField label="Descripcion" name="descripcion" />
-                                    <petclinic:inputField label="Fecha de inicio" name="fechaInicio" />
-                                    <petclinic:inputField label="Fecha de fin" name="fechaFin" />
+                                    <petclinic:inputField label = "Fecha Inicio" name ="fechaInicio" id="fechaInicio"/>
+                                    <petclinic:inputField label = "Fecha Fin" name ="fechaFin" id="fechaFin"/>
                                     <petclinic:inputField label="Categoria" name="categoria" />
                                     <petclinic:inputField label="Medidas Sanitarias" name="medidasSanitarias" />
+                        
                                 </div>
 
                                 <div class="form-group">
