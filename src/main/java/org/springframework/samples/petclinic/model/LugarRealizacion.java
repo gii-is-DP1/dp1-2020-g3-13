@@ -21,10 +21,13 @@ import lombok.Setter;
 @Table(name = "lugar_realizacion")
 public class LugarRealizacion extends BaseEntity{
 
+<<<<<<< Updated upstream
+=======
 // CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
 
-    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
-    // private List<Actividad> actividades;
+>>>>>>> Stashed changes
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
+    private List<Actividad> actividades;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
     private List<AlquilerEspacio> alquilerEspacio;

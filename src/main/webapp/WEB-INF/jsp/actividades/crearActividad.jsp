@@ -28,15 +28,21 @@
                                     <div class="form-group has-feedback">
                                         <petclinic:inputField label="Temática" name="tematicaActividad"/>
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
-                                        <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
-                                        <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
-                                        <!-- <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${lugares}" />
+                                        <petclinic:inputField id="datetimeInicio" label="Fecha de Inicio" name="fechaInicio" />
+                                        <petclinic:inputField id="datetimeFin" label="Fecha de Fin" name="fechaFin" />
+                                        <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${lugares}" />
                                        <p> Elige lugar</p>
                                         <select name="lugarRealizacionId" >
                                             <c:forEach items="${lugaresRealizacion}" var="lugarRealizacion">
                                                   <option value="${lugarRealizacion.id}"> <c:out value="${lugarRealizacion.nombre_recinto}"></c:out> </option>
                                                 </c:forEach>
                                         </select> -->
+=======
+                                        <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
+                                        <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
+                                        <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${lugares}" />
+                                       
+>>>>>>> Stashed changes
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
