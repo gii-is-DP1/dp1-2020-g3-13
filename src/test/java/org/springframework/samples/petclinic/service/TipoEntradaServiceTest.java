@@ -89,4 +89,25 @@ public class TipoEntradaServiceTest {
         assertEquals(numeroDeEntradasAntes+2, numeroDeEntradasDespues);
     }
 
+
+        // Comprueba que no hay errores al añadir un tipo de entrada a un evento
+        @Test
+        public void deberiaAñadir90porCiento() {
+            int numeroEntradasIntroducidas = 50;
+            int numeroEntradasDespues = 45;
+            Evento evento = eventoService.findEventoById(1);
+            TipoEntrada tipoEntrada = new TipoEntrada();
+            tipoEntrada.setFechaInicio(LocalDateTime.now().plusDays(1));
+            tipoEntrada.setFechaFin(tipoEntrada.getFechaInicio().plusDays(1));
+            tipoEntrada.setId(tipoEntradaService.tipoEntradaCount());
+            tipoEntrada.setNombre(NombreTiposEntrada.PASE_VARIOS_DIAS);
+            tipoEntrada.setPrecio(12.0);
+            tipoEntrada.setEvento(evento);
+            tipoEntrada.setNumEntradas(numeroEntradasIntroducidas);
+            evento.getTipoEntradas().add(tipoEntrada);
+            tipoEntradaService.soloVentaAl90PorCiento(tipoEntrada);
+            assertEquals(numeroEntradasDespues, tipoEntrada.getNumEntradas());
+    
+        }
+
 }

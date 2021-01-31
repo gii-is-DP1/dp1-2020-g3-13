@@ -12,10 +12,13 @@ public class RespuestaLimiteOrganizacionValidador implements ConstraintValidator
     @Override
     public boolean isValid(String respuesta, ConstraintValidatorContext context) {
         if (respuesta == null) {
+            System.out.println("soy cliente");
             return true;
         }else{
+            System.out.println("entro aqui");
             int tamanio = respuesta.toString().length();
-            return tamanio <= 500 && tamanio > 50;
+            System.out.println(tamanio);
+            return (tamanio <= 500 && tamanio > 50);
         }
     }
 }

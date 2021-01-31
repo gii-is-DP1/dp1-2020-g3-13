@@ -3,11 +3,13 @@ package org.springframework.samples.petclinic.web;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Consulta;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.Validadores.RespuestaLimiteOrganizacionValidador;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ConsultaService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -15,6 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -89,19 +93,19 @@ public class ConsultaController {
 
     // Crea una vista para la respuesta de la consulta
     @GetMapping(value = "/organizacion/misConsultas/{consulta_id}")
-    public String respuestaConsulta(ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {
+    public String respuestaConsulta(Consulta consulta, ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         List<Consulta> consultasOrganizacion = consultaService.devuelveTodasLasConsultasDeOrganizacionConId(
                 organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
-        Consulta consulta = consultaService.sacaConsultaDeLista(consultasOrganizacion, consultaId);
+                consulta = consultaService.sacaConsultaDeLista(consultasOrganizacion, consultaId);
         modelMap.addAttribute("consulta", consulta);
         return VIEWS_CONSULTA_REPLY;
 
     }
 
     @PostMapping(value = "/organizacion/misConsultas/{consulta_id}")
-    public String guardaRespuestaConsulta(ModelMap modelMap, @PathVariable("consulta_id") int consultaId,
-            Consulta consulta, BindingResult resultado) {
+    public String guardaRespuestaConsulta(@Valid Consulta consulta, ModelMap modelMap, @PathVariable("consulta_id") int consultaId,
+            BindingResult resultado) {
         if (resultado.hasErrors()) {
             modelMap.addAttribute("consulta", consulta);
             return VIEWS_CONSULTA_CREATE_OR_UPDATE_FORM;
@@ -112,6 +116,8 @@ public class ConsultaController {
         }
 
     }
+
+    
 
     @GetMapping(value = "/cliente/misConsultas/{consulta_id}")
     public String verDetallesConsultaCliente(ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {

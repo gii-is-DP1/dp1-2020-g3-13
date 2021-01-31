@@ -14,17 +14,6 @@
 
 
                             <petclinic:layout pageName="tipoEntrada">
-                                <script>
-                                    $(function() {
-                                        $("#fechaInicio").datepicker({
-                                            dateFormat: 'yy/mm/dd'
-                                        });
-                                        $("#fechaFin").datepicker({
-                                            dateFormat: 'yy/mm/dd'
-                                        });
-                                    });
-                                </script>
-                        <jsp:body>
                                 <h2>
                                     Añade los Tipos de Entradas a tu Evento
                                 </h2>
@@ -32,8 +21,8 @@
                                     <div class="form-group has-feedback">
                                         <petclinic:selectFieldTipoEntrada label="Selecciona el tipo de Entrada" name="nombre" names="${NombreTipoEntrada}" size ="1"/>
                                         <petclinic:inputField label="Numero de entradas disponibles" name="numEntradas" />
-                                        <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" id="fechaInicio" />
-                                        <petclinic:inputField label="Fecha de Fin" name="fechaFin" id="fechaFin" />
+                                        <petclinic:inputField id="datetimeInicio" label="Fecha de Inicio" name="fechaInicio"/>
+                                        <petclinic:inputField id="datetimeFin" label="Fecha de Fin" name="fechaFin"/>
                                         <petclinic:inputField label="Precio" name="precio" />
 
                                     </div>
@@ -50,5 +39,5 @@
                                         </div>
                                     </div>
                                 </form:form>
-                            </jsp:body>
+                        
                             </petclinic:layout>
