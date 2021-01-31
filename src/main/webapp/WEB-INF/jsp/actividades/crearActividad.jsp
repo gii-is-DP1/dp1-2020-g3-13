@@ -28,6 +28,7 @@
                                     <div class="form-group has-feedback">
                                         <petclinic:inputField label="Temática" name="tematicaActividad"/>
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
+<<<<<<< Updated upstream
                                         <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" id="fechaInicio" />
                                         <petclinic:inputField label="Fecha de Fin" name="fechaFin" id="fechaFin" />
                                         <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${lugares}" />
@@ -37,6 +38,12 @@
                                                   <option value="${lugarRealizacion.id}"> <c:out value="${lugarRealizacion.nombre_recinto}"></c:out> </option>
                                                 </c:forEach>
                                         </select> -->
+=======
+                                        <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
+                                        <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
+                                        <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${lugares}" />
+                                       
+>>>>>>> Stashed changes
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
