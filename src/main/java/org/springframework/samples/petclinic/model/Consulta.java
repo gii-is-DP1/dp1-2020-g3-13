@@ -43,8 +43,9 @@ public class Consulta extends BaseEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
-
-    // @RespuestaLimiteOrganizacionRestriccion
+    //TODO revisar bien esta validacion
+    @RespuestaLimiteOrganizacionRestriccion
+    @Column(name = "respuesta", updatable = true)
     private String respuesta;
 
 }

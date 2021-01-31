@@ -22,7 +22,6 @@ public class ConsultaService {
     @Autowired
     private EventoService eventoService;
 
-    @Transactional
     public int consultasCount() {
         return (int) consultaRepository.count();
     }
@@ -42,7 +41,6 @@ public class ConsultaService {
 
     }
 
-    @Transactional
     // Devuelve todas las consultas que se han realizado a los eventos de
     // la organizacion cuyo id es el que se ha pasado por parametros
     public List<Consulta> devuelveTodasLasConsultasDeOrganizacionConId(int id) {
@@ -61,7 +59,6 @@ public class ConsultaService {
 
     }
 
-    @Transactional
     // Devuelve todas las consultas que se han realizado a los eventos del
     // cliente cuyo id es el que se ha pasado por parametros
     public List<Consulta> devuelveTodasLasConsultasDeClienteConId(int id) {
@@ -91,8 +88,8 @@ public class ConsultaService {
         return consulta;
     }
 
+    @Transactional
     public void aniadirRespuesta(Consulta consulta, int consultaId) {
-
         Iterator<Consulta> consultasIterador = consultaRepository.findAll().iterator();
         while (consultasIterador.hasNext()) {
             Consulta consultaIterada = consultasIterador.next();

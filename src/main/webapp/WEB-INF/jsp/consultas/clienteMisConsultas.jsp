@@ -36,10 +36,11 @@
                     <c:out value="${consulta.fechaConsulta}"/>
                 </td>
                 <td>
+                    
                     <spring:url value="/consultas/cliente/misConsultas/{consulta_id}" var="detallesUrl">
                     <spring:param name="consulta_id" value="${consulta.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(detallesUrl)}" class="btn btn-default">Ver detalles</a>
+                    <a href="${fn:escapeXml(detallesUrl)}" class="btn btn-default">Ver respuesta</a>
 
                 </td>
 
