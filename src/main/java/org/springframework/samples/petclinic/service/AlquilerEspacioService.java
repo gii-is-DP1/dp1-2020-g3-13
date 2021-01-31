@@ -1,16 +1,10 @@
 package org.springframework.samples.petclinic.service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
 import static java.time.temporal.ChronoUnit.HOURS;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.AlquilerEspacio;
-import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.repository.AlquilerEspacioRepository;
@@ -22,14 +16,6 @@ public class AlquilerEspacioService {
 
     @Autowired
     private AlquilerEspacioRepository alquilerEspacioRepository;
-    @Autowired
-    private ActividadService actividadService;
-    @Autowired
-    private AlquilerEspacioService alquilerService;
-    @Autowired
-    private LineaFacturaService lineaService;
-    @Autowired
-    private CarritoService carritoService;
 
     @Transactional
     public int alquilerEspacioCount(){

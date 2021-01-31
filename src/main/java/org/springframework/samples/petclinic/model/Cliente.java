@@ -3,19 +3,19 @@ package org.springframework.samples.petclinic.model;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
+
+
 
 
 
@@ -39,9 +39,8 @@ public class Cliente extends Persona{
 
 
     @Column(name = "telefono")
-    @NotNull
-    @Size(min=9, message = "Número de teléfono no válido")
-    @Digits(fraction = 0, integer = 9, message = "Número de teléfono no válido")
+    @NotBlank(message = "El telefono no puede estar vacio")
+    @Size(min=9, max= 9, message = "El telefono debe ser exactamente de 9 caracteres")
     private String telefono;
 
       

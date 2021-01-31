@@ -19,13 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -36,7 +34,6 @@ public class ActividadController {
     private static final String VIEWS_ACTIVIDAD_LISTA_ACTIVIDADES = "actividades/EventoLista";
     private static final String VIEW_ALQUILAR_ESPACIO = "alquilerEspacio/alquilerEspacio";
     private static final String VIEW_ACTIVIDAD_DETALLES = "actividades/detallesActividad";
-    private static final String VIEW_EVENTO_DETALLES = "eventos/detallesEvento";
 
     @Autowired
     private ActividadService actividadService;

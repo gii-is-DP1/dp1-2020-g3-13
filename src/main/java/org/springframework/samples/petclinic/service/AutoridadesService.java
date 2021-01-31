@@ -37,7 +37,7 @@ public class AutoridadesService {
 			//user.get().getAuthorities().add(authority);
 			autoridadesRepository.save(autoridades);
 		}else
-			throw new DataAccessException("User '"+nombreUsuario+"' not found!") {};
+			throw new DataAccessException("User '"+nombreUsuario+" ' not found!") {};
 	}
 
 	public Collection<Autoridades> listadoAutoridades(String usuario){

@@ -27,7 +27,7 @@
     <div class="form-group has-feedback">
         <petclinic:inputField label="Titular Tarjeta" name="nombreTitular"/>
         <petclinic:inputField label="Numero Tajeta" name="numTarjeta"/>
-        <petclinic:inputField label="Fecha Caducidad" name="fechaCaducidad"/>
+        <petclinic:inputField label="Fecha Caducidad" name="fechaCaducidad" id="fechaCaducidad"/>
         <petclinic:inputField label="CVV" name="cvv"/>
     </div>
     <div class="form-group">
