@@ -48,6 +48,10 @@ public class Actividad extends BaseEntity {
   @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
   private LocalDateTime fechaFin;
   
+<<<<<<< Updated upstream
+=======
+  // CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
+>>>>>>> Stashed changes
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "lugar_realizacion_id", referencedColumnName = "id")
   private LugarRealizacion lugarRealizacion;
