@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class FacturaServiceTest {
@@ -19,8 +17,6 @@ public class FacturaServiceTest {
     private FacturaService facturaService;
     @Autowired
     private UsuarioService usuarioService;
-    @Autowired
-    private OrganizacionService organizacionService;
 
     @Test
     public void testCountWithInitialDataConsulta(){

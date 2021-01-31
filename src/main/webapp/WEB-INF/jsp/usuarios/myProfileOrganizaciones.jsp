@@ -29,26 +29,25 @@
                                             <spring:url value="myprofile/edit" var="edicionUrl">
 
                                             </spring:url>
-                                            <a href="${fn:escapeXml(edicionUrl)}">
-                                                <img class="img-responsive" src="/resources/images/icons/details.png" width="10%" />
-
+                                            <a href="${fn:escapeXml(edicionUrl)}"class="btn btn-default">Editar perfil</a></button>
+                                            <c:out value="" /> 
                                             </a>
-                                            <li class="button">
+                                            
                                                 <spring:url value="myprofile/delete" var="organizacionUrl">                                  
                                                 </spring:url>
                                                 <a href="${fn:escapeXml(organizacionUrl)}" class="btn btn-default">Eliminar organizacion</a></button>
                                                 <c:out value="" /> 
                                                 </a>
                                                 </button>
-                                            </li>
-                                            <li class="button">
+                                            
+                                            
                                                 <spring:url value="myprofile/facturas" var="facturaUrl">                                  
                                                 </spring:url>
                                                 <a href="${fn:escapeXml(facturaUrl)}" class="btn btn-default">Facturas</a></button>
                                                 <c:out value="" /> 
                                                 </a>
                                                 </button>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>

@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,7 +35,9 @@ public class Cliente extends Persona{
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cliente")
     private  List<Entrada> entradas;
-    @OneToMany(cascade = CascadeType.ALL)
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Evento> eventosFavoritos;
 
     @OneToOne(cascade = CascadeType.ALL)

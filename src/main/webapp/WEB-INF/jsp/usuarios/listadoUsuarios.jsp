@@ -33,10 +33,21 @@
                     <c:out value="${usuarios.autoridades.autoridad} "/>
 
                 </td>
-                    <td><spring:url value="/usuarios/{usuarioId}/delete" var="deleteUrl">
-                        <spring:param name="usuarioId" value="${usuarios.nombreUsuario}"/>
-                    </spring:url>
-                    <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default" onclick="return confirm('¿Esta seguro de que quiere borrar el usuario?')">Borrar Usuario</a></td>
+                
+                    <div class="borrar">
+                        <c:choose>
+                        <c:when test="${usuarios.autoridades.autoridad=='admin'}">
+                            <td></td>
+                        </c:when>
+                        <c:otherwise >
+                            <td><spring:url value="/usuarios/{usuarioId}/delete" var="deleteUrl">
+                                <spring:param name="usuarioId" value="${usuarios.nombreUsuario}"/>
+                            </spring:url>
+                            <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default" onclick="return confirm('¿Esta seguro de que quiere borrar el usuario?')">Borrar Usuario</a>
+                        </c:otherwise>
+                        </c:choose>
+                    </div>
+                </td>
       
 <!--
                 <td> 

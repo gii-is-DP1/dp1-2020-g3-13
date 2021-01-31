@@ -3,46 +3,56 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
-<petclinic:layout pageName="lugaresRealizacion">
+<petclinic:layout pageName="detallesActividad">
 
-    <h2>Detalles de <c:out value="${lugarRealizacion.nombre_recinto}"/></h2>
-
-
+    <h2>Detalles de <c:out value="${actividad.tematicaActividad}"/></h2>
     <table class="table table-striped">
         <tr>
-            <th>Nombre</th>
-            <td><b><c:out value="${lugarRealizacion.nombre_recinto}"/></b></td>
+            <th>Descripción</th>
+            <td><b><c:out value="${actividad.descripcionActividad}"/></b></td>
         </tr>
         <tr>
-            <th>telefono</th>
-            <td><c:out value="${lugarRealizacion.telefono}"/></td>
+            <th>Fecha de Inicio</th>
+            <td><c:out value="${actividad.fechaInicio}"/></td>
         </tr>
         <tr>
-            <th>aforo</th>
-            <td><c:out value="${lugarRealizacion.aforo}"/></td>
+            <th>Fecha de Fin</th>
+            <td><c:out value="${actividad.fechaFin}"/></td>
         </tr>
         <tr>
-            <th>direccion</th>
-            <td><c:out value="${lugarRealizacion.direccion}"/></td>
+            <th>¿Dónde se va a realizar?</th>
+            <td><c:out value="${actividad.alquilerEspacio.lugarRealizacion.nombre_recinto}"/></td>
         </tr>
         <tr>
-            <th>email</th>
-            <td><c:out value="${lugarRealizacion.email}"/></td>
+            <th>Exponentes</th>
+            <td>
+                <div class="cuadro-entrada"></div>
+                <c:forEach items="${actividad.exponentes}" var="exponente">
+                    <p>Nombre:
+                        <c:out value="${exponente.nombreExponente} " /></p>
+                    <p>Apellidos:
+                        <c:out value="${exponente.apellidosExponente} " /></p>
+                    <p>Alias: "<c:out value="${exponente.alias} " />"</p>
+                        
+                    </div>
+
+                </c:forEach>
+            </td>
         </tr>
-        <tr>
-            <th>Caracteristicas</th>
-            <td><c:out value="${lugarRealizacion.caracteristicas}"/></td>
-        </tr>
-        <tr>
-            <th>Foto</th>
-            <td><img src="${lugarRealizacion.urlFoto}" ></td>
-        </tr>
+       
     </table>
-    <spring:url value="{adminId}/edit" var="editUrl">
-        <spring:param name="adminId" value="${admin.id}"/>
+    <spring:url value="/eventos/{eventoId}/actividades/{actividadId}/alquilarEspacio" var="alquilarEspacioUrl">
+        <spring:param name="eventoId" value="${evento.id}"/>
+        <spring:param name="actividadId" value="${actividad.id}"/>
     </spring:url>
-    <a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Editar Lugar</a>
+    <a href="${fn:escapeXml(alquilarEspacioUrl)}" class="btn btn-default">¿Quieres reservar el espacio?</a>
+    <spring:url value="/eventos/{eventoId}/actividades/{actividadId}/nuevo" var="anadirExponenteUrl">
+        <spring:param name="eventoId" value="${evento.id}"/>
+        <spring:param name="actividadId" value="${actividad.id}"/>
+    </spring:url>
+    <a href="${fn:escapeXml(anadirExponenteUrl)}" class="btn btn-default">Añadir más exponentes</a>
 
 
 </petclinic:layout>

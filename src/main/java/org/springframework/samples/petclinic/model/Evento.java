@@ -10,9 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Builder.Default;
 
 @Entity
 @Getter
@@ -47,6 +50,9 @@ public class Evento extends BaseEntity{
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFin;
 
+    @Column(name = "esPublico")
+    private Boolean esPublico;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     
     // @JoinColumn(name = "actividades_id", referencedColumnName = "id")
@@ -61,14 +67,13 @@ public class Evento extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<Consulta> consultas;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     private Organizacion organizacion;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<Sponsor> sponsors;
 
-    private Boolean esPublico;
 
 
        

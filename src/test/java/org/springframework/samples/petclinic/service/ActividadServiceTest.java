@@ -1,11 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,21 +9,17 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
-import org.springframework.samples.petclinic.repository.ActividadRepository;
-import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class ActividadServiceTest {
+    
     @Autowired
     private ActividadService actividadService;
     @Autowired
-    private ActividadRepository actividadRepo;
-    @Autowired 
-    EventoRepository eventoRepo;
+    private EventoService eventoService;
 
     @Test
     public void testCountWithInitialDataActividad() {
@@ -35,12 +27,12 @@ public class ActividadServiceTest {
         assertEquals(count, 0);
     }
 
-    @Test
-    public void deberiaAñadirLugar() {
-        Actividad act = new Actividad();
-        actividadService.AñadirLugarRealizacionActividad(act, 1);
-        assertEquals(1, act.getLugarRealizacion().getId());
-    }
+    // @Test
+    // public void deberiaAñadirLugar() {
+    //     Actividad act = new Actividad();
+    //     actividadService.AñadirLugarRealizacionActividad(act, 1);
+    //     assertEquals(1, act.getLugarRealizacion().getId());
+    // }
 
     @Test
     public void deberiaAñadirActividad() {
@@ -51,7 +43,7 @@ public class ActividadServiceTest {
         act.setFechaInicio(LocalDateTime.now().plusDays(1));
         act.setFechaFin(LocalDateTime.now().plusDays(2));
         int count = actividadService.actividadesCount();
-        actividadRepo.save(act);
+        actividadService.guardarActividad(act);
         assertEquals(count + 1, actividadService.actividadesCount());
 
     }
@@ -68,7 +60,7 @@ public class ActividadServiceTest {
     }
     @Test
     public void añadeActividadTest(){
-        Evento eventoTest= eventoRepo.findById(1).get();
+        Evento eventoTest = eventoService.findEventoById(1);
         Actividad actTest = new Actividad();
         actTest.setDescripcionActividad("test uno");
         List<Exponente> listTest= new ArrayList<Exponente>();

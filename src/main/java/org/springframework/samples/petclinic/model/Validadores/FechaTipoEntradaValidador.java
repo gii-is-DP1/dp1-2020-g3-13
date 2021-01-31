@@ -5,10 +5,9 @@ import java.time.LocalDateTime;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
-import org.springframework.samples.petclinic.service.EventoService;
+//import org.springframework.samples.petclinic.service.EventoService;
 
 public class FechaTipoEntradaValidador implements ConstraintValidator<FechaTipoEntradaRestriccion, Object> {
 
@@ -17,7 +16,7 @@ public class FechaTipoEntradaValidador implements ConstraintValidator<FechaTipoE
     private String nombreEntrada;
     //private String evento_id;
     //@Autowired
-    private EventoService eventoService;
+    //private EventoService eventoService;
 
     @Override
     public void initialize(FechaTipoEntradaRestriccion TipoEntrada) {

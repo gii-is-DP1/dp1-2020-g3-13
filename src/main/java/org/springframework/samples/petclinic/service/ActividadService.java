@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
+import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
@@ -21,7 +22,8 @@ public class ActividadService {
         @Autowired
         private LugarRealizacionService lugarRealizacionService;
         @Autowired
-        private ExponenteService exponenteService;
+        private AlquilerEspacioService alquilerService;
+
 
         public int actividadesCount(){
             return (int) actividadRepo.count();
@@ -44,10 +46,19 @@ public class ActividadService {
             }
             return res;
         }
+        @Transactional
+        public Actividad encuentraActividadId(int actividadId){
+            return actividadRepo.findById(actividadId).orElse(null);
+        }
 
         @Transactional
         public void guardarActividad(Actividad actividad){
                 actividadRepo.save(actividad);
+        }
+        @Transactional
+        public void borrarAlquileres(Actividad actividad){
+            //AlquilerEspacio alq =actividadRepo.encuentraAlquilerLugar(alquiler.getId());
+            actividad.setAlquilerEspacio(null);
         }
 
         @Transactional
@@ -64,9 +75,9 @@ public class ActividadService {
                 listaActividadesActual.add(actividad);
             }
         }
-        @Transactional
-        public void AñadirLugarRealizacionActividad(Actividad actividad, Integer idLugar) throws DataAccessException{
-            actividad.setLugarRealizacion(lugarRealizacionService.findById(idLugar));
-        }
+        // @Transactional
+        // public void AñadirLugarRealizacionActividad(Actividad actividad, Integer idLugar) throws DataAccessException{
+        //     actividad.setLugarRealizacion(lugarRealizacionService.findById(idLugar));
+        // }
 
 }

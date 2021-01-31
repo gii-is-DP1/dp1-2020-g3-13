@@ -23,8 +23,8 @@ public class LugarRealizacion extends BaseEntity{
 
 // CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
-    private List<Actividad> actividades;
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
+    // private List<Actividad> actividades;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
     private List<AlquilerEspacio> alquilerEspacio;
@@ -55,6 +55,9 @@ public class LugarRealizacion extends BaseEntity{
 
     @Column(name = "url_foto")
     private String urlFoto;
+    
+    @Column(name = "precioDia")
+    private Double precio;
 
 
 
