@@ -10,10 +10,10 @@
                                 <jsp:attribute name="customScript">
                                      <script>
                                 $(function() {
-                                    $("#fechaInicio")({
+                                    $("#fechaInicio").datepicker({
                                         dateFormat: 'yy/mm/dd'
                                     });
-                                    $("#fechaFin")({
+                                    $("#fechaFin").datepicker({
                                         dateFormat: 'yy/mm/dd'
                                     });
                                 });
@@ -28,9 +28,9 @@
                                     <div class="form-group has-feedback">
                                         <petclinic:inputField label="Temática" name="tematicaActividad"/>
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
-                                        <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" />
-                                        <petclinic:inputField label="Fecha de Fin" name="fechaFin" />
-                                        <!-- <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${lugares}" />
+                                        <petclinic:inputField label="Fecha de Inicio" name="fechaInicio" id="fechaInicio" />
+                                        <petclinic:inputField label="Fecha de Fin" name="fechaFin" id="fechaFin" />
+                                        <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${lugares}" />
                                        <p> Elige lugar</p>
                                         <select name="lugarRealizacionId" >
                                             <c:forEach items="${lugaresRealizacion}" var="lugarRealizacion">
