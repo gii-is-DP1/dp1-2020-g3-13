@@ -1,30 +1,23 @@
 package org.springframework.samples.petclinic.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.model.Validadores.FechaFinActividadRestriccion;
-import org.springframework.samples.petclinic.model.Validadores.FechaInicioRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechaInicioTimeRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechasActividadRestriccion;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-// @Data
 @Getter
 @Setter
 @Entity
@@ -54,10 +47,15 @@ public class Actividad extends BaseEntity {
   @Column(name = "fechaFin")
   @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
   private LocalDateTime fechaFin;
+  
   // CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "lugar_realizacion_id", referencedColumnName = "id")
-  private LugarRealizacion lugarRealizacion;
+  // @ManyToOne(cascade = CascadeType.ALL)
+  // @JoinColumn(name = "lugar_realizacion_id", referencedColumnName = "id")
+  // private LugarRealizacion lugarRealizacion;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "alquiler_espacio_id", referencedColumnName = "id")
+  private AlquilerEspacio alquilerEspacio;
 
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "evento_id", referencedColumnName = "id")

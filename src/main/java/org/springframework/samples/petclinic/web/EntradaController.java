@@ -1,17 +1,13 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.ArrayList;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
-import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EntradaService;
-import org.springframework.samples.petclinic.service.LineaFacturaService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -46,7 +42,6 @@ public class EntradaController {
 		Carrito car= carritoService.dimeCarritoUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		List<String> nAsists= carritoService.dimeNombreAsistentes(car,eventoId);
 		System.out.println(nAsists.toString());
-		System.out.println("==============================");
 		if (result.hasErrors()) {
 			return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 		}

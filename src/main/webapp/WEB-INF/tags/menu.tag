@@ -3,7 +3,9 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
+
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
 
@@ -35,6 +37,7 @@
 					<span> Eventos</span>
 				</petclinic:menuItem>
 
+
 <!-- ************* MENU PARA ADMIN ************* -->
 			<sec:authorize access='hasAnyAuthority("admin")'>
 					<petclinic:menuItem active="${name eq 'owners'}" url="/peticion"
@@ -64,6 +67,11 @@
 						<span class="bi bi-camera-reels" aria-hidden="true"></span>
 						<span>Crear Evento</span>
 					</petclinic:menuItem>
+					<petclinic:menuItem active="${name eq 'owners'}" url="/consultas/organizacion/misConsultas"
+						title="Página de consultas de clientes">
+						<span class="bi bi-camera-reels" aria-hidden="true"></span>
+						<span>Mis Consultas</span>
+					</petclinic:menuItem>
 			</sec:authorize>
 
 				
@@ -81,8 +89,19 @@
 					<li><a href="<c:url value="/peticion/new" />">Registro organizacion</a></li>
 				</sec:authorize>
 				<sec:authorize access='hasAnyAuthority("cliente")'>
-					<li><a href="<c:url value="/carrito" />"><span
+					<li><a href="<c:url value="/carrito/cliente" />"><span
 					class="glyphicon glyphicon-shopping-cart"></span> Mi cesta</a></li>
+					<petclinic:menuItem active="${name eq 'owners'}" url="/consultas/cliente/misConsultas"
+						title="Página de consultas de clientes">
+						<span class="bi bi-camera-reels" aria-hidden="true"></span>
+						<span>Mis Consultas</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				<sec:authorize access='hasAnyAuthority("cliente")'>
+					<li><a href="<c:url value="/usuarios/myprofile/eventosFavoritos" />"><i class="glyphicon glyphicon-heart"></i> Favoritos</a></li>
+				</sec:authorize>
+				<sec:authorize access='hasAnyAuthority("organizacion")'>
+					<li><a href="<c:url value="/carrito/organizacion" />"><i class="glyphicon glyphicon-shopping-cart"></i>Mi cesta</a></li>
 				</sec:authorize>
 
 				

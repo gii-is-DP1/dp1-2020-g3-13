@@ -33,7 +33,7 @@ public class FacturaService {
             List<LineaFactura> lineas = facturas.get(i).getLineasFacturas();
             if(! (lineas==null)){
             while (j<lineas.size()){
-                precio += lineas.get(j).getAlquilerEspacio().getPrecio();
+                precio += lineas.get(j).getAlquilerEspacio().getPrecioTotal();
                 j++;
             }
         }

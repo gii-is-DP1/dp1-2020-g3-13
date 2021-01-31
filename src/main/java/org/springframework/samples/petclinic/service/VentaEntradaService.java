@@ -1,22 +1,17 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
-import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.VentaEntrada;
-import org.springframework.samples.petclinic.repository.EntradaRepository;
 import org.springframework.samples.petclinic.repository.VentaEntradaRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class VentaEntradaService {
@@ -25,6 +20,12 @@ public class VentaEntradaService {
     private VentaEntradaRepository ventaEntradaRepository;
     @Autowired
     private CarritoService carritoService;
+    @Autowired
+    private EntradaService entradaService;
+    @Autowired
+    private TipoEntradaService tipoEntrSer;
+    @Autowired
+    private AlquilerEspacioService alquilerEspacioService;
 
     @Transactional
     public long ventaEntradaCount() {
@@ -32,39 +33,43 @@ public class VentaEntradaService {
     }
 
     @Transactional
+    //Guarda cada entrada que hay en el carrito, reduce los numeros de entrada disponibles y vacía el carrito
     public void finalizarCompra(int carritoId, Cliente cliente, VentaEntrada ventaEntrada) throws DataAccessException {
         Carrito carrito = carritoService.findCarritoById(carritoId);
         Entrada entrada = new Entrada();
         for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
-           
-            // TipoEntrada lineaActual =
-            // carrito.getLineasFacturas().get(i).getTipoEntrada();
-            // lineaActual.setNumEntradas(lineaActual.getNumEntradas()-1);
-
             entrada = carrito.getLineasFacturas().get(i).getEntrada();
-            entrada.setVentaEntrada(ventaEntrada);
+            entradaService.guardarEntrada(entrada);
+            TipoEntrada tipoEntrada = entrada.getTipoEntrada();
+            tipoEntrada.setNumEntradas(tipoEntrada.getNumEntradas()-1);
+            tipoEntrSer.guardar(tipoEntrada);
+            
         }
+        //Genera la factura del cliente
         carritoService.generarFacturaCarrito(carrito, cliente);
-        ventaEntradaRepository.save(ventaEntrada);
-        carrito.getLineasFacturas().clear();
-        carrito.setTotal(0.0);
-
+        //Vacía el carrito para una nueva compra
+        carritoService.actualizaCarritoAcero(carrito);
     }
 
     @Transactional
+    //Guarda cada entrada que hay en el carrito, reduce los numeros de entrada disponibles y vacía el carrito
+    public void finalizarAlquiler(int carritoId, Organizacion organizacion, VentaEntrada ventaEntrada) throws DataAccessException {
+        Carrito carrito = carritoService.findCarritoById(carritoId);
+        AlquilerEspacio alquiler = new AlquilerEspacio();
+        for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
+            alquiler = carrito.getLineasFacturas().get(i).getAlquilerEspacio();
+            alquilerEspacioService.guardarAlquilerEspacio(alquiler); 
+        }
+        //Genera la factura del cliente
+        carritoService.generarFacturaCarritoOrg(carrito, organizacion);
+        //Vacía el carrito para una nueva compra
+        carritoService.actualizaCarritoAcero(carrito);
+    }
+    
+
+    @Transactional
     public void guardaVentaEntrada(VentaEntrada ventaEntrada) throws DataAccessException {
-        // List<VentaEntrada> entradas =
-        // eventoService.findEventoById(ventaEntrada.getEvento().getId()).getVentaEntrada();
-        // Boolean existe = false;
-        // int i = 0;
-        // while(i<entradas.size()&&existe==false){
-        // if(entradas.get(i).getNombreAsistente()==ventaEntrada.getNombreAsistente()){
-        // existe = true;
-        // }
-        // }
-        // if(existe== true){
         ventaEntradaRepository.save(ventaEntrada);
-        // }
     }
 
 }

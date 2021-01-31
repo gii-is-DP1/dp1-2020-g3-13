@@ -21,6 +21,7 @@ import lombok.Setter;
 public class Exponente extends BaseEntity{
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "actividad_id")
     private List<Actividad> actividades;
     
     @Column(name = "nombreExponente")

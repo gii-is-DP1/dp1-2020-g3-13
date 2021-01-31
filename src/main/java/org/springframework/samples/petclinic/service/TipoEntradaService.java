@@ -22,19 +22,19 @@ public class TipoEntradaService {
     public int tipoEntradaCount(){
         return (int) tipoEntradaRepository.count();
     }
-
+    @Transactional
     public Iterable<TipoEntrada> findAll(){
         return tipoEntradaRepository.findAll();
     }
-
+    @Transactional
     public void anadirTipoEntrada(Evento evento, TipoEntrada tipoEntrada){
         tipoEntrada.setEvento(evento);
     }
-
+    @Transactional
     public List<Entrada> EncontrarTodasLasEntradas(TipoEntrada tipoEntrada){
         return tipoEntradaRepository.findAllEntradas(tipoEntrada.getId());
     }
-
+    @Transactional
     public void guardar(TipoEntrada tipoEntrada){
         tipoEntradaRepository.save(tipoEntrada);
     }
