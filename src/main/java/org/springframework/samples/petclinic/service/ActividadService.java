@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
-import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
@@ -19,10 +18,7 @@ public class ActividadService {
 
         @Autowired
         private ActividadRepository actividadRepo;
-        @Autowired
-        private LugarRealizacionService lugarRealizacionService;
-        @Autowired
-        private AlquilerEspacioService alquilerService;
+      
 
 
         public int actividadesCount(){

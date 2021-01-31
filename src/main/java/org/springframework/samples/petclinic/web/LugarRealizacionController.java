@@ -1,11 +1,8 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
 import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
@@ -27,8 +24,6 @@ public class LugarRealizacionController {
     
     @Autowired
 	private LugarRealizacionService lugarRealizacionService;
-	@Autowired
-	private AlquilerEspacioService alquilerService;
 
     @GetMapping()
     public String listadoLugaresRealizacion(ModelMap modelMap){

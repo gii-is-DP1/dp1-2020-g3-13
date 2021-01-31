@@ -22,7 +22,7 @@ public abstract class AbstractJPARepository< T extends Serializable > {
 	   }
 	   public List< T > findAll(){
 	      return entityManager.createQuery( "from " + clazz.getName() )
-	       .getResultList();
+.getResultList();
 	   }
 	 
 	   public void save( T entity ){
