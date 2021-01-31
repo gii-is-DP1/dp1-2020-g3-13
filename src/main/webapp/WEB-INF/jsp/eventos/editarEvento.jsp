@@ -26,7 +26,6 @@
                             </h2>
 
                             <form:form modelAttribute="evento" class="form-horizontal" id="add-evento-form">
-                                <div class="form-group has-feedback">
                                     <petclinic:inputField label="Nombre" name="nombreEvento" />
                                     <petclinic:inputField label="Tipo de evento" name="tipoEvento" />
                                     <petclinic:inputField label="Descripcion" name="descripcion" />

@@ -32,7 +32,7 @@ public class ClienteValidadores {
 		    assertThat(constraintViolations.size()).isEqualTo(3);
 		    ConstraintViolation<Cliente> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("telefono");
-	  	    assertThat(violation.getMessage()).isEqualTo("El telefono no puede estar vacio");
+	  	    assertThat(violation.getMessage()).isEqualTo("El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres");
     }
 
     @Test
@@ -46,10 +46,10 @@ public class ClienteValidadores {
         Validator validator = createValidator();
 		    Set<ConstraintViolation<Cliente>> constraintViolations = validator.validate(cliente);
 
-		    assertThat(constraintViolations.size()).isEqualTo(3);
+		    assertThat(constraintViolations.size()).isEqualTo(2);
 		    ConstraintViolation<Cliente> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("telefono");
-	  	    assertThat(violation.getMessage()).isEqualTo("El telefono debe ser exactamente de 9 caracteres");
+	  	    assertThat(violation.getMessage()).isEqualTo("El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ClienteValidadores {
 		    assertThat(constraintViolations.size()).isEqualTo(2);
 		    ConstraintViolation<Cliente> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("telefono");
-	  	    assertThat(violation.getMessage()).isEqualTo("El telefono debe ser exactamente de 9 caracteres");
+	  	    assertThat(violation.getMessage()).isEqualTo("El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres");
     }
 
 }
