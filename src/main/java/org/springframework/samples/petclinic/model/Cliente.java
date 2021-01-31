@@ -39,8 +39,8 @@ public class Cliente extends Persona{
 
 
     @Column(name = "telefono")
-    @NotBlank(message = "El telefono no puede estar vacio")
-    @Size(min=9, max= 9, message = "El telefono debe ser exactamente de 9 caracteres")
+    @NotBlank(message = "El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres")
+    @Size(min=9, max= 9, message = "El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres" )
     private String telefono;
 
       
