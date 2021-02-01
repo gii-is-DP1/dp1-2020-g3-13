@@ -11,7 +11,10 @@ $(function() {
     $("#datetimeFin").datetimepicker({
         format: 'YYYY/MM/DD HH:mm'
     });
-
+    
+    if($('.SinRespuestaConsulta').text() == ""){
+        $('.SinRespuestaConsulta').text("Aún no hay una respuesta para esta consulta");
+    }
 
     
     return false;

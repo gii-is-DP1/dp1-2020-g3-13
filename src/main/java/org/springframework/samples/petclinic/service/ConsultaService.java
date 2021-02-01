@@ -22,7 +22,6 @@ public class ConsultaService {
     @Autowired
     private EventoService eventoService;
 
-    @Transactional
     public int consultasCount() {
         return (int) consultaRepository.count();
     }
@@ -41,37 +40,64 @@ public class ConsultaService {
         consultaRepository.save(consulta);
 
     }
-    @Transactional
-    //Devuelve todas las consultas que se han realizado a los eventos de 
-    //la organizacion cuyo id es el que se ha pasado por parametros
-	public List<Consulta> devuelveTodasLasConsultasDeOrganizacionConId(int id) {
-    List<Consulta> listaConsultasOrganizacion = new ArrayList<Consulta>();
-    Iterator<Consulta> consultas = findAll().iterator();
-        while(consultas.hasNext()){
+
+    // Devuelve todas las consultas que se han realizado a los eventos de
+    // la organizacion cuyo id es el que se ha pasado por parametros
+    public List<Consulta> devuelveTodasLasConsultasDeOrganizacionConId(int id) {
+        List<Consulta> listaConsultasOrganizacion = new ArrayList<Consulta>();
+        Iterator<Consulta> consultas = findAll().iterator();
+        while (consultas.hasNext()) {
             Consulta consultaIterada = consultas.next();
-            if(consultaIterada.getEvento().getOrganizacion().getId().equals(id)){
+            if (consultaIterada.getEvento().getOrganizacion().getId().equals(id)
+                    && consultaIterada.getRespuesta() == null) {
+
                 listaConsultasOrganizacion.add(consultaIterada);
+            }
+        }
+
+        return listaConsultasOrganizacion;
+
+    }
+
+    // Devuelve todas las consultas que se han realizado a los eventos del
+    // cliente cuyo id es el que se ha pasado por parametros
+    public List<Consulta> devuelveTodasLasConsultasDeClienteConId(int id) {
+        List<Consulta> listaConsultasCliente = new ArrayList<Consulta>();
+        Iterator<Consulta> consultas = findAll().iterator();
+        while (consultas.hasNext()) {
+            Consulta consultaIterada = consultas.next();
+            if (consultaIterada.getCliente().getId().equals(id)) {
+                listaConsultasCliente.add(consultaIterada);
 
             }
 
         }
-        return listaConsultasOrganizacion;
-}
-
-@Transactional
-//Devuelve todas las consultas que se han realizado a los eventos del 
-//cliente cuyo id es el que se ha pasado por parametros
-public List<Consulta> devuelveTodasLasConsultasDeClienteConId(int id) {
-List<Consulta> listaConsultasCliente = new ArrayList<Consulta>();
-Iterator<Consulta> consultas = findAll().iterator();
-    while(consultas.hasNext()){
-        Consulta consultaIterada = consultas.next();
-        if(consultaIterada.getCliente().getId().equals(id)){
-            listaConsultasCliente.add(consultaIterada);
-
-        }
-
+        return listaConsultasCliente;
     }
-    return listaConsultasCliente;
-}
+
+    public Consulta sacaConsultaDeLista(List<Consulta> consultas, int consultaId) {
+        Iterator<Consulta> consultasIterador = consultas.iterator();
+        Consulta consulta = null;
+        while (consultasIterador.hasNext()) {
+            Consulta consultaIterada = consultasIterador.next();
+            if (consultaIterada.getId().equals(consultaId)) {
+                consulta = consultaIterada;
+                break;
+            }
+        }
+        return consulta;
+    }
+
+    @Transactional
+    public void aniadirRespuesta(Consulta consulta, int consultaId) {
+        Iterator<Consulta> consultasIterador = consultaRepository.findAll().iterator();
+        while (consultasIterador.hasNext()) {
+            Consulta consultaIterada = consultasIterador.next();
+            if (consultaIterada.getId().equals(consultaId)) {
+                consultaIterada.setRespuesta(consulta.getRespuesta());
+                consultaRepository.save(consultaIterada);
+                break;
+            }
+        }
+    }
 }

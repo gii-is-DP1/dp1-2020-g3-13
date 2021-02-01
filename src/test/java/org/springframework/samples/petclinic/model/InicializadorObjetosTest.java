@@ -4,8 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.service.OrganizacionService;
+
 //Objetos para los test, todos los objetos están creados y cumpliendo las restricciones de los validadores
 public class InicializadorObjetosTest {
+
+    OrganizacionService organizacionService;
 
     public static Evento eventoParaTest() {
         Evento evento = new Evento();
@@ -35,10 +40,10 @@ public class InicializadorObjetosTest {
 
     }
 
-    public Consulta consultaParaTest() {
+    public static Consulta consultaParaTest() {
         Consulta consulta = new Consulta();
-        consulta.setAsunto("asunto");
-        consulta.setDescripcion("esta es la descripcion");
+        consulta.setAsunto("asunto2");
+        consulta.setDescripcion("esta es la segunda descripcion");
         return consulta;
 
     }
