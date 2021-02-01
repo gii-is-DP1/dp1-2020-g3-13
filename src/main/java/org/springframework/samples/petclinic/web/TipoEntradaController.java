@@ -49,6 +49,7 @@ public class TipoEntradaController {
 
 
             tipoEntradaService.anadirTipoEntrada(evento, tipoEntrada);
+            tipoEntradaService.soloVentaAl90PorCiento(tipoEntrada);
             tipoEntradaService.guardar(tipoEntrada);
             modelMap.addAttribute("message", "Tipo de Entrada creada satisfactoriamente!");
             return "redirect:/eventos/{evento_id}";

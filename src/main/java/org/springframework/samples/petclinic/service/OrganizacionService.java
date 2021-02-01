@@ -7,51 +7,60 @@ import org.springframework.samples.petclinic.repository.OrganizacionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 public class OrganizacionService {
 
-        @Autowired
-        private OrganizacionRepository organizacionRepo;
+    @Autowired
+    private OrganizacionRepository organizacionRepo;
 
-       // private PeticionRepository peticionrepo;
-        @Transactional
-        public int organizacionCount(){
-            return (int) organizacionRepo.count();
-        }
-
-        public Iterable<Organizacion> findAll(){
-            return organizacionRepo.findAll();
-        }
-        public Organizacion encuentraOrganizacionByUsuario(String usuario) throws DataAccessException{
-            return organizacionRepo.listadoOrganizacionByUsuario(usuario);
-        }
-
-        public void deleteOrganizacion(Organizacion o) throws DataAccessException{
-            organizacionRepo.delete(o);
-          //  peticionrepo.delete(peticionrepo.findPeticionByOrganizacion(organizacion.getNombreOrganizacion().getNombre_organizacion()));
-
-        }
-
-           @Transactional
-           public void saveOrganizacion(Organizacion organizacion) throws DataAccessException{
-            organizacionRepo.save(organizacion);
-       }
-       
-	public void modifyUsuarioOrganizacion(Organizacion organizacion, Organizacion org) throws DataAccessException{
-		organizacion.setId(org.getId());
-		organizacion.setUsuario(org.getUsuario());
-	    saveOrganizacion(organizacion);
-    }
+    // private PeticionRepository peticionrepo;
     @Transactional
-    public Organizacion findOrganizacionById(int organizacionId){
-        return organizacionRepo.findById(organizacionId);
+    public int organizacionCount() {
+        return (int) organizacionRepo.count();
     }
-    @Transactional
-    public Organizacion findOrganizacionByUsuario(String usuario) throws DataAccessException{
+
+    public Iterable<Organizacion> findAll() {
+        return organizacionRepo.findAll();
+    }
+
+    public Organizacion encuentraOrganizacionByUsuario(String usuario) throws DataAccessException {
         return organizacionRepo.listadoOrganizacionByUsuario(usuario);
     }
 
+    public Boolean hayOrganizacionConEseUsuario(String usuario) throws DataAccessException {
+        if (organizacionRepo.listadoOrganizacionByUsuario(usuario) != null) {
+            return true;
+        } else {
 
+            return false;
+        }
 
     }
+
+    @Transactional
+    public void deleteOrganizacion(Organizacion o) throws DataAccessException {
+        organizacionRepo.delete(o);
+
+    }
+
+    @Transactional
+    public void saveOrganizacion(Organizacion organizacion) throws DataAccessException {
+        organizacionRepo.save(organizacion);
+    }
+
+    @Transactional
+    public void modifyUsuarioOrganizacion(Organizacion organizacion, Organizacion org) throws DataAccessException {
+        organizacion.setId(org.getId());
+        organizacion.setUsuario(org.getUsuario());
+        saveOrganizacion(organizacion);
+    }
+
+    public Organizacion findOrganizacionById(int organizacionId) {
+        return organizacionRepo.findById(organizacionId);
+    }
+
+    public Organizacion findOrganizacionByUsuario(String usuario) throws DataAccessException {
+        return organizacionRepo.listadoOrganizacionByUsuario(usuario);
+    }
+
+}
