@@ -14,7 +14,7 @@
             <tr>
                 <th style="width: 200px;">Evento consultado</th>
                 <th style="width: 200px;">Asunto</th>
-                <th style="width: 200px;">Descripcion</th>
+                <th style="width: 200px;">Descripción</th>
                 <th style="width: 200px;">Fecha de la consulta</th>
                 <th style="width: 200px;">Email a comunicar</th>
             </tr>
