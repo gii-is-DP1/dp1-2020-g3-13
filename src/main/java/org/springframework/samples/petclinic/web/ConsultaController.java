@@ -78,7 +78,7 @@ public class ConsultaController {
 
     }
 
-    // Crea una vista con todas las consultas dirigidas a l cliente que está
+    // Crea una vista con todas las consultas dirigidas al cliente que está
     // logeado
     @GetMapping(value = "/cliente/misConsultas")
     public String listadoConsultasCliente(ModelMap modelMap) {
@@ -121,7 +121,6 @@ public class ConsultaController {
 
     @GetMapping(value = "/cliente/misConsultas/{consulta_id}")
     public String verDetallesConsultaCliente(ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {
-        System.out.println("======================================");
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         List<Consulta> consultasCliente = consultaService
                 .devuelveTodasLasConsultasDeClienteConId(clienteService.findClienteByUsuario(usuario).getId());
