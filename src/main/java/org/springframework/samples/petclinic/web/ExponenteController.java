@@ -29,6 +29,7 @@ public class ExponenteController {
 
     @Autowired ActividadService actividadService;
     private static final String VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM = "exponentes/crearExponentes";
+    
     @GetMapping(value="/nuevo")
     public String guardarExponentes(ModelMap modelMap, @PathVariable("actividad_id") int actividadInt, @PathVariable("evento_id") int evento_id){
         Exponente nuevoExponente = new Exponente();
