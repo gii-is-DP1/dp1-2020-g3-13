@@ -46,7 +46,6 @@
                                         <h3 style="text-align: center; color:rgb(194, 19, 6); size:20;">Toda actividad requiere un mínimo de un exponente</h3>
                                     </c:otherwise>
                                 </c:choose>
-                                <!--Terminar !!!! -->
                                 <table id="exponentesTabla" class="table table-striped">
                                     <tr>
                                         <th style="width: 150px;">Nombre exponente</th>

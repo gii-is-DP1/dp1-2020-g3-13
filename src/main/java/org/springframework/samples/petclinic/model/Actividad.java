@@ -49,9 +49,9 @@ public class Actividad extends BaseEntity {
   private LocalDateTime fechaFin;
   
   // CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
-  // @ManyToOne(cascade = CascadeType.ALL)
-  // @JoinColumn(name = "lugar_realizacion_id", referencedColumnName = "id")
-  // private LugarRealizacion lugarRealizacion;
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "lugar_realizacion_id", referencedColumnName = "id")
+  private LugarRealizacion lugarRealizacion;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "alquiler_espacio_id", referencedColumnName = "id")

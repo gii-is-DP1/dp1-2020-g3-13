@@ -15,11 +15,9 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.LineaFactura;
-import org.springframework.samples.petclinic.model.LugarRealizacion;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.repository.CarritoRepository;
 import org.springframework.samples.petclinic.repository.FacturaRepository;
-import org.springframework.samples.petclinic.web.OrganizacionController;
 import org.springframework.stereotype.Service;
 
 @Service
