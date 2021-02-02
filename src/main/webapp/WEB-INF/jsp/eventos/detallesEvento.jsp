@@ -130,17 +130,22 @@
                                      <h3 style="text-align: center; color:rgb(228, 30, 30); size:20;">No hay actividades añadidas</h3>
                             </c:when>
                              <c:otherwise>
-                                    <spring:url value="/eventos/{eventoId}/hacerPublico" var="volverAEvento">
-                                    <spring:param name="eventoId" value="${evento.id}" />
-                                    </spring:url>
-                              <div class="publicar">
                              </c:otherwise>
                             </c:choose>
                             <c:choose>
-                            
-                        <c:when test="${evento.esPublico}">
-                        </c:when>
-                        <c:when test="${not empty evento.actividades}">
+                            <c:when test="${not evento.esPublico}">
+                                <spring:url value="/eventos/{eventoId}/delete" var="borrarEvento">
+                                <spring:param name="eventoId" value="${evento.id}" />
+                                </spring:url>
+    
+                                <a href="${fn:escapeXml(borrarEvento)}" class="btn btn-default">Eliminar evento</a>
+                                </c:when>
+                        <c:when test="${not empty evento.actividades and not evento.esPublico}">
+                            <div class="publicar">    
+                            <spring:url value="/eventos/{eventoId}/hacerPublico" var="volverAEvento">
+                            <spring:param name="eventoId" value="${evento.id}" />
+                            </spring:url>
+
                         <a href="${fn:escapeXml(volverAEvento)}" class="btn btn-default">Hacer publico</a>
                         </c:when>
                         </c:choose>

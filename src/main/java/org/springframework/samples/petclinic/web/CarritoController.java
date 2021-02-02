@@ -30,9 +30,7 @@ public class CarritoController {
     @Autowired
     private ActividadService actividadService;
 
-    @Autowired
-    private AlquilerEspacioRepository alquilerEspacioRepository;
-	
+
     @GetMapping("/cliente")
 	public String miCarrito(ModelMap modelMap) {
 		String vista="carrito/miCarrito";
@@ -45,20 +43,9 @@ public class CarritoController {
 	public String miCarritoOrg(ModelMap modelMap) {
 		String vista="carrito/miCarritoOrganizacion";
         Carrito carrito = carritoService.listadoObjetosCarritoOrganizacion(SecurityContextHolder.getContext().getAuthentication().getName());
-        List<Actividad> actividades = new ArrayList<Actividad>();
-        if(carrito!=null){
-            for(LineaFactura linea :carrito.getLineasFacturas()){
-                actividades.add(alquilerEspacioRepository.encuentraActividadPorAlquilerId(linea.getAlquilerEspacio().getId()));
-            }
-            modelMap.addAttribute("actividades", actividades);
-        }
-        double total = 0.0;
-            
-        for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
-            total += carrito.getLineasFacturas().get(i).getPrecio();
-        }
-        carrito.setTotal(total);
-        carritoService.guardarCarrito(carrito);
+        List<Actividad> actividades = actividadService.encuentraActividadesPorCarrito(carrito);
+        
+        modelMap.addAttribute("actividades", actividades);
         modelMap.addAttribute("carrito", carrito);
         return vista;
     }
