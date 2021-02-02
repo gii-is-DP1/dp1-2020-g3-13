@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Carrito;
+import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.repository.AlquilerEspacioRepository;
 import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.CarritoService;
+import org.springframework.samples.petclinic.service.EntradaService;
 import org.springframework.samples.petclinic.service.LineaFacturaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,6 +31,8 @@ public class CarritoController {
     private LineaFacturaService lineaFacturaService;
     @Autowired
     private ActividadService actividadService;
+    @Autowired
+    private EntradaService entradaService;
 
     @Autowired
     private AlquilerEspacioRepository alquilerEspacioRepository;
@@ -72,5 +76,16 @@ public class CarritoController {
 
         model.addAttribute("carrito", carrito);
         return "redirect:/carrito/organizacion";
+    }
+
+    @GetMapping(value = "/cliente/{lineaFacturaId}/delete")
+    public String deleteLineaFacturaCliente(@PathVariable("lineaFacturaId") int lineaFacturaId, ModelMap model){ 
+        LineaFactura linea = lineaFacturaService.encuentraLineaFactura(lineaFacturaId);
+        Carrito carrito = carritoService.listadoObjetosCarrito(SecurityContextHolder.getContext().getAuthentication().getName());
+        carritoService.borrarLineaFactura(carrito, lineaFacturaId);
+        entradaService.borrarEntrada(entradaService.encuentraEntradaPorId(linea.getEntrada().getId()));
+        lineaFacturaService.borrarLinea(linea);
+        model.addAttribute("carrito", carrito);
+        return "redirect:/carrito/cliente";
     }
 }

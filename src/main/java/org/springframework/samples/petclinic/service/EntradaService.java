@@ -28,6 +28,11 @@ public class EntradaService {
     public Entrada findEntradaByNombreAsistente(String nombreAsistente){
         return entradaRepo.findEntradaByNombreAsistente(nombreAsistente);
     }
+
+    @Transactional
+    public Entrada encuentraEntradaPorId(int entradaId){
+        return entradaRepo.findById(entradaId).orElse(null);
+    }
     @Transactional
     public Boolean existeElNombreEnElCarro(List<String> listaAsistentes, String nombreAsistente){
         Boolean res = false;
@@ -45,5 +50,10 @@ public class EntradaService {
     @Transactional
     public void guardarEntrada(Entrada entrada){
         entradaRepo.save(entrada);
+    }
+
+    @Transactional
+    public void borrarEntrada(Entrada entrada){
+        entradaRepo.delete(entrada);
     }
 }

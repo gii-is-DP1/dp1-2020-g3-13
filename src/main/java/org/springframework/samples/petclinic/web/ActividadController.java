@@ -110,7 +110,6 @@ public class ActividadController {
         Evento ev  = eventoService.findEventoById(eventoId);
         AlquilerEspacio alquiler = new AlquilerEspacio();
         Iterable<LugarRealizacion> lugares = lugarRealizacionService.findAll();
-        // model.addAttribute("lugarSeleccionado", alquiler.getLugarRealizacion());
         model.addAttribute("lugares", lugares);
         model.addAttribute("alquilerEspacio", alquiler);
         model.addAttribute("actividad", actividad);

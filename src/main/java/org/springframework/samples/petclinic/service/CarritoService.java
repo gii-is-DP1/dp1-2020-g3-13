@@ -32,6 +32,8 @@ public class CarritoService {
     @Autowired
     private LineaFacturaService lineaService;
 
+    @Autowired
+    private EntradaService entradaService;
 
     @Transactional
     public long carritoCount(){
@@ -147,8 +149,6 @@ public class CarritoService {
         carrito.getLineasFacturas().remove(linea);
 
     }
-
-
 
     @Transactional
     public void generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
