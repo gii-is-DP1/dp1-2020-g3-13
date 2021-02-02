@@ -111,6 +111,38 @@ public class ConsultaValidadores {
 	  	    assertThat(violation.getMessage()).isEqualTo("La descripción debe estar comprendida entre 15 y 400 caracteres");
     }
 
+    @Test
+    void noDeberiaValidarRespuestaMenor50caracteres(){
+        Consulta consulta  = new Consulta();
+        consulta.setAsunto("Error inicio de sesion");
+        consulta.setDescripcion("Con diez cañones por banda Viento");
+        consulta.setRespuesta("respuesta");
+        
+        Validator validator = createValidator();
+		    Set<ConstraintViolation<Consulta>> constraintViolations = validator.validate(consulta);
+
+		    assertThat(constraintViolations.size()).isEqualTo(1);
+		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
+		    assertThat(violation.getPropertyPath().toString()).isEqualTo("respuesta");
+	  	    assertThat(violation.getMessage()).isEqualTo("La respuesta debe ser mayor a 15 caracteres y menor a 500 caracteres");
+    }
+
+    @Test
+    void noDeberiaValidarRespuestaMayor500caracteres(){
+        Consulta consulta  = new Consulta();
+        consulta.setAsunto("Error inicio de sesion");
+        consulta.setDescripcion("Con diez cañones por banda Viento");
+        consulta.setRespuesta("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada elementum urna ac porta. Proin sit amet luctus libero. Vivamus euismod enim nec justo ultrices feugiat. Mauris placerat turpis ex, ac condimentum orci pellentesque sit amet. Cras neque leo, ornare id imperdiet in, fermentum id lectus. In bibendum tempus lacus tincidunt bibendum. Nullam non vehicula nibh, a scelerisque mauris. Aenean vehicula odio id libero efficitur tempor. Curabitur ultricies elit nec enim porta, eu interdum urna sollicitudin. Nam nec tempus tellus, sed egestas tortor.   Donec mi erat, condimentum sit amet est id, bibendum ultrices urna. Donec in cursus elit, vitae tincidunt quam. Nam lacinia, libero mi.");
+        
+        Validator validator = createValidator();
+		    Set<ConstraintViolation<Consulta>> constraintViolations = validator.validate(consulta);
+
+		    assertThat(constraintViolations.size()).isEqualTo(1);
+		    ConstraintViolation<Consulta> violation = constraintViolations.iterator().next();
+		    assertThat(violation.getPropertyPath().toString()).isEqualTo("respuesta");
+	  	    assertThat(violation.getMessage()).isEqualTo("La respuesta debe ser mayor a 15 caracteres y menor a 500 caracteres");
+    }
+
 
 
 }
