@@ -17,17 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AlquilerEspacioController {
 
     private static final String VIEW_ALQUILAR_ESPACIO = "alquilerEspacio/alquilerEspacio";
-    private static final String VIEW_EVENTO_DETALLES = "eventos/detallesEvento";
+
     @Autowired
     private AlquilerEspacioService alquilerEspacioService;
-    @Autowired
-    private OrganizacionService orgService;
-    @Autowired
-    private EventoService eventoService;
-    @Autowired
-    private ActividadService actividadService;
-    @Autowired
-    private CarritoService carritoService;
 
 
     @GetMapping
