@@ -68,16 +68,15 @@ public class AlquilerEspacioService {
         Iterator<AlquilerEspacio> todosAlquileres = alquilerEspacioRepository.findAll().iterator();
         if(todosAlquileres.hasNext()){
             AlquilerEspacio alqActual =todosAlquileres.next();
-            if(alqActual.getLugarRealizacion()==lugarSeleccionado && actividad.getEvento() !=evento){
+            if(alqActual.getLugarRealizacion().equals(lugarSeleccionado)){
                LocalDateTime alqFechaFin = alqActual.getFechaFinReserva();
                LocalDateTime alqFechaInicio = alqActual.getFechaInicioReserva();
-               if(alqFechaInicio.isBefore(actividad.getFechaFin()) || alqFechaFin.isAfter(actividad.getFechaInicio())
-                || (actividad.getFechaFin().isAfter(alqFechaInicio) && actividad.getFechaFin().isBefore(alqFechaFin))){
+                    if((actividad.getFechaInicio().isAfter(alqFechaInicio) && actividad.getFechaInicio().isBefore(alqFechaFin))
+                || (actividad.getFechaFin().isAfter(alqFechaInicio) && actividad.getFechaFin().isBefore(alqFechaFin)) 
+                || (actividad.getFechaFin().isAfter(alqFechaInicio) && actividad.getFechaFin().isAfter(alqFechaInicio))){
                     throw new Exception("El lugar seleccionado esta reservado para esas fechas");
-                }
             }
         }
-
     }
-
+}
 }

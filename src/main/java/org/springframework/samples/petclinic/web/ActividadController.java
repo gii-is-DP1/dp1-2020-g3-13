@@ -124,7 +124,7 @@ public class ActividadController {
             try {
                 alquilerService.compruebaFechas(alquiler.getLugarRealizacion(), actividad, evento);
             } catch (Exception e) {
-                return VIEW_ALQUILAR_ESPACIO;
+                return "exception";
             }
             alquilerService.alquilerLugarRealizacion(alquiler, actividad, org);
             carritoService.anadirCarritoLugarRealizacion(actividad, org);
