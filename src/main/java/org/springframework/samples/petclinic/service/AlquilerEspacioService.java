@@ -1,7 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import javax.transaction.Transactional;
-import static java.time.temporal.ChronoUnit.HOURS;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
@@ -49,11 +49,16 @@ public class AlquilerEspacioService {
     @Transactional
     public void alquilerLugarRealizacion(AlquilerEspacio alquiler, Actividad actividad, Organizacion org) {
         LugarRealizacion lugar = alquiler.getLugarRealizacion();
+        double precioTotal = 0.0;
         alquiler.setFechaInicioReserva(actividad.getFechaInicio());
         alquiler.setFechaFinReserva(actividad.getFechaFin());
         actividad.setAlquilerEspacio(alquiler);
-        long horas = HOURS.between(alquiler.getFechaInicioReserva(), alquiler.getFechaFinReserva());
-        double precioTotal = lugar.getPrecio() * horas;
+        long horas = DAYS.between(alquiler.getFechaInicioReserva(), alquiler.getFechaFinReserva());
+        if(horas<1){
+            precioTotal = lugar.getPrecio() * 1;
+        }else{
+            precioTotal = lugar.getPrecio() * horas;
+        }
         alquiler.setPrecioTotal(precioTotal);
         // actividadService.guardarActividad(actividad);
     }
