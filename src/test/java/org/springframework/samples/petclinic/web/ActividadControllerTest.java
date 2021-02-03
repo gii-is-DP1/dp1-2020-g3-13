@@ -42,13 +42,16 @@ public class ActividadControllerTest {
 
     
     @Test
-    public void testFormularioActividad() throws Exception{
-
-        mockMvc.perform(get("/eventos/{evento_id}/actividades/nuevo", 1)).andExpect(status().isOk()).andExpect(view().name(VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM)).andExpect(model().attributeExists("listaId","lugaresRealizacion","actividad"));
+    public void testFormularioCrearActividad() throws Exception{
+//
+        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}/nuevo", 1,1)).andExpect(status().isOk()).andExpect(view().name(VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM)).andExpect(model().attributeExists("listaId","lugaresRealizacion","actividad"));
     }
-    //Terminar
+    //rezar a ezequiel
     @Test
     public void testFormularioActividadExito() throws Exception{
-        mockMvc.perform(post("/eventos/{evento_id}/actividades/nuevo", 1).param("tematicaActividad", "tematica de ejemplo").param("descripcionActividad", "una descripcion cualquiera que cumpla con el validador").param("fechaInicio", "2021/02/02 09:00").param("fechaFin", "2021/02/02 12:00").param("lugarRealizacion", "1")).andExpect(view().name("VISTA"));
+        mockMvc.perform(post("/eventos/{evento_id}/actividades/nuevo",1).param("tematicaActividad", "tematica de ejemplo").
+        param("descripcionActividad", "una descripcion cualquiera que cumpla con el validador").param("fechaInicio", "2021/02/02 09:00").param("fechaFin", "2021/02/02 12:00")).andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo"))
+       ;
     }
 }
