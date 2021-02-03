@@ -92,11 +92,17 @@ public class EventoController {
     }
     @GetMapping("/{eventosId}/hacerPublico")
     public String hacerEventoPublico(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
+        Evento evento =eventoService.findEventoById(eventosId);
+
+        if(evento.getActividades().size()!=0){
         eventoService.hacerPublico(eventosId);
       //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
         modelMap.addAttribute("message", "Evento añadido a favoritos!");
         return "redirect:/eventos/{eventosId}";
+    }else{
+        return "redirect:/eventos/";
     }
+}
 
     // @PostMapping("/{eventosId}/añadirEventosFavoritos")
     // public String anadirEventosAFavorito(@PathVariable("eventosId") int eventosId,BindingResult resultado, ModelMap modelMap) {

@@ -5,11 +5,13 @@
                 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                        <%@page contentType="text/html"%>
+                        <%@page pageEncoding="UTF-8"%>
 
                             <petclinic:layout pageName="usuarios">
                             
                                 <div class="centrar-datos">
-                                    <h2>Mi perfil</h2>
+                                    <h2 style="text-align: left; color:rgb(130, 28, 120); size:20;">Mi perfil</h2>
                                     <div class="listar-Datos">
                                         <ul>
                                             <li>Nombre:
@@ -21,22 +23,23 @@
                                             <li>Email:
                                                 <c:out value="${cliente.email}" />
                                             </li>
-                                            <li>Telefono:
+                                            <li>Teléfono:
                                                 <c:out value="${cliente.telefono}" />
                                             </li>
-                                            <li>Nombre Usuario:
+                                            <li>Nombre de usuario:
                                                 <c:out value="${cliente.usuario.nombreUsuario}" />
                                             </li>
                                             <spring:url value="myprofile/edit" var="edicionUrl">
 
                                             </spring:url>
+                                            <h4></h4>
                                             <a href="${fn:escapeXml(edicionUrl)}"class="btn btn-default">Editar perfil</a></button>
                                             <c:out value="" /> 
                                             </a>
                                             
                                                 <spring:url value="myprofile/delete" var="clienteUrl">                                  
                                                 </spring:url>
-                                                <a href="${fn:escapeXml(clienteUrl)}" class="btn btn-default">Eliminar cliente</a></button>
+                                                <a href="${fn:escapeXml(clienteUrl)}" class="btn btn-default">Borrar mi perfil</a></button>
                                                 <c:out value="" /> 
                                                 </a>
                                                 </button>

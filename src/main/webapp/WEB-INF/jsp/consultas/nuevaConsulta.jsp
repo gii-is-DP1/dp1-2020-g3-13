@@ -17,13 +17,13 @@
                                 <form:form modelAttribute="consulta" class="form-horizontal" id="add-admin-form">
                                     <div class="form-group has-feedback">
                                         <petclinic:inputField label="Asunto" name="asunto" />
-                                        <petclinic:inputField label="Descripcion" name="descripcion" />
+                                        <petclinic:inputField label="Descripción" name="descripcion" />
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
                                             <c:choose>
                                                 <c:when test="${consulta['new']}">
-                                                    <button class="btn btn-default" type="submit">a&ntilde;adir Consulta</button>
+                                                    <button class="btn btn-default" type="submit">A&ntilde;adir consulta</button>
                                                 </c:when>
                                             </c:choose>
                                         </div>

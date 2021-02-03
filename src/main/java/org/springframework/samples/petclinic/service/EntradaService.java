@@ -9,6 +9,8 @@ import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.repository.EntradaRepository;
 import org.springframework.samples.petclinic.repository.TipoEntradaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class EntradaService {
@@ -16,7 +18,7 @@ public class EntradaService {
     private EntradaRepository entradaRepo;
     @Autowired
     private TipoEntradaRepository tipoEntradaRepo;
-
+    
     @Transactional
     public void crearEntrada(Entrada entrada, Integer tipoEntradaId) throws DataAccessException{
         TipoEntrada tipoEntrada = tipoEntradaRepo.findById(tipoEntradaId).orElse(null);
@@ -42,8 +44,27 @@ public class EntradaService {
         return res;
     }
 
+    @Transactional 
+    
+    public Boolean buscaPorEventoYPorNombreAsistene(String nombreAsistente, int eventoID){
+        List<Entrada> res= new ArrayList<>();
+        Boolean aux = false;
+        entradaRepo.findAll().iterator().forEachRemaining(res::add);
+        for (Entrada entrada2 : res) {
+            if(entrada2.getNombreAsistente()==nombreAsistente&&entrada2.getTipoEntrada().getEvento().getId()==eventoID){
+                aux = true;
+            }
+
+            }
+            return aux;
+        }
+    
+   
+    
     @Transactional
     public void guardarEntrada(Entrada entrada){
         entradaRepo.save(entrada);
     }
+    
+
 }

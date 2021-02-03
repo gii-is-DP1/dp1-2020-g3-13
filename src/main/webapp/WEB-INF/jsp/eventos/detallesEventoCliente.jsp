@@ -3,8 +3,9 @@
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-                <%@ page contentType="text/html; charset=UTF-8" %>
-
+              
+                <%@page contentType="text/html"%>
+                <%@page pageEncoding="UTF-8"%>
                     <petclinic:layout pageName="evento">
 
                         <h2>Detalles de
@@ -23,7 +24,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Descripcion</th>
+                                <th>Descripción</th>
                                 <td>
                                     <c:out value="${evento.descripcion}" />
                                 </td>
@@ -42,7 +43,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Categoria</th>
+                                <th>Categoría</th>
                                 <td>
                                     <c:out value="${evento.categoria}" />
                                 </td>
@@ -58,7 +59,7 @@
                                 <td>
                                     <div class="cuadro-entrada"></div>
                                     <c:forEach items="${evento.actividades}" var="actividad">
-                                        <p>Tematica:
+                                        <p>Temática:
                                             <c:out value="${actividad.tematicaActividad} " /></p>
                                         </div>
 
