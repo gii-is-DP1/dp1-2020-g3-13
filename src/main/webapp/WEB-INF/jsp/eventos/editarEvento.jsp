@@ -3,7 +3,8 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-
+                <%@page contentType="text/html"%>
+                <%@page pageEncoding="UTF-8"%>
 
                     <petclinic:layout pageName="Eventos">
                         <jsp:attribute name="customScript">
@@ -28,10 +29,10 @@
                             <form:form modelAttribute="evento" class="form-horizontal" id="add-evento-form">
                                     <petclinic:inputField label="Nombre" name="nombreEvento" />
                                     <petclinic:inputField label="Tipo de evento" name="tipoEvento" />
-                                    <petclinic:inputField label="Descripcion" name="descripcion" />
+                                    <petclinic:inputField label="Descripción" name="descripcion" />
                                     <petclinic:inputField label = "Fecha Inicio" name ="fechaInicio" id="fechaInicio"/>
                                     <petclinic:inputField label = "Fecha Fin" name ="fechaFin" id="fechaFin"/>
-                                    <petclinic:inputField label="Categoria" name="categoria" />
+                                    <petclinic:inputField label="Categoría" name="categoria" />
                                     <petclinic:inputField label="Medidas Sanitarias" name="medidasSanitarias" />
                         
                                 </div>

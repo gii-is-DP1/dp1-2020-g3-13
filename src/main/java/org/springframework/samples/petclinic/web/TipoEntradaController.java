@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
@@ -30,10 +31,12 @@ public class TipoEntradaController {
     private EventoService eventoService;
 
     @GetMapping(value = "/nuevo")
-    public String crearTipoEntrada(ModelMap modelMap){
+    public String crearTipoEntrada(ModelMap modelMap, @PathVariable("evento_id") int eventoId){
         modelMap.addAttribute("tipoEntrada", new TipoEntrada());
         List<NombreTiposEntrada> nombre =  Arrays.asList(NombreTiposEntrada.values());
+        List<Actividad> actividades = eventoService.findEventoById(eventoId).getActividades();
         modelMap.addAttribute("NombreTipoEntrada", nombre);
+        modelMap.addAttribute("actividades", actividades);
         return VIEWS_TIPOS_ENTRADAS_CREATE_OR_UPDATE_FORM;
     }
 
@@ -47,8 +50,11 @@ public class TipoEntradaController {
             return VIEWS_TIPOS_ENTRADAS_CREATE_OR_UPDATE_FORM;
         }else{
 
-
+            //TODO
+            //Terminar el tipoEntrada
+            System.out.println(tipoEntrada.getActividades().size());
             tipoEntradaService.anadirTipoEntrada(evento, tipoEntrada);
+            tipoEntradaService.soloVentaAl90PorCiento(tipoEntrada);
             tipoEntradaService.guardar(tipoEntrada);
             modelMap.addAttribute("message", "Tipo de Entrada creada satisfactoriamente!");
             return "redirect:/eventos/{evento_id}";

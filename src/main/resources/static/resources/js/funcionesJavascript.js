@@ -11,11 +11,56 @@ $(function() {
     $("#datetimeFin").datetimepicker({
         format: 'YYYY/MM/DD HH:mm'
     });
+    
+    if($('.SinRespuestaConsulta').text() == ""){
+        $('.SinRespuestaConsulta').text("Aún no hay una respuesta para esta consulta");
+    }
+    $("div[id*='javascriptActividad']").hide();
+
+    $( "#datetimeInicio").focusout(function(){
+        i = 0;
+        if(typeof($('#datetimeFin').data('date')) != "undefined"){
+            console.log('hi')
+            $("div[id*='javascriptActividad']").show()
+            while($("div[id*='javascriptActividad']").length > i){
+                fechaActividadIterada = new Date($("div[id*='javascriptActividad']").eq(i).attr('data'));
+                fechaIntroducidaInicio = new Date($('#datetimeInicio').data('date'));
+                fechaIntroducidaFinal = new Date($('#datetimeFin').data('date'));
+                if(fechaActividadIterada >= fechaIntroducidaInicio && fechaActividadIterada < fechaIntroducidaFinal){    
+                    $("div[id*='javascriptActividad']").eq(i).show()
+                }else{
+                    $("div[id*='javascriptActividad']").eq(i).hide()
+                }
+                    i++;
+            }
+    }
+    })
+
+    $( "#datetimeFin").focusout(function(){
+        i = 0;
+        if(typeof($('#datetimeInicio').data('date')) != "undefined"){
+            console.log('hi')
+            $("div[id*='javascriptActividad']").show()
+            while($("div[id*='javascriptActividad']").length > i){
+                fechaActividadIterada = new Date($("div[id*='javascriptActividad']").eq(i).attr('data'));
+                fechaIntroducidaInicio = new Date($('#datetimeInicio').data('date'));
+                fechaIntroducidaFinal = new Date($('#datetimeFin').data('date'));
+                if(fechaActividadIterada >= fechaIntroducidaInicio && fechaActividadIterada < fechaIntroducidaFinal){    
+                    $("div[id*='javascriptActividad']").eq(i).show()
+                }else{
+                    $("div[id*='javascriptActividad']").eq(i).hide()
+                }
+                    i++;
+            }
+    }
+    })
 
 
+   
     
     return false;
 });
+
 
 
 function miselect(idRecinto){

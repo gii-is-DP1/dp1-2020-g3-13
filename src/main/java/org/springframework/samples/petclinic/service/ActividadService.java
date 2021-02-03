@@ -18,7 +18,6 @@ public class ActividadService {
 
         @Autowired
         private ActividadRepository actividadRepo;
-      
 
 
         public int actividadesCount(){

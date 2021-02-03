@@ -1,9 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +54,9 @@ public class ConsultaServiceTest {
                 clienteService.findCliente().iterator().next());
         assertEquals(null, consulta.getRespuesta());
         Consulta consultaConRespuesta = new Consulta();
-        consultaConRespuesta.setRespuesta("ADJDKAOAKADOAAKAJASODKDKDKDSKKKKKKALALLLALALAL");
+        consultaConRespuesta.setRespuesta("Esto es un ejemplo de respuesta para una consulta realizada por un cliente");
         consultaService.aniadirRespuesta(consultaConRespuesta, consulta.getId());
-        assertEquals("ADJDKAOAKADOAAKAJASODKDKDKDSKKKKKKALALLLALALAL", consulta.getRespuesta());
+        assertEquals("Esto es un ejemplo de respuesta para una consulta realizada por un cliente", consulta.getRespuesta());
 
     }
 
