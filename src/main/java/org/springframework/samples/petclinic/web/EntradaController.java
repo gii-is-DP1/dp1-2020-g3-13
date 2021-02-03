@@ -8,6 +8,7 @@ import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EntradaService;
+import org.springframework.samples.petclinic.service.TipoEntradaService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,7 +23,8 @@ import java.util.List;
 public class EntradaController {
 
     public static final String VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM= "entradas/crearEntrada";
-
+	@Autowired
+	private TipoEntradaService tipoEntradaService;
     @Autowired
     private EntradaService entradaService; 
     @Autowired
@@ -45,7 +47,7 @@ public class EntradaController {
 		if (result.hasErrors()) {
 			return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 		}
-		else if(entradaService.existeElNombreEnElCarro(nAsists, entrada.getNombreAsistente())){
+		else if(entradaService.existeElNombreEnElCarro(nAsists, entrada.getNombreAsistente())||entradaService.buscaPorEventoYPorNombreAsistene(entrada.getNombreAsistente(), eventoId)){
 			return "/entradas/errorAsistente";
 		}else{
 		   entradaService.crearEntrada(entrada, tipoEntradaId);
@@ -54,4 +56,6 @@ public class EntradaController {
 			return "redirect:/eventos/{eventoId}" /*+ admin.getId()*/;
 		}
 	}
+
+	
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -60,5 +61,8 @@ public class Actividad extends BaseEntity {
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "evento_id", referencedColumnName = "id")
   private Evento evento;
+
+  @ManyToMany(cascade = CascadeType.ALL)
+  private List<TipoEntrada> tiposEntrada;
 
 }

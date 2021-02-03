@@ -24,6 +24,8 @@
                                         <petclinic:inputField id="datetimeInicio" label="Fecha de Inicio" name="fechaInicio"/>
                                         <petclinic:inputField id="datetimeFin" label="Fecha de Fin" name="fechaFin"/>
                                         <petclinic:inputField label="Precio" name="precio" />
+                                        <petclinic:checkboxField id="javascriptActividad" names="${actividades}" name="actividades" label="Selecciona una actividad"/>
+                                
 
                                     </div>
                                     <div class="form-group">
