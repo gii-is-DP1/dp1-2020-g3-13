@@ -21,7 +21,7 @@ public class InicializadorObjetosTest {
         evento.setId(Integer.MAX_VALUE);
         evento.setMedidasSanitarias("6M");
         evento.setNombreEvento("nombreEvento");
-        evento.setTipoEvento("tipoEvento");
+        evento.setTipoEvento(TipoEvento.ACADEMICOS);;
         evento.setTipoEntradas(new ArrayList<TipoEntrada>());
         evento.setActividades(new ArrayList<Actividad>());
         evento.setConsultas(new ArrayList<Consulta>());

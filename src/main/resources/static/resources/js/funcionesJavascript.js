@@ -5,6 +5,15 @@ $(function() {
     $('.nombre-sitio').lettering();
     $('.ocultar').hide();
 
+
+    $("#fechaInicio").datepicker({
+            dateFormat: 'yy/mm/dd'
+    });
+    $("#fechaFin").datepicker({
+            dateFormat: 'yy/mm/dd'
+    });
+
+
     $("#datetimeInicio").datetimepicker({
         format: 'YYYY/MM/DD HH:mm'
     });

@@ -18,7 +18,7 @@ public class RespuestaLimiteOrganizacionValidador implements ConstraintValidator
             System.out.println("entro aqui");
             int tamanio = respuesta.toString().length();
             System.out.println(tamanio);
-            return (tamanio <= 500 && tamanio > 50);
+            return (tamanio <= 500 && tamanio > 15);
         }
     }
 }

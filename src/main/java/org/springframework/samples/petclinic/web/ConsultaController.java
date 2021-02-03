@@ -22,6 +22,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -104,7 +105,7 @@ public class ConsultaController {
     }
 
     @PostMapping(value = "/organizacion/misConsultas/{consulta_id}")
-    public String guardaRespuestaConsulta(@Valid Consulta consulta, ModelMap modelMap, @PathVariable("consulta_id") int consultaId,
+    public String guardaRespuestaConsulta(Consulta consulta, ModelMap modelMap, @PathVariable("consulta_id") int consultaId,
             BindingResult resultado) {
         if (resultado.hasErrors()) {
             modelMap.addAttribute("consulta", consulta);
@@ -116,8 +117,6 @@ public class ConsultaController {
         }
 
     }
-
-    
 
     @GetMapping(value = "/cliente/misConsultas/{consulta_id}")
     public String verDetallesConsultaCliente(ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {
