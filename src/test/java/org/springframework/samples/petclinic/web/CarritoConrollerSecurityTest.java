@@ -20,11 +20,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
-public class ActividadControllerSecurityTest {
+public class CarritoConrollerSecurityTest {
     @Autowired
     private WebApplicationContext context;
     
     private MockMvc mockMvc;
+
+    
+    private static final String VIEW_CARRITO_CLIENTE = "carrito/miCarrito";
+    private static final String VIEW_CARRITO_ORGANIZACION = "carrito/miCarritoOrganizacion";
 
     private int TEST_ID = 1;
 
@@ -32,29 +36,43 @@ public class ActividadControllerSecurityTest {
     public void setup(){
         mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
     }
+
+
+     
     @Test
     @WithMockUser(username = "UsuarioAleatorio", authorities = {"cliente"})
-    void deberiaDevolverListaDeActividadesCliente() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
+    void deberiaDevolverCarritoCliente() throws Exception{
+        mockMvc.perform(get("/carrito/cliente", TEST_ID)).andExpect(view().name(VIEW_CARRITO_CLIENTE));
         
     }
     @Test
-    @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
-    void deberiaDevolverListaDeActividadesOrganizacion() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
+    @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacicon"})
+    void deberiaNoDevolverCarritoClienteOrgn() throws Exception{
+        mockMvc.perform(get("/carrito/cliente", TEST_ID)).andExpect(status().isForbidden());
         
     }
     @Test
     @WithMockUser(username = "UsuarioAleatorio", authorities = {"admin"})
-    void deberiaDevolverListaDeActividadesAdmin() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
+    void deberiaNoDevolverCarritoClienteAdmin() throws Exception{
+        mockMvc.perform(get("/carrito/cliente", TEST_ID)).andExpect(status().isForbidden());
         
     }
-    //@Test
-    //@WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
-  //  void deberiaDevolverFormularioActividadOrganizacion() throws Exception{
-   //     mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
+    @Test
+    @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
+    void deberiaDevolverCarritoOrganizacion() throws Exception{
+        mockMvc.perform(get("/carrito/organizacion", TEST_ID)).andExpect(view().name(VIEW_CARRITO_ORGANIZACION));
         
-  //  }
-    
+    }
+    @Test
+    @WithMockUser(username = "UsuarioAleatorio", authorities = {"cliente"})
+    void deberiaNoDevolverCarritoOrganizacionCliente() throws Exception{
+        mockMvc.perform(get("/carrito/organizacion", TEST_ID)).andExpect(status().isForbidden());
+        
+    }
+    @Test
+    @WithMockUser(username = "UsuarioAleatorio", authorities = {"admin"})
+    void deberiaNoDevolverCarritoOrganizacionAdmin() throws Exception{
+        mockMvc.perform(get("/carrito/organizacion", TEST_ID)).andExpect(status().isForbidden());
+        
+    }
 }
