@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Organizacion;
@@ -38,7 +40,7 @@ public class VentaEntradaController {
 		return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
 	}
     @PostMapping(value = "/finalizarCompra")
-	public String processCreationForm(VentaEntrada ventaEntrada, @PathVariable("carritoId") int carritoId, BindingResult result, ModelMap model) {
+	public String processCreationForm(@Valid VentaEntrada ventaEntrada, @PathVariable("carritoId") int carritoId, BindingResult result, ModelMap model) {
 		if (result.hasFieldErrors()) {
 			model.put("ventaEntrada", ventaEntrada);
 			return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
@@ -59,7 +61,7 @@ public class VentaEntradaController {
 	}
 
 	@PostMapping(value = "/org/finalizarCompra")
-	public String carritoOrgForm(VentaEntrada ventaEntrada, @PathVariable("carritoId") int carritoId, BindingResult result, ModelMap model) {
+	public String carritoOrgForm(@Valid VentaEntrada ventaEntrada, @PathVariable("carritoId") int carritoId, BindingResult result, ModelMap model) {
 		if (result.hasFieldErrors()) {
 			model.put("ventaEntrada", ventaEntrada);
 			return VIEWS_VENTA_ENTRADAS_CREATE_OR_UPDATE_FORM;
