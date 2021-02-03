@@ -8,10 +8,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
-import org.springframework.samples.petclinic.model.AlquilerEspacio;
+import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
+import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
+import org.springframework.samples.petclinic.repository.AlquilerEspacioRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,10 +21,12 @@ public class ActividadService {
 
         @Autowired
         private ActividadRepository actividadRepo;
+
         @Autowired
-        private LugarRealizacionService lugarRealizacionService;
+        private AlquilerEspacioService alquilerEspacioService;
+        
         @Autowired
-        private AlquilerEspacioService alquilerService;
+        private CarritoService carritoService;
 
 
         public int actividadesCount(){
@@ -85,5 +89,19 @@ public class ActividadService {
         // public void AñadirLugarRealizacionActividad(Actividad actividad, Integer idLugar) throws DataAccessException{
         //     actividad.setLugarRealizacion(lugarRealizacionService.findById(idLugar));
         // }
+
+		public List<Actividad> encuentraActividadesPorCarrito(Carrito carrito) {
+            List<Actividad> actividades = new ArrayList<Actividad>();
+            double total = 0.0;
+            if(carrito!=null){
+                for(LineaFactura linea :carrito.getLineasFacturas()){
+                    actividades.add(alquilerEspacioService.encuentraActividad(linea.getAlquilerEspacio().getId()));
+                    total += linea.getPrecio();
+                    }
+                    carrito.setTotal(total);
+                    carritoService.guardarCarrito(carrito);
+                }
+            return actividades;
+		}
 
 }

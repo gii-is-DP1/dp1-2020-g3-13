@@ -1,8 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
@@ -87,18 +85,23 @@ public class EventoController {
         Evento evento =eventoService.findEventoById(eventosId);
       //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
         eventoService.anadirEventoAFav(evento, usuario);
-        System.out.println("AQUI ENTRA=====================================================");
         eventoService.save(evento);
         modelMap.addAttribute("message", "Evento añadido a favoritos!");
         return "redirect:/eventos/";
     }
     @GetMapping("/{eventosId}/hacerPublico")
     public String hacerEventoPublico(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
+        Evento evento =eventoService.findEventoById(eventosId);
+
+        if(evento.getActividades().size()!=0){
         eventoService.hacerPublico(eventosId);
       //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
         modelMap.addAttribute("message", "Evento añadido a favoritos!");
         return "redirect:/eventos/{eventosId}";
+    }else{
+        return "redirect:/eventos/";
     }
+}
 
     // @PostMapping("/{eventosId}/añadirEventosFavoritos")
     // public String anadirEventosAFavorito(@PathVariable("eventosId") int eventosId,BindingResult resultado, ModelMap modelMap) {
@@ -162,9 +165,16 @@ public class EventoController {
 
 
     }
-    @GetMapping(value = "/delete/{eventoId}")
+    @GetMapping(value = "/{eventoId}/delete")
     public String deleteEvento(@PathVariable("eventoId") int eventoId, ModelMap model){
-        this.eventoService.delete(eventoService.findEventoById(eventoId));
+        Organizacion org = this.organizacionService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+        Evento evento = this.eventoService.findEventoById(eventoId);
+        if((org  == evento.getOrganizacion()||SecurityContextHolder.getContext().getAuthentication().getName()=="admin")&& !evento.getEsPublico())
+            this.eventoService.delete(evento);
+        else{
+            return "eventos/organizacionSinPermiso";
+        }
+
         return "redirect:/eventos";
     }
     

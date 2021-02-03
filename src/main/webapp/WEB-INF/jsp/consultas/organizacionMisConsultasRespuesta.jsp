@@ -12,20 +12,18 @@
                             </head>
                             <petclinic:layout pageName="consulta/new">
                                 <h2>
-                                    <c:if test="${consulta['new']}">Haz una consulta </c:if>
+                                    <c:if test="${consulta['new']}">Formulario de respuesta a la consulta </c:if>
                                 </h2>
+                                <c:out value="${consulta.fechaConsulta}"/>
+                                <c:out value="${consulta.evento.nombreEvento}"/>
+                                <c:out value="${consulta.evento.nombreEvento}"/>
                                 <form:form modelAttribute="consulta" class="form-horizontal" id="add-admin-form">
                                     <div class="form-group has-feedback">
-                                        <petclinic:inputField label="Asunto" name="asunto" />
-                                        <petclinic:inputField label="Descripción" name="descripcion" />
+                                        <petclinic:inputField label="Respuesta" name="respuesta" />
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <c:choose>
-                                                <c:when test="${consulta['new']}">
-                                                    <button class="btn btn-default" type="submit">A&ntilde;adir consulta</button>
-                                                </c:when>
-                                            </c:choose>
+                                                    <button class="btn btn-default" type="submit">a&ntilde;adir Consulta</button>
                                         </div>
                                     </div>
                                 </form:form>

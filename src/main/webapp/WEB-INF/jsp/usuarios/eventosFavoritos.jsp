@@ -6,7 +6,7 @@
 
 <petclinic:layout pageName="eventosFavoritosUsuario">
 
-    <h2>Aqui estan tus eventos Favoritos! ;) <c:out value="${usuario.nombreUsuario}"/></h2>
+    <h2 style="text-align: left ; color:rgb(172, 27, 124); size:20;">Listado de sus eventos favoritos <c:out value="${usuario.nombreUsuario}"/></h2>
 
 
     <table class="table table-striped">
@@ -19,6 +19,7 @@
                 <c:out value="${eventos.fechaInicio} " />
             <h3>Fecha de Fin:</h3>
             <c:out value="${eventos.fechaFin}" />
+            <h4>   </h4>
             <spring:url value="/usuarios/myprofile/eventosFavoritos/{eventosFavId}/borrar" var="borrarFavUrl">
                     <spring:param name="eventosFavId" value="${eventos.id}"/>
                     </spring:url>
