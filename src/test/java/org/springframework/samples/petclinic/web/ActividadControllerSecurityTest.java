@@ -50,8 +50,8 @@ public class ActividadControllerSecurityTest {
         mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
         
     }
-    @Test
-    @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
+    //@Test
+    //@WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
   //  void deberiaDevolverFormularioActividadOrganizacion() throws Exception{
    //     mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
         
