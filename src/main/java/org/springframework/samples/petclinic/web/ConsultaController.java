@@ -105,7 +105,7 @@ public class ConsultaController {
     }
 
     @PostMapping(value = "/organizacion/misConsultas/{consulta_id}")
-    public String guardaRespuestaConsulta(Consulta consulta, ModelMap modelMap, @PathVariable("consulta_id") int consultaId,
+    public String guardaRespuestaConsulta(@Valid Consulta consulta, ModelMap modelMap, @PathVariable("consulta_id") int consultaId,
             BindingResult resultado) {
         if (resultado.hasErrors()) {
             modelMap.addAttribute("consulta", consulta);
