@@ -8,4 +8,7 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer>{
     
     @Query("SELECT alquilerEspacio FROM Actividad actividad WHERE actividad.alquilerEspacio.id =:alquilerId")
     public AlquilerEspacio encuentraAlquilerLugar(int alquilerId);
+
+    @Query("SELECT actividad FROM Actividad actividad WHERE actividad.alquilerEspacio.id =:alquilerId")
+    public Actividad encuentraLugarAlquiler(int alquilerId);
 }

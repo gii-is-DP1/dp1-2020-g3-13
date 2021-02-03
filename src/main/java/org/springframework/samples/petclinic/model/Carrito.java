@@ -23,10 +23,10 @@ public class Carrito extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL)
     private List<LineaFactura> lineasFacturas;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "id_organizacion", referencedColumnName = "id")
     private Organizacion organizacion;
 

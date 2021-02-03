@@ -60,6 +60,10 @@
 						<span>G. Lugares de Realización</span>
 					</petclinic:menuItem>
 			</sec:authorize>
+
+
+
+			
 			<!-- ************* MENU PARA ORGANIZACION ************* -->
 						<sec:authorize access='hasAnyAuthority("organizacion")'>
 					<petclinic:menuItem active="${name eq 'owners'}" url="/eventos/nuevo"
@@ -102,6 +106,9 @@
 				</sec:authorize>
 				<sec:authorize access='hasAnyAuthority("organizacion")'>
 					<li><a href="<c:url value="/carrito/organizacion" />"><i class="glyphicon glyphicon-shopping-cart"></i>Mi cesta</a></li>
+				</sec:authorize>
+				<sec:authorize access='hasAnyAuthority("organizacion", "cliente")'>
+					<li><a href="<c:url value="/facturas" />"><i class="glyphicon glyphicon-folder-open"></i>Facturas</a></li>
 				</sec:authorize>
 
 				
