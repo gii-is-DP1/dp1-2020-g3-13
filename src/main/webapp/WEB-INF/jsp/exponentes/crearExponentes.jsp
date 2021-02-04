@@ -1,11 +1,12 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-            <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-                <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-                    <%@page contentType="text/html"%>
-                        <%@page pageEncoding="UTF-8"%>
-                    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+                <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+                    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+                        <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                            <%@ taglib prefix ="form" uri = "http://www.springframework.org/tags/form"%>  
+                            <%@ page contentType="text/html; charset=UTF-8" %>
                         <petclinic:layout pageName="test">
                             <jsp:body>
                                 <h2>

@@ -59,6 +59,7 @@ public class AlquilerEspacioService {
         }else{
             precioTotal = lugar.getPrecio() * horas;
         }
+        precioTotal = Math.round(precioTotal * 100)/100d;
         alquiler.setPrecioTotal(precioTotal);
         // actividadService.guardarActividad(actividad);
     }

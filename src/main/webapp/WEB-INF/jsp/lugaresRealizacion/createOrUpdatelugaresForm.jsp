@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <petclinic:layout pageName="lugaresRealizacion">
     <h2>
@@ -24,10 +25,10 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <c:choose>
                     <c:when test="${lugarRealizacion['new']}">
-                        <button class="btn btn-default" type="submit">Add Lugar Realizacion</button>
+                        <button class="btn btn-default" type="submit">Añadir Lugar Realizacion</button>
                     </c:when>
                     <c:otherwise>
-                        <button class="btn btn-default" type="submit">Update Lugar Realizacion</button>
+                        <button class="btn btn-default" type="submit">Actualizar Lugar Realizacion</button>
                     </c:otherwise>
                 </c:choose>
             </div>

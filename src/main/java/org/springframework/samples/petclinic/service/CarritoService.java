@@ -128,6 +128,7 @@ public class CarritoService {
             for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
                 total += carrito.getLineasFacturas().get(i).getPrecio();
             }
+            total = Math.round(total * 100)/100d;
             carrito.setTotal(total);
             carritoRepo.save(carrito);
         }
@@ -162,6 +163,7 @@ public class CarritoService {
         precioTotal = precioTotal +lineas.get(cont).getPrecio();
         cont++;
        }
+        precioTotal = Math.round(precioTotal * 100)/100d;
         factura.setPrecioTotal(precioTotal);
         factura.setFechaFactura(LocalDate.now());
         factura.setUsuario(cliente.getUsuario()); 
@@ -187,6 +189,7 @@ public class CarritoService {
         precioTotal = precioTotal +lineas.get(cont).getPrecio();
         cont++;
        }
+        precioTotal = Math.round(precioTotal * 100)/100d;
         factura.setPrecioTotal(precioTotal);
         factura.setFechaFactura(LocalDate.now());
         factura.setUsuario(org.getUsuario()); 
