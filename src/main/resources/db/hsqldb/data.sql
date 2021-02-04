@@ -75,29 +75,29 @@ INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medid
 INSERT INTO eventos(tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id, es_publico) VALUES ('Concierto', 'ornare lacus suscipit eget. Pellentesque nec fermentum justo. Donec ultricies justo ac porttitor tempor.', 'Reconstruye tu negocio', '2022-08-11', '2M', 'Musica', '2022-08-12', 2, TRUE);
 INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, evento_id) VALUES (11,'Tupac in live', 'accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias,', '2021-04-11 10:00', '2021-04-11 13:00', 2);
 
-INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, evento_id, lugar_realizacion_id) VALUES (2,'Eminem in live', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2021-04-11 10:00', '2021-04-11 13:00', 1,1);
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, evento_id) VALUES (2,'Eminem in live', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2021-04-11 10:00', '2021-04-11 13:00', 1);
 INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, evento_id) VALUES (3,'Eminem behind scenes', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2021-04-11 13:05', '2021-04-11 13:45', 1);
 INSERT INTO exponente(id,nombre_exponente,apellidos_exponente,alias) VALUES(1,'Marshall Bruce','Mathers III', 'EMINEM');
 
 INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03',1,1);
 INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(2, 'test_asunto_2', 'test_descripcion_2', '2021-03-03',1,2);
 
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'DIURNA', '2021-04-11 09:00', '2021-04-11 12:00', 10,1);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2021-04-11 16:00', '2021-04-11 20:00', 10,1);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (5, 'DIURNA', '2023-06-11 09:00', '2023-06-11 12:00', 10,2);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8, 'NOCTURNA', '2023-06-11 16:00', '2023-06-11 20:00', 10,2);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6, 'DIURNA', '2022-10-11 09:00', '2022-10-11 12:00', 10,3);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'NOCTURNA', '2022-10-11 16:00', '2022-10-11 20:00', 10,3);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (4, 'DIURNA', '2022-04-13 09:00', '2022-04-13 12:00', 10,4);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'NOCTURNA', '2022-04-13 16:00', '2022-04-13 20:00', 10,4);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6, 'DIURNA', '2022-06-11 09:00', '2022-06-11 12:00', 10,5);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-06-11 16:00', '2022-06-11 20:00', 10,5);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7, 'DIURNA', '2022-02-11 09:00', '2022-02-11 12:00', 10,6);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-02-11 16:00', '2022-02-11 20:00', 10,6);
-INSERT INTO tipoentradas(precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9, 'NOCTURNA', '2022-08-11 16:00', '2022-08-11 20:00', 10,7);
+INSERT INTO tipoentradas(id, precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (1,8, 'DIURNA', '2021-04-11 09:00', '2021-04-11 12:00', 10,1);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (2,9, 'NOCTURNA', '2021-04-11 16:00', '2021-04-11 20:00', 10,1);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (3,5, 'DIURNA', '2023-06-11 09:00', '2023-06-11 12:00', 10,2);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (4,8, 'NOCTURNA', '2023-06-11 16:00', '2023-06-11 20:00', 10,2);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (5,6, 'DIURNA', '2022-10-11 09:00', '2022-10-11 12:00', 10,3);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (6,7, 'NOCTURNA', '2022-10-11 16:00', '2022-10-11 20:00', 10,3);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (7,4, 'DIURNA', '2022-04-13 09:00', '2022-04-13 12:00', 10,4);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (8,7, 'NOCTURNA', '2022-04-13 16:00', '2022-04-13 20:00', 10,4);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (9,6, 'DIURNA', '2022-06-11 09:00', '2022-06-11 12:00', 10,5);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (10,9, 'NOCTURNA', '2022-06-11 16:00', '2022-06-11 20:00', 10,5);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (11,7, 'DIURNA', '2022-02-11 09:00', '2022-02-11 12:00', 10,6);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (12,9, 'NOCTURNA', '2022-02-11 16:00', '2022-02-11 20:00', 10,6);
+INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (13,9, 'NOCTURNA', '2022-08-11 16:00', '2022-08-11 20:00', 10,7);
 
 
 INSERT INTO tipoentradas_actividades(tipo_entrada_id, actividades_id) VALUES (1,2);
-INSERT INTO tipoentradas_actividades(tipo_entrada_id, actividades_id) VALUES (1,1);
+INSERT INTO tipoentradas_actividades(tipo_entrada_id, actividades_id) VALUES (1,2);
 
 

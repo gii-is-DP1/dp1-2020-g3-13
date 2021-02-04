@@ -107,6 +107,8 @@ public class CarritoService {
     public void anadirCarritoLugarRealizacion(Actividad actividad, Organizacion organizacion) throws DataAccessException{
         AlquilerEspacio alquiler = actividad.getAlquilerEspacio();
         LineaFactura linea = new LineaFactura();
+
+
         linea.setCantidad(1);
         linea.setPrecio(alquiler.getPrecioTotal());
         linea.setAlquilerEspacio(alquiler);
@@ -123,7 +125,6 @@ public class CarritoService {
                 carrito.setLineasFacturas(lineasFacturas);
             }
             double total = 0.0;
-            
             for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
                 total += carrito.getLineasFacturas().get(i).getPrecio();
             }

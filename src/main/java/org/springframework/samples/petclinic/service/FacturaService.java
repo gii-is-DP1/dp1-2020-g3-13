@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.LineaFactura;
+import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.FacturaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,12 @@ public class FacturaService {
         facturaRepo.save(Factura);
 
    }
+
+   public List<Factura> facturasUsuario(Usuario usuario){
+       return facturaRepo.facturasDeUsuario(usuario);
+   }
+
+
    public void calculaPrecioTotal(List<Factura> facturas){
         int i = 0;
         Double precio = 0.;
