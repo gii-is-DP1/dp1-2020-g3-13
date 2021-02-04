@@ -30,7 +30,8 @@ public class ActividadService {
 
         public Actividad findById(int id){
             return actividadRepo.findById(id).orElse(null);
-        }
+        } 
+        //Devuelve si cierta actividad contiene al exponente pasado por parametros
         public Boolean contieneExponente(Exponente exponente, Actividad actividad){
             Boolean res = false;
             for (int i = 0; i < actividad.getExponentes().size(); i++) {
@@ -41,7 +42,7 @@ public class ActividadService {
             }
             return res;
         }
-        @Transactional
+
         public Actividad encuentraActividadId(int actividadId){
             return actividadRepo.findById(actividadId).orElse(null);
         }
@@ -50,15 +51,9 @@ public class ActividadService {
         public void guardarActividad(Actividad actividad){
                 actividadRepo.save(actividad);
         }
-        @Transactional
-        public void borrarAlquileres(Actividad actividad){
-            //AlquilerEspacio alq =actividadRepo.encuentraAlquilerLugar(alquiler.getId());
-            actividad.setAlquilerEspacio(null);
-        }
 
         @Transactional
         public void anadirActividadAEvento(Evento evento, Actividad actividad) throws DataAccessException{
-
             if(evento.getActividades()==null){
                 List<Actividad> listaActividades = new ArrayList<>();
                 actividad.setEvento(evento);
@@ -70,9 +65,5 @@ public class ActividadService {
                 listaActividadesActual.add(actividad);
             }
         }
-        // @Transactional
-        // public void AñadirLugarRealizacionActividad(Actividad actividad, Integer idLugar) throws DataAccessException{
-        //     actividad.setLugarRealizacion(lugarRealizacionService.findById(idLugar));
-        // }
-
+       
 }
