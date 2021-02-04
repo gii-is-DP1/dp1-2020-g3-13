@@ -89,7 +89,6 @@ public class EventoController {
         Evento evento =eventoService.findEventoById(eventosId);
       //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
         eventoService.anadirEventoAFav(evento, usuario);
-        System.out.println("AQUI ENTRA=====================================================");
         eventoService.save(evento);
         modelMap.addAttribute("message", "Evento añadido a favoritos!");
         return "redirect:/eventos/";
@@ -174,9 +173,16 @@ public class EventoController {
 
 
     }
-    @GetMapping(value = "/delete/{eventoId}")
+    @GetMapping(value = "/{eventoId}/delete")
     public String deleteEvento(@PathVariable("eventoId") int eventoId, ModelMap model){
-        this.eventoService.delete(eventoService.findEventoById(eventoId));
+        Organizacion org = this.organizacionService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+        Evento evento = this.eventoService.findEventoById(eventoId);
+        if((org  == evento.getOrganizacion()||SecurityContextHolder.getContext().getAuthentication().getName()=="admin")&& !evento.getEsPublico())
+            this.eventoService.delete(evento);
+        else{
+            return "eventos/organizacionSinPermiso";
+        }
+
         return "redirect:/eventos";
     }
     

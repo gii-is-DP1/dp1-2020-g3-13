@@ -107,7 +107,6 @@ public class ActividadController {
         Evento ev  = eventoService.findEventoById(eventoId);
         AlquilerEspacio alquiler = new AlquilerEspacio();
         Iterable<LugarRealizacion> lugares = lugarRealizacionService.findAll();
-        // model.addAttribute("lugarSeleccionado", alquiler.getLugarRealizacion());
         model.addAttribute("lugares", lugares);
         model.addAttribute("alquilerEspacio", alquiler);
         model.addAttribute("actividad", actividad);
@@ -117,10 +116,16 @@ public class ActividadController {
 	@PostMapping("/{actividadId}/alquilarEspacio")
 	public String alquilarEspacioProcesarForm(@Valid AlquilerEspacio alquiler, @PathVariable("evento_id") int eventoId ,@PathVariable("actividadId") int actividadId, BindingResult result, ModelMap model){
         Actividad actividad = actividadService.findById(actividadId);
+        Evento evento = eventoService.findEventoById(eventoId);
         Organizacion org  = orgService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		if (result.hasErrors()) {
 			return VIEW_ALQUILAR_ESPACIO;
 		}else {
+            try {
+                alquilerService.compruebaFechas(alquiler.getLugarRealizacion(), actividad, evento);
+            } catch (Exception e) {
+                return "exception";
+            }
             alquilerService.alquilerLugarRealizacion(alquiler, actividad, org);
             carritoService.anadirCarritoLugarRealizacion(actividad, org);
             model.addAttribute("alquilerEspacio", alquiler);

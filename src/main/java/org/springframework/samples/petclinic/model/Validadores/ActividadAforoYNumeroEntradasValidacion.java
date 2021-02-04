@@ -37,7 +37,7 @@ public class ActividadAforoYNumeroEntradasValidacion
         List<Actividad> listaActividades = (List<Actividad>) campoActividades;
         for (int i = 0; i < listaActividades.size(); i++) {
             Actividad actividadIterada = (Actividad) listaActividades.get(i);
-            if (sumaAforo(valorNumEntradas, actividadIterada, actividadIterada.getLugarRealizacion().getAforo())) {
+            if (sumaAforo(valorNumEntradas, actividadIterada, actividadIterada.getAlquilerEspacio().getLugarRealizacion().getAforo())) {
                 res = false;
             }
 
@@ -47,7 +47,7 @@ public class ActividadAforoYNumeroEntradasValidacion
 
     private boolean sumaAforo(Integer valorNumEntradas, Actividad actividadIterada, Integer aforo) {
         if (tipoEntradaService != null) {
-            LugarRealizacion lugar = actividadIterada.getLugarRealizacion();
+            LugarRealizacion lugar = actividadIterada.getAlquilerEspacio().getLugarRealizacion();
             List<TipoEntrada> tiposEntradaCompartiendoActividad = tipoEntradaService
                     .devuelveTodasLasEntradasParaElLugar(lugar.getId());
             Integer sumaEntradas = tiposEntradaCompartiendoActividad.stream().mapToInt(x -> x.getNumEntradas()).sum();

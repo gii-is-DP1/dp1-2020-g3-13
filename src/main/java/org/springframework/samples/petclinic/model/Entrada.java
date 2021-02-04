@@ -19,11 +19,11 @@ import lombok.Setter;
 @Table(name = "entrada")
 public class Entrada extends BaseEntity{
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="id_cliente",referencedColumnName = "id")
     private Cliente cliente;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="id_tipoEntrada", referencedColumnName = "id")
     private TipoEntrada tipoEntrada;
 

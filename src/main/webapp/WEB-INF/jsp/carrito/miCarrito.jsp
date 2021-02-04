@@ -42,6 +42,11 @@
                                     Cantidad:
                                         <c:out value="${lineasFacturas.cantidad}" />
                                 </p>
+                                <spring:url value="/carrito/cliente/{lineaFacturaId}/delete" var="borrarUrl">
+                                            <spring:param name="lineaFacturaId" value="${lineasFacturas.id}" />
+                                        </spring:url>
+                                        <a href="${fn:escapeXml(borrarUrl)}">
+                                            <c:out value="Borrar" /><br></a>
                             </c:forEach>
                             <p> Total: </p>
                             <c:out value="${carrito.total}" />

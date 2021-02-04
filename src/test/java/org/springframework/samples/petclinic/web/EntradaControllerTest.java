@@ -10,7 +10,6 @@ import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
-import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.ClienteRepository;
 import org.springframework.samples.petclinic.repository.EntradaRepository;
@@ -108,7 +107,7 @@ public class EntradaControllerTest {
         // definimos el evento
         evento = new Evento();
         evento.setId(8);
-        evento.setTipoEvento(TipoEvento.ACADEMICOS);
+        evento.setTipoEvento("tipoEvento");
         evento.setDescripcion("descripcion");
         evento.setNombreEvento("nombreEvento");
         evento.setMedidasSanitarias("medidasSanitarias");

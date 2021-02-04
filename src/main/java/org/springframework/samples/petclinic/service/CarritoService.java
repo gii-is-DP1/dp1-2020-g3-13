@@ -30,6 +30,8 @@ public class CarritoService {
     @Autowired
     private LineaFacturaService lineaService;
 
+    @Autowired
+    private EntradaService entradaService;
 
     @Transactional
     public long carritoCount(){
@@ -100,6 +102,8 @@ public class CarritoService {
     public void anadirCarritoLugarRealizacion(Actividad actividad, Organizacion organizacion) throws DataAccessException{
         AlquilerEspacio alquiler = actividad.getAlquilerEspacio();
         LineaFactura linea = new LineaFactura();
+
+
         linea.setCantidad(1);
         linea.setPrecio(alquiler.getPrecioTotal());
         linea.setAlquilerEspacio(alquiler);
@@ -116,7 +120,6 @@ public class CarritoService {
                 carrito.setLineasFacturas(lineasFacturas);
             }
             double total = 0.0;
-            
             for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
                 total += carrito.getLineasFacturas().get(i).getPrecio();
             }
@@ -135,11 +138,10 @@ public class CarritoService {
 
     @Transactional
     public void borrarLineaFactura(Carrito carrito, int lineaFacturaId) throws DataAccessException{
-        LineaFactura linea =carrito.getLineasFacturas().get(lineaFacturaId);
-        lineaService.borrarLinea(linea);
+        LineaFactura linea = lineaService.encuentraLineaFactura(lineaFacturaId);
+        carrito.getLineasFacturas().remove(linea);
+
     }
-
-
 
     public void generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
        Factura factura = new Factura();
