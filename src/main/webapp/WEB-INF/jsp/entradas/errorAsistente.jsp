@@ -1,8 +1,7 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
-<%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

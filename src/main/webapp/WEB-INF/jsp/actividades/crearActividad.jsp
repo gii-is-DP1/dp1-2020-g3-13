@@ -30,8 +30,7 @@
                                         <petclinic:inputField label="Descripción" name="descripcionActividad" />
                                         <petclinic:inputField id="datetimeInicio" label="Fecha de Inicio" name="fechaInicio" />
                                         <petclinic:inputField id="datetimeFin" label="Fecha de Fin" name="fechaFin" />
-                                        <petclinic:selectField label="Lugar de realizacion " name="lugarRealizacion" size="6" names="${lugares}" />
-                                      
+                                        
 
                                     </div>
                                     <div class="form-group">
