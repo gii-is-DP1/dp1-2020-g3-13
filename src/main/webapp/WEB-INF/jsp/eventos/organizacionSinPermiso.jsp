@@ -9,7 +9,7 @@
                         <petclinic:layout pageName="test">
                             <jsp:body>
 
-                                <h1 style="text-align: center; color:rgb(194, 19, 6); size:20;">Usted no tiene permiso para acceder a este evento.</h1>
+                                <h1 style="text-align: center; color:rgb(194, 19, 6); size:20;">Usted no tiene permiso para realizar acciones sobre este evento.</h1>
                                 <a href="/eventos" title="Pagina de eventos"  > Volver al listado de eventos </a>
 
                             </jsp:body>

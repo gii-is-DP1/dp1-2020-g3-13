@@ -11,12 +11,17 @@
                         </h2>
 
                         <h3>¿Qué llevo en mi carrito?</h3>
-                      
+
                             <!-- <div class="cuadro-carrito"></div> -->
-                            <c:forEach items="${carrito.lineasFacturas}" var="lineasFacturas">
+                            <c:forEach items="${carrito.lineasFacturas}" var="lineasFacturas" varStatus="i">
+
                                 <p>
                                     Espacio Reservado:
                                         <c:out value="${lineasFacturas.alquilerEspacio.lugarRealizacion.nombre_recinto}" />
+                                </p>
+                                <p>
+                                    Actividad asociada:
+                                        <c:out value="${actividades[i.index].tematicaActividad}"/>
                                 </p>
                                 <p>
                                     Fecha Inicio:
@@ -30,6 +35,11 @@
                                     Precio:
                                         <c:out value="${lineasFacturas.precio}" />
                                 </p>
+                                <spring:url value="/carrito/organizacion/${lineasFacturas.id}/delete" var="borrarAlquilerEspacioUrl">
+                                <spring:param name="lineaFacturaId" value="${lineasFacturas.id}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(borrarAlquilerEspacioUrl)}" class="btn btn-default">Borrar elemento</a>
+
                             </c:forEach>
                             <p> Total: </p>
                             <c:out value="${carrito.total}" />

@@ -43,11 +43,20 @@
         </tr>
        
     </table>
-    <spring:url value="/eventos/{eventoId}/actividades/{actividadId}/alquilarEspacio" var="alquilarEspacioUrl">
-        <spring:param name="eventoId" value="${evento.id}"/>
-        <spring:param name="actividadId" value="${actividad.id}"/>
-    </spring:url>
-    <a href="${fn:escapeXml(alquilarEspacioUrl)}" class="btn btn-default">¿Quieres reservar el espacio?</a>
+
+    <c:choose>
+        <c:when test="${actividad.alquilerEspacio==null}">
+            <spring:url value="/eventos/{eventoId}/actividades/{actividadId}/alquilarEspacio" var="alquilarEspacioUrl">
+            <spring:param name="eventoId" value="${evento.id}"/>
+            <spring:param name="actividadId" value="${actividad.id}"/>
+            </spring:url>
+            <a href="${fn:escapeXml(alquilarEspacioUrl)}" class="btn btn-default">¿Quieres reservar el espacio?</a>
+        </c:when>
+        <c:otherwise>
+            <h2>Esta actividad ya tiene un lugar de realizacion asociado </h2>
+        </c:otherwise>
+    </c:choose>
+
     <spring:url value="/eventos/{eventoId}/actividades/{actividadId}/nuevo" var="anadirExponenteUrl">
         <spring:param name="eventoId" value="${evento.id}"/>
         <spring:param name="actividadId" value="${actividad.id}"/>
