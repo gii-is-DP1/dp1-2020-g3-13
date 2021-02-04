@@ -79,11 +79,12 @@ public class ActividadControllerTest {
         
     }
  
-    @WithMockUser
+    @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
     @Test
     public void testFormularioActividadExito() throws Exception{
         mockMvc.perform(post("/eventos/{evento_id}/actividades/nuevo",1).param("tematicaActividad", "tematica de ejemplo").
         param("descripcionActividad", "una descripcion cualquiera que cumpla con el validador").param("fechaInicio", "2023/02/02 09:00").
-        param("fechaFin", "2023/02/02 12:00").param("lugarRealizacion", "1").with(csrf())).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo"));
+        param("fechaFin", "2023/02/02 12:00").param("lugarRealizacion", "1").param("id", "115").with(csrf())).andExpect(status().is3xxRedirection()).andExpect(view().
+        name("redirect:/eventos/{evento_id}/actividades/115/nuevo"));
     }
 }
