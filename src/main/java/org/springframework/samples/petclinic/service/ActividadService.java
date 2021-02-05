@@ -13,7 +13,6 @@ import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
-import org.springframework.samples.petclinic.repository.AlquilerEspacioRepository;
 import org.springframework.stereotype.Service;
 
 @Service

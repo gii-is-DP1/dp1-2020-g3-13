@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 
 //Objetos para los test, todos los objetos están creados y cumpliendo las restricciones de los validadores
