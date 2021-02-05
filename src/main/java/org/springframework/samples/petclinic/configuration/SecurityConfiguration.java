@@ -45,10 +45,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.hasAnyAuthority("organizacion").antMatchers("/consultas/cliente/misConsultas/*")
 				.hasAnyAuthority("cliente").antMatchers("/consultas/cliente/misConsultas").hasAnyAuthority("cliente")
 				.antMatchers("/organizaciones/**").hasAnyAuthority("admin").antMatchers("/eventos").permitAll()
-				.antMatchers("/eventos/nuevo/**").hasAnyAuthority("organizacion")
+				.antMatchers("/eventos/nuevo/**").hasAnyAuthority("organizacion","admin")
 				.antMatchers("/eventos/{evento_id}/actividades/{actividad_id}/nuevo").hasAnyAuthority("organizacion")
-				.antMatchers("/eventos/{eventoId}/{tipoEntradasId}/entrada").hasAnyAuthority("cliente").antMatchers("/eventos/**")
-				.hasAnyAuthority("cliente", "admin", "organizacion").antMatchers("/tipoentradas/**").permitAll()
+				.antMatchers("/eventos/{eventoId}/{tipoEntradasId}/entrada").hasAnyAuthority("cliente","admin")
+				.antMatchers("/eventos").hasAnyAuthority("cliente","admin")
+				.antMatchers("/eventos/{evento_id}").hasAnyAuthority("cliente","admin")
+				//
+				
+				.antMatchers("/tipoentradas/**").permitAll()
 				.antMatchers("/carrito/**").hasAnyAuthority("cliente","organizacion").antMatchers("/actividades/**")
 				.hasAnyAuthority("organizacion").antMatchers("/facturas/**").hasAnyAuthority("organizacion","cliente")
 				// .antMatchers("/consultas/{evento_id}/nuevo").hasAnyAuthority("cliente")
