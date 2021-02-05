@@ -1,10 +1,14 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -125,6 +129,8 @@ public class EventoController {
     @GetMapping(value="/nuevo")
     public String crearEvento(ModelMap modelMap){
         String vista="eventos/editarEvento";
+        List<TipoEvento> tipoEventos = Arrays.asList(TipoEvento.values());
+        modelMap.addAttribute("tipoEvento", tipoEventos);
         modelMap.addAttribute("evento", new Evento());
         return vista;
     }
@@ -133,6 +139,8 @@ public class EventoController {
     public String guardarEvento(@Valid Evento evento, BindingResult resultado, ModelMap modelMap){
         Organizacion org = this.organizacionService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
         if(resultado.hasErrors()){
+            List<TipoEvento> tipoEventos = Arrays.asList(TipoEvento.values());
+            modelMap.addAttribute("tipoEvento", tipoEventos);
             modelMap.addAttribute("evento", evento);
             return "eventos/editarEvento";
         }else {
