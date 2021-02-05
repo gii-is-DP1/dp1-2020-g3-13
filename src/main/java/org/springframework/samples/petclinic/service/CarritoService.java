@@ -30,8 +30,6 @@ public class CarritoService {
     @Autowired
     private LineaFacturaService lineaService;
 
-    @Autowired
-    private EntradaService entradaService;
 
     @Transactional
     public long carritoCount(){

@@ -10,7 +10,7 @@ import javax.websocket.ClientEndpoint;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.service.ClienteService;
-import org.springframework.samples.petclinic.service.EventoService;
+
 import org.springframework.samples.petclinic.service.UsuarioService;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 public class CarritoValidador {
