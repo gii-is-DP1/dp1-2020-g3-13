@@ -16,6 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -50,11 +51,26 @@ public class ActividadControllerSecurityTest {
         mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
         
     }
-    // @Test
-    // @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
-  //  void deberiaDevolverFormularioActividadOrganizacion() throws Exception{
-   //     mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
-        
-  //  }
-    
+    @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
+    @Test
+    public void testFormularioActividadExitoOrganizacion() throws Exception{
+        mockMvc.perform(post("/eventos/{evento_id}/actividades/nuevo",1).param("tematicaActividad", "tematica de ejemplo").
+        param("descripcionActividad", "una descripcion cualquiera que cumpla con el validador").param("fechaInicio", "2023/02/02 09:00").
+        param("fechaFin", "2023/02/02 12:00").param("lugarRealizacion", "1").param("id", "115").with(csrf())).andExpect(status().is3xxRedirection()).andExpect(view().
+        name("redirect:/eventos/{evento_id}/actividades/115/nuevo"));
+    }
+    @WithMockUser(username = "UsuarioAleatorio", authorities = {"cliente"})
+    @Test
+    public void testFormularioActividadClienteError() throws Exception{
+        mockMvc.perform(post("/eventos/{evento_id}/actividades/nuevo",1).param("tematicaActividad", "tematica de ejemplo").
+        param("descripcionActividad", "una descripcion cualquiera que cumpla con el validador").param("fechaInicio", "2023/02/02 09:00").
+        param("fechaFin", "2023/02/02 12:00").param("lugarRealizacion", "1").param("id", "115").with(csrf())).andExpect(status().is4xxClientError());
+    } 
+    @WithMockUser(username = "UsuarioAleatorio", authorities = {"admin"})
+    @Test
+    public void testFormularioActividadAdminError() throws Exception{
+        mockMvc.perform(post("/eventos/{evento_id}/actividades/nuevo",1).param("tematicaActividad", "tematica de ejemplo").
+        param("descripcionActividad", "una descripcion cualquiera que cumpla con el validador").param("fechaInicio", "2023/02/02 09:00").
+        param("fechaFin", "2023/02/02 12:00").param("lugarRealizacion", "1").param("id", "115").with(csrf())).andExpect(status().is4xxClientError());
+    } 
 }
