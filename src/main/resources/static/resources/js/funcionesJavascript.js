@@ -4,10 +4,6 @@ $(function() {
     //Lettering
     $('.nombre-sitio').lettering();
     $('.ocultar').hide();
-
-    document.querySelector('.button').addEventListener('click', function (event) {
-        event.preventDefault();
-    });
     
     $("#fechaInicio").datepicker({
             dateFormat: 'yy/mm/dd'

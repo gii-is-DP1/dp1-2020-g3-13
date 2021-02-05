@@ -32,8 +32,9 @@ public class AlquilerEspacio extends BaseEntity{
     @ManyToOne()
     @JoinColumn(name = "id_lugar_realizacion", referencedColumnName = "id")
     private LugarRealizacion lugarRealizacion;
-     
+     /*
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "actividad_id", referencedColumnName = "id")
     private Actividad actividad;
+    */
 }
