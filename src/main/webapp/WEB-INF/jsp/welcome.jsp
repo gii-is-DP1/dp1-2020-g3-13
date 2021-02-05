@@ -6,6 +6,8 @@
                 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                        <%@page contentType="text/html"%>
+                        <%@page pageEncoding="UTF-8"%>  
                             <div class="hero">
                                 <div class="contenido-header">
                                     <div class="informacion-evento">
@@ -24,7 +26,7 @@
                             <petclinic:layout pageName="home">
                                 <div class="calendario">
                                     <h3>
-                                        <i class="fa fa-calendar" aria-hidden="true"></i> Nuestros proximos eventos </h3>
+                                        <i class="fa fa-calendar" aria-hidden="true"></i> Nuestros próximos eventos </h3>
                                 </div>
                                 <!-- <section class="contenido-descriptivo">
                                     <div class="contenido-video">
