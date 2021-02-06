@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -112,8 +113,6 @@ public class ConsultaController {
         }
 
     }
-
-    
 
     @GetMapping(value = "/cliente/misConsultas/{consulta_id}")
     public String verDetallesConsultaCliente(ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {

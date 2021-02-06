@@ -56,7 +56,7 @@ public class EntradaService {
         Boolean aux = false;
         entradaRepo.findAll().iterator().forEachRemaining(res::add);
         for (Entrada entrada2 : res) {
-            if(entrada2.getNombreAsistente()==nombreAsistente&&entrada2.getTipoEntrada().getEvento().getId()==eventoID){
+            if(entrada2.getNombreAsistente().equals(nombreAsistente)&&entrada2.getTipoEntrada().getEvento().getId().equals(eventoID)){
                 aux = true;
             }
 

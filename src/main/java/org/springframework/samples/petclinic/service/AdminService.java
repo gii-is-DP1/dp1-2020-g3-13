@@ -21,7 +21,6 @@ public class AdminService {
     @Autowired
     private OrganizacionService organizacionService;
     
-    @Transactional
     public int adminCount(){
         return (int) adminRepo.count();
     }
@@ -35,7 +34,7 @@ public class AdminService {
 		return adminRepo.findById(adminId);
     }
     
-
+    @Transactional
     public void deleteUsuario(String usuarioId){
         Usuario u = usuarioService.findUsuario(usuarioId);
         Cliente c = clienteService.findClienteByUsuario(usuarioId);

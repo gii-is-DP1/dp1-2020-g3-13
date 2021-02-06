@@ -7,19 +7,6 @@
                 <%@page pageEncoding="UTF-8"%>
 
                     <petclinic:layout pageName="Eventos">
-                        <jsp:attribute name="customScript">
-                            <script>
-                                $(function() {
-                                    $("#fechaInicio").datepicker({
-                                        dateFormat: 'yy/mm/dd'
-                                    });
-                                    $("#fechaFin").datepicker({
-                                        dateFormat: 'yy/mm/dd'
-                                    });
-                                });
-                            </script>
-
-                        </jsp:attribute>
                         <jsp:body>
 
                             <h2>
@@ -28,10 +15,11 @@
 
                             <form:form modelAttribute="evento" class="form-horizontal" id="add-evento-form">
                                     <petclinic:inputField label="Nombre" name="nombreEvento" />
-                                    <petclinic:inputField label="Tipo de evento" name="tipoEvento" />
-                                    <petclinic:inputField label="Descripción" name="descripcion" />
+                                    <petclinic:selectFieldTipoEntrada label="Tipo de evento" name="tipoEvento" size="1" names="${tipoEvento}"/>
+                                    <petclinic:textAreaField label = "Descripción" name ="descripcion"/>
                                     <petclinic:inputField label = "Fecha Inicio" name ="fechaInicio" id="fechaInicio"/>
                                     <petclinic:inputField label = "Fecha Fin" name ="fechaFin" id="fechaFin"/>
+                                    
                                     <petclinic:inputField label="Categoría" name="categoria" />
                                     <petclinic:inputField label="Medidas Sanitarias" name="medidasSanitarias" />
                         

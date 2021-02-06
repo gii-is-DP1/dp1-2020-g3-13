@@ -2,8 +2,9 @@
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-                <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-                    <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %> 
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 
 
@@ -13,8 +14,8 @@
                             <table id="peticionesTable" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="width: 150px;">Nombre organizacion</th>
-                                        <th style="width: 200px;">Info</th>
+                                        <th style="width: 150px;">Nombre organización</th>
+                                        <th style="width: 200px;">Información</th>
                                         <th style="width: 200px;">Email</th>
                                         <th style="width: 200px;">Opciones</th>
                                     </tr>

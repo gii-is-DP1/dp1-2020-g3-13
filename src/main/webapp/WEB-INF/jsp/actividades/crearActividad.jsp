@@ -7,22 +7,9 @@
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
                         <%@ page contentType="text/html; charset=UTF-8" %>
                             <petclinic:layout pageName="actividades">
-                                <jsp:attribute name="customScript">
-                                     <script>
-                                $(function() {
-                                    $("#fechaInicio")({
-                                        dateFormat: 'yy/mm/dd'
-                                    });
-                                    $("#fechaFin")({
-                                        dateFormat: 'yy/mm/dd'
-                                    });
-                                });
-                                     </script>
-
-                        </jsp:attribute>
                         <jsp:body>
                                 <h2>
-                                    Anade actividades a tu Evento
+                                    Añade actividades a tu Evento
                                 </h2>
                                 <form:form modelAttribute="actividad" class="form-horizontal" id="add-actividad-form">
                                     <div class="form-group has-feedback">

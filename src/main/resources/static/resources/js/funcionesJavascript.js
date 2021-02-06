@@ -4,6 +4,14 @@ $(function() {
     //Lettering
     $('.nombre-sitio').lettering();
     $('.ocultar').hide();
+    
+    $("#fechaInicio").datepicker({
+            dateFormat: 'yy/mm/dd'
+    });
+    $("#fechaFin").datepicker({
+            dateFormat: 'yy/mm/dd'
+    });
+
 
     $("#datetimeInicio").datetimepicker({
         format: 'YYYY/MM/DD HH:mm'
@@ -74,7 +82,15 @@ function miselect(idRecinto){
     $('#caracteristicasSeleccionado').text($('.'+x+'caracteristicasSeleccionado').text())
     $('#precioSeleccionado').text($('.'+x+'precioSeleccionado').text())
 
-    
+}
+
+function miselectexponentes(idExponente){
+
+    x = idExponente.value;
+    $('#nombreExponenteSeleccionado').text($('.'+x+'nombreExponenteSeleccionado').text())
+    $('#apellidosExponenteSeleccionado').text($('.'+x+'apellidosExponenteSeleccionado').text())
+    $('#aliasSeleccionado').text($('.'+x+'aliasSeleccionado').text())
+     
 }
 
 
