@@ -57,7 +57,6 @@ public class ExponenteServiceTest {
             int cantidad = eventoService.eventosCount();
             Evento evento = new Evento();
             Evento eventoCreado = eventoService.findAll().iterator().next();
-            evento.setActividades(new ArrayList<Actividad>());
             evento.setCategoria("categoria");
             evento.setConsultas(new ArrayList<Consulta>());
             evento.setDescripcion("descripcion");
@@ -94,7 +93,6 @@ public class ExponenteServiceTest {
             int cantidad = eventoService.eventosCount();
             Evento evento = new Evento();
             Evento eventoCreado = eventoService.findAll().iterator().next();
-            evento.setActividades(new ArrayList<Actividad>());
             evento.setCategoria("categoria");
             evento.setConsultas(new ArrayList<Consulta>());
             evento.setDescripcion("descripcion");
@@ -139,7 +137,6 @@ public class ExponenteServiceTest {
             int cantidad = eventoService.eventosCount();
             Evento evento = new Evento();
             Evento eventoCreado = eventoService.findAll().iterator().next();
-            evento.setActividades(new ArrayList<Actividad>());
             evento.setCategoria("categoria");
             evento.setConsultas(new ArrayList<Consulta>());
             evento.setDescripcion("descripcion");

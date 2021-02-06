@@ -12,6 +12,7 @@ import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.InicializadorObjetosTest;
+import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -21,6 +22,8 @@ public class ActividadServiceTest {
     private ActividadService actividadService;
     @Autowired
     private ExponenteService expoService;
+    @Autowired
+    private EventoRepository eventoRepo;
 
     @Test
     public void testCountWithInitialDataActividad() {
@@ -55,7 +58,7 @@ public class ActividadServiceTest {
         Evento evento = InicializadorObjetosTest.eventoParaTest();
         Actividad actividad = InicializadorObjetosTest.actividadParaTest();
         actividadService.anadirActividadAEvento(evento, actividad);
-        assertEquals(evento.getActividades().iterator().next(), actividad);
+        assertEquals(eventoRepo.getActividades(evento.getId()).iterator().next(), actividad);
         
     }
 }

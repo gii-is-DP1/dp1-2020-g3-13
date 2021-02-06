@@ -13,6 +13,7 @@ import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
+import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +29,8 @@ public class ActividadService {
         private CarritoService carritoService;
         @Autowired
         private ExponenteService expoService;
+        @Autowired
+        private EventoRepository eventoRepo;
 
 
         public int actividadesCount(){
@@ -76,13 +79,12 @@ public class ActividadService {
 
         @Transactional
         public void anadirActividadAEvento(Evento evento, Actividad actividad) throws DataAccessException{
-            if(evento.getActividades()==null){
+            if(eventoRepo.getActividades(evento.getId())==null){
                 List<Actividad> listaActividades = new ArrayList<>();
                 actividad.setEvento(evento);
                 listaActividades.add(actividad);
-                evento.setActividades(listaActividades);
             }else{
-                List<Actividad> listaActividadesActual = evento.getActividades();
+                List<Actividad> listaActividadesActual = eventoRepo.getActividades(evento.getId());
                 actividad.setEvento(evento);
                 listaActividadesActual.add(actividad);
             }
