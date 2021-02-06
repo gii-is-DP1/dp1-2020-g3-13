@@ -28,17 +28,9 @@ public class ExponenteService {
         exponenteRepo.save(exponente);
     }
 
-    // @Transactional
-    // public Exponente encuentraExponente(Exponente exponente){
-    //     String alias = exponente.getAlias();
-    //     String apellidos = exponente.getApellidosExponente();
-    //     String nombre = exponente.getNombreExponente();
-    //     if(exponenteRepo.existeExponenteConEstosAtributos(nombre, apellidos, alias) >= 1){
-    //         return exponente;
-    //         }else{
-    //             return null;
-    //         }
-    //     }
+    public List<Exponente> encuentraActividadExponente(int actividadId){
+        return exponenteRepo.encuentraActividadExponente(actividadId);
+    }
 
         public Exponente buscaExponente(Exponente exponente){
             Exponente exponenteABuscar = null;
@@ -65,22 +57,21 @@ public class ExponenteService {
     @Transactional
     public void anadirExponente(Actividad actividad, Exponente exponente) throws DataAccessException{
         if(buscaExponente(exponente)==null){
-            actividad.getExponentes().add(exponente);
+            //actividad.getExponentes().add(exponente);
             List<Actividad> actividades = new ArrayList<>();
             actividades.add(actividad);
-            exponente.setActividades(actividades); 
-            System.out.println(exponente.getActividades().size());
+            exponente.setActividades(actividades);
             exponenteRepo.save(exponente);
 
         }else{
             exponente = buscaExponente(exponente);
                 if(actividadService.contieneExponente(exponente, actividad)==false){
                     exponente = buscaExponente(exponente);
-                    actividad.getExponentes().add(exponente);
+                    //actividad.getExponentes().add(exponente);
                     List<Actividad> actividadesActual =exponente.getActividades();
-                    System.out.println(exponente.getActividades().size());
                     actividadesActual.add(actividad);
                     exponente.setActividades(actividadesActual);
+                    exponenteRepo.save(exponente);
                 }
                
             }

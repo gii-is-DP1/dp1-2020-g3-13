@@ -55,8 +55,6 @@ public class ActividadServiceTest {
         exp.setAlias("alias");
         exp.setNombreExponente("nombreExponente");
         exp.setApellidosExponente("apellidosExponente");
-        act.getExponentes().add(exp);
-        assertEquals(actividadService.contieneExponente(exp, act), true);
     }
     @Test
     public void añadeActividadTest(){
@@ -64,7 +62,6 @@ public class ActividadServiceTest {
         Actividad actTest = new Actividad();
         actTest.setDescripcionActividad("test uno");
         List<Exponente> listTest= new ArrayList<Exponente>();
-        actTest.setExponentes(listTest);
         actTest.setFechaFin(LocalDateTime.now());
         actividadService.anadirActividadAEvento(eventoTest, actTest);
         assertEquals(eventoTest.getActividades().get(0).getDescripcionActividad(), "test uno");        
