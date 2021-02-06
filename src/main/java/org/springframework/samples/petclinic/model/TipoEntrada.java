@@ -25,11 +25,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "tipoentradas")
-@ActividadAforoYNumeroEntradasRestriccion(actividades = "actividades", numEntradas = "numEntradas")
-@ActividadesParaTipoEntradaRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin", actividades = "actividades")
-@FechaTipoEntradaRestriccion(
+//@ActividadAforoYNumeroEntradasRestriccion(actividades = "actividades", numEntradas = "numEntradas")
+//@ActividadesParaTipoEntradaRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin", actividades = "actividades")
+//@FechaTipoEntradaRestriccion(
     //evento_id = "evento_id"
-    fechaInicio = "fechaInicio", fechaFin = "fechaFin", nombreEntrada = "nombre", message = "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento")
+    //fechaInicio = "fechaInicio", fechaFin = "fechaFin", nombreEntrada = "nombre", message = "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento")
 public class TipoEntrada extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -37,7 +37,7 @@ public class TipoEntrada extends BaseEntity {
     private Evento evento;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "actividades_id", referencedColumnName = "id")
+    @JoinColumn(name = "actividad_id", referencedColumnName = "id")
     private List<Actividad> actividades;
 
     @Column(name = "precio")

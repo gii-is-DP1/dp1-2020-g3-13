@@ -56,8 +56,4 @@ public class Actividad extends BaseEntity {
   @ManyToOne()
   @JoinColumn(name = "evento_id", referencedColumnName = "id")
   private Evento evento;
-
-  @ManyToMany(cascade = CascadeType.ALL)
-  private List<TipoEntrada> tiposEntrada;
-
 }
