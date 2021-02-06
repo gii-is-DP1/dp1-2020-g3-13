@@ -10,6 +10,7 @@ import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
+import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.TipoEntradaService;
 import org.springframework.stereotype.Controller;
@@ -29,12 +30,14 @@ public class TipoEntradaController {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private EventoService eventoService;
+    @Autowired
+    private EventoRepository eventoRepo;
 
     @GetMapping(value = "/nuevo")
     public String crearTipoEntrada(ModelMap modelMap, @PathVariable("evento_id") int eventoId){
         modelMap.addAttribute("tipoEntrada", new TipoEntrada());
         List<NombreTiposEntrada> nombre =  Arrays.asList(NombreTiposEntrada.values());
-        List<Actividad> actividades = eventoService.findEventoById(eventoId).getActividades();
+        List<Actividad> actividades =eventoRepo.getActividades(eventoId);
         modelMap.addAttribute("NombreTipoEntrada", nombre);
         modelMap.addAttribute("actividades", actividades);
         return VIEWS_TIPOS_ENTRADAS_CREATE_OR_UPDATE_FORM;

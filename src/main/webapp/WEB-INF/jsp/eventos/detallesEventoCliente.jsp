@@ -58,7 +58,7 @@
                                 <th>Actividades</th>
                                 <td>
                                     <div class="cuadro-entrada"></div>
-                                    <c:forEach items="${evento.actividades}" var="actividad">
+                                    <c:forEach items="${actividades}" var="actividad">
                                         <p>Temática:
                                             <c:out value="${actividad.tematicaActividad} " /></p>
                                         </div>
