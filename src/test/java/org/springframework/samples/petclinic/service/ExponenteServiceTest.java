@@ -22,7 +22,7 @@ import org.springframework.samples.petclinic.model.Consulta;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.TipoEntrada;
-
+import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -68,7 +68,7 @@ public class ExponenteServiceTest {
             evento.setNombreEvento("nombreEvento");
             evento.setOrganizacion(eventoCreado.getOrganizacion());
             evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-            evento.setTipoEvento("tipoEvento");
+            evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
             eventoService.save(evento);
             actividadExpo.setTematicaActividad("ActividadPrueba");
             actividadExpo.setDescripcionActividad("ESTO ES UNA ACTIVIDAD DE PRUEBA CON UNA DESCRIPCION APROPIADA PARA LA PRUEBA");
@@ -105,7 +105,7 @@ public class ExponenteServiceTest {
             evento.setNombreEvento("nombreEvento");
             evento.setOrganizacion(eventoCreado.getOrganizacion());
             evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-            evento.setTipoEvento("tipoEvento");
+            evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
             eventoService.save(evento);
             actividadExpo.setTematicaActividad("ActividadPrueba");
             // List<Exponente> exponentes = new ArrayList<Exponente>();
@@ -150,7 +150,7 @@ public class ExponenteServiceTest {
             evento.setNombreEvento("nombreEvento");
             evento.setOrganizacion(eventoCreado.getOrganizacion());
             evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-            evento.setTipoEvento("tipoEvento");
+            evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
             eventoService.save(evento);
             actividadExpo.setTematicaActividad("ActividadPrueba");
             List<Exponente> exponentes = new ArrayList<Exponente>();

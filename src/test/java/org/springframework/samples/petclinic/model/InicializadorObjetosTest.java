@@ -20,7 +20,7 @@ public class InicializadorObjetosTest {
         evento.setId(Integer.MAX_VALUE);
         evento.setMedidasSanitarias("6M");
         evento.setNombreEvento("nombreEvento");
-        evento.setTipoEvento(TipoEvento.ACADEMICOS);;
+        evento.setTipoEvento(TipoEvento.ACADEMICOS);
         evento.setTipoEntradas(new ArrayList<TipoEntrada>());
         evento.setActividades(new ArrayList<Actividad>());
         evento.setConsultas(new ArrayList<Consulta>());
@@ -56,7 +56,7 @@ public class InicializadorObjetosTest {
         actividad.setFechaFin(actividad.getFechaInicio().plusDays(1));
         actividad.setId(Integer.MAX_VALUE);
         actividad.setTematicaActividad("tematica de una actividad");
-        actividad.setExponentes( new ArrayList<Exponente>());
+        // actividad.setExponentes( new ArrayList<Exponente>());
         actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
         return actividad;
     }

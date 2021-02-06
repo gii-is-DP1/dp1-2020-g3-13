@@ -84,7 +84,7 @@ INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,f
 INSERT INTO exponente(id,nombre_exponente,apellidos_exponente,alias) VALUES(1,'Marshall Bruce','Mathers III', 'EMINEM');
 INSERT INTO exponente(id,nombre_exponente,apellidos_exponente,alias) VALUES(2,'Jack Berman','Webster II', 'Travis Scott');
 
-INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(1, 'test_asunto', 'test_descripcion', '2020-03-03',1,1);
+INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(1, 'test_asunto', 'test_descripcion', '2022-03-03',1,1);
 INSERT INTO consulta(id, asunto, descripcion, fecha_consulta, id_cliente, ID_EVENTO) VALUES(2, 'test_asunto_2', 'test_descripcion_2', '2021-03-03',1,2);
 
 INSERT INTO tipoentradas(id, precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (1,8, 'DIURNA', '2021-04-11 09:00', '2021-04-11 12:00', 10,1);
