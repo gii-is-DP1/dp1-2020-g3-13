@@ -16,8 +16,7 @@ import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Consulta;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.TipoEntrada;
-
-
+import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.stereotype.Service;
 
 
@@ -50,7 +49,7 @@ public class EventoServiceTest {
         evento.setOrganizacion(eventoCreado.getOrganizacion());
         evento.setTipoEntradas(new ArrayList<TipoEntrada>());
         evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        evento.setTipoEvento("tipoEvento");
+        evento.setTipoEvento(TipoEvento.ACADEMICOS);
         eventoService.save(evento);
         assertEquals(eventoService.eventosCount(), cantidad+1);
     }
