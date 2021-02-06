@@ -11,120 +11,60 @@ import org.junit.jupiter.api.Test;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 public class EntradaValidadores {
-    
-    private Validator createValidator() {
+
+       private Validator createValidator() {
 		LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
 		localValidatorFactoryBean.afterPropertiesSet();
 		return localValidatorFactoryBean;
     }
 
     @Test
-    void noDeberiavalidarDNIDeMasDe9Caracteres(){
-
+    void deberiaValidarDNISinLetra(){
         Entrada entrada = new Entrada();
-        entrada.setNombreAsistente("Pepe");
-        entrada.setDni("4353455334545");
+        entrada.setNombreAsistente("John Doe");
+        entrada.setDni("77934193");
 
         Validator validator = createValidator();
-		    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
-
-		    assertThat(constraintViolations.size()).isEqualTo(1);
-		    ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
-		    assertThat(violation.getPropertyPath().toString()).isEqualTo("dni");
-	  	    assertThat(violation.getMessage()).isEqualTo("El DNI no puede estar vacio, y debe ser exactamente de 9 caracteres");
-        
-
+	    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
+        assertThat(constraintViolations.size()).isEqualTo(1);
+        ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
+        assertThat(violation.getPropertyPath().toString()).isEqualTo("dni");
+        assertThat(violation.getMessage()).isEqualTo("El dni debe tener 8 dígitos y una letra");
+    
+    
     }
 
     @Test
-    void noDeberiavalidarDNIDeMenosDe9Caracteres(){
-
+    void deberiaValidarDNIConLetraYMenosNumeros(){
         Entrada entrada = new Entrada();
-        entrada.setNombreAsistente("Pepe");
-        entrada.setDni("123");
+        entrada.setNombreAsistente("John Doe");
+        entrada.setDni("7793419G");
 
         Validator validator = createValidator();
-		    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
-
-		    assertThat(constraintViolations.size()).isEqualTo(1);
-		    ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
-		    assertThat(violation.getPropertyPath().toString()).isEqualTo("dni");
-	  	    assertThat(violation.getMessage()).isEqualTo("El DNI no puede estar vacio, y debe ser exactamente de 9 caracteres");
-        
-
-    }
-
-
-    @Test
-    void noDeberiavalidarDNIVacio(){
-
-        Entrada entrada = new Entrada();
-        entrada.setNombreAsistente("Pepe");
-        entrada.setDni("");
-
-        Validator validator = createValidator();
-		    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
-
-		    assertThat(constraintViolations.size()).isEqualTo(2);
-		    ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
-		    assertThat(violation.getPropertyPath().toString()).isEqualTo("dni");
-	  	    assertThat(violation.getMessage()).isEqualTo("El DNI no puede estar vacio, y debe ser exactamente de 9 caracteres");
-        
-
+	    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
+        assertThat(constraintViolations.size()).isEqualTo(1);
+        ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
+        assertThat(violation.getPropertyPath().toString()).isEqualTo("dni");
+        assertThat(violation.getMessage()).isEqualTo("El dni debe tener 8 dígitos y una letra");
+    
+    
     }
 
     @Test
-    void noDeberiavalidarNombreAsistenteVacio(){
-
+    void deberiaValidarDNILetraIncorrecta(){
         Entrada entrada = new Entrada();
-        entrada.setNombreAsistente("");
-        entrada.setDni("49789456M");
+        entrada.setNombreAsistente("John Doe");
+        entrada.setDni("77934193O");
 
         Validator validator = createValidator();
-		    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
-
-		    assertThat(constraintViolations.size()).isEqualTo(2);
-		    ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
-		    assertThat(violation.getPropertyPath().toString()).isEqualTo("nombreAsistente");
-	  	    assertThat(violation.getMessage()).isEqualTo("El nombre del asistente no puede estar vacío y debe estar comprendido entre 2 y 35 caracteres");
-        
-
+	    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
+        assertThat(constraintViolations.size()).isEqualTo(1);
+        ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
+        assertThat(violation.getPropertyPath().toString()).isEqualTo("dni");
+        assertThat(violation.getMessage()).isEqualTo("El dni debe tener 8 dígitos y una letra");
+    
+    
     }
 
-    @Test
-    void noDeberiavalidarNombreAsistenteDeMasDe35Caracteres(){
-
-        Entrada entrada = new Entrada();
-        entrada.setNombreAsistente("Estafraseestáformadaporuntotalde44caracteres");
-        entrada.setDni("49789456M");
-
-        Validator validator = createValidator();
-		    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
-
-		    assertThat(constraintViolations.size()).isEqualTo(1);
-		    ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
-		    assertThat(violation.getPropertyPath().toString()).isEqualTo("nombreAsistente");
-	  	    assertThat(violation.getMessage()).isEqualTo("El nombre del asistente no puede estar vacío y debe estar comprendido entre 2 y 35 caracteres");
-        
-
-    }
-
-    @Test
-    void noDeberiavalidarNombreAsistenteDeMenosDe3Caracteres(){
-
-        Entrada entrada = new Entrada();
-        entrada.setNombreAsistente("Bo");
-        entrada.setDni("49789456M");
-
-        Validator validator = createValidator();
-		    Set<ConstraintViolation<Entrada>> constraintViolations = validator.validate(entrada);
-
-		    assertThat(constraintViolations.size()).isEqualTo(1);
-		    ConstraintViolation<Entrada> violation = constraintViolations.iterator().next();
-		    assertThat(violation.getPropertyPath().toString()).isEqualTo("nombreAsistente");
-	  	    assertThat(violation.getMessage()).isEqualTo("El nombre del asistente no puede estar vacío y debe estar comprendido entre 2 y 35 caracteres");
-        
-
-    }
 
 }

@@ -146,7 +146,7 @@ public class CarritoService {
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carrito.getLineasFacturas();
        List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
-       factura.setLineasFacturas(listaLineasDeFactura);
+    //    factura.setLineasFacturas(listaLineasDeFactura);
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();
@@ -161,7 +161,7 @@ public class CarritoService {
       //  factura.setLineasFacturas(lineas);
         for (LineaFactura lineaFactura : lineas) {
             lineaFactura.setFactura(factura);
-            factura.getLineasFacturas().add(lineaFactura);
+            // factura.getLineasFacturas().add(lineaFactura);
         }
         facturaRepo.save(factura);
 
@@ -171,7 +171,7 @@ public class CarritoService {
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carrito.getLineasFacturas();
        List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
-       factura.setLineasFacturas(listaLineasDeFactura);
+    //    factura.setLineasFacturas(listaLineasDeFactura);
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();
@@ -186,7 +186,7 @@ public class CarritoService {
       //  factura.setLineasFacturas(lineas);
         for (LineaFactura lineaFactura : lineas) {
             lineaFactura.setFactura(factura);
-            factura.getLineasFacturas().add(lineaFactura);
+            // factura.getLineasFacturas().add(lineaFactura);
         }
         facturaRepo.save(factura);
 
