@@ -19,8 +19,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name= "organizaciones")  
-public class Organizacion extends BaseEntity {    
+@Table(name = "organizaciones")
+public class Organizacion extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
@@ -44,6 +44,4 @@ public class Organizacion extends BaseEntity {
     @NotEmpty
     private String info;
 
-
-    
 }
