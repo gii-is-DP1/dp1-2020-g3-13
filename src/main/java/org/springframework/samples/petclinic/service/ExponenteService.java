@@ -32,6 +32,7 @@ public class ExponenteService {
         return exponenteRepo.encuentraActividadExponente(actividadId);
     }
 
+    
         public Exponente buscaExponente(Exponente exponente){
             Exponente exponenteABuscar = null;
             Iterator<Exponente> iteradorExponente = exponenteRepo.findAll().iterator();
@@ -54,6 +55,22 @@ public class ExponenteService {
             return exponenteRepo.findAll();
         }
 
+
+        public void eliminaExponente(Exponente exponente, Actividad actividad){
+            for(int i = 0; i< exponente.getActividades().size(); i++){
+                if(exponente.getActividades().get(i).equals(actividad)){
+                    exponente.getActividades().remove(actividad);
+                    guardarExponente(exponente);
+                    break;
+                }
+            }
+
+        }
+
+        public Exponente encuentraExponente(int exponenteId){
+            return exponenteRepo.findById(exponenteId).orElse(null);
+        }
+    
     @Transactional
     public void anadirExponente(Actividad actividad, Exponente exponente) throws DataAccessException{
         if(buscaExponente(exponente)==null){
