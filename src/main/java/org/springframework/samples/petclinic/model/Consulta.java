@@ -22,7 +22,7 @@ import lombok.Setter;
 @Table(name = "consulta")
 public class Consulta extends BaseEntity {
 
-    @OneToOne()
+  
     @OneToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
