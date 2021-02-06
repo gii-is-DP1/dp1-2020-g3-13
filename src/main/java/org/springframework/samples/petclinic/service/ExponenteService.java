@@ -57,7 +57,14 @@ public class ExponenteService {
 
 
         public void eliminaExponente(Exponente exponente, Actividad actividad){
-                exponente.getActividades().remove(actividad);
+            for(int i = 0; i< exponente.getActividades().size(); i++){
+                if(exponente.getActividades().get(i).equals(actividad)){
+                    exponente.getActividades().remove(actividad);
+                    guardarExponente(exponente);
+                    break;
+                }
+            }
+
         }
 
         public Exponente encuentraExponente(int exponenteId){

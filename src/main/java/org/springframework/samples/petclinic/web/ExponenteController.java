@@ -57,7 +57,7 @@ public class ExponenteController {
     }
 
     @GetMapping(value = "/{exponenteId}/borrarExponente")
-    public String borrarExponente(@PathVariable("exponenteId") int exponenteId,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id, BindingResult resultado, ModelMap modelMap){
+    public String borrarExponente(@PathVariable("exponenteId") int exponenteId,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id, ModelMap modelMap){
     Actividad actividad = actividadService.findById(actividadInt);
     Exponente exponente = exponenteService.encuentraExponente(exponenteId);
     modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
@@ -65,7 +65,7 @@ public class ExponenteController {
     modelMap.addAttribute("exponente", exponente);
     modelMap.addAttribute("listaExponentes", exponenteService.encuentraActividadExponente(actividadInt));
     exponenteService.eliminaExponente(exponente, actividad);
-    return guardarExponentes(modelMap, actividadInt, evento_id);
+    return "redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo/";
 
 
 }
