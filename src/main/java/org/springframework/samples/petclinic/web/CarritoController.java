@@ -36,6 +36,12 @@ public class CarritoController {
 		String vista="carrito/miCarrito";
         Carrito carrito = carritoService.listadoObjetosCarrito(SecurityContextHolder.getContext().getAuthentication().getName());
         modelMap.addAttribute("carrito", carrito);
+        if(carrito!=null){
+            List<LineaFactura> lf= carritoService.dimeLineaFacturasDeCarrito(carrito.getId());
+            System.out.println("======================24124141");
+            System.out.println(lf.toString());
+            modelMap.addAttribute("lineasFactura",lf);
+        }
         return vista;
     }
     

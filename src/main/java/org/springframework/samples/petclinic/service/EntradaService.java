@@ -74,4 +74,7 @@ public class EntradaService {
     public void borrarEntrada(Entrada entrada){
         entradaRepo.delete(entrada);
     }
+    public List<Entrada> buscaEntradaPorClienteId(int ClienteId){
+       return entradaRepo.findEntradaByClienteId(ClienteId);
+    }
 }
