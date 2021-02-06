@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="detallesActividad">
 
@@ -29,7 +29,7 @@
             <th>Exponentes</th>
             <td>
                 <div class="cuadro-entrada"></div>
-                <c:forEach items="${actividad.exponentes}" var="exponente">
+                <c:forEach items="${exponentes}" var="exponente">
                     <p>Nombre:
                         <c:out value="${exponente.nombreExponente} " /></p>
                     <p>Apellidos:

@@ -13,7 +13,7 @@ import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
-import org.springframework.samples.petclinic.repository.AlquilerEspacioRepository;
+import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,6 +27,10 @@ public class ActividadService {
         
         @Autowired
         private CarritoService carritoService;
+        @Autowired
+        private ExponenteService expoService;
+        @Autowired
+        private EventoRepository eventoRepo;
 
 
         public int actividadesCount(){
@@ -39,18 +43,20 @@ public class ActividadService {
 
         public Actividad findById(int id){
             return actividadRepo.findById(id).orElse(null);
-        }
+        } 
+        //Devuelve si cierta actividad contiene al exponente pasado por parametros
         public Boolean contieneExponente(Exponente exponente, Actividad actividad){
             Boolean res = false;
-            for (int i = 0; i < actividad.getExponentes().size(); i++) {
-                if(actividad.getExponentes().get(i).getNombreExponente().equals(exponente.getNombreExponente()) && actividad.getExponentes().get(i).getApellidosExponente().equals(exponente.getApellidosExponente()) && actividad.getExponentes().get(i).getAlias().equals(exponente.getAlias())) {
+            List<Exponente> exponentesActividad = expoService.encuentraActividadExponente(actividad.getId());
+            for (int i = 0; i < exponentesActividad.size(); i++) {
+                if(exponentesActividad.get(i).getNombreExponente().equals(exponente.getNombreExponente()) && exponentesActividad.get(i).getApellidosExponente().equals(exponente.getApellidosExponente()) && exponentesActividad.get(i).getAlias().equals(exponente.getAlias())) {
                     res = true;
                     break;
                 }
             }
             return res;
         }
-        @Transactional
+
         public Actividad encuentraActividadId(int actividadId){
             return actividadRepo.findById(actividadId).orElse(null);
         }
@@ -73,23 +79,16 @@ public class ActividadService {
 
         @Transactional
         public void anadirActividadAEvento(Evento evento, Actividad actividad) throws DataAccessException{
-
-            if(evento.getActividades()==null){
+            if(eventoRepo.getActividades(evento.getId())==null){
                 List<Actividad> listaActividades = new ArrayList<>();
                 actividad.setEvento(evento);
                 listaActividades.add(actividad);
-                evento.setActividades(listaActividades);
             }else{
-                List<Actividad> listaActividadesActual = evento.getActividades();
+                List<Actividad> listaActividadesActual = eventoRepo.getActividades(evento.getId());
                 actividad.setEvento(evento);
                 listaActividadesActual.add(actividad);
             }
         }
-        // @Transactional
-        // public void AñadirLugarRealizacionActividad(Actividad actividad, Integer idLugar) throws DataAccessException{
-        //     actividad.setLugarRealizacion(lugarRealizacionService.findById(idLugar));
-        // }
-
 		public List<Actividad> encuentraActividadesPorCarrito(Carrito carrito) {
             List<Actividad> actividades = new ArrayList<Actividad>();
             double total = 0.0;

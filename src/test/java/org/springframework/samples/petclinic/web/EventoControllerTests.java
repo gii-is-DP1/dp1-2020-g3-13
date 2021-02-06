@@ -17,6 +17,7 @@ import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Autoridades;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.AutoridadesRepository;
 import org.springframework.samples.petclinic.repository.EventoRepository;
@@ -83,7 +84,7 @@ public class EventoControllerTests {
         //inicializamos evento
         evento = new Evento();
         evento.setId(8);
-        evento.setTipoEvento("tipoEvento");
+        evento.setTipoEvento(TipoEvento.ACADEMICOS);
         evento.setDescripcion("descripcion");
         evento.setNombreEvento("nombreEvento");
         evento.setMedidasSanitarias("medidasSanitarias");

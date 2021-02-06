@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.Evento;
+import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.EventoService;
+import org.springframework.samples.petclinic.service.ExponenteService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,6 +49,8 @@ public class ActividadController {
     private CarritoService carritoService;
     @Autowired
     private OrganizacionService orgService;
+    @Autowired
+    private ExponenteService exponenteService;
 
 
 
@@ -63,8 +67,10 @@ public class ActividadController {
     public String detallesActividad(ModelMap model,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId){
         Actividad actividad = actividadService.findById(actividadId);
         Evento evento = eventoService.findEventoById(eventoId);
+        List<Exponente> exponentes = exponenteService.encuentraActividadExponente(actividadId);
         model.addAttribute("actividad", actividad);
         model.addAttribute("evento", evento);
+        model.addAttribute("exponentes", exponentes);
         return VIEW_ACTIVIDAD_DETALLES;
     }
     

@@ -1,10 +1,15 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.TipoEvento;
+import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -27,6 +32,8 @@ public class EventoController {
 
     @Autowired
     private EventoService eventoService;
+    @Autowired
+    private EventoRepository eventoRepo;
 
     @Autowired
     private OrganizacionService organizacionService;
@@ -77,6 +84,11 @@ public class EventoController {
             }
         }
         mav.addObject(this.eventoService.findEventoById(eventosId));
+        System.out.println("=============================");
+        System.out.println(this.eventoService.getActividades(eventosId).toString());
+        System.out.println("=============================");
+
+        mav.addObject("actividades",this.eventoService.getActividades(eventosId));
             return mav;
     }
     @GetMapping("/{eventosId}/añadirEventosFavoritos")
@@ -93,7 +105,7 @@ public class EventoController {
     public String hacerEventoPublico(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
         Evento evento =eventoService.findEventoById(eventosId);
 
-        if(evento.getActividades().size()!=0){
+        if(eventoRepo.getActividades(evento.getId()).size()!=0){
         eventoService.hacerPublico(eventosId);
       //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
         modelMap.addAttribute("message", "Evento añadido a favoritos!");
@@ -125,6 +137,8 @@ public class EventoController {
     @GetMapping(value="/nuevo")
     public String crearEvento(ModelMap modelMap){
         String vista="eventos/editarEvento";
+        List<TipoEvento> tipoEventos = Arrays.asList(TipoEvento.values());
+        modelMap.addAttribute("tipoEvento", tipoEventos);
         modelMap.addAttribute("evento", new Evento());
         return vista;
     }
@@ -133,6 +147,8 @@ public class EventoController {
     public String guardarEvento(@Valid Evento evento, BindingResult resultado, ModelMap modelMap){
         Organizacion org = this.organizacionService.encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
         if(resultado.hasErrors()){
+            List<TipoEvento> tipoEventos = Arrays.asList(TipoEvento.values());
+            modelMap.addAttribute("tipoEvento", tipoEventos);
             modelMap.addAttribute("evento", evento);
             return "eventos/editarEvento";
         }else {

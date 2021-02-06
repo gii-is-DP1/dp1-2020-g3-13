@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,8 +23,8 @@ import lombok.Setter;
 @Table(name = "eventos")
 public class Evento extends BaseEntity{
     @Column(name = "tipoEvento")
-    @NotEmpty
-    protected String tipoEvento;
+    @Enumerated(EnumType.STRING)
+    protected TipoEvento tipoEvento;
 
     @Column(name = "descripcion")
     @NotEmpty
@@ -50,11 +52,6 @@ public class Evento extends BaseEntity{
 
     @Column(name = "esPublico")
     private Boolean esPublico;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    
-    // @JoinColumn(name = "actividades_id", referencedColumnName = "id")
-    private List<Actividad> actividades;
     
     // @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     // private List<VentaEntrada> ventaEntrada;

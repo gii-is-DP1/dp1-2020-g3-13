@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Usuario;
-import org.springframework.samples.petclinic.repository.UsuarioRepository;
 import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.UsuarioService;
 import org.springframework.security.core.context.SecurityContextHolder;

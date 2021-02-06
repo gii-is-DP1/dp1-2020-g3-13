@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="ventaEntrada">
 
@@ -26,7 +26,7 @@
     <form:form modelAttribute="ventaEntrada" class="form-horizontal" id="add-ventaEntrada-form">
     <div class="form-group has-feedback">
         <petclinic:inputField label="Titular Tarjeta" name="nombreTitular"/>
-        <petclinic:inputField label="Numero Tajeta" name="numTarjeta"/>
+        <petclinic:inputField label="Número Tarjeta" name="numTarjeta"/>
         <petclinic:inputField label="Fecha Caducidad" name="fechaCaducidad" id="fechaCaducidad"/>
         <petclinic:inputField label="CVV" name="cvv"/>
     </div>

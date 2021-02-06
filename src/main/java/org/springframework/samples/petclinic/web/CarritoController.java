@@ -1,16 +1,12 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Carrito;
-import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.LineaFactura;
-import org.springframework.samples.petclinic.repository.AlquilerEspacioRepository;
 import org.springframework.samples.petclinic.service.ActividadService;
-import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.EntradaService;
 import org.springframework.samples.petclinic.service.LineaFacturaService;

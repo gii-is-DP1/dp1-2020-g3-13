@@ -4,7 +4,6 @@ import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
-import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
