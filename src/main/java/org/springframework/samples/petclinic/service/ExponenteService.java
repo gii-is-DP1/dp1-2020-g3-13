@@ -57,7 +57,6 @@ public class ExponenteService {
     @Transactional
     public void anadirExponente(Actividad actividad, Exponente exponente) throws DataAccessException{
         if(buscaExponente(exponente)==null){
-            //actividad.getExponentes().add(exponente);
             List<Actividad> actividades = new ArrayList<>();
             actividades.add(actividad);
             exponente.setActividades(actividades);
@@ -67,7 +66,6 @@ public class ExponenteService {
             exponente = buscaExponente(exponente);
                 if(actividadService.contieneExponente(exponente, actividad)==false){
                     exponente = buscaExponente(exponente);
-                    //actividad.getExponentes().add(exponente);
                     List<Actividad> actividadesActual =exponente.getActividades();
                     actividadesActual.add(actividad);
                     exponente.setActividades(actividadesActual);

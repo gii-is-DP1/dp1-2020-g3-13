@@ -29,7 +29,7 @@
             <th>Exponentes</th>
             <td>
                 <div class="cuadro-entrada"></div>
-                <c:forEach items="${actividad.exponentes}" var="exponente">
+                <c:forEach items="${exponentes}" var="exponente">
                     <p>Nombre:
                         <c:out value="${exponente.nombreExponente} " /></p>
                     <p>Apellidos:
