@@ -17,6 +17,7 @@ import org.springframework.samples.petclinic.model.Consulta;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.TipoEvento;
+import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -24,6 +25,8 @@ import org.springframework.stereotype.Service;
 public class EventoServiceTest {
     @Autowired
     private EventoService eventoService;
+    @Autowired
+    private EventoRepository eventoRepo;
 
     @Test
     public void testCountWithInitialData() {
@@ -37,7 +40,6 @@ public class EventoServiceTest {
         int cantidad = eventoService.eventosCount();
         Evento evento = new Evento();
         Evento eventoCreado = eventoService.findAll().iterator().next();
-        evento.setActividades(new ArrayList<Actividad>());
         evento.setCategoria("categoria");
         evento.setConsultas(new ArrayList<Consulta>());
         evento.setDescripcion("descripcion");

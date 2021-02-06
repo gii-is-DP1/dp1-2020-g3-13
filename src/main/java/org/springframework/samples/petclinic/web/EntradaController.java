@@ -1,6 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
@@ -37,20 +40,21 @@ public class EntradaController {
 	}
 
     @PostMapping(value = "/entrada")
-	public String processCreationForm(Entrada entrada,@PathVariable("eventoId") int eventoId,@PathVariable("tipoEntradasId") int tipoEntradaId, BindingResult result) {
+	public String processCreationForm(@Valid Entrada entrada,@PathVariable("eventoId") int eventoId,@PathVariable("tipoEntradasId") int tipoEntradaId, BindingResult result) {
 		Carrito car= carritoService.dimeCarritoUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		List<String> nAsists= carritoService.dimeNombreAsistentes(car,eventoId);
-		System.out.println(nAsists.toString());
+		System.out.println("======================================================00");
+		System.out.println(entradaService.buscaPorEventoYPorNombreAsistene(entrada.getNombreAsistente(), eventoId).toString());
 		if (result.hasErrors()) {
 			return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 		}
 		else if(entradaService.existeElNombreEnElCarro(nAsists, entrada.getNombreAsistente())||entradaService.buscaPorEventoYPorNombreAsistene(entrada.getNombreAsistente(), eventoId)){
 			return "/entradas/errorAsistente";
 		}else{
-		   entradaService.crearEntrada(entrada, tipoEntradaId);
+		   this.entradaService.crearEntrada(entrada, tipoEntradaId);
 		   Cliente cliente  = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-		   carritoService.anadirCarrito(entrada, cliente);
-			return "redirect:/eventos/{eventoId}" /*+ admin.getId()*/;
+		   this.carritoService.anadirCarrito(entrada, cliente);
+			return "redirect:/eventos/{eventoId}";
 		}
 	}
 

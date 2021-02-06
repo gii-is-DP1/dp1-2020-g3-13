@@ -8,6 +8,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.samples.petclinic.model.Validadores.DNIRestriccion;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +33,6 @@ public class Entrada extends BaseEntity{
     private String nombreAsistente;
 
     @Column(name = "dni")
-    @NotBlank(message = "El DNI no puede estar vacio, y debe ser exactamente de 9 caracteres")
-    @Size(min=9, max= 9, message = "El DNI no puede estar vacio, y debe ser exactamente de 9 caracteres" )
+    @DNIRestriccion
     private String dni;
 }

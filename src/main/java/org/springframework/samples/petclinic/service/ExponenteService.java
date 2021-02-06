@@ -28,24 +28,21 @@ public class ExponenteService {
         exponenteRepo.save(exponente);
     }
 
-    @Transactional
-    public Exponente encuentraExponente(Exponente exponente){
-        String alias = exponente.getAlias();
-        String apellidos = exponente.getApellidosExponente();
-        String nombre = exponente.getNombreExponente();
-        if(exponenteRepo.existeExponenteConEstosAtributos(nombre, apellidos, alias) >= 1){
-            return exponente;
-            }else{
-                return null;
-            }
-        }
+    public List<Exponente> encuentraActividadExponente(int actividadId){
+        return exponenteRepo.encuentraActividadExponente(actividadId);
+    }
 
         public Exponente buscaExponente(Exponente exponente){
             Exponente exponenteABuscar = null;
             Iterator<Exponente> iteradorExponente = exponenteRepo.findAll().iterator();
             while(iteradorExponente.hasNext()){
                 Exponente exponenteIterado = iteradorExponente.next();
-                if(exponente.getNombreExponente().equals(exponenteIterado.getNombreExponente()) && exponente.getApellidosExponente().equals(exponenteIterado.getApellidosExponente()) && exponente.getAlias().equals(exponenteIterado.getAlias())){
+                String expoApellidos = exponente.getApellidosExponente().toUpperCase();
+                String expoNombre =exponente.getNombreExponente().toUpperCase();
+                String expoAlias = exponente.getAlias().toUpperCase();
+                if(expoNombre.equals(exponenteIterado.getNombreExponente().toUpperCase()) 
+                && expoApellidos.equals(exponenteIterado.getApellidosExponente().toUpperCase()) 
+                && expoAlias.equals(exponenteIterado.getAlias().toUpperCase())){
                     exponenteABuscar = exponenteIterado;
                     break;
                 }
@@ -53,31 +50,30 @@ public class ExponenteService {
             return exponenteABuscar;
         }
 
+        public Iterable<Exponente> listaExponentes(){
+            return exponenteRepo.findAll();
+        }
+
     @Transactional
     public void anadirExponente(Actividad actividad, Exponente exponente) throws DataAccessException{
-        if(exponenteRepo.existeExponenteConEstosAtributos(exponente.getNombreExponente(), exponente.getApellidosExponente(), exponente.getAlias()) <= 0){
-            actividad.getExponentes().add(exponente);
+        if(buscaExponente(exponente)==null){
             List<Actividad> actividades = new ArrayList<>();
             actividades.add(actividad);
-            exponente.setActividades(actividades); 
-            System.out.println(exponente.getActividades().size());
+            exponente.setActividades(actividades);
             exponenteRepo.save(exponente);
 
         }else{
-            if(encuentraExponente(exponente)!=null){
-
+            exponente = buscaExponente(exponente);
                 if(actividadService.contieneExponente(exponente, actividad)==false){
                     exponente = buscaExponente(exponente);
-                    actividad.getExponentes().add(exponente);
                     List<Actividad> actividadesActual =exponente.getActividades();
-                    System.out.println(exponente.getActividades().size());
                     actividadesActual.add(actividad);
                     exponente.setActividades(actividadesActual);
+                    exponenteRepo.save(exponente);
                 }
                
             }
         }
-    }
 
 
     }

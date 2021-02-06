@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Evento;
@@ -112,6 +113,9 @@ public class EventoService {
             evento.setEsPublico(true);
             eventoRepository.save(evento);
 
+        }
+        public List<Actividad> getActividades(int eventoId){
+           return eventoRepository.getActividades(eventoId);
         }
 
     
