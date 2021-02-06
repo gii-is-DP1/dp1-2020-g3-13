@@ -103,5 +103,5 @@ INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entrada
 
 
 INSERT INTO tipoentradas_actividades(tipo_entrada_id, actividades_id) VALUES (1,2);
-INSERT INTO tipoentradas_actividades(tipo_entrada_id, actividades_id) VALUES (1,2);
+INSERT INTO tipoentradas_actividades(tipo_entrada_id, actividades_id) VALUES (1,3);
 
