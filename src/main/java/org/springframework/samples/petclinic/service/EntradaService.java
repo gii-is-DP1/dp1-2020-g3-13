@@ -17,25 +17,25 @@ public class EntradaService {
     @Autowired
     private EntradaRepository entradaRepo;
     @Autowired
-    private TipoEntradaRepository tipoEntradaRepo;
+    private TipoEntradaService tipoEntradaService;
     
     @Transactional
     public void crearEntrada(Entrada entrada, Integer tipoEntradaId) throws DataAccessException{
-        TipoEntrada tipoEntrada = tipoEntradaRepo.findById(tipoEntradaId).orElse(null);
+        TipoEntrada tipoEntrada = tipoEntradaService.findById(tipoEntradaId);
         entrada.setTipoEntrada(tipoEntrada);
         entradaRepo.save(entrada);
     }
 
-    @Transactional
+
     public Entrada findEntradaByNombreAsistente(String nombreAsistente){
         return entradaRepo.findEntradaByNombreAsistente(nombreAsistente);
     }
 
-    @Transactional
     public Entrada encuentraEntradaPorId(int entradaId){
         return entradaRepo.findById(entradaId).orElse(null);
     }
-    @Transactional
+
+
     public Boolean existeElNombreEnElCarro(List<String> listaAsistentes, String nombreAsistente){
         Boolean res = false;
         int i =0;
@@ -49,7 +49,6 @@ public class EntradaService {
         return res;
     }
 
-    @Transactional 
     
     public Boolean buscaPorEventoYPorNombreAsistene(String nombreAsistente, int eventoID){
         List<Entrada> res= new ArrayList<>();

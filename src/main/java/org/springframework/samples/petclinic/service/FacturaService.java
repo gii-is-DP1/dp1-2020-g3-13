@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class FacturaService {
     @Autowired
     private FacturaRepository facturaRepo;
+    @Autowired
+    private LineaFacturaService lineaService;
 
     @Transactional
     public int facturaCount(){
@@ -21,6 +23,7 @@ public class FacturaService {
     public Iterable<Factura> findAll(){
         return facturaRepo.findAll();
     }
+    @Transactional
     public void save(Factura Factura){
         facturaRepo.save(Factura);
 
@@ -29,27 +32,30 @@ public class FacturaService {
    public List<Factura> facturasUsuario(Usuario usuario){
        return facturaRepo.facturasDeUsuario(usuario);
    }
-
-
-   public void calculaPrecioTotal(List<Factura> facturas){
-        int i = 0;
-        Double precio = 0.;
-        while (i<facturas.size()){
-            int j = 0;
-            
-            List<LineaFactura> lineas = facturas.get(i).getLineasFacturas();
-            if(! (lineas==null)){
-            while (j<lineas.size()){
-                precio += lineas.get(j).getAlquilerEspacio().getPrecioTotal();
-                j++;
-            }
-        }
-            facturas.get(i).setPrecioTotal(precio);
-            save(facturas.get(i));
-            i++;
-        }
-
+   public List<LineaFactura> lineasFacturaDeFactura(int facturaId){
+       return facturaRepo.lineasFacturaDeFactura(facturaId);
    }
+
+
+//    public void calculaPrecioTotal(List<Factura> facturas){
+//         int i = 0;
+//         Double precio = 0.;
+//         while (i<facturas.size()){
+//             int j = 0;
+            
+//             List<LineaFactura> lineas = lineaService.lineasFacturaDeFactura(facturas.get(i).getId());
+//             if(! (lineas==null)){
+//             while (j<lineas.size()){
+//                 precio += lineas.get(j).getAlquilerEspacio().getPrecioTotal();
+//                 j++;
+//             }
+//         }
+//             facturas.get(i).setPrecioTotal(precio);
+//             save(facturas.get(i));
+//             i++;
+//         }
+
+//    }
     
 }
 

@@ -24,8 +24,8 @@ import lombok.Setter;
 @Table(name = "clientes")
 public class Cliente extends Persona{
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "cliente")
-    private  List<Entrada> entradas;
+    // @OneToMany(cascade = CascadeType.ALL,mappedBy = "cliente")
+    // private  List<Entrada> entradas;
 
 
     @ManyToMany(cascade = CascadeType.ALL)

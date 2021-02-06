@@ -63,6 +63,8 @@ INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(2,'202
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(3,'2020-09-03', 5.6,'ezepersos');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(4,'2020-02-03', 68.1,'andmecsan');
 INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(5,'2020-02-03', 68.1,'organizacion1');
+INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(6,'2020-02-03', 99.0,'organizacion1');
+INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(7,'2020-02-03', 99.0,'cliente1');
 --INSERT INTO linea_factura(id, id_alquiler_espacio, cantidad, id_factura) VALUES (1, 1, 1, 5);
 
 -- EL CONCIERTO DE EMINEN NO SE PUEDE BORRAR QUE LO USAMOS PARA PRUEBAS
