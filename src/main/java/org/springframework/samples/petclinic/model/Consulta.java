@@ -22,7 +22,7 @@ import lombok.Setter;
 @Table(name = "consulta")
 public class Consulta extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
 
@@ -40,7 +40,7 @@ public class Consulta extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaConsulta;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
     //TODO revisar bien esta validacion

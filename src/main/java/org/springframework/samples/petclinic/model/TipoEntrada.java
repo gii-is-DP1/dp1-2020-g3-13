@@ -32,11 +32,11 @@ import lombok.Setter;
     fechaInicio = "fechaInicio", fechaFin = "fechaFin", nombreEntrada = "nombre", message = "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento")
 public class TipoEntrada extends BaseEntity {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "evento_id", referencedColumnName = "id")
     private Evento evento;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinColumn(name = "actividades_id", referencedColumnName = "id")
     private List<Actividad> actividades;
 
