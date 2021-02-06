@@ -31,6 +31,7 @@ public class ExponenteSecurityControllerTest {
 
     private int TEST_EVENTO_ID = 1;
     private int TEST_ACTIVIDAD_ID =2;
+    private int TEST_EXPONENTE_ID =1;
 
     @BeforeEach
     void setup() {
@@ -59,13 +60,17 @@ public class ExponenteSecurityControllerTest {
         .andExpect(view().name("exponentes/crearExponentes"));
     }
 
-    // @WithMockUser(username = "organizacion1", authorities = {"organizacion"})
-    // @Test
-    // void creaExponenteTieneErrores() throws Exception{
-    //     mockMvc.perform(post("/eventos/{evento_id}/actividades/{actividad_id}/nuevo",TEST_EVENTO_ID,TEST_ACTIVIDAD_ID)
-    //     .param("nombreExponente", "Exponente")
-    //     .param("alias", "pruebecita").with(csrf())).andExpect(model().attributeHasFieldErrors("exponente", "apellidosExponente"))
-    //     .andExpect(view().name("exponentes/crearExponentes"));
-    // }
+
+    @WithMockUser(username = "organizacion1", authorities = {"organizacion"})
+    @Test 
+    void borrarExponentePasa() throws Exception{
+        mockMvc.perform(get( "/eventos/{evento_id}/actividades/{actividad_id}/{exponente_id}/borrarExponente",TEST_EVENTO_ID,TEST_ACTIVIDAD_ID,TEST_EXPONENTE_ID)).andExpect(status().is3xxRedirection());
+    }
+
+    @WithMockUser(username = "cliente1", authorities = {"cliente"})
+    @Test 
+    void borrarExponenteNoPasa() throws Exception{
+        mockMvc.perform(get( "/eventos/{evento_id}/actividades/{actividad_id}/{exponente_id}/borrarExponente",TEST_EVENTO_ID,TEST_ACTIVIDAD_ID,TEST_EXPONENTE_ID)).andExpect(status().isForbidden());
+    }
     }
 
