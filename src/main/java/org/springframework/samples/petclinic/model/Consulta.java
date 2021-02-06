@@ -22,6 +22,7 @@ import lombok.Setter;
 @Table(name = "consulta")
 public class Consulta extends BaseEntity {
 
+  
     @OneToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
