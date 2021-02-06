@@ -26,6 +26,8 @@ public class ActividadService {
         
         @Autowired
         private CarritoService carritoService;
+        @Autowired
+        private ExponenteService expoService;
 
 
         public int actividadesCount(){
@@ -42,8 +44,9 @@ public class ActividadService {
         //Devuelve si cierta actividad contiene al exponente pasado por parametros
         public Boolean contieneExponente(Exponente exponente, Actividad actividad){
             Boolean res = false;
-            for (int i = 0; i < actividad.getExponentes().size(); i++) {
-                if(actividad.getExponentes().get(i).getNombreExponente().equals(exponente.getNombreExponente()) && actividad.getExponentes().get(i).getApellidosExponente().equals(exponente.getApellidosExponente()) && actividad.getExponentes().get(i).getAlias().equals(exponente.getAlias())) {
+            List<Exponente> exponentesActividad = expoService.encuentraActividadExponente(actividad.getId());
+            for (int i = 0; i < exponentesActividad.size(); i++) {
+                if(exponentesActividad.get(i).getNombreExponente().equals(exponente.getNombreExponente()) && exponentesActividad.get(i).getApellidosExponente().equals(exponente.getApellidosExponente()) && exponentesActividad.get(i).getAlias().equals(exponente.getAlias())) {
                     res = true;
                     break;
                 }

@@ -7,18 +7,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
+
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
-
-
-
-
-
 @Entity
 @Getter
 @Setter
@@ -39,8 +38,8 @@ public class Cliente extends Persona{
 
 
     @Column(name = "telefono")
-    @NotBlank(message = "El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres")
-    @Size(min=9, max= 9, message = "El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres" )
+    @Digits(fraction = 0, integer= 9, message = "El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres" )
+    @Length(min =9,message = "El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres")
     private String telefono;
 
       

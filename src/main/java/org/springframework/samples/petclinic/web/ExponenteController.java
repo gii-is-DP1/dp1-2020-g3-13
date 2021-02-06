@@ -29,7 +29,7 @@ public class ExponenteController {
 
     @Autowired ActividadService actividadService;
     private static final String VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM = "exponentes/crearExponentes";
-    
+
     @GetMapping(value="/nuevo")
     public String guardarExponentes(ModelMap modelMap, @PathVariable("actividad_id") int actividadInt, @PathVariable("evento_id") int evento_id){
         Exponente nuevoExponente = new Exponente();
@@ -37,7 +37,7 @@ public class ExponenteController {
         modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
         modelMap.addAttribute("exponente", nuevoExponente);
         modelMap.addAttribute("actividad", actividad);
-        modelMap.addAttribute("listaExponentes", actividadService.findById(actividadInt).getExponentes());
+        modelMap.addAttribute("listaExponentes", exponenteService.encuentraActividadExponente(actividadInt));
 
         return VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM;
     }
@@ -46,14 +46,12 @@ public class ExponenteController {
     public String guardarExponentes(@Valid Exponente exponente,@PathVariable("evento_id") int eventoId,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id, BindingResult resultado, ModelMap modelMap){
         if(resultado.hasErrors()){
             modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
-            modelMap.addAttribute("exponentes", exponente);
-            modelMap.addAttribute("listaExponentes", actividadService.findById(actividadInt).getExponentes());
+            modelMap.addAttribute("exponente", exponente);
+            modelMap.addAttribute("listaExponentes", exponenteService.encuentraActividadExponente(actividadInt));
             return VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM;
         }else {
             exponenteService.anadirExponente(actividadService.findById(actividadInt), exponente);
             return guardarExponentes(modelMap, actividadInt, evento_id);
-        }
-        
-        
+        } 
     }
 }
