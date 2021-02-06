@@ -1,8 +1,5 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -10,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Sponsor;
-import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.repository.SponsorRepository;
 import org.springframework.stereotype.Service;
 

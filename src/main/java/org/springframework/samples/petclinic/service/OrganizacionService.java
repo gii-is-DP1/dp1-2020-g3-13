@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Evento;
@@ -19,7 +21,6 @@ public class OrganizacionService {
     @Autowired
     private ActividadRepository actividadRepo;
 
-    // private PeticionRepository peticionrepo;
     @Transactional
     public int organizacionCount() {
         return (int) organizacionRepo.count();
@@ -71,6 +72,11 @@ public class OrganizacionService {
 
     public Organizacion findOrganizacionByUsuario(String usuario) throws DataAccessException {
         return organizacionRepo.listadoOrganizacionByUsuario(usuario);
+    }
+
+    public List<Evento> getEventos(int id_organizacion) {
+        return organizacionRepo.getEventos(id_organizacion);
+
     }
 
 }

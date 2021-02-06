@@ -25,8 +25,8 @@ public class Organizacion extends BaseEntity {
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion")
-    private List<Evento> eventos;
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizacion")
+    // private List<Evento> eventos;
 
     @Column(name = "nombreOrganizacion")
     @NotBlank(message = "El nombre de la organización no puede estar en blanco, ser menor de 3 Caracteres ni mayor que 30")
