@@ -32,6 +32,9 @@ public class FacturaService {
    public List<Factura> facturasUsuario(Usuario usuario){
        return facturaRepo.facturasDeUsuario(usuario);
    }
+   public List<LineaFactura> lineasFacturaDeFactura(int facturaId){
+       return facturaRepo.lineasFacturaDeFactura(facturaId);
+   }
 
 
 //    public void calculaPrecioTotal(List<Factura> facturas){

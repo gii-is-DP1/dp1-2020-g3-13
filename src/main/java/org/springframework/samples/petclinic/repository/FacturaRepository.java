@@ -12,4 +12,6 @@ public interface FacturaRepository extends CrudRepository<Factura,Integer>{
     @Query("SELECT factura FROM Factura factura WHERE factura.usuario=:usuario")
     public List<Factura> facturasDeUsuario(Usuario usuario);
 
+    @Query("SELECT lineaFactura FROM LineaFactura lineaFactura WHERE lineaFactura.factura.id=:facturaId")
+    public List<LineaFactura> lineasFacturaDeFactura(int facturaId);
 }

@@ -89,7 +89,7 @@ public class EventoController {
         System.out.println("=============================");
 
         mav.addObject("actividades",this.eventoService.getActividades(eventosId));
-            return mav;
+        return mav;
     }
     @GetMapping("/{eventosId}/añadirEventosFavoritos")
     public String anadirEventosAFavorito(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
