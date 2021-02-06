@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEvento;
+import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -31,6 +32,8 @@ public class EventoController {
 
     @Autowired
     private EventoService eventoService;
+    @Autowired
+    private EventoRepository eventoRepo;
 
     @Autowired
     private OrganizacionService organizacionService;
@@ -81,6 +84,11 @@ public class EventoController {
             }
         }
         mav.addObject(this.eventoService.findEventoById(eventosId));
+        System.out.println("=============================");
+        System.out.println(this.eventoService.getActividades(eventosId).toString());
+        System.out.println("=============================");
+
+        mav.addObject("actividades",this.eventoService.getActividades(eventosId));
             return mav;
     }
     @GetMapping("/{eventosId}/añadirEventosFavoritos")
@@ -97,7 +105,7 @@ public class EventoController {
     public String hacerEventoPublico(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
         Evento evento =eventoService.findEventoById(eventosId);
 
-        if(evento.getActividades().size()!=0){
+        if(eventoRepo.getActividades(evento.getId()).size()!=0){
         eventoService.hacerPublico(eventosId);
       //  ModelAndView mav = new ModelAndView("eventos/listadoEventos");
         modelMap.addAttribute("message", "Evento añadido a favoritos!");

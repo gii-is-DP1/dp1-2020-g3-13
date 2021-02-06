@@ -27,7 +27,8 @@ public class ExponenteController {
     @Autowired
     private EventoRepository eventoRepository;
 
-    @Autowired ActividadService actividadService;
+    @Autowired 
+    private ActividadService actividadService;
     private static final String VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM = "exponentes/crearExponentes";
 
     @GetMapping(value="/nuevo")

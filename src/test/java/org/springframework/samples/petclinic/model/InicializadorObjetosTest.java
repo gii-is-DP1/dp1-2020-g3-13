@@ -22,7 +22,6 @@ public class InicializadorObjetosTest {
         evento.setNombreEvento("nombreEvento");
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
         evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        evento.setActividades(new ArrayList<Actividad>());
         evento.setConsultas(new ArrayList<Consulta>());
         evento.setSponsors(new ArrayList<Sponsor>());
         return evento;
@@ -57,7 +56,7 @@ public class InicializadorObjetosTest {
         actividad.setId(Integer.MAX_VALUE);
         actividad.setTematicaActividad("tematica de una actividad");
         // actividad.setExponentes( new ArrayList<Exponente>());
-        actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
+        //actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
         return actividad;
     }
         
