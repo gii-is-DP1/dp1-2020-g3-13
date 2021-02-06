@@ -95,17 +95,6 @@ public class UsuarioController {
         }
         return "redirect:/usuarios/myprofile";
     }
-    @GetMapping(value = "/myprofile/facturas")
-    public String facturas(ModelMap modelMap){
-        Usuario usuario = usuarioService.findUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-        Organizacion org = organizacionService.encuentraOrganizacionByUsuario(usuario.getNombreUsuario());
-        List<Factura> facts = usuario.getFacturas();
-        facturaService.calculaPrecioTotal(facts);
-        modelMap.addAttribute("usuario", usuario);
-        modelMap.addAttribute("organizacion", org);
-        String vista="usuarios/myProfileFacturas";
-        return vista;
-    }
 
     //TODO
     @PostMapping(value = "/myprofile/edit")
