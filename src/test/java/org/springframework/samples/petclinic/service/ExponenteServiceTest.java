@@ -106,8 +106,6 @@ public class ExponenteServiceTest {
             evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
             eventoService.save(evento);
             actividadExpo.setTematicaActividad("ActividadPrueba");
-            // List<Exponente> exponentes = new ArrayList<Exponente>();
-            // exponentes.add(exponente);
             actividadExpo.setDescripcionActividad("ESTO ES UNA ACTIVIDAD DE PRUEBA CON UNA DESCRIPCION APROPIADA PARA LA PRUEBA");
             actividadExpo.setFechaFin(LocalDateTime.of(2022, 03, 03, 10, 00));
             actividadExpo.setFechaInicio(LocalDateTime.of(2022, 03, 02, 10, 00));
@@ -163,5 +161,44 @@ public class ExponenteServiceTest {
             exponenteService.guardarExponente(exponente);           
             List<Exponente> expoActividad = exponenteService.encuentraActividadExponente(actividadExpo.getId());
             assertTrue(expoActividad.contains(exponente));
+        }
+
+        @Test
+        public void deberiaEliminarExponentesActividad(){
+            Exponente exponente = new Exponente();
+            exponente.setNombreExponente("Exponente");
+            exponente.setApellidosExponente("De Prueba");
+            exponente.setAlias("Test 5");
+            exponente.setActividades(new ArrayList<Actividad>());
+            Actividad actividadExpo = new Actividad();
+            int cantidad = eventoService.eventosCount();
+            Evento evento = new Evento();
+            Evento eventoCreado = eventoService.findAll().iterator().next();
+            evento.setCategoria("categoria");
+            evento.setConsultas(new ArrayList<Consulta>());
+            evento.setDescripcion("descripcion");
+            evento.setFechaInicio(LocalDate.of(2022, 03, 02));
+            evento.setFechaFin(LocalDate.of(2022, 03, 04));
+            evento.setId(cantidad);
+            evento.setMedidasSanitarias("medidasSanitarias");
+            evento.setNombreEvento("nombreEvento");
+            evento.setOrganizacion(eventoCreado.getOrganizacion());
+            evento.setTipoEntradas(new ArrayList<TipoEntrada>());
+            evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
+            eventoService.save(evento);
+            actividadExpo.setTematicaActividad("ActividadPrueba");
+            List<Exponente> exponentes = new ArrayList<Exponente>();
+            exponentes.add(exponente);
+            actividadExpo.setDescripcionActividad("ESTO ES UNA ACTIVIDAD DE PRUEBA CON UNA DESCRIPCION APROPIADA PARA LA PRUEBA");
+            actividadExpo.setFechaFin(LocalDateTime.of(2022, 03, 03, 10, 00));
+            actividadExpo.setFechaInicio(LocalDateTime.of(2022, 03, 02, 10, 00));
+            actividadExpo.setEvento(evento);
+            actividadService.guardarActividad(actividadExpo);
+            List<Actividad> actividades = new ArrayList<>();
+            actividades.add(actividadExpo);
+            exponente.setActividades(actividades);
+            exponenteService.guardarExponente(exponente);           
+            exponenteService.eliminaExponente(exponente, actividadExpo);
+            assertFalse(exponente.getActividades().contains(actividadExpo));
         }
 }
