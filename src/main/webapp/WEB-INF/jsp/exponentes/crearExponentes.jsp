@@ -72,6 +72,15 @@ charset=UTF-8" %>
           <td>
             <c:out value="${exponente.alias}" />
           </td>
+          <td>
+            <spring:url value="/eventos/{evento_id}/actividades/{actividad_id}/{exponenteId}/borrarExponente" var="borrarExponenteUrl">
+            <spring:param name="evento_id" value="${evento.id}" />
+            <spring:param name="actividad_id" value="${actividad.id}" />
+            <spring:param name="exponenteId" value="${exponente.id}" />
+            </spring:url>
+            <a href="${fn:escapeXml(borrarExponenteUrl)}">
+            <c:out value="Borrar Exponente" /><br></a>
+          </td>
         </tr>
       </c:forEach>
     </table>
