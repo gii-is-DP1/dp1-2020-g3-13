@@ -75,9 +75,9 @@
                                 <th>Sponsors</th>
                                 <td>
                                     <div class="cuadro-sponsor"></div>
-                                    <c:forEach items="${evento.sponsors}" var="sponsor">
-                                        <a href="${sponsor.urlWeb}" target="_self">    
-                                    <img src="${sponsor.urlLogo}" width=15%></a>
+                                    <c:forEach items="${sponsors}" var="sponsorIterado">
+                                        <a href="${sponsorIterado.urlWeb}" target="_self">    
+                                    <img src="${sponsorIterado.urlLogo}" width=15%></a>
                                     </div>
 
                                     </c:forEach>
@@ -108,23 +108,34 @@
                             </td>
                             </tr>
                         </table>
-                        <spring:url value="{eventoId}/actividades/nuevo" var="actividadesUrl">
-                        <spring:param name="eventoId" value="${evento.id}" />
-                     </spring:url>
-                        <a href="${fn:escapeXml(actividadesUrl)}">
-                        <c:out value="Añadir actividades" /><br></a>
-                        <spring:url value="{eventoId}/sponsors/nuevo" var="sponsorUrl">
-                        <spring:param name="eventoId" value="${evento.id}" />
-                     </spring:url>
-                        <a href="${fn:escapeXml(sponsorUrl)}">
-                        <c:out value="Añadir Sponsors" /><br></a>
+                                                
+                        <c:choose>
+                            <c:when test="${not evento.esPublico}">
+                                <spring:url value="{eventoId}/actividades/nuevo" var="actividadesUrl">
+                                <spring:param name="eventoId" value="${evento.id}" />
+                             </spring:url>
+                                <a href="${fn:escapeXml(actividadesUrl)}">
+                                <c:out value="Añadir actividades" /><br></a>
+                                <spring:url value="{eventoId}/sponsors/nuevo" var="sponsorUrl">
+                                <spring:param name="eventoId" value="${evento.id}" />
+                             </spring:url>
+                                <a href="${fn:escapeXml(sponsorUrl)}">
+                                <c:out value="Añadir Sponsors" /><br></a>
+        
+        
+                                <spring:url value="{eventoId}/tipoEntradas/nuevo" var="tipoEntradasUrl">
+                                <spring:param name="eventoId" value="${evento.id}" />
+                                </spring:url>
+                                <a href="${fn:escapeXml(tipoEntradasUrl)}">
+                                <c:out value="Añadir Tipos de Entradas" /><br></a>
+                                <spring:url value="/eventos/{eventoId}/delete" var="borrarEvento">
+                                <spring:param name="eventoId" value="${evento.id}" />
+                                </spring:url>
+    
+                                <a href="${fn:escapeXml(borrarEvento)}" class="btn btn-default">Eliminar evento</a>
+                            </c:when>
+                        </c:choose>  
 
-
-                        <spring:url value="{eventoId}/tipoEntradas/nuevo" var="tipoEntradasUrl">
-                        <spring:param name="eventoId" value="${evento.id}" />
-                        </spring:url>
-                        <a href="${fn:escapeXml(tipoEntradasUrl)}">
-                        <c:out value="Añadir Tipos de Entradas" /><br></a>
                         <c:choose>
                             <c:when test="${empty actividades}">
                                      <h3 style="text-align: center; color:rgb(228, 30, 30); size:20;">No hay actividades añadidas</h3>
@@ -142,16 +153,7 @@
                             </div>
                         </c:when>
                         </c:choose>   
-                        
-                        <c:choose>
-                            <c:when test="${not evento.esPublico}">
-                                <spring:url value="/eventos/{eventoId}/delete" var="borrarEvento">
-                                <spring:param name="eventoId" value="${evento.id}" />
-                                </spring:url>
-    
-                                <a href="${fn:escapeXml(borrarEvento)}" class="btn btn-default">Eliminar evento</a>
-                            </c:when>
-                        </c:choose>  
+
 
  
 
