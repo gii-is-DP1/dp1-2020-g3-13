@@ -125,4 +125,9 @@ public class EventoService {
 
     }
 
+    @Transactional
+    public void borraSponsor(int id_evento) {
+        eventoRepository.borraSponsor(id_evento);
+    }
+
 }

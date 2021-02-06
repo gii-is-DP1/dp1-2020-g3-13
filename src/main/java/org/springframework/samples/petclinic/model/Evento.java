@@ -52,8 +52,8 @@ public class Evento extends BaseEntity {
     @Column(name = "esPublico")
     private Boolean esPublico;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<VentaEntrada> ventaEntrada;
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    // private List<VentaEntrada> ventaEntrada;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<TipoEntrada> tipoEntradas;

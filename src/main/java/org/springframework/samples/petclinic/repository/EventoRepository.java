@@ -18,6 +18,9 @@ public interface EventoRepository extends CrudRepository<Evento, Integer> {
     @Query("SELECT actividad FROM Actividad actividad WHERE actividad.evento.id=:id_evento")
     public List<Actividad> getActividades(int id_evento);
 
-    @Query("SELECT sponsor FROM Sponsor sponsor WHERE sponsor.evento.id=id_evento")
+    @Query("SELECT sponsor FROM Sponsor sponsor WHERE sponsor.evento.id=:id_evento")
     public List<Sponsor> getSponsors(int id_evento);
+
+    @Query("DELETE FROM Sponsor sponsor WHERE sponsor.evento.id=:id_evento")
+    public void borraSponsor(int id_evento);
 }

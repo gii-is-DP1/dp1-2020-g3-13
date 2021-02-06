@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.persistence.JoinColumn;
 
 import org.hibernate.validator.constraints.URL;
 
