@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 
 //Objetos para los test, todos los objetos están creados y cumpliendo las restricciones de los validadores
@@ -83,7 +85,6 @@ public class InicializadorObjetosTest {
         Cliente cliente = new Cliente();
         cliente.setApellidos("apellidos");
         cliente.setEmail("email@email.com");
-        cliente.setEntradas(new ArrayList<Entrada>());
         cliente.setEventosFavoritos(new ArrayList<Evento>());
         cliente.setId(Integer.MAX_VALUE);
         cliente.setNombre("nombre");

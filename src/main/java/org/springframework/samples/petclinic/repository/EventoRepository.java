@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.model.Actividad;
@@ -21,6 +22,7 @@ public interface EventoRepository extends CrudRepository<Evento, Integer> {
     @Query("SELECT sponsor FROM Sponsor sponsor WHERE sponsor.evento.id=:id_evento")
     public List<Sponsor> getSponsors(int id_evento);
 
+    @Modifying
     @Query("DELETE FROM Sponsor sponsor WHERE sponsor.evento.id=:id_evento")
     public void borraSponsor(int id_evento);
 }

@@ -30,12 +30,10 @@ public class LugarRealizacion extends BaseEntity{
 
 // CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
-    private List<AlquilerEspacio> alquilerEspacio;
 
     @Column(name = "telefono")
-    @Digits(fraction = 0, integer = 9, message = "El número de teléfono debe tener 6 dígitos")
-    @Length(min = 16, message ="El número de teléfono debe tener 6 dígitos" )
+    @Digits(fraction = 0, integer = 9, message = "El número de teléfono debe tener 9 dígitos")
+    @Length(min = 9, message ="El número de teléfono debe tener 9 dígitos" )
     private String telefono;
 
     @Column(name = "aforo")
