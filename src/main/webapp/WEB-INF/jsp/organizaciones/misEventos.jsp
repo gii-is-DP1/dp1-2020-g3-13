@@ -4,6 +4,7 @@
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                    <%@ page contentType="text/html; charset=UTF-8" %>
 
                         <petclinic:layout pageName="eventos">
                             <section class="seccion contenedor">
@@ -11,7 +12,7 @@
 
                                 <div class="calendario">
                                     <h3>
-                                        <i class="fa fa-calendar" aria-hidden="true"></i> Eventos proximos </h3>
+                                        <i class="fa fa-calendar" aria-hidden="true"></i> Eventos próximos </h3>
                                 </div>
                                 <tbody>
                                     <c:forEach items="${eventos}" var="evento">

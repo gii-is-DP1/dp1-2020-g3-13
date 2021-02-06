@@ -3,13 +3,11 @@ package org.springframework.samples.petclinic.web;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Consulta;
 import org.springframework.samples.petclinic.model.Organizacion;
-import org.springframework.samples.petclinic.model.Validadores.RespuestaLimiteOrganizacionValidador;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ConsultaService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -17,11 +15,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -116,8 +113,6 @@ public class ConsultaController {
         }
 
     }
-
-    
 
     @GetMapping(value = "/cliente/misConsultas/{consulta_id}")
     public String verDetallesConsultaCliente(ModelMap modelMap, @PathVariable("consulta_id") int consultaId) {

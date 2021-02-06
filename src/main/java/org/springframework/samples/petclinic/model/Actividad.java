@@ -27,8 +27,8 @@ import lombok.Setter;
 @FechasActividadRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin")
 public class Actividad extends BaseEntity {
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  private List<Exponente> exponentes;
+  // @ManyToMany(cascade = CascadeType.ALL)
+  // private List<Exponente> exponentes;
 
   @NotBlank(message = "El nombre de la temática debe estar comprendido entre 2 y 30 caracteres, además de no estar vacío")
   @Size(min = 2, max = 30, message = "El nombre de la temática debe estar comprendido entre 2 y 30 caracteres, además de no estar vacío")

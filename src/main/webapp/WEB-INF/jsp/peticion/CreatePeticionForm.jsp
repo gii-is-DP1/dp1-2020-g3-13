@@ -20,7 +20,7 @@
                                         <petclinic:inputField label="Email" name="email" />
                                         <petclinic:inputField label="Nombre de organizacion" name="nombre_organizacion" />
                                         <petclinic:inputField label="C.I.F." name="cif" />
-                                        <petclinic:inputField label="Información" name="info" />
+                                        <petclinic:textAreaField label = "Información" name ="info"/>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
