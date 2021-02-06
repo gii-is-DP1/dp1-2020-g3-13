@@ -29,6 +29,9 @@ public class FacturaService {
    public List<Factura> facturasUsuario(Usuario usuario){
        return facturaRepo.facturasDeUsuario(usuario);
    }
+   public List<LineaFactura> lineasFacturaDeFactura(int facturaId){
+       return facturaRepo.lineasFacturaDeFactura(facturaId);
+   }
 
 
    public void calculaPrecioTotal(List<Factura> facturas){
@@ -37,7 +40,7 @@ public class FacturaService {
         while (i<facturas.size()){
             int j = 0;
             
-            List<LineaFactura> lineas = facturas.get(i).getLineasFacturas();
+            List<LineaFactura> lineas = lineasFacturaDeFactura(facturas.get(i).getId()) ;
             if(! (lineas==null)){
             while (j<lineas.size()){
                 precio += lineas.get(j).getAlquilerEspacio().getPrecioTotal();

@@ -145,8 +145,6 @@ public class CarritoService {
     public void generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carrito.getLineasFacturas();
-       List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
-       factura.setLineasFacturas(listaLineasDeFactura);
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();
@@ -161,7 +159,6 @@ public class CarritoService {
       //  factura.setLineasFacturas(lineas);
         for (LineaFactura lineaFactura : lineas) {
             lineaFactura.setFactura(factura);
-            factura.getLineasFacturas().add(lineaFactura);
         }
         facturaRepo.save(factura);
 
@@ -170,8 +167,6 @@ public class CarritoService {
     public void generarFacturaCarritoOrg(Carrito carrito, Organizacion org) throws DataAccessException{
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carrito.getLineasFacturas();
-       List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
-       factura.setLineasFacturas(listaLineasDeFactura);
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();
@@ -186,7 +181,6 @@ public class CarritoService {
       //  factura.setLineasFacturas(lineas);
         for (LineaFactura lineaFactura : lineas) {
             lineaFactura.setFactura(factura);
-            factura.getLineasFacturas().add(lineaFactura);
         }
         facturaRepo.save(factura);
 
