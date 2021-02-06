@@ -10,6 +10,11 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.URL;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "sponsor")
 public class Sponsor extends BaseEntity {

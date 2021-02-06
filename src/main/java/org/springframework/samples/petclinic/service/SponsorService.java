@@ -20,12 +20,6 @@ public class SponsorService {
     @Autowired
     private SponsorRepository sponsorRepository;
 
-    @Autowired
-    private EventoRepository eventoRepository;
-
-    @Autowired
-    private EventoService eventoService;
-
     @Transactional
     public int sponsorCount() {
         return (int) sponsorRepository.count();
