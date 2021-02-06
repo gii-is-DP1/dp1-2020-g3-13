@@ -58,7 +58,7 @@
                                 <th>Actividades</th>
                                 <td>
                                     <div class="cuadro-entrada"></div>
-                                    <c:forEach items="${evento.actividades}" var="actividad">
+                                    <c:forEach items="${actividades}" var="actividad">
                                         <p>Temática:
                                             <c:out value="${actividad.tematicaActividad} " /></p>
                                             <spring:url value="{eventoId}/actividades/{actividadId}" var="detallesActividadesUrl">
@@ -126,13 +126,13 @@
                         <a href="${fn:escapeXml(tipoEntradasUrl)}">
                         <c:out value="Añadir Tipos de Entradas" /><br></a>
                         <c:choose>
-                            <c:when test="${empty evento.actividades}">
+                            <c:when test="${empty actividades}">
                                      <h3 style="text-align: center; color:rgb(228, 30, 30); size:20;">No hay actividades añadidas</h3>
                             </c:when>
                         </c:choose>
 
                         <c:choose>
-                            <c:when test="${not empty evento.actividades and not evento.esPublico}">
+                            <c:when test="${not empty actividades and not evento.esPublico}">
                                 <div class="publicar">    
                                 <spring:url value="/eventos/{eventoId}/hacerPublico" var="volverAEvento">
                                 <spring:param name="eventoId" value="${evento.id}" />
