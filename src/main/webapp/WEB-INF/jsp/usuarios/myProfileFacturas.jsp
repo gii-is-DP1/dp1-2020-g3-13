@@ -5,6 +5,7 @@
                 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                        <%@page pageEncoding="UTF-8"%>
                             
                             <style type="text/css">
                             h2 { color:#ff7300;font-weight:bold;font-family:Calibri;font-size:20 }

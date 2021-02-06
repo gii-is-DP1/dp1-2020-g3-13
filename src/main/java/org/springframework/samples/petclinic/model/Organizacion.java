@@ -21,7 +21,7 @@ import lombok.Setter;
 @Entity
 @Table(name= "organizaciones")  
 public class Organizacion extends BaseEntity {    
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
 

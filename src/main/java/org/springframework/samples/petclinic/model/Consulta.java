@@ -23,6 +23,7 @@ import lombok.Setter;
 public class Consulta extends BaseEntity {
 
     @OneToOne()
+    @OneToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
 
@@ -40,7 +41,7 @@ public class Consulta extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaConsulta;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
     //TODO revisar bien esta validacion

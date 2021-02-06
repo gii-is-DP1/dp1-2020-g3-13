@@ -56,7 +56,7 @@ public class InicializadorObjetosTest {
         actividad.setId(Integer.MAX_VALUE);
         actividad.setTematicaActividad("tematica de una actividad");
         // actividad.setExponentes( new ArrayList<Exponente>());
-        actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
+        //actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
         return actividad;
     }
         
