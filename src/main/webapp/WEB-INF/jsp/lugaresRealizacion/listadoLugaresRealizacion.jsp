@@ -37,7 +37,7 @@
         </c:forEach>
         <spring:url value="/lugaresRealizacion/new" var="newUrl">
     </spring:url>
-    <a href="${fn:escapeXml(newUrl)}" class="btn btn-default">Add Lugar</a>
+    <a href="${fn:escapeXml(newUrl)}" class="btn btn-default">Añadir lugar</a>
         </tbody>
     </table>
 </petclinic:layout>
