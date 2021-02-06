@@ -43,6 +43,8 @@ public class EntradaController {
 	public String processCreationForm(@Valid Entrada entrada,@PathVariable("eventoId") int eventoId,@PathVariable("tipoEntradasId") int tipoEntradaId, BindingResult result) {
 		Carrito car= carritoService.dimeCarritoUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		List<String> nAsists= carritoService.dimeNombreAsistentes(car,eventoId);
+		System.out.println("======================================================00");
+		System.out.println(entradaService.buscaPorEventoYPorNombreAsistene(entrada.getNombreAsistente(), eventoId).toString());
 		if (result.hasErrors()) {
 			return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 		}
