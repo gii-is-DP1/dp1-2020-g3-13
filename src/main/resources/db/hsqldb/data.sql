@@ -102,6 +102,4 @@ INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entrada
 INSERT INTO tipoentradas(id,precio, nombre, fecha_inicio, fecha_fin, num_entradas, evento_id) VALUES (13,9, 'NOCTURNA', '2022-08-11 16:00', '2022-08-11 20:00', 10,7);
 
 
-INSERT INTO tipoentradas_actividades(tipo_entrada_id, actividades_id) VALUES (1,2);
-INSERT INTO tipoentradas_actividades(tipo_entrada_id, actividades_id) VALUES (1,3);
 
