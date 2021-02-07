@@ -82,7 +82,7 @@
                                 <th>Tipos de entrada</th>
                                 <td>
                                     <div class="cuadro-entrada"></div>
-                                    <c:forEach items="${evento.tipoEntradas}" var="tipoEntradas">
+                                    <c:forEach items="${listaTipoEntrada}" var="tipoEntradas">
 
                                         <h3>
                                             Tipo de entrada:

@@ -161,9 +161,11 @@ public class UsuarioController {
             Organizacion org2 = this.organizacionService
                     .encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 
-            usuarioService.deleteUsuario(org2.getUsuario());
+            
 
             organizacionService.deleteOrganizacion(org2);
+
+            usuarioService.deleteUsuario(org2.getUsuario());
 
         }
         return "redirect:/logout";

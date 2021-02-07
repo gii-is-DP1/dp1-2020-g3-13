@@ -8,12 +8,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
+import org.springframework.samples.petclinic.service.TipoEntradaService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,7 +42,7 @@ public class EventoController {
     @Autowired
     private ClienteService clienteService;
     @Autowired
-    private AdminService adminService;
+    private TipoEntradaService tipoEntradaService;
 
     @GetMapping
     public String listadoEventos(ModelMap modelMap) {
@@ -66,13 +68,16 @@ public class EventoController {
     @GetMapping("/{eventosId}")
     public ModelAndView showEvento(@PathVariable("eventosId") int eventosId, ModelAndView mav) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<TipoEntrada> tipo = tipoEntradaService.encuentraTodasLasEntradasDeEvento(eventosId);
         mav.setViewName("eventos/detallesEvento");
         Evento evento = this.eventoService.findEventoById(eventosId);
         if (evento.getFechaInicio().isBefore(LocalDate.now())) {
+            mav.addObject("listaTipoEntrada",  tipo);
             mav.setViewName("eventos/eventoFinalizado");
             return mav;
         } else {
             if (!(clienteService.findClienteByUsuario(usuario) == null)) {
+                mav.addObject("listaTipoEntrada",  tipo);
                 mav.setViewName("eventos/detallesEventoCliente");
             } else if (!(organizacionService.encuentraOrganizacionByUsuario(usuario) == null))  {
                 Organizacion org = organizacionService.encuentraOrganizacionByUsuario(usuario);
@@ -82,6 +87,7 @@ public class EventoController {
                 }
             }
         }
+        mav.addObject("listaTipoEntrada",  tipo);
         mav.addObject("sponsors", this.eventoService.getSponsors(eventosId));
         mav.addObject(this.eventoService.findEventoById(eventosId));
         mav.addObject("actividades", this.eventoService.getActividades(eventosId));

@@ -66,7 +66,7 @@ public class EventoService {
 
     public List<Entrada> encontrarEntradasEvento(Evento evento) {
         List<Entrada> entradas = new ArrayList<Entrada>();
-        List<TipoEntrada> tiposEntrada = evento.getTipoEntradas();
+        List<TipoEntrada> tiposEntrada = tipoEntradaService.encuentraTodasLasEntradasDeEvento(evento.getId());
         int i = 0;
         while (i < tiposEntrada.size()) {
             entradas.addAll(tipoEntradaService.EncontrarTodasLasEntradas(tiposEntrada.get(i)));
@@ -124,14 +124,19 @@ public class EventoService {
     public List<Sponsor> getSponsors(int id_evento) {
         return eventoRepository.getSponsors(id_evento);
 
-
     }
 
     @Transactional
     public void borraSponsor(int id_evento) {
         eventoRepository.borraSponsor(id_evento);
     }
-    public List<TipoEntrada> getTipoEntradaPorEvento(int eventoId){
+
+    public List<TipoEntrada> getTipoEntradaPorEvento(int eventoId) {
         return eventoRepository.getTipoEntrada(eventoId);
+    }
+
+    @Transactional
+    public void eliminaEventosDeOrganizacion(int organizacionId) {
+        eventoRepository.eliminaEventosDeOrganizacion(organizacionId);
     }
 }

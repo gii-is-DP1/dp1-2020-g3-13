@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -12,8 +13,10 @@ import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.InicializadorObjetosTest;
-import org.springframework.samples.petclinic.repository.EventoRepository;
+import org.springframework.samples.petclinic.repository.ActividadRepository;
 import org.springframework.stereotype.Service;
+
+import net.bytebuddy.asm.Advice.Local;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class ActividadServiceTest {
@@ -21,9 +24,11 @@ public class ActividadServiceTest {
     @Autowired
     private ActividadService actividadService;
     @Autowired
+    private ActividadRepository actividadRepo;
+    @Autowired
     private ExponenteService expoService;
     @Autowired
-    private EventoRepository eventoRepo;
+    private EventoService eventoService;
 
     @Test
     public void testCountWithInitialDataActividad() {
@@ -56,9 +61,16 @@ public class ActividadServiceTest {
     @Test
     public void deberiaAnadirActividadAEvento(){
         Evento evento = InicializadorObjetosTest.eventoParaTest();
-        Actividad actividad = InicializadorObjetosTest.actividadParaTest();
+        Actividad actividad = new Actividad();
+        actividad.setTematicaActividad("Cine");
+        actividad.setDescripcionActividad("Peliculas de terror");
+        actividad.setFechaInicio(LocalDateTime.now().plusDays(2));
+        actividad.setFechaFin(LocalDateTime.now().plusDays(3));
+        
+        actividadRepo.save(actividad);
         actividadService.anadirActividadAEvento(evento, actividad);
-        assertEquals(eventoRepo.getActividades(evento.getId()).iterator().next(), actividad);
+        
+        assertEquals(eventoService.getActividades(evento.getId()).iterator().next(), actividad);
         
     }
 }
