@@ -39,7 +39,7 @@ public class EventoControllerSecurityTest {
 
     private int TEST_EVENTO_ID = 1;
     private int TEST_EVENTO_ID2 = 8;
-    private int TEST_ENTRADA_ID = 1;
+    private int TEST_EVENTO_ID3 = 9;
     @BeforeEach
     void setup() {
        mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
@@ -150,12 +150,12 @@ public class EventoControllerSecurityTest {
     @WithMockUser(username="organizacion1", authorities={"organizacion"})
     @Test
     void noDeberiaBorrarOrg() throws Exception{
-        mockMvc.perform(get("/eventos/{eventoId}/delete", TEST_EVENTO_ID)).andExpect(status().isOk()).andExpect(view().name("redirect:/eventos"));
+        mockMvc.perform(get("/eventos/{eventoId}/delete", TEST_EVENTO_ID)).andExpect(status().isOk()).andExpect(view().name("eventos/organizacionSinPermiso"));
     }
     @WithMockUser(username="organizacion1", authorities={"organizacion"})
     @Test
     void deberiaBorrarOrg() throws Exception{
-        mockMvc.perform(get("/eventos/{eventoId}/delete", TEST_EVENTO_ID2)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos"));
+        mockMvc.perform(get("/eventos/{eventoId}/delete", TEST_EVENTO_ID3)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos"));
     }
     @WithMockUser(username="alebangon", authorities={"admin"})
     @Test
