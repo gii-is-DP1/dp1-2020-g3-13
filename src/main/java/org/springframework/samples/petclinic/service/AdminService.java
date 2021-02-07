@@ -42,8 +42,10 @@ public class AdminService {
 
             if(u.getAutoridades().getAutoridad().equals("cliente")){
                 this.clienteService.deleteCliente(c);
+        
             }
             if(u.getAutoridades().getAutoridad().equals("organizacion")){
+  
                 this.organizacionService.deleteOrganizacion(o);
             }
         

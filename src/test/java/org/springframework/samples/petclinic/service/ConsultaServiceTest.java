@@ -49,14 +49,16 @@ public class ConsultaServiceTest {
         consulta.setAsunto("asunto2");
         consulta.setDescripcion("esta es la segunda descripcion");
         Organizacion org = organizacionService.findAll().iterator().next();
-        consulta.setEvento(org.getEventos().get(0));
+        // consulta.setEvento(org.getEventos().get(0));
+        consulta.setEvento(organizacionService.getEventos(org.getId()).get(0));
         consultaService.anadirConsulta(consulta, consulta.getEvento().getId(),
                 clienteService.findCliente().iterator().next());
         assertEquals(null, consulta.getRespuesta());
         Consulta consultaConRespuesta = new Consulta();
         consultaConRespuesta.setRespuesta("Esto es un ejemplo de respuesta para una consulta realizada por un cliente");
         consultaService.aniadirRespuesta(consultaConRespuesta, consulta.getId());
-        assertEquals("Esto es un ejemplo de respuesta para una consulta realizada por un cliente", consulta.getRespuesta());
+        assertEquals("Esto es un ejemplo de respuesta para una consulta realizada por un cliente",
+                consulta.getRespuesta());
 
     }
 

@@ -35,7 +35,7 @@ public class PeticionServiceTest {
         Peticion peti = new Peticion();
         peti.setNombre_organizacion("pacopepe");
         peti.setFecha(LocalDate.now());
-        peti.setCif("cif");
+        peti.setCif("J76767676");
         peti.setEmail("email@email.email");
         peti.setInfo("info");
         peticionService.createPeticion(peti);

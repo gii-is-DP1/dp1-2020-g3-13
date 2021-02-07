@@ -36,6 +36,11 @@ public class CarritoController {
 		String vista="carrito/miCarrito";
         Carrito carrito = carritoService.listadoObjetosCarrito(SecurityContextHolder.getContext().getAuthentication().getName());
         modelMap.addAttribute("carrito", carrito);
+        if(carrito!=null){
+            List<LineaFactura> lf= carritoService.dimeLineaFacturasDeCarrito(carrito.getId());
+          
+            modelMap.addAttribute("lineasFactura",lf);
+        }
         return vista;
     }
     
@@ -44,7 +49,10 @@ public class CarritoController {
 		String vista="carrito/miCarritoOrganizacion";
         Carrito carrito = carritoService.listadoObjetosCarritoOrganizacion(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Actividad> actividades = actividadService.encuentraActividadesPorCarrito(carrito);
-        
+        if(carrito!=null){
+        List<LineaFactura> lf= carritoService.dimeLineaFacturasDeCarrito(carrito.getId());
+        modelMap.addAttribute("lineasFactura", lf);
+        }
         modelMap.addAttribute("actividades", actividades);
         modelMap.addAttribute("carrito", carrito);
         return vista;
@@ -56,7 +64,7 @@ public class CarritoController {
         carritoService.borrarLineaFactura(carrito, lineaFacturaId);
         actividadService.borrarAlquileres(actividadService.encuentraActividadPorAlquilerId(linea.getAlquilerEspacio().getId()));
         lineaFacturaService.borrarLinea(linea);
-
+    
         model.addAttribute("carrito", carrito);
         return "redirect:/carrito/organizacion";
     }

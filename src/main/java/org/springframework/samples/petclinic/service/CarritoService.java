@@ -45,7 +45,7 @@ public class CarritoService {
     }
 
     public Integer contadorElementosCarrito(Carrito carrito){
-        return carrito.getLineasFacturas().size();
+        return carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).size();
     }
     public Carrito dimeCarritoOrganizacion(String nombreUsuario){
         return carritoRepo.dimeCarritoDeUsuarioOrganizacion(nombreUsuario);
@@ -57,10 +57,12 @@ public class CarritoService {
 
     @Transactional
     public void actualizaCarritoAcero(Carrito carrito){
-        carrito.getLineasFacturas().clear();
+      for (LineaFactura  lf : carritoRepo.dimeLineaFacturaCarrito(carrito.getId())) {
+        lineaService.borrarLinea(lf);
+      } 
         carrito.setTotal(0.0);
         carritoRepo.save(carrito);
-
+    
         }
 
     @Transactional
@@ -68,29 +70,39 @@ public class CarritoService {
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
-        //linea.setTipoEntrada(entrada.getTipoEntrada());
+    //    linea.setTipoEntrada(entrada.getTipoEntrada());
         // entrada.setLineaFactura(linea);
         entrada.setCliente(cliente);
         linea.setEntrada(entrada);
         Carrito carrito = new Carrito();
-        
+
 
         
         if(carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario()) != null){
                 carrito = carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario());
                 linea.setCarrito(carrito);
-                carrito.getLineasFacturas().add(linea);     
+                
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa");
+                carrito.setCliente(cliente);
+                guardarCarrito(carrito);
+                System.out.println(carrito.getTotal());
         }else{
-            
+            linea.setCarrito(carrito);
             carrito.setCliente(cliente);
             List<LineaFactura> lineasFacturas = new ArrayList<>();
-            linea.setCarrito(carrito);
             lineasFacturas.add(linea);
-            carrito.setLineasFacturas(lineasFacturas);
+           
+            guardarCarrito(carrito);
+            
+            System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+            System.out.println(carrito.getTotal());
+
         }
+         lineaService.save(linea);
+
         double total = 0.0;
-        for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
-            total += carrito.getLineasFacturas().get(i).getPrecio();
+        for (int i = 0; i < carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).size(); i++) {
+            total += carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).get(i).getPrecio();
         }
         carrito.setTotal(total);
         carritoRepo.save(carrito);
@@ -106,22 +118,26 @@ public class CarritoService {
         linea.setPrecio(alquiler.getPrecioTotal());
         linea.setAlquilerEspacio(alquiler);
         Carrito carrito = new Carrito();
+        Double total = 0.;
         if(carritoRepo.dimeCarritoDeUsuarioOrganizacion(organizacion.getUsuario().getNombreUsuario()) != null){
             carrito = carritoRepo.dimeCarritoDeUsuarioOrganizacion(organizacion.getUsuario().getNombreUsuario());
             linea.setCarrito(carrito);
-            carrito.getLineasFacturas().add(linea);     
+            System.out.println("megustaelfutbolmucho");
+            
+            carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).add(linea);     
+            System.out.println("petas? no cigarro");
+            for (int i = 0; i < carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).size(); i++) {
+                total += carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).get(i).getPrecio();
+            }
+            total = Math.round(total * 100)/100d;
             }else{
+             
                 carrito.setOrganizacion(organizacion);
                 List<LineaFactura> lineasFacturas = new ArrayList<>();
                 linea.setCarrito(carrito);
                 lineasFacturas.add(linea);
-                carrito.setLineasFacturas(lineasFacturas);
             }
-            double total = 0.0;
-            for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
-                total += carrito.getLineasFacturas().get(i).getPrecio();
-            }
-            total = Math.round(total * 100)/100d;
+            lineaService.save(linea);
             carrito.setTotal(total);
             carritoRepo.save(carrito);
         }
@@ -138,13 +154,13 @@ public class CarritoService {
     @Transactional
     public void borrarLineaFactura(Carrito carrito, int lineaFacturaId) throws DataAccessException{
         LineaFactura linea = lineaService.encuentraLineaFactura(lineaFacturaId);
-        carrito.getLineasFacturas().remove(linea);
+        carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).remove(linea);
 
     }
 
     public void generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
        Factura factura = new Factura();
-       List<LineaFactura> lineas =  carrito.getLineasFacturas();
+       List<LineaFactura> lineas =  carritoRepo.dimeLineaFacturaCarrito(carrito.getId());;
        List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
     //    factura.setLineasFacturas(listaLineasDeFactura);
        Integer cont = 0;
@@ -168,7 +184,7 @@ public class CarritoService {
 
     public void generarFacturaCarritoOrg(Carrito carrito, Organizacion org) throws DataAccessException{
        Factura factura = new Factura();
-       List<LineaFactura> lineas =  carrito.getLineasFacturas();
+       List<LineaFactura> lineas =  carritoRepo.dimeLineaFacturaCarrito(carrito.getId());
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();
@@ -192,7 +208,7 @@ public class CarritoService {
             return new ArrayList<>();
         }else{
         List<String>nombreAsist= new ArrayList<>();
-        List<LineaFactura> lf=  car.getLineasFacturas();
+        List<LineaFactura> lf=  carritoRepo.dimeLineaFacturaCarrito(car.getId());
         int i =0;
         while(lf.size()-1>=i){
             if(lf.get(i).getEntrada().getTipoEntrada().getEvento().getId()==eventoId){
@@ -208,5 +224,8 @@ public class CarritoService {
     @Transactional
     public void guardarCarrito(Carrito car){
         carritoRepo.save(car);
+    }
+    public List<LineaFactura> dimeLineaFacturasDeCarrito(int carritoId){
+        return carritoRepo.dimeLineaFacturaCarrito(carritoId);
     }
 }

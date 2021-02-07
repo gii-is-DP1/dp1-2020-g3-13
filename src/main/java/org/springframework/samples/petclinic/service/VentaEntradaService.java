@@ -27,7 +27,6 @@ public class VentaEntradaService {
     @Autowired
     private AlquilerEspacioService alquilerEspacioService;
 
-    @Transactional
     public long ventaEntradaCount() {
         return ventaEntradaRepository.count();
     }
@@ -37,8 +36,8 @@ public class VentaEntradaService {
     public void finalizarCompra(int carritoId, Cliente cliente, VentaEntrada ventaEntrada) throws DataAccessException {
         Carrito carrito = carritoService.findCarritoById(carritoId);
         Entrada entrada = new Entrada();
-        for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
-            entrada = carrito.getLineasFacturas().get(i).getEntrada();
+        for (int i = 0; i < carritoService.dimeLineaFacturasDeCarrito(carritoId).size(); i++) {
+            entrada = carritoService.dimeLineaFacturasDeCarrito(carritoId).get(i).getEntrada();
             entradaService.guardarEntrada(entrada);
             TipoEntrada tipoEntrada = entrada.getTipoEntrada();
             tipoEntrada.setNumEntradas(tipoEntrada.getNumEntradas()-1);
@@ -56,8 +55,8 @@ public class VentaEntradaService {
     public void finalizarAlquiler(int carritoId, Organizacion organizacion, VentaEntrada ventaEntrada) throws DataAccessException {
         Carrito carrito = carritoService.findCarritoById(carritoId);
         AlquilerEspacio alquiler = new AlquilerEspacio();
-        for (int i = 0; i < carrito.getLineasFacturas().size(); i++) {
-            alquiler = carrito.getLineasFacturas().get(i).getAlquilerEspacio();
+        for (int i = 0; i < carritoService.dimeLineaFacturasDeCarrito(carritoId).size(); i++) {
+            alquiler = carritoService.dimeLineaFacturasDeCarrito(carritoId).get(i).getAlquilerEspacio();
             alquilerEspacioService.guardarAlquilerEspacio(alquiler); 
         }
         //Genera la factura del cliente

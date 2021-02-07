@@ -20,16 +20,13 @@ public class TipoEntradaService {
     @Autowired
     private TipoEntradaRepository tipoEntradaRepository;
 
-    @Transactional
     public int tipoEntradaCount(){
         return (int) tipoEntradaRepository.count();
     }
-    @Transactional
     public Iterable<TipoEntrada> findAll(){
         return tipoEntradaRepository.findAll();
     }
 
-    @Transactional
     public TipoEntrada findById(int id_tipoEntrada) {
         return tipoEntradaRepository.findById(id_tipoEntrada).get();
     }
@@ -38,7 +35,6 @@ public class TipoEntradaService {
     public void anadirTipoEntrada(Evento evento, TipoEntrada tipoEntrada){
         tipoEntrada.setEvento(evento);
     }
-    @Transactional
     public List<Entrada> EncontrarTodasLasEntradas(TipoEntrada tipoEntrada){
         return tipoEntradaRepository.findAllEntradas(tipoEntrada.getId());
     }
@@ -47,7 +43,6 @@ public class TipoEntradaService {
         tipoEntradaRepository.save(tipoEntrada);
     }
 
-    @Transactional
     public void soloVentaAl90PorCiento(TipoEntrada tipoEntrada){
         tipoEntrada.setNumEntradas((int) (tipoEntrada.getNumEntradas()*0.9));
     }
@@ -65,5 +60,9 @@ public class TipoEntradaService {
         }
         return res;
 	}
+    public void borrarTipoEntrada(TipoEntrada te){
+        tipoEntradaRepository.delete(te);
+    }
+    
 
 }

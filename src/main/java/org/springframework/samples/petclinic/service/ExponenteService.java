@@ -28,10 +28,11 @@ public class ExponenteService {
         exponenteRepo.save(exponente);
     }
 
-    public List<Exponente> encuentraActividadExponente(int actividadId){
-        return exponenteRepo.encuentraActividadExponente(actividadId);
+    public List<Exponente> encuentraExponentesPorActividad(int actividadId){
+        return exponenteRepo.encuentraExponentesPorActividad(actividadId);
     }
 
+    
         public Exponente buscaExponente(Exponente exponente){
             Exponente exponenteABuscar = null;
             Iterator<Exponente> iteradorExponente = exponenteRepo.findAll().iterator();
@@ -54,6 +55,22 @@ public class ExponenteService {
             return exponenteRepo.findAll();
         }
 
+
+        public void eliminaExponente(Exponente exponente, Actividad actividad){
+            for(int i = 0; i< exponente.getActividades().size(); i++){
+                if(exponente.getActividades().get(i).equals(actividad)){
+                    exponente.getActividades().remove(actividad);
+                    guardarExponente(exponente);
+                    break;
+                }
+            }
+
+        }
+
+        public Exponente encuentraExponente(int exponenteId){
+            return exponenteRepo.findById(exponenteId).orElse(null);
+        }
+    
     @Transactional
     public void anadirExponente(Actividad actividad, Exponente exponente) throws DataAccessException{
         if(buscaExponente(exponente)==null){
@@ -74,6 +91,8 @@ public class ExponenteService {
                
             }
         }
-
+        public void borraTodoExponentesActividad(int Actividad_id){
+            exponenteRepo.deleteAll(encuentraExponentesPorActividad(Actividad_id));
+        }
 
     }

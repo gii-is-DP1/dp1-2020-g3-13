@@ -16,12 +16,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Entity
 @Getter
 @Setter
 @Table(name = "eventos")
-public class Evento extends BaseEntity{
+public class Evento extends BaseEntity {
     @Column(name = "tipoEvento")
     @Enumerated(EnumType.STRING)
     protected TipoEvento tipoEvento;
@@ -52,11 +51,11 @@ public class Evento extends BaseEntity{
 
     @Column(name = "esPublico")
     private Boolean esPublico;
-    
+
     // @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     // private List<VentaEntrada> ventaEntrada;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+    @OneToMany(mappedBy = "evento")
     private List<TipoEntrada> tipoEntradas;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
@@ -65,11 +64,4 @@ public class Evento extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     private Organizacion organizacion;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
-    private List<Sponsor> sponsors;
-
-
-
-       
 }
