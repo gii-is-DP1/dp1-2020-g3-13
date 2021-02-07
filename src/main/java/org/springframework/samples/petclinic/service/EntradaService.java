@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.repository.EntradaRepository;
@@ -20,9 +21,10 @@ public class EntradaService {
     private TipoEntradaService tipoEntradaService;
     
     @Transactional
-    public void crearEntrada(Entrada entrada, Integer tipoEntradaId) throws DataAccessException{
+    public void crearEntrada(Entrada entrada, Integer tipoEntradaId, Cliente cliente) throws DataAccessException{
         TipoEntrada tipoEntrada = tipoEntradaService.findById(tipoEntradaId);
         entrada.setTipoEntrada(tipoEntrada);
+        entrada.setCliente(cliente);
         entradaRepo.save(entrada);
     }
 

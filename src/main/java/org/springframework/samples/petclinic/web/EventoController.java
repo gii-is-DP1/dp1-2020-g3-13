@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.ClienteService;
@@ -68,14 +69,15 @@ public class EventoController {
     public ModelAndView showEvento(@PathVariable("eventosId") int eventosId) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         ModelAndView mav = new ModelAndView("eventos/detallesEvento");
+        List<TipoEntrada> tipo = tipoEntradaService.encuentraTodasLasEntradasDeEvento(eventosId);
         Evento evento = this.eventoService.findEventoById(eventosId);
         if (evento.getFechaInicio().isBefore(LocalDate.now())) {
-       
-            mav.addObject("listaTipoEntrada",  tipoEntradaService.encuentraTodasLasEntradasDeEvento(eventosId));
+            mav.addObject("listaTipoEntrada",  tipo);
             mav.setViewName("eventos/eventoFinalizado");
             return mav;
         } else {
             if (!(clienteService.findClienteByUsuario(usuario) == null)) {
+                mav.addObject("listaTipoEntrada",  tipo);
                 mav.setViewName("eventos/detallesEventoCliente");
             } else {
                 Organizacion org = organizacionService.encuentraOrganizacionByUsuario(usuario);
@@ -86,6 +88,7 @@ public class EventoController {
                 }
             }
         }
+        mav.addObject("listaTipoEntrada",  tipo);
         mav.addObject("sponsors", this.eventoService.getSponsors(eventosId));
         mav.addObject(this.eventoService.findEventoById(eventosId));
         mav.addObject("actividades", this.eventoService.getActividades(eventosId));
