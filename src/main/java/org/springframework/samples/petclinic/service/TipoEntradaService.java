@@ -63,6 +63,16 @@ public class TipoEntradaService {
     public void borrarTipoEntrada(TipoEntrada te){
         tipoEntradaRepository.delete(te);
     }
+
+    @Transactional
+    public void eliminaTipoEntradaDeOrganizacion(int organizacionId){
+        tipoEntradaRepository.eliminaTipoEntradaDeOrganizacion(organizacionId);
+    }
+
+    public List<TipoEntrada> encuentraTodasLasEntradasDeEvento(int eventoId){
+        return tipoEntradaRepository.encuentraTodasLasEntradasDeEvento(eventoId);
+
+    }
     
 
 }

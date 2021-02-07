@@ -23,8 +23,8 @@ public class InicializadorObjetosTest {
         evento.setMedidasSanitarias("6M");
         evento.setNombreEvento("nombreEvento");
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
-        evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        evento.setConsultas(new ArrayList<Consulta>());
+        //evento.setTipoEntradas(new ArrayList<TipoEntrada>());
+        //evento.setConsultas(new ArrayList<Consulta>());
         return evento;
     }
 
@@ -67,7 +67,7 @@ public class InicializadorObjetosTest {
         exponente.setNombreExponente("nombreExponente");
         exponente.setApellidosExponente("apellidosExponente");
         exponente.setId(Integer.MAX_VALUE);
-        exponente.setActividades(new ArrayList<Actividad>());
+        //exponente.setActividades(new ArrayList<Actividad>());
         return exponente;
     }
 

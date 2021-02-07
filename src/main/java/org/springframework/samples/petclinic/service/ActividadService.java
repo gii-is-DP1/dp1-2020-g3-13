@@ -19,97 +19,109 @@ import org.springframework.stereotype.Service;
 @Service
 public class ActividadService {
 
-        @Autowired
-        private ActividadRepository actividadRepo;
+    @Autowired
+    private ActividadRepository actividadRepo;
 
-        @Autowired
-        private AlquilerEspacioService alquilerEspacioService;
-        
-        @Autowired
-        private CarritoService carritoService;
-        @Autowired
-        private ExponenteService expoService;
-        @Autowired
-        private EventoRepository eventoRepo;
+    @Autowired
+    private AlquilerEspacioService alquilerEspacioService;
 
+    @Autowired
+    private CarritoService carritoService;
+    @Autowired
+    private ExponenteService expoService;
+    @Autowired
+    private EventoRepository eventoRepo;
 
-        public int actividadesCount(){
-            return (int) actividadRepo.count();
+    public int actividadesCount() {
+        return (int) actividadRepo.count();
+    }
+
+    public Iterable<Actividad> findAll() {
+        return actividadRepo.findAll();
+    }
+
+    public Actividad findById(int id) {
+        return actividadRepo.findById(id).orElse(null);
+    }
+
+    // Devuelve si cierta actividad contiene al exponente pasado por parametros
+    public Boolean contieneExponente(Exponente exponente, Actividad actividad) {
+        return actividad.getExponentes().contains(exponente);
+    }
+
+    public Actividad encuentraActividadId(int actividadId) {
+        return actividadRepo.findById(actividadId).orElse(null);
+    }
+
+    @Transactional
+    public void guardarActividad(Actividad actividad) {
+        actividadRepo.save(actividad);
+    }
+
+    @Transactional
+    public void borrarAlquileres(Actividad actividad) {
+        // AlquilerEspacio alq =actividadRepo.encuentraAlquilerLugar(alquiler.getId());
+        actividad.setAlquilerEspacio(null);
+    }
+
+    @Transactional
+    public Actividad encuentraActividadPorAlquilerId(int alquilerEspacioId) {
+        return actividadRepo.encuentraLugarAlquiler(alquilerEspacioId);
+    }
+
+    @Transactional
+    public void anadirActividadAEvento(Evento evento, Actividad actividad) throws DataAccessException {
+        if (eventoRepo.getActividades(evento.getId()) == null) {
+            List<Actividad> listaActividades = new ArrayList<>();
+            actividad.setEvento(evento);
+            listaActividades.add(actividad);
+        } else {
+            List<Actividad> listaActividadesActual = eventoRepo.getActividades(evento.getId());
+            actividad.setEvento(evento);
+            listaActividadesActual.add(actividad);
         }
+    }
 
-        public Iterable<Actividad> findAll(){
-            return actividadRepo.findAll();
-        }
-
-        public Actividad findById(int id){
-            return actividadRepo.findById(id).orElse(null);
-        } 
-        //Devuelve si cierta actividad contiene al exponente pasado por parametros
-        public Boolean contieneExponente(Exponente exponente, Actividad actividad){
-            Boolean res = false;
-            List<Exponente> exponentesActividad = expoService.encuentraExponentesPorActividad(actividad.getId());
-            for (int i = 0; i < exponentesActividad.size(); i++) {
-                if(exponentesActividad.get(i).getNombreExponente().equals(exponente.getNombreExponente()) && exponentesActividad.get(i).getApellidosExponente().equals(exponente.getApellidosExponente()) && exponentesActividad.get(i).getAlias().equals(exponente.getAlias())) {
-                    res = true;
-                    break;
-                }
+    public List<Actividad> encuentraActividadesPorCarrito(Carrito carrito) {
+        List<Actividad> actividades = new ArrayList<Actividad>();
+        double total = 0.0;
+        if (carrito != null) {
+            for (LineaFactura linea : carritoService.dimeLineaFacturasDeCarrito(carrito.getId())) {
+                actividades.add(alquilerEspacioService.encuentraActividad(linea.getAlquilerEspacio().getId()));
+                total += linea.getPrecio();
             }
-            return res;
+            carrito.setTotal(total);
+            carritoService.guardarCarrito(carrito);
         }
+        return actividades;
+    }
 
-        public Actividad encuentraActividadId(int actividadId){
-            return actividadRepo.findById(actividadId).orElse(null);
-        }
+    public List<Actividad> encuentraActividadesPorEvento(int eventoId) {
+        return actividadRepo.encuentrActividadesEventoId(eventoId);
 
-        @Transactional
-        public void guardarActividad(Actividad actividad){
-                actividadRepo.save(actividad);
-        }
-        @Transactional
-        public void borrarAlquileres(Actividad actividad){
-            //AlquilerEspacio alq =actividadRepo.encuentraAlquilerLugar(alquiler.getId());
-            actividad.setAlquilerEspacio(null);
-        }
-        @Transactional
-        public Actividad encuentraActividadPorAlquilerId(int alquilerEspacioId){
-            return actividadRepo.encuentraLugarAlquiler(alquilerEspacioId);
-        }
+    }
 
+    public void borraActividadEvento(int eventoId) {
+        actividadRepo.deleteAll(encuentraActividadesPorEvento(eventoId));
+    }
 
+    @Transactional
+    public void eliminaActividadesOrganizacion(int organizacionId){
+        actividadRepo.eliminaActividadesOrganizacion(organizacionId);
+    }
 
-        @Transactional
-        public void anadirActividadAEvento(Evento evento, Actividad actividad) throws DataAccessException{
-            if(eventoRepo.getActividades(evento.getId())==null){
-                List<Actividad> listaActividades = new ArrayList<>();
-                actividad.setEvento(evento);
-                listaActividades.add(actividad);
-            }else{
-                List<Actividad> listaActividadesActual = eventoRepo.getActividades(evento.getId());
-                actividad.setEvento(evento);
-                listaActividadesActual.add(actividad);
-            }
+    public List<Actividad> encuentraActividadesDeOrganizacion(int organizacionId){
+        return actividadRepo.encuentraActividadesDeOrganizacion(organizacionId);
+    }
+/*
+    @Transactional
+    public void borrarActividad(Actividad actividad){
+        List<Exponente> exponentesActividad = expoService.encuentraExponentesPorActividad(actividad.getId());
+        for(int i = 0; i<exponentesActividad.size();i++){
+            exponentesActividad.get(i).getActividades().remove(actividad);
         }
-		public List<Actividad> encuentraActividadesPorCarrito(Carrito carrito) {
-            List<Actividad> actividades = new ArrayList<Actividad>();
-            double total = 0.0;
-            if(carrito!=null){
-                for(LineaFactura linea :carritoService.dimeLineaFacturasDeCarrito(carrito.getId())){
-                    actividades.add(alquilerEspacioService.encuentraActividad(linea.getAlquilerEspacio().getId()));
-                    total += linea.getPrecio();
-                    }
-                    carrito.setTotal(total);
-                    carritoService.guardarCarrito(carrito);
-                }
-            return actividades;
-		}
-        public List<Actividad> encuentraActividadesPorEvento(int eventoId){
-           return  actividadRepo.encuentrActividadesEventoId(eventoId);
+        actividadRepo.deleteById(actividad.getId());
 
-            }        
-        public void borraActividadEvento(int eventoId){
-            actividadRepo.deleteAll(encuentraActividadesPorEvento(eventoId));
-        }
-        public void borrarActividad(Actividad act){
-            actividadRepo.delete(act);
-        }
-            }
+    }
+*/
+}
