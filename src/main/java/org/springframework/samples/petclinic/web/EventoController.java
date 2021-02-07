@@ -10,6 +10,7 @@ import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.repository.EventoRepository;
+import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -38,33 +39,34 @@ public class EventoController {
     private OrganizacionService organizacionService;
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping
     public String listadoEventos(ModelMap modelMap) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
-        String vista = "eventos/";
-        if (!(clienteService.findClienteByUsuario(usuario) == null) || usuario == "anonymousUser") {
-            Iterable<Evento> eventos = eventoService.encuentraTodosPublicos();
-            modelMap.addAttribute("eventos", eventos);
-            vista = "eventos/listadoEventos";
-        } else if (!(organizacionService.encuentraOrganizacionByUsuario(usuario) == null)) {
+        String vista = "eventos/listadoEventos";
+        if (!(organizacionService.encuentraOrganizacionByUsuario(usuario) == null)) {
             Iterable<Evento> eventos = eventoService
                     .listadoEventosDeOrganizacion(organizacionService.encuentraOrganizacionByUsuario(usuario).getId());
             modelMap.addAttribute("eventos", eventos);
             vista = "eventos/listadoEventosOrganizacion";
-        } else {
+        } else if (!(adminService.encuentraAdminPorNombre(usuario) == null)) {
             Iterable<Evento> eventos = eventoService.findAll();
             modelMap.addAttribute("eventos", eventos);
             vista = "eventos/listadoEventosAdmin";
-        }
+        } else {
+            Iterable<Evento> eventos = eventoService.encuentraTodosPublicos();
+            modelMap.addAttribute("eventos", eventos);
+        } 
 
         return vista;
     }
 
     @GetMapping("/{eventosId}")
-    public ModelAndView showEvento(@PathVariable("eventosId") int eventosId) {
+    public ModelAndView showEvento(@PathVariable("eventosId") int eventosId, ModelAndView mav) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
-        ModelAndView mav = new ModelAndView("eventos/detallesEvento");
+        mav.setViewName("eventos/detallesEvento");
         Evento evento = this.eventoService.findEventoById(eventosId);
         if (evento.getFechaInicio().isBefore(LocalDate.now())) {
             mav.setViewName("eventos/eventoFinalizado");
@@ -72,12 +74,11 @@ public class EventoController {
         } else {
             if (!(clienteService.findClienteByUsuario(usuario) == null)) {
                 mav.setViewName("eventos/detallesEventoCliente");
-            } else {
+            } else if (!(organizacionService.encuentraOrganizacionByUsuario(usuario) == null))  {
                 Organizacion org = organizacionService.encuentraOrganizacionByUsuario(usuario);
-                if (!(organizacionService.encuentraOrganizacionByUsuario(usuario) == null)) {
-                    if (evento.getOrganizacion() != org) {
-                        mav.setViewName("eventos/organizacionSinPermiso");
-                    }
+                if (evento.getOrganizacion() != org) {
+                    mav.setViewName("eventos/organizacionSinPermiso");
+
                 }
             }
         }
@@ -87,7 +88,7 @@ public class EventoController {
         return mav;
     }
 
-    @GetMapping("/{eventosId}/añadirEventosFavoritos")
+    @GetMapping("/{eventosId}/anadirEventosFavoritos")
     public String anadirEventosAFavorito(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
         String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
         Evento evento = eventoService.findEventoById(eventosId);
@@ -103,8 +104,6 @@ public class EventoController {
 
         if (eventoRepo.getActividades(evento.getId()).size() != 0) {
             eventoService.hacerPublico(eventosId);
-            // ModelAndView mav = new ModelAndView("eventos/listadoEventos");
-            modelMap.addAttribute("message", "Evento añadido a favoritos!");
             return "redirect:/eventos/{eventosId}";
         } else {
             return "redirect:/eventos/";

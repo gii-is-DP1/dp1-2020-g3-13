@@ -25,29 +25,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
-@ExtendWith(SpringExtension.class)
 public class EventoControllerSecurityTest {
     
     @Autowired
     private WebApplicationContext context;
     
     private MockMvc mockMvc;
-    
-    @MockBean
-    private EventoService entradaService;
-    @MockBean
-    private CarritoService carritoService;
-    @MockBean
-    private ClienteService clienteService;
 
-    private int TEST_EVENTO_ID = 8;
+
+    private int TEST_EVENTO_ID = 1;
     private int TEST_ENTRADA_ID = 1;
     @BeforeEach
     void setup() {
        mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
     }
+
+    //LISTADO EVENTOS
 
     @WithMockUser(username="organizacion1", authorities = {"organizacion"})
     @Test
@@ -56,18 +52,77 @@ public class EventoControllerSecurityTest {
         .andExpect(model().attributeExists("eventos"));
     }
 
-    @WithMockUser(username="organizacionRandom",authorities = {"organizacion"})
+    @WithMockUser(username="cliente1", authorities = {"cliente"})
     @Test
-    void noPuedeCrearEntradaForm() throws Exception {
-        mockMvc.perform(get("/eventos/{eventoId}/{tipoEntradasId}/entrada",TEST_EVENTO_ID,TEST_ENTRADA_ID))
-        .andExpect(status().is(HttpStatus.FORBIDDEN.value()));
+    void deberiaDevolverListadoEventosDeCliente() throws Exception{
+        mockMvc.perform(get("/eventos")).andExpect(status().isOk()).andExpect(view().name("eventos/listadoEventos"))
+        .andExpect(model().attributeExists("eventos"));
     }
 
-    @WithMockUser(username="clienteRandom",authorities = {"cliente"})
     @Test
-    void testCrearEntradaForm() throws Exception {
-        mockMvc.perform(get("/eventos/{eventoId}/{tipoEntradasId}/entrada",TEST_EVENTO_ID,TEST_ENTRADA_ID)).andExpect(status().isOk())
-        .andExpect(view().name("entradas/crearEntrada")).andExpect(model().attributeExists("entrada"));
+    void deberiaDevolverListadoEventosDePersonaAnonima() throws Exception{
+        mockMvc.perform(get("/eventos")).andExpect(status().isOk()).andExpect(view().name("eventos/listadoEventos"))
+        .andExpect(model().attributeExists("eventos"));
+    }
+    @WithMockUser(username="alebangon", authorities = {"admin"})
+    @Test
+    void deberiaDevolverListadoEventosDeAdmin() throws Exception{
+        mockMvc.perform(get("/eventos")).andExpect(status().isOk()).andExpect(view().name("eventos/listadoEventosAdmin"))
+        .andExpect(model().attributeExists("eventos"));
+    }
+
+    //DETALLES EVENTO
+    @WithMockUser(username="cliente1", authorities = {"cliente"})
+    @Test
+    void deberiaMostrarDetallesEventosDeCliente() throws Exception{
+        mockMvc.perform(get("/eventos/1")).andExpect(status().isOk()).andExpect(view().name("eventos/detallesEventoCliente"))
+        .andExpect(model().attributeExists("evento"));
+    }
+    @WithMockUser(username="organizacion1", authorities = {"organizacion"})
+    @Test
+    void deberiaMostrarDetallesEventosDeOrganizacion() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}", TEST_EVENTO_ID)).andExpect(status().isOk()).andExpect(view().name("eventos/detallesEvento"))
+        .andExpect(model().attributeExists("evento"));
+    }
+    @WithMockUser(username="alebangon", authorities = {"admin"})
+    @Test
+    void deberiaMostrarDetallesEventosDeAdmin() throws Exception {
+        mockMvc.perform(get("/eventos/{eventoId}", TEST_EVENTO_ID)).andExpect(status().isOk()).andExpect(view().name("eventos/detallesEvento"))
+        .andExpect(model().attributeExists("evento"));
+    }
+
+    //AÑADIR A FAVORITOS
+    @WithMockUser(username="cliente1", authorities={"cliente"})
+    @Test
+    void deberiaAñadirAFavoritosCliente() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/anadirEventosFavoritos", TEST_EVENTO_ID)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/"));
+    }
+    @WithMockUser(username="organizacion1", authorities={"organizacion"})
+    @Test
+    void noDeberiaAñadirAFavoritosOrg() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/anadirEventosFavoritos", TEST_EVENTO_ID)).andExpect(status().is4xxClientError());
+    }
+    @WithMockUser(username="alebangon", authorities={"admin"})
+    @Test
+    void noDeberiaAñadirAFavoritosAdmin() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/anadirEventosFavoritos", TEST_EVENTO_ID)).andExpect(status().is4xxClientError());
+    }
+
+    //HACER PUBLICO 
+    @WithMockUser(username="cliente1", authorities={"cliente"})
+    @Test
+    void noDeberiaHacerPublicoCliente() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/hacerPublico", TEST_EVENTO_ID)).andExpect(status().is4xxClientError());
+    }
+    @WithMockUser(username="organizacion1", authorities={"organizacion"})
+    @Test
+    void deberiaHacerPublicoOrg() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/hacerPublico", TEST_EVENTO_ID)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/"));
+    }
+    @WithMockUser(username="alebangon", authorities={"admin"})
+    @Test
+    void noDeberiaHacerPublicoAdmin() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/hacerPublico", TEST_EVENTO_ID)).andExpect(status().is4xxClientError());
     }
 
     @WithMockUser(username="clienteRandom",authorities = {"cliente"})
