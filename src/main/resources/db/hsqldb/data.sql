@@ -68,6 +68,7 @@ INSERT INTO factura (id,fecha_factura,precio_total,nombre_usuario) VALUES(7,'202
 --INSERT INTO linea_factura(id, id_alquiler_espacio, cantidad, id_factura) VALUES (1, 1, 1, 5);
 
 -- EL CONCIERTO DE EMINEN NO SE PUEDE BORRAR QUE LO USAMOS PARA PRUEBAS
+
 INSERT INTO eventos(id,tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id, es_publico) VALUES (1,'CULTURALES_DE_OCIO', 'Concierto de Eminem', 'Eminem concert for valor', '2021-04-11', '6M', 'Musica', '2021-06-11', 1, TRUE);
 INSERT INTO eventos(id,tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id, es_publico) VALUES (2,'CULTURALES_DE_OCIO', 'Fusce vel neque nunc. Mauris nec enim at justo semper lobortis. Sed et pulvinar turpis', 'The Late Morning Event Show', '2023-06-11', '6M', 'Musica', '2023-06-12' , 1, TRUE);
 INSERT INTO eventos(id,tipo_evento, descripcion, nombre_evento, fecha_inicio, medidas_sanitarias, categoria, fecha_fin, organizacion_id, es_publico) VALUES (3,'CULTURALES_DE_OCIO', 'FITUR es la primera cita anual para los profesionales del turismo mundial', 'FITUR 2021', '2022-10-11', '6M', 'Musica', '2022-10-12', 1, FALSE);

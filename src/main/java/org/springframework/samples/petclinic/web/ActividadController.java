@@ -67,7 +67,7 @@ public class ActividadController {
     public String detallesActividad(ModelMap model,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId){
         Actividad actividad = actividadService.findById(actividadId);
         Evento evento = eventoService.findEventoById(eventoId);
-        List<Exponente> exponentes = exponenteService.encuentraExponentesPorActividad(actividadId);
+        List<Exponente> exponentes = actividad.getExponentes();
         model.addAttribute("actividad", actividad);
         model.addAttribute("evento", evento);
         model.addAttribute("exponentes", exponentes);

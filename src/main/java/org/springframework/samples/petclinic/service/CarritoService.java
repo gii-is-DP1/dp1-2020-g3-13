@@ -228,4 +228,9 @@ public class CarritoService {
     public List<LineaFactura> dimeLineaFacturasDeCarrito(int carritoId){
         return carritoRepo.dimeLineaFacturaCarrito(carritoId);
     }
+
+    @Transactional
+    public void eliminaCarritoOrganizacion(int organizacionId){
+        carritoRepo.eliminaCarritoOrganizacion(organizacionId);
+    }
 }

@@ -13,6 +13,7 @@ import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
+import org.springframework.samples.petclinic.service.TipoEntradaService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,6 +39,8 @@ public class EventoController {
     private OrganizacionService organizacionService;
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private TipoEntradaService tipoEntradaService;
 
     @GetMapping
     public String listadoEventos(ModelMap modelMap) {
@@ -67,6 +70,8 @@ public class EventoController {
         ModelAndView mav = new ModelAndView("eventos/detallesEvento");
         Evento evento = this.eventoService.findEventoById(eventosId);
         if (evento.getFechaInicio().isBefore(LocalDate.now())) {
+       
+            mav.addObject("listaTipoEntrada",  tipoEntradaService.encuentraTodasLasEntradasDeEvento(eventosId));
             mav.setViewName("eventos/eventoFinalizado");
             return mav;
         } else {

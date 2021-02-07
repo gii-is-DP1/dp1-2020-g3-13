@@ -21,9 +21,7 @@ import lombok.Setter;
 @Table(name = "exponente")
 public class Exponente extends BaseEntity{
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "actividad_id", referencedColumnName = "id")
-    private List<Actividad> actividades;
+
     
     @Column(name = "nombreExponente")
     @NotBlank(message = "El nombre del exponente no puede estar vacío y debe estar comprendido entre 2 y 20 caracteres")
