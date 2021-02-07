@@ -1,13 +1,12 @@
 package org.springframework.samples.petclinic.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import javax.persistence.JoinColumn;
 
 import org.hibernate.validator.constraints.URL;
 
@@ -34,7 +33,8 @@ public class Sponsor extends BaseEntity {
     @URL(message = "Debe introducir una Url válida para el logo")
     private String urlLogo;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
+    @JoinColumn(name= "evento_id", referencedColumnName = "id")
     private Evento evento;
 
 }

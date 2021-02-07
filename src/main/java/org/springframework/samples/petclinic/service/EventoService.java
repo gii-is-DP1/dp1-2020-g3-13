@@ -124,11 +124,14 @@ public class EventoService {
     public List<Sponsor> getSponsors(int id_evento) {
         return eventoRepository.getSponsors(id_evento);
 
+
     }
 
     @Transactional
     public void borraSponsor(int id_evento) {
         eventoRepository.borraSponsor(id_evento);
     }
-
+    public List<TipoEntrada> getTipoEntradaPorEvento(int eventoId){
+        return eventoRepository.getTipoEntrada(eventoId);
+    }
 }

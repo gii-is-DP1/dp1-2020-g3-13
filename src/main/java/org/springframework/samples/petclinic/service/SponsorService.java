@@ -16,7 +16,7 @@ public class SponsorService {
     @Autowired
     private SponsorRepository sponsorRepository;
 
-    @Transactional
+
     public int sponsorCount() {
         return (int) sponsorRepository.count();
     }
@@ -29,9 +29,11 @@ public class SponsorService {
     public void anadirSponsorAEvento(Evento evento, Sponsor sponsor) throws DataAccessException {
         sponsor.setEvento(evento);
     }
-
+    @Transactional
     public void guardarSponsor(@Valid Sponsor sponsor) {
         sponsorRepository.save(sponsor);
     }
-
+    public void borrarSponsor( Sponsor sponsor) {
+        sponsorRepository.delete(sponsor);
+    }
 }

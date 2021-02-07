@@ -11,13 +11,9 @@ import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.model.Validadores.ActividadAforoYNumeroEntradasRestriccion;
-import org.springframework.samples.petclinic.model.Validadores.ActividadesParaTipoEntradaRestriccion;
-import org.springframework.samples.petclinic.model.Validadores.FechaTipoEntradaRestriccion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,11 +28,11 @@ import lombok.Setter;
     //fechaInicio = "fechaInicio", fechaFin = "fechaFin", nombreEntrada = "nombre", message = "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento")
 public class TipoEntrada extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "evento_id", referencedColumnName = "id")
     private Evento evento;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinColumn(name = "actividad_id", referencedColumnName = "id")
     private List<Actividad> actividades;
 
