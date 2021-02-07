@@ -8,12 +8,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
+import org.springframework.samples.petclinic.service.ExponenteService;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
@@ -52,6 +54,9 @@ public class ActividadControllerTest {
 
     @MockBean
     private OrganizacionService organizacionService;
+
+    @MockBean
+    private ExponenteService exponenteService;
 
 
 
