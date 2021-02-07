@@ -14,7 +14,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
+
 
 public class TipoEntradaValidadores {
 	LugarRealizacion lugarRealizacion = new LugarRealizacion();
@@ -92,7 +95,7 @@ public class TipoEntradaValidadores {
 		// Validamos
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(2);
+		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
 		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 
@@ -274,7 +277,7 @@ public class TipoEntradaValidadores {
 		// Validamos
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(1);
+		assertThat(constraintViolations.size()).isEqualTo(0);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
 		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(
@@ -301,7 +304,7 @@ public class TipoEntradaValidadores {
 		// Validamos
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(1);
+		assertThat(constraintViolations.size()).isEqualTo(0);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
 		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(
@@ -311,15 +314,4 @@ public class TipoEntradaValidadores {
 
 }
 
-/*
- * @ActividadAforoYNumeroEntradasRestriccion(actividades = "actividades",
- * numEntradas = "numEntradas")
- * 
- * 
- * @FechaTipoEntradaRestriccion( //evento_id = "evento_id" fechaInicio =
- * "fechaInicio", fechaFin = "fechaFin", nombreEntrada = "nombre", message =
- * "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento"
- * )
- * 
- * 
- */
+ 

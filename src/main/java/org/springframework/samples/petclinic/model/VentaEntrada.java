@@ -36,8 +36,8 @@ public class VentaEntrada extends BaseEntity {
     private String nombreTitular;
 
     
-    @NotEmpty(message = "El CVV no debe tener menos de 3 digitos")
-    @Digits(fraction = 0, integer = 3, message = "El CVV no debe tener mas de 3 digitos")
-    @Length(min = 3, message ="El CVV no debe tener menos de 3 digitos")
+    @NotEmpty(message = "El CVV no debe estar vacio y debe ser exactamente de 3 dígitos")
+    @Digits(fraction = 0, integer = 3, message = "El CVV no debe estar vacio y debe ser exactamente de 3 dígitos")
+    @Length(min = 3, message ="El CVV no debe estar vacio y debe ser exactamente de 3 dígitos")
     private String cvv;   
 }
