@@ -20,6 +20,7 @@ public @interface FechaTipoEntradaRestriccion {
     //String evento_id();
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default{};
+	String evento_id();
 
      
 }

@@ -18,7 +18,7 @@ public class ClienteServiceTest {
     @Test
     public void testCountWithInitialData(){
         int count= clienteService.clienteCount();
-        assertEquals(count, 0);
+        assertEquals(count, 2);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ClienteServiceTest {
         Usuario usuario = new Usuario();
         usuario.setEnabled(true);
         usuario.setNombreUsuario("prueba");
-        usuario.setPassword("password");
+        usuario.setPassword("Password8");
 
         Autoridades autoridades = new Autoridades();
         autoridades.setAutoridad("cliente");
