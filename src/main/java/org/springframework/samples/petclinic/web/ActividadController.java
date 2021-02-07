@@ -73,7 +73,48 @@ public class ActividadController {
         model.addAttribute("exponentes", exponentes);
         return VIEW_ACTIVIDAD_DETALLES;
     }
-    
+
+    @GetMapping("/{actividadId}/borrarActividad")
+    public String borrarActividad(ModelMap model,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId){
+        Actividad actividad = actividadService.findById(actividadId);
+        Evento evento = eventoService.findEventoById(eventoId);
+        model.addAttribute("actividad", actividad);
+        model.addAttribute("evento", evento);
+        if(actividad.getAlquilerEspacio()==null){
+            actividadService.borrarActividad(actividad);
+        }else{
+            return "exception";
+        }
+      
+        return "redirect:/eventos/{evento_id}";
+    }
+    @GetMapping("/{actividadId}/editar")
+    public String editarActividadForm(ModelMap model,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId){
+        Actividad actividad = actividadService.findById(actividadId);
+        Evento evento = eventoService.findEventoById(eventoId);
+        List<Exponente> exponentes = exponenteService.encuentraActividadExponente(actividadId);
+        model.addAttribute("actividad", actividad);
+        model.addAttribute("evento", evento);
+        model.addAttribute("exponentes", exponentes);
+        return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
+    }
+    @PostMapping("/{actividadId}/editar")
+    public String editarActividad(@Valid Actividad actividad,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId, BindingResult result, ModelMap model){
+       if(!(actividadService.findById(actividadId)==null)){
+           if(result.hasErrors()){
+            model.put("actividad", actividad);
+            return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
+           }else{
+               model.put("actividad", actividad);
+               try{
+                   this.actividadService.modificarActividad(actividad, actividadService.findById(actividadId));
+               }catch(Exception e){
+                return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
+               }
+           }
+       }  
+       return "redirect:/eventos/{evento_id}/actividades/{actividadId}";      
+    }
     @GetMapping(value="/nuevo")
     public String crearActividad(ModelMap modelMap){
         Iterable<LugarRealizacion> lugaresRealizacion = lugarRealizacionService.findAll();
@@ -84,6 +125,7 @@ public class ActividadController {
         modelMap.addAttribute("lugares", lugares);
         modelMap.addAttribute("listaId", listaIds);
         modelMap.addAttribute("lugaresRealizacion", lugaresLista);
+
         modelMap.addAttribute("actividad", new Actividad());
         return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
     }

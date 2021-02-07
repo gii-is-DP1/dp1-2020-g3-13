@@ -57,6 +57,16 @@ public class ActividadService {
             return res;
         }
 
+        @Transactional
+        public void borrarActividad(Actividad actividad){
+           List<Exponente> exponentesActividad = expoService.encuentraActividadExponente(actividad.getId());
+            for(int i = 0; i<exponentesActividad.size();i++){
+               exponentesActividad.get(i).getActividades().remove(actividad);
+            }
+            actividadRepo.deleteById(actividad.getId());
+           
+        }
+
         public Actividad encuentraActividadId(int actividadId){
             return actividadRepo.findById(actividadId).orElse(null);
         }
@@ -73,6 +83,11 @@ public class ActividadService {
         @Transactional
         public Actividad encuentraActividadPorAlquilerId(int alquilerEspacioId){
             return actividadRepo.encuentraLugarAlquiler(alquilerEspacioId);
+        }
+        @Transactional
+        public void modificarActividad(Actividad actividad, Actividad actividadActual) throws DataAccessException{
+            actividad.setId(actividadActual.getId());
+            guardarActividad(actividad);
         }
 
 
