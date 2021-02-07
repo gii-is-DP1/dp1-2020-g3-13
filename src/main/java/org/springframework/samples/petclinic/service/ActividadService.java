@@ -93,7 +93,7 @@ public class ActividadService {
             List<Actividad> actividades = new ArrayList<Actividad>();
             double total = 0.0;
             if(carrito!=null){
-                for(LineaFactura linea :carrito.getLineasFacturas()){
+                for(LineaFactura linea :carritoService.dimeLineaFacturasDeCarrito(carrito.getId())){
                     actividades.add(alquilerEspacioService.encuentraActividad(linea.getAlquilerEspacio().getId()));
                     total += linea.getPrecio();
                     }

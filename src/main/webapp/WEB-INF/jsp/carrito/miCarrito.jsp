@@ -13,7 +13,7 @@
                         <h3>¿Qué llevo en mi carrito?</h3>
                       
                             <!-- <div class="cuadro-carrito"></div> -->
-                            <c:forEach items="${carrito.lineasFacturas}" var="lineasFacturas">
+                            <c:forEach items="${lineasFactura}" var="lineasFacturas">
                                 <p>
                                     Evento:
                                         <c:out value="${lineasFacturas.entrada.tipoEntrada.evento.nombreEvento}" />

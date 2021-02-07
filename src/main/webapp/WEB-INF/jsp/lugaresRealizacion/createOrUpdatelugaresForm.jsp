@@ -19,6 +19,7 @@
             <petclinic:inputField label="Caracteristicas" name="caracteristicas"/>
             <petclinic:inputField label="Telefono" name="telefono"/>
             <petclinic:inputField label="email" name="email"/>
+            <petclinic:inputField label="Precio/dia" name="precio"/>
             <petclinic:inputField label="Foto" name="urlFoto"/>
         </div>
         <div class="form-group">

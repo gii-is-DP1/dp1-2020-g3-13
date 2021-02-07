@@ -54,7 +54,6 @@ public class VentaEntradaServiceTest {
         // Creación de un carrito
         Carrito carrito = new Carrito();
         carrito.setId(((int) carritoService.carritoCount()) + 1);
-        carrito.setLineasFacturas(lineas);
         carrito.setTotal(30.0);
         // Creacion de ventaEntrada
 

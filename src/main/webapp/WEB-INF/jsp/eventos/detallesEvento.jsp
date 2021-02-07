@@ -75,9 +75,9 @@
                                 <th>Sponsors</th>
                                 <td>
                                     <div class="cuadro-sponsor"></div>
-                                    <c:forEach items="${evento.sponsors}" var="sponsor">
-                                        <a href="${sponsor.urlWeb}" target="_self">    
-                                    <img src="${sponsor.urlLogo}" width=15%></a>
+                                    <c:forEach items="${sponsors}" var="sponsorIterado">
+                                        <a href="${sponsorIterado.urlWeb}" target="_self">    
+                                    <img src="${sponsorIterado.urlLogo}" width=15%></a>
                                     </div>
 
                                     </c:forEach>
