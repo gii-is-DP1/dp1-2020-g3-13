@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.web;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EntradaService;
@@ -37,6 +38,7 @@ public class EventoControllerSecurityTest {
 
 
     private int TEST_EVENTO_ID = 1;
+    private int TEST_EVENTO_ID2 = 8;
     private int TEST_ENTRADA_ID = 1;
     @BeforeEach
     void setup() {
@@ -95,7 +97,7 @@ public class EventoControllerSecurityTest {
     @WithMockUser(username="cliente1", authorities={"cliente"})
     @Test
     void deberiaAñadirAFavoritosCliente() throws Exception{
-        mockMvc.perform(get("/eventos/{eventoId}/anadirEventosFavoritos", TEST_EVENTO_ID)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/"));
+        mockMvc.perform(get("/eventos/{eventoId}/anadirEventosFavoritos", TEST_EVENTO_ID)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos"));
     }
     @WithMockUser(username="organizacion1", authorities={"organizacion"})
     @Test
@@ -117,18 +119,47 @@ public class EventoControllerSecurityTest {
     @WithMockUser(username="organizacion1", authorities={"organizacion"})
     @Test
     void deberiaHacerPublicoOrg() throws Exception{
-        mockMvc.perform(get("/eventos/{eventoId}/hacerPublico", TEST_EVENTO_ID)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/"));
+        mockMvc.perform(get("/eventos/{eventoId}/hacerPublico", TEST_EVENTO_ID)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/{eventosId}"));
     }
     @WithMockUser(username="alebangon", authorities={"admin"})
     @Test
     void noDeberiaHacerPublicoAdmin() throws Exception{
         mockMvc.perform(get("/eventos/{eventoId}/hacerPublico", TEST_EVENTO_ID)).andExpect(status().is4xxClientError());
     }
-
-    @WithMockUser(username="clienteRandom",authorities = {"cliente"})
+    //NUEVO EVENTO
+    @WithMockUser(username="cliente1", authorities={"cliente"})
     @Test
-    void postEntrada() throws Exception{
-        mockMvc.perform(post("/eventos/8/1/entrada").param("dni", "77778888H").param("nombreAsistente", "Raul Rodriguez Mendez").with(csrf()))
-             .andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/{eventoId}"));
+    void noDeberiaAñadirEventoCliente() throws Exception{
+        mockMvc.perform(get("/eventos/nuevo")).andExpect(status().is4xxClientError());
+    }
+    @WithMockUser(username="organizacion1", authorities={"organizacion"})
+    @Test
+    void deberiaAñadirEventoOrg() throws Exception{
+        mockMvc.perform(post("/eventos/nuevo").param("nombreEvento", "evento").param("tipoEvento", "SOCIALES")
+        .param("descripcion", "Descripcion de mas de quince caracteres").param("fechaInicio", "2022/12/12").param("fechaFin", "2022/12/12")
+        .param("categoria", "eventos sociales").param("medidasSanitarias", "Medidas sanitarias para el evento").with(csrf())).andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/eventos"));
+    }
+
+    //BORRAR EVENTO
+    @WithMockUser(username="cliente1", authorities={"cliente"})
+    @Test
+    void noDeberiaBorrarCliente() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/delete", TEST_EVENTO_ID)).andExpect(status().is4xxClientError());
+    }
+    @WithMockUser(username="organizacion1", authorities={"organizacion"})
+    @Test
+    void noDeberiaBorrarOrg() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/delete", TEST_EVENTO_ID)).andExpect(status().isOk()).andExpect(view().name("redirect:/eventos"));
+    }
+    @WithMockUser(username="organizacion1", authorities={"organizacion"})
+    @Test
+    void deberiaBorrarOrg() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/delete", TEST_EVENTO_ID2)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos"));
+    }
+    @WithMockUser(username="alebangon", authorities={"admin"})
+    @Test
+    void DeberiaBorrarAdmin() throws Exception{
+        mockMvc.perform(get("/eventos/{eventoId}/delete", TEST_EVENTO_ID2)).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos"));
     }
 }

@@ -43,6 +43,8 @@ public class EventoController {
     private ClienteService clienteService;
     @Autowired
     private TipoEntradaService tipoEntradaService;
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping
     public String listadoEventos(ModelMap modelMap) {
@@ -101,7 +103,7 @@ public class EventoController {
         eventoService.anadirEventoAFav(evento, usuario);
         eventoService.save(evento);
         modelMap.addAttribute("message", "Evento añadido a favoritos!");
-        return "redirect:/eventos/";
+        return "redirect:/eventos";
     }
 
     @GetMapping("/{eventosId}/hacerPublico")
@@ -112,7 +114,7 @@ public class EventoController {
             eventoService.hacerPublico(eventosId);
             return "redirect:/eventos/{eventosId}";
         } else {
-            return "redirect:/eventos/";
+            return "redirect:/eventos";
         }
     }
 
@@ -139,29 +141,29 @@ public class EventoController {
             evento.setEsPublico(false);
             eventoService.save(evento);
             modelMap.addAttribute("message", "Evento guardado satisfactoriamente!");
-            return "redirect:/eventos/";
+            return "redirect:/eventos";
         }
 
     }
 
-    @GetMapping(value = "/{eventoId}/edit")
-    public String initUpdateEventoForm(@PathVariable("eventoId") int eventoId, ModelMap modelMap) {
-        Evento evento = this.eventoService.findEventoById(eventoId);
-        modelMap.addAttribute(evento);
-        return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
-    }
+    // @GetMapping(value = "/{eventoId}/edit")
+    // public String initUpdateEventoForm(@PathVariable("eventoId") int eventoId, ModelMap modelMap) {
+    //     Evento evento = this.eventoService.findEventoById(eventoId);
+    //     modelMap.addAttribute(evento);
+    //     return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
+    // }
 
-    @PostMapping(value = "/{eventoId}/edit")
-    public String processUpdateEventoForm(@Valid Evento evento, BindingResult result,
-            @PathVariable("eventoId") int eventoId) {
-        if (result.hasErrors()) {
-            return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
-        } else {
-            this.eventoService.modifyEvento(evento, this.eventoService.findEventoById(eventoId));
-            return "redirect:/eventos/{eventoId}";
-        }
+    // @PostMapping(value = "/{eventoId}/edit")
+    // public String processUpdateEventoForm(@Valid Evento evento, BindingResult result,
+    //         @PathVariable("eventoId") int eventoId) {
+    //     if (result.hasErrors()) {
+    //         return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
+    //     } else {
+    //         this.eventoService.modifyEvento(evento, this.eventoService.findEventoById(eventoId));
+    //         return "redirect:/eventos/{eventoId}";
+    //     }
 
-    }
+    // }
 
     @GetMapping(value = "/{eventoId}/delete")
     public String deleteEvento(@PathVariable("eventoId") int eventoId, ModelMap model) {
@@ -169,7 +171,7 @@ public class EventoController {
                 .encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
         Evento evento = this.eventoService.findEventoById(eventoId);
         if ((org == evento.getOrganizacion()
-                || SecurityContextHolder.getContext().getAuthentication().getName() == "admin")
+                || adminService.encuentraAdminPorNombre(SecurityContextHolder.getContext().getAuthentication().getName())!=null)
                 && !evento.getEsPublico()) {
             this.eventoService.borraSponsor(eventoId);
             this.eventoService.delete(evento);
