@@ -36,7 +36,7 @@ public class CarritoServiceTest {
         Integer tipoEntradaPruebaId = eventoPrueba.getTipoEntradas().get(1).getId();
         Entrada entradaPrueba = new Entrada();
         entradaPrueba.setCliente(cliente);
-        entradaPrueba.setDni("00000000L");
+        entradaPrueba.setDni("49063639Q");
         entradaPrueba.setNombreAsistente("Persona Prueba");
         entradaService.crearEntrada(entradaPrueba, tipoEntradaPruebaId);
         carritoService.anadirCarrito(entradaPrueba, cliente);
@@ -53,7 +53,7 @@ public class CarritoServiceTest {
         Integer tipoEntradaPruebaId = eventoPrueba.getTipoEntradas().get(1).getId();
         Entrada entradaPrueba = new Entrada();
         entradaPrueba.setCliente(cliente);
-        entradaPrueba.setDni("00000000L");
+        entradaPrueba.setDni("49063639Q");
         entradaPrueba.setNombreAsistente("Persona Prueba");
         entradaService.crearEntrada(entradaPrueba, tipoEntradaPruebaId);
         carritoService.anadirCarrito(entradaPrueba, cliente);
