@@ -30,10 +30,6 @@ public class VentaEntradaServiceTest {
         int count = (int) ventaEntradaService.ventaEntradaCount();
         assertEquals(count, 0);
     }
-
-    // TODO !**************************** HAY QUE TERMINARLO CON EL NUMERO DE
-    // ENTRADAS,
-    // ESTE METODO NO ESTÁ COMPROBANDOLO TODO
     @Test
     public void deberiaFinalizarCompra() {
         // Creacion de dos lineas de factura
