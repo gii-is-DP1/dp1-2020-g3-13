@@ -23,9 +23,6 @@ import lombok.Setter;
 @Table(name = "peticion")
 public class Peticion extends BaseEntity {
 
-  // @OneToOne(cascade = CascadeType.ALL, mappedBy = "organizacion")
-  // private Organizacion organizacion;
-
   @Column(name = "email")
   @NotBlank(message = "El formato del email no es válido")
   @Email(message = "El formato del email no es válido")
@@ -46,7 +43,7 @@ public class Peticion extends BaseEntity {
   @Column(name = "fecha")
   protected LocalDate fecha;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "nombre_admin", referencedColumnName = "nombre_usuario")
   private Admin admin;
 }

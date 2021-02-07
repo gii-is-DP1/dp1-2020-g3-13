@@ -101,7 +101,7 @@ void noDeberiaValidarNumTarjetaConLetras(){
 		assertThat(constraintViolations.size()).isEqualTo(2);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("numTarjeta");
-		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta debe ser un numero de menos de 16 digitos");
+		assertThat(violation.getMessage()).isEqualTo("El numero de tarjeta debe ser un numero de mas 16 digitos");
 }
 
 @Test
@@ -154,7 +154,7 @@ void noDeberiaValidarCVVEnBlanco(){
 		assertThat(constraintViolations.size()).isEqualTo(2);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("cvv");
-		assertThat(violation.getMessage()).isEqualTo("El CVV no debe tener mas de 3 digitos");
+		assertThat(violation.getMessage()).isEqualTo("El CVV no debe estar vacio y debe ser exactamente de 3 dígitos");
 }
 @Test
 void noDeberiaValidarCVVDeMasDe3Digitos(){
@@ -171,7 +171,7 @@ void noDeberiaValidarCVVDeMasDe3Digitos(){
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("cvv");
-		assertThat(violation.getMessage()).isEqualTo("El CVV no debe tener mas de 3 digitos");
+		assertThat(violation.getMessage()).isEqualTo("El CVV no debe estar vacio y debe ser exactamente de 3 dígitos");
 }
 @Test
 void noDeberiaValidarCVVDeMenosDe3Digitos(){
@@ -188,7 +188,7 @@ void noDeberiaValidarCVVDeMenosDe3Digitos(){
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("cvv");
-		assertThat(violation.getMessage()).isEqualTo("El CVV no debe tener menos de 3 digitos");
+		assertThat(violation.getMessage()).isEqualTo("El CVV no debe estar vacio y debe ser exactamente de 3 dígitos");
 }
 @Test
 void noDeberiaValidarCVVConLetras(){
@@ -205,6 +205,6 @@ void noDeberiaValidarCVVConLetras(){
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<VentaEntrada> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("cvv");
-		assertThat(violation.getMessage()).isEqualTo("El CVV no debe tener mas de 3 digitos");
+		assertThat(violation.getMessage()).isEqualTo("El CVV no debe estar vacio y debe ser exactamente de 3 dígitos");
 }
 }

@@ -23,7 +23,7 @@ public class ConsultaServiceTest {
     @Test
     public void testCountWithInitialDataConsulta() {
         int count = consultaService.consultasCount();
-        assertEquals(count, 0);
+        assertEquals(count, 2);
     }
 
     @Test

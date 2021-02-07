@@ -53,9 +53,8 @@ public class ConsultaControllerTestSecurity {
     void deberiaDevolverProhibidoFormularioConsultaParaAdmin() throws Exception{
         mockMvc.perform(get("/consultas/{id_evento}/nuevo", TEST_ID)).andExpect(status().isForbidden());
     }
-        // OTRA
 
-    @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
+    @WithMockUser(username = "organizacion1", authorities = {"organizacion"})
     @Test
     void deberiaDevolverListadoConsultasYatributoConsultaOrganizacion() throws Exception{
         mockMvc.perform(get("/consultas/organizacion/misConsultas", TEST_ID)).andExpect(status().isOk()).andExpect(model().attributeExists("consultas"));

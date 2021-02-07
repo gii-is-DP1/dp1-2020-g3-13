@@ -18,7 +18,7 @@ public class ClienteServiceTest {
     @Test
     public void testCountWithInitialData(){
         int count= clienteService.clienteCount();
-        assertEquals(count, 0);
+        assertEquals(count, 2);
     }
 
     @Test
