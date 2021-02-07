@@ -51,4 +51,9 @@ public class AdminService {
         
         this.usuarioService.deleteUsuario(u);
     }
+
+    @Transactional
+    public Admin encuentraAdminPorNombre(String nombreUsuario){
+        return adminRepo.encuentraAdminPorNombreUsuario(nombreUsuario);
+    }
 }

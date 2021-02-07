@@ -116,7 +116,7 @@
                         <spring:param name="eventoId" value="${evento.id}" />
                         </spring:url>
                         <form action="favoritos" method="POST">
-                            <spring:url value="/eventos/{eventoId}/añadirEventosFavoritos" var="favoritosUrl">
+                            <spring:url value="/eventos/{eventoId}/anadirEventosFavoritos" var="favoritosUrl">
                             <spring:param name="eventoId" value="${evento.id}" />
                             </spring:url>
                             <a href="${fn:escapeXml(favoritosUrl)}">
