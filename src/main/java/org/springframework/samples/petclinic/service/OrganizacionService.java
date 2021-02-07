@@ -70,10 +70,6 @@ public class OrganizacionService {
         return organizacionRepo.findById(organizacionId);
     }
 
-    public Organizacion findOrganizacionByUsuario(String usuario) throws DataAccessException {
-        return organizacionRepo.listadoOrganizacionByUsuario(usuario);
-    }
-
     public List<Evento> getEventos(int id_organizacion) {
         return organizacionRepo.getEventos(id_organizacion);
 
