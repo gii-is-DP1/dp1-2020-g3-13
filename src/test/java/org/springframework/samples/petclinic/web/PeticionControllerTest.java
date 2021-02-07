@@ -26,6 +26,8 @@ import org.springframework.samples.petclinic.service.OrganizacionService;
 public class PeticionControllerTest {
 
     private static final String VIEWS_PETICION = "peticion/CreatePeticionForm";
+    private static final String VIEWS_LISTADO_PETICION = "/peticion/listado";
+    private static final String VIEWS_DETALLES_PETICION = "peticion/listadoDetails";
 
     @Autowired
     private MockMvc mockMvc;
@@ -58,4 +60,17 @@ public class PeticionControllerTest {
                 .andExpect(model().attributeExists("peticion"));
     }
 
+    @Test
+    @WithMockUser
+    public void testListadoPeticiones() throws Exception {
+        mockMvc.perform(get("/peticion")).andExpect(status().isOk()).andExpect(view().name(VIEWS_LISTADO_PETICION))
+                .andExpect(model().attributeExists("peticion"));
+    }
+
+    // @Test
+    // @WithMockUser
+    // public void testDetallesPeticion() throws Exception {
+    // mockMvc.perform(get("/peticion/{peticion_id}")).andExpect(status().isOk())
+    // .andExpect(view().name(VIEWS_DETALLES_PETICION)).andExpect(model().attributeExists("peticion"));
+    // }
 }
