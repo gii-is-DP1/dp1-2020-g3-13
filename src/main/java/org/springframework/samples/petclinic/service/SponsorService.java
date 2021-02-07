@@ -1,8 +1,5 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -16,34 +13,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class SponsorService {
 
-
     @Autowired
     private SponsorRepository sponsorRepository;
 
     @Transactional
-    public int sponsorCount(){
+    public int sponsorCount() {
         return (int) sponsorRepository.count();
     }
 
-    public Iterable<Sponsor> findAll(){
+    public Iterable<Sponsor> findAll() {
         return sponsorRepository.findAll();
     }
 
     @Transactional
-    public void anadirSponsorAEvento(Evento evento, Sponsor sponsor) throws DataAccessException{
-        if(evento.getSponsors()==null){
-            List<Sponsor> listaSponsor = new ArrayList<Sponsor>();
-            sponsor.setEvento(evento);
-            listaSponsor.add(sponsor);
-            evento.setSponsors(listaSponsor);
-        }else{
-            List<Sponsor> listaSponsorsActual = evento.getSponsors();
-            sponsor.setEvento(evento);
-            listaSponsorsActual.add(sponsor);
-        }
+    public void anadirSponsorAEvento(Evento evento, Sponsor sponsor) throws DataAccessException {
+        sponsor.setEvento(evento);
     }
 
-	public void guardarSponsor(@Valid Sponsor sponsor) {
+    public void guardarSponsor(@Valid Sponsor sponsor) {
         sponsorRepository.save(sponsor);
-	}
+    }
+
 }

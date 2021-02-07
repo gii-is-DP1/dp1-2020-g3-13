@@ -11,6 +11,8 @@ import org.springframework.samples.petclinic.service.OrganizacionService;
 //Objetos para los test, todos los objetos están creados y cumpliendo las restricciones de los validadores
 public class InicializadorObjetosTest {
 
+    OrganizacionService organizacionService;
+
     public static Evento eventoParaTest() {
         Evento evento = new Evento();
         evento.setCategoria("categoria");
@@ -23,7 +25,6 @@ public class InicializadorObjetosTest {
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
         evento.setTipoEntradas(new ArrayList<TipoEntrada>());
         evento.setConsultas(new ArrayList<Consulta>());
-        evento.setSponsors(new ArrayList<Sponsor>());
         return evento;
     }
 
@@ -48,19 +49,19 @@ public class InicializadorObjetosTest {
 
     }
 
-    public static Actividad actividadParaTest(){
+    public static Actividad actividadParaTest() {
         Actividad actividad = new Actividad();
         actividad.setDescripcionActividad("descripción de una actividad de ejemplo");
         actividad.setFechaInicio(LocalDateTime.now().plusDays(1));
         actividad.setFechaFin(actividad.getFechaInicio().plusDays(1));
         actividad.setId(Integer.MAX_VALUE);
         actividad.setTematicaActividad("tematica de una actividad");
-        //actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
+        // actividad.setExponentes( new ArrayList<Exponente>());
+        // actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
         return actividad;
     }
-        
 
-    public static Exponente exponenteParaTest(){
+    public static Exponente exponenteParaTest() {
         Exponente exponente = new Exponente();
         exponente.setAlias("alias");
         exponente.setNombreExponente("nombreExponente");
@@ -69,8 +70,8 @@ public class InicializadorObjetosTest {
         exponente.setActividades(new ArrayList<Actividad>());
         return exponente;
     }
-    
-    public static Usuario usuarioParaTest(){
+
+    public static Usuario usuarioParaTest() {
         Usuario usuario = new Usuario();
         usuario.setPassword("password");
         usuario.setNombreUsuario("nombreUsuario");
@@ -79,7 +80,8 @@ public class InicializadorObjetosTest {
         usuario.setAutoridades(new Autoridades());
         return usuario;
     }
-    public static Cliente clienteParaTest(){
+
+    public static Cliente clienteParaTest() {
         Cliente cliente = new Cliente();
         cliente.setApellidos("apellidos");
         cliente.setEmail("email@email.com");
@@ -92,7 +94,8 @@ public class InicializadorObjetosTest {
         return cliente;
 
     }
-    public static Entrada entradaParaTest(){
+
+    public static Entrada entradaParaTest() {
         Entrada entrada = new Entrada();
         entrada.setCliente(clienteParaTest());
         entrada.setDni("00000000L");
@@ -101,4 +104,4 @@ public class InicializadorObjetosTest {
         entrada.setTipoEntrada(tipoEntradaParaTest());
         return entrada;
     }
-    }
+}

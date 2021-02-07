@@ -100,4 +100,7 @@ public class ConsultaService {
             }
         }
     }
+    public void eliminaTodasConsulta(int clienteId){
+        consultaRepository.deleteAll(devuelveTodasLasConsultasDeClienteConId(clienteId));
+    }
 }
