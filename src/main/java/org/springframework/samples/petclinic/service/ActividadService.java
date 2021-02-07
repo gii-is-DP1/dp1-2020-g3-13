@@ -98,37 +98,24 @@ public class ActividadService {
 
         @Transactional
         public void borrarActividad(Actividad actividad){
-           List<Exponente> exponentesActividad = expoService.encuentraActividadExponente(actividad.getId());
-            for(int i = 0; i<exponentesActividad.size();i++){
-               exponentesActividad.get(i).getActividades().remove(actividad);
-            }
+        //    List<Exponente> exponentesActividad = expoService.encuentraActividadExponente(actividad.getId());
+        //     for(int i = 0; i<exponentesActividad.size();i++){
+        //        exponentesActividad.get(i).getActividades().remove(actividad);
+        //     }
             actividadRepo.deleteById(actividad.getId());
            
         }
 
-        public Actividad encuentraActividadId(int actividadId){
-            return actividadRepo.findById(actividadId).orElse(null);
-        }
     public List<Actividad> encuentraActividadesPorEvento(int eventoId) {
         return actividadRepo.encuentrActividadesEventoId(eventoId);
 
     }
         @Transactional
-        public void guardarActividad(Actividad actividad){
-                actividadRepo.save(actividad);
-        }
-        @Transactional
-        public void borrarAlquileres(Actividad actividad){
-            //AlquilerEspacio alq =actividadRepo.encuentraAlquilerLugar(alquiler.getId());
-            actividad.setAlquilerEspacio(null);
-        }
-        @Transactional
-        public Actividad encuentraActividadPorAlquilerId(int alquilerEspacioId){
-            return actividadRepo.encuentraLugarAlquiler(alquilerEspacioId);
-        }
-        @Transactional
         public void modificarActividad(Actividad actividad, Actividad actividadActual) throws DataAccessException{
             actividad.setId(actividadActual.getId());
+            actividad.setAlquilerEspacio(actividadActual.getAlquilerEspacio());
+            actividad.setExponentes(actividadActual.getExponentes());
+            actividad.setEvento(actividadActual.getEvento());
             guardarActividad(actividad);
         }
 
