@@ -24,9 +24,11 @@ public class Factura extends BaseEntity{
     @Column(name="precioTotal")
     @NotNull
     private Double precioTotal;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombreUsuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
+
     @Column(name = "fechaFactura")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaFactura;

@@ -15,58 +15,32 @@ public class PeticionService {
     @Autowired
     private PeticionRepository peticionRepo;
 
-    @Transactional
-    public int peticionCount(){
-    return (int) peticionRepo.count();
+    public int peticionCount() {
+        return (int) peticionRepo.count();
     }
-    @Transactional
-    public Iterable<Peticion> dimeTodas(){
+
+    public Iterable<Peticion> dimeTodas() {
         return peticionRepo.findAll();
     }
 
-
-            
-   // @Transactional
-    //public void saveOrganizacion(Peticion organizacion) throws DataAccessException{
-     //   peticionRepo.save(organizacion);
-    //}
-
-    @Transactional
-        public void savePeticion(Peticion organizacion) throws DataAccessException{
-             peticionRepo.save(organizacion);
-         }
-     
-
-    //@Transactional
-    //public Peticion findByPeticionByOrganizacionId(int organizacionId) throws DataAccessException{
-      //  return peticionRepo.findPeticionByOrganizacionId(organizacionId);
-    //}
-
-public void deleteOrganizacion(int organizacionId) {
-    peticionRepo.delete(peticionRepo.findById(organizacionId).get());
-}
-
-
-    @Transactional
-    public Optional<Peticion> findPeticionById(int peticionId){
+    public Optional<Peticion> findPeticionById(int peticionId) {
         return peticionRepo.findById(peticionId);
     }
-	public void deletePeticion(Peticion peticion) {
-         peticionRepo.delete(peticion);
+
+    @Transactional
+    public void savePeticion(Peticion organizacion) throws DataAccessException {
+        peticionRepo.save(organizacion);
     }
-    
-    public void createPeticion(Peticion peticion){
+
+    @Transactional
+    public void deletePeticion(Peticion peticion) {
+        peticionRepo.delete(peticion);
+    }
+
+    @Transactional
+    public void createPeticion(Peticion peticion) {
         peticion.setFecha(LocalDate.now());
         savePeticion(peticion);
     }
 
 }
-
-
-
-
-
-
-
-
-
