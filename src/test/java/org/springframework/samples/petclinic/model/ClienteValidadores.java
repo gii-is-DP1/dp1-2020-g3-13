@@ -25,11 +25,12 @@ public class ClienteValidadores {
         cliente.setNombre("José");
         cliente.setApellidos("Pérez García");
         cliente.setTelefono(" ");
+        cliente.setEmail("a@a");
         
         Validator validator = createValidator();
 		    Set<ConstraintViolation<Cliente>> constraintViolations = validator.validate(cliente);
 
-		    assertThat(constraintViolations.size()).isEqualTo(3);
+		    assertThat(constraintViolations.size()).isEqualTo(2);
 		    ConstraintViolation<Cliente> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("telefono");
 	  	    assertThat(violation.getMessage()).isEqualTo("El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres");
@@ -41,12 +42,12 @@ public class ClienteValidadores {
         cliente.setTelefono("9879");
         cliente.setNombre("José");
         cliente.setApellidos("Pérez García");
-        
+        cliente.setEmail("a@a");
         
         Validator validator = createValidator();
 		    Set<ConstraintViolation<Cliente>> constraintViolations = validator.validate(cliente);
 
-		    assertThat(constraintViolations.size()).isEqualTo(2);
+		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Cliente> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("telefono");
 	  	    assertThat(violation.getMessage()).isEqualTo("El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres");
@@ -58,12 +59,12 @@ public class ClienteValidadores {
         cliente.setTelefono("98749790989879");
         cliente.setNombre("José");
         cliente.setApellidos("Pérez García");
-        
+        cliente.setEmail("a@a");
         
         Validator validator = createValidator();
 		    Set<ConstraintViolation<Cliente>> constraintViolations = validator.validate(cliente);
 
-		    assertThat(constraintViolations.size()).isEqualTo(2);
+		    assertThat(constraintViolations.size()).isEqualTo(1);
 		    ConstraintViolation<Cliente> violation = constraintViolations.iterator().next();
 		    assertThat(violation.getPropertyPath().toString()).isEqualTo("telefono");
 	  	    assertThat(violation.getMessage()).isEqualTo("El telefono no puede estar vacio, y debe ser exactamente de 9 caracteres");

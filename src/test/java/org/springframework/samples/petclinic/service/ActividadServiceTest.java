@@ -28,7 +28,7 @@ public class ActividadServiceTest {
     @Test
     public void testCountWithInitialDataActividad() {
         int count = actividadService.actividadesCount();
-        assertEquals(count, 0);
+        assertEquals(count, 3);
     }
 
 
