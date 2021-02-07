@@ -159,7 +159,7 @@ public class ExponenteServiceTest {
             actividades.add(actividadExpo);
             exponente.setActividades(actividades);
             exponenteService.guardarExponente(exponente);           
-            List<Exponente> expoActividad = exponenteService.encuentraActividadExponente(actividadExpo.getId());
+            List<Exponente> expoActividad = exponenteService.encuentraExponentesPorActividad(actividadExpo.getId());
             assertTrue(expoActividad.contains(exponente));
         }
 

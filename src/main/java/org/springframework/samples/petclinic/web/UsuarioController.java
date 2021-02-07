@@ -72,6 +72,7 @@ public class UsuarioController {
             Cliente cliente = clienteService
                     .findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
             modelMap.addAttribute("cliente", cliente);
+            
         }
         if (!(organizacionService.encuentraOrganizacionByUsuario(username) == null)) {
             vista = "usuarios/myProfileOrganizaciones";
@@ -161,6 +162,7 @@ public class UsuarioController {
                     .encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 
             usuarioService.deleteUsuario(org2.getUsuario());
+
             organizacionService.deleteOrganizacion(org2);
 
         }

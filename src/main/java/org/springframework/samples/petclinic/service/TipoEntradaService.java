@@ -65,5 +65,9 @@ public class TipoEntradaService {
         }
         return res;
 	}
+    public void borrarTipoEntrada(TipoEntrada te){
+        tipoEntradaRepository.delete(te);
+    }
+    
 
 }

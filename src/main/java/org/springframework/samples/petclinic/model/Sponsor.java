@@ -35,6 +35,7 @@ public class Sponsor extends BaseEntity {
     private String urlLogo;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "evento_id", referencedColumnName = "id")
     private Evento evento;
 
 }
