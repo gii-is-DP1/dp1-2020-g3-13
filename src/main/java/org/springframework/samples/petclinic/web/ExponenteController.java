@@ -38,7 +38,7 @@ public class ExponenteController {
         modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
         modelMap.addAttribute("exponente", nuevoExponente);
         modelMap.addAttribute("actividad", actividad);
-        modelMap.addAttribute("listaExponentes", exponenteService.encuentraActividadExponente(actividadInt));
+        modelMap.addAttribute("listaExponentes", exponenteService.encuentraExponentesPorActividad(actividadInt));
 
         return VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM;
     }
@@ -48,7 +48,7 @@ public class ExponenteController {
         if(resultado.hasErrors()){
             modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
             modelMap.addAttribute("exponente", exponente);
-            modelMap.addAttribute("listaExponentes", exponenteService.encuentraActividadExponente(actividadInt));
+            modelMap.addAttribute("listaExponentes", exponenteService.encuentraExponentesPorActividad(actividadInt));
             return VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM;
         }else {
             exponenteService.anadirExponente(actividadService.findById(actividadInt), exponente);
@@ -63,7 +63,7 @@ public class ExponenteController {
     modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
     modelMap.addAttribute("actividad", actividad);
     modelMap.addAttribute("exponente", exponente);
-    modelMap.addAttribute("listaExponentes", exponenteService.encuentraActividadExponente(actividadInt));
+    modelMap.addAttribute("listaExponentes", exponenteService.encuentraExponentesPorActividad(actividadInt));
     exponenteService.eliminaExponente(exponente, actividad);
     return "redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo/";
 

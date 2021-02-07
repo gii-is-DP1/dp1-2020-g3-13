@@ -28,8 +28,8 @@ public class ExponenteService {
         exponenteRepo.save(exponente);
     }
 
-    public List<Exponente> encuentraActividadExponente(int actividadId){
-        return exponenteRepo.encuentraActividadExponente(actividadId);
+    public List<Exponente> encuentraExponentesPorActividad(int actividadId){
+        return exponenteRepo.encuentraExponentesPorActividad(actividadId);
     }
 
     
@@ -91,6 +91,8 @@ public class ExponenteService {
                
             }
         }
-
+        public void borraTodoExponentesActividad(int Actividad_id){
+            exponenteRepo.deleteAll(encuentraExponentesPorActividad(Actividad_id));
+        }
 
     }

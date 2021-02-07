@@ -33,5 +33,7 @@ public class SponsorService {
     public void guardarSponsor(@Valid Sponsor sponsor) {
         sponsorRepository.save(sponsor);
     }
-
+    public void borrarSponsor( Sponsor sponsor) {
+        sponsorRepository.delete(sponsor);
+    }
 }
