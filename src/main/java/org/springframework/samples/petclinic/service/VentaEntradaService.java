@@ -27,7 +27,6 @@ public class VentaEntradaService {
     @Autowired
     private AlquilerEspacioService alquilerEspacioService;
 
-    @Transactional
     public long ventaEntradaCount() {
         return ventaEntradaRepository.count();
     }
