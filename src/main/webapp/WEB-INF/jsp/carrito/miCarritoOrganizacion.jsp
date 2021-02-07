@@ -49,8 +49,7 @@
                                 <p> Total: </p>
                                 <c:out value="${carrito.total}" />
 
-                                <spring:url value="/carrito/{carritoId}/org/finalizarCompra" var="ventaUrl">
-                                                <spring:param name="carritoId" value="${carrito.id}" />
+                                <spring:url value="/carrito/org/finalizarCompra" var="ventaUrl">
                                             </spring:url>
                                             <a href="${fn:escapeXml(ventaUrl)}">
                                                 <c:out value="Comprar" /><br></a>

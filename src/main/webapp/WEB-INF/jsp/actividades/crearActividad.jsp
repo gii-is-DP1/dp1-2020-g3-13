@@ -9,7 +9,11 @@
                             <petclinic:layout pageName="actividades">
                         <jsp:body>
                                 <h2>
-                                    Añade actividades a tu Evento
+                                    <c:choose>
+                                        <c:when test="${actividad['new']}">Añade actividades a tu Evento </c:when> 
+                                        <c:otherwise>Modifica <c:out value="${actividad.tematicaActividad}"></c:out></c:otherwise>
+                                    </c:choose>
+                                    
                                 </h2>
                                 <form:form modelAttribute="actividad" class="form-horizontal" id="add-actividad-form">
                                     <div class="form-group has-feedback">

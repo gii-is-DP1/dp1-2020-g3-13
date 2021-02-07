@@ -41,7 +41,7 @@ public class EventoServiceTest {
         Evento evento = new Evento();
         Evento eventoCreado = eventoService.findAll().iterator().next();
         evento.setCategoria("categoria");
-        evento.setConsultas(new ArrayList<Consulta>());
+        //evento.setConsultas(new ArrayList<Consulta>());
         evento.setDescripcion("descripcion");
         evento.setFechaInicio(LocalDate.now().plusDays(10));
         evento.setFechaFin(LocalDate.now().plusDays(20));
@@ -49,8 +49,8 @@ public class EventoServiceTest {
         evento.setMedidasSanitarias("medidasSanitarias");
         evento.setNombreEvento("nombreEvento");
         evento.setOrganizacion(eventoCreado.getOrganizacion());
-        evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        evento.setTipoEntradas(new ArrayList<TipoEntrada>());
+        //evento.setTipoEntradas(new ArrayList<TipoEntrada>());
+        //evento.setTipoEntradas(new ArrayList<TipoEntrada>());
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
         eventoService.save(evento);
         assertEquals(eventoService.eventosCount(), cantidad+1);

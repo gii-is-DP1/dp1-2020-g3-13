@@ -41,7 +41,7 @@ public class Consulta extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaConsulta;
 
-    @ManyToOne
+    @ManyToOne(optional = false) // si se crea una consulta tiene que haber por cojones un evento
     @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
     //TODO revisar bien esta validacion

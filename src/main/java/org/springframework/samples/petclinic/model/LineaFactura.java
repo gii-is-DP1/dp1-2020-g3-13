@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "lineaFactura")
 public class LineaFactura extends BaseEntity{
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_entrada", referencedColumnName = "id")
     private Entrada entrada;
 

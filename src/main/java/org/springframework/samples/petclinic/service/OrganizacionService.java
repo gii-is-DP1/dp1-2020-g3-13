@@ -38,6 +38,9 @@ public class OrganizacionService {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private EntradaService entradaService;
+    @Autowired
+    private ConsultaService consultaService;
+
     @Transactional
     public int organizacionCount() {
         return (int) organizacionRepo.count();
@@ -63,31 +66,12 @@ public class OrganizacionService {
     
     @Transactional
     public void deleteOrganizacion(Organizacion o) throws DataAccessException {
-        if(carritoService.dimeCarritoOrganizacion(o.getUsuario().getNombreUsuario())!=null){
-             for (LineaFactura lf : carritoService.dimeLineaFacturasDeCarrito(carritoService.dimeCarritoOrganizacion(o.getUsuario().getNombreUsuario()).getId()) ) {
-    
-            lineaFacturaService.borrarLinea(lf);
-        }
-    }
-//lo hace pablo
-        for (Evento ev : eventoService.listadoEventosDeOrganizacion(o.getId()))
-         {
-             for(TipoEntrada te : eventoService.getTipoEntradaPorEvento(ev.getId ())){
-                 for(Entrada en : tipoEntradaService.EncontrarTodasLasEntradas(te)){
-                     entradaService.borrarEntrada(en);
-                 }
-                        tipoEntradaService.borrarTipoEntrada(te);
-             }
-             for (Sponsor sp : eventoService.getSponsors(ev.getId())) {
-                 sponsorService.borrarSponsor(sp);
-             }
-            for (Actividad ac : eventoService.getActividades(ev.getId())) {
-             exponenteService.borraTodoExponentesActividad(ac.getId());
-             actividadService.borrarActividad(ac);
-         }
-        
-            eventoService.delete(ev);
-        }
+        lineaFacturaService.eliminaLineaFacturaDeOrganizacion(o.getId());
+        carritoService.eliminaCarritoOrganizacion(o.getId());
+        tipoEntradaService.eliminaTipoEntradaDeOrganizacion(o.getId());
+        consultaService.eliminaConsultasDeOrganizacion(o.getId());
+        actividadService.eliminaActividadesOrganizacion(o.getId());
+        eventoService.eliminaEventosDeOrganizacion(o.getId());
         organizacionRepo.delete(o);
 
     }
