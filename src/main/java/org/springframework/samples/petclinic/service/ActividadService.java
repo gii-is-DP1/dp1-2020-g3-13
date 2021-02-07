@@ -47,7 +47,7 @@ public class ActividadService {
         //Devuelve si cierta actividad contiene al exponente pasado por parametros
         public Boolean contieneExponente(Exponente exponente, Actividad actividad){
             Boolean res = false;
-            List<Exponente> exponentesActividad = expoService.encuentraActividadExponente(actividad.getId());
+            List<Exponente> exponentesActividad = expoService.encuentraExponentesPorActividad(actividad.getId());
             for (int i = 0; i < exponentesActividad.size(); i++) {
                 if(exponentesActividad.get(i).getNombreExponente().equals(exponente.getNombreExponente()) && exponentesActividad.get(i).getApellidosExponente().equals(exponente.getApellidosExponente()) && exponentesActividad.get(i).getAlias().equals(exponente.getAlias())) {
                     res = true;
@@ -117,5 +117,14 @@ public class ActividadService {
                 }
             return actividades;
 		}
+        public List<Actividad> encuentraActividadesPorEvento(int eventoId){
+           return  actividadRepo.encuentrActividadesEventoId(eventoId);
 
-}
+            }        
+        public void borraActividadEvento(int eventoId){
+            actividadRepo.deleteAll(encuentraActividadesPorEvento(eventoId));
+        }
+        public void borrarActividad(Actividad act){
+            actividadRepo.delete(act);
+        }
+            }

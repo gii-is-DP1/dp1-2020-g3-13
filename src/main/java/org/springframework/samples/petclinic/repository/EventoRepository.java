@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Sponsor;
+import org.springframework.samples.petclinic.model.TipoEntrada;
 
 public interface EventoRepository extends CrudRepository<Evento, Integer> {
     @Query("SELECT evento FROM Evento evento WHERE evento.organizacion.id=:id_organizacion ORDER BY evento.fechaInicio ASC")
@@ -25,4 +26,7 @@ public interface EventoRepository extends CrudRepository<Evento, Integer> {
     @Modifying
     @Query("DELETE FROM Sponsor sponsor WHERE sponsor.evento.id=:id_evento")
     public void borraSponsor(int id_evento);
+
+    @Query("SELECT tipoEntrada FROM TipoEntrada tipoEntrada WHERE tipoEntrada.evento.id=:id_evento")
+    public List<TipoEntrada> getTipoEntrada(int id_evento);
 }

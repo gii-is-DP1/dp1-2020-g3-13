@@ -57,10 +57,12 @@ public class CarritoService {
 
     @Transactional
     public void actualizaCarritoAcero(Carrito carrito){
-        carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).clear();
+      for (LineaFactura  lf : carritoRepo.dimeLineaFacturaCarrito(carrito.getId())) {
+        lineaService.borrarLinea(lf);
+      } 
         carrito.setTotal(0.0);
         carritoRepo.save(carrito);
-
+    
         }
 
     @Transactional
@@ -68,7 +70,7 @@ public class CarritoService {
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
-        //linea.setTipoEntrada(entrada.getTipoEntrada());
+    //    linea.setTipoEntrada(entrada.getTipoEntrada());
         // entrada.setLineaFactura(linea);
         entrada.setCliente(cliente);
         linea.setEntrada(entrada);
@@ -79,6 +81,7 @@ public class CarritoService {
         if(carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario()) != null){
                 carrito = carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario());
                 linea.setCarrito(carrito);
+                
                 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa");
                 carrito.setCliente(cliente);
                 guardarCarrito(carrito);
@@ -90,12 +93,13 @@ public class CarritoService {
             lineasFacturas.add(linea);
            
             guardarCarrito(carrito);
-            carrito.setTotal(linea.getPrecio());
             
             System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
             System.out.println(carrito.getTotal());
 
         }
+         lineaService.save(linea);
+
         double total = 0.0;
         for (int i = 0; i < carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).size(); i++) {
             total += carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).get(i).getPrecio();
@@ -114,21 +118,26 @@ public class CarritoService {
         linea.setPrecio(alquiler.getPrecioTotal());
         linea.setAlquilerEspacio(alquiler);
         Carrito carrito = new Carrito();
+        Double total = 0.;
         if(carritoRepo.dimeCarritoDeUsuarioOrganizacion(organizacion.getUsuario().getNombreUsuario()) != null){
             carrito = carritoRepo.dimeCarritoDeUsuarioOrganizacion(organizacion.getUsuario().getNombreUsuario());
             linea.setCarrito(carrito);
+            System.out.println("megustaelfutbolmucho");
+            
             carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).add(linea);     
+            System.out.println("petas? no cigarro");
+            for (int i = 0; i < carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).size(); i++) {
+                total += carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).get(i).getPrecio();
+            }
+            total = Math.round(total * 100)/100d;
             }else{
+             
                 carrito.setOrganizacion(organizacion);
                 List<LineaFactura> lineasFacturas = new ArrayList<>();
                 linea.setCarrito(carrito);
                 lineasFacturas.add(linea);
             }
-            double total = 0.0;
-            for (int i = 0; i < carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).size(); i++) {
-                total += carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).get(i).getPrecio();
-            }
-            total = Math.round(total * 100)/100d;
+            lineaService.save(linea);
             carrito.setTotal(total);
             carritoRepo.save(carrito);
         }

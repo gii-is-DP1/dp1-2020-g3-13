@@ -49,6 +49,11 @@ public class ClienteService {
     }
 
     public void deleteCliente(Cliente cliente) throws DataAccessException{
+//beti
+        for (Entrada en : entradaService.buscaEntradaPorClienteId(cliente.getId())) {
+            en.setCliente(null);
+            entradaService.guardarEntrada(en);
+        }
         if(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario())!=null){
             for (LineaFactura lf :  carritoService.dimeLineaFacturasDeCarrito(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()).getId())) {
                 lineaFacturaService.borrarLinea(lf);
@@ -56,12 +61,10 @@ public class ClienteService {
            
           //  carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()).getLineasFacturas()
         carritoService.deleteCarrito(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()));
-        for (Entrada en : entradaService.buscaEntradaPorClienteId(cliente.getId())) {
-            en.setCliente(null);
-            entradaService.guardarEntrada(en);
-        }
         
-         } //carritoRepo
+   
+        
+         } //carritoRepos
         consultaService.eliminaTodasConsulta(cliente.getId());
       //  entradaRepoa
         clienteRepo.delete(cliente);
