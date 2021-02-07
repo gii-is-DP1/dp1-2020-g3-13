@@ -95,7 +95,7 @@ public class TipoEntradaValidadores {
 		// Validamos
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(1);
+		assertThat(constraintViolations.size()).isEqualTo(2);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
 		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 
@@ -277,7 +277,7 @@ public class TipoEntradaValidadores {
 		// Validamos
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(0);
+		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
 		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(

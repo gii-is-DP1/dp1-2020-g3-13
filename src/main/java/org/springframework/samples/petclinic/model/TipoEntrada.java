@@ -15,6 +15,7 @@ import javax.persistence.Column;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.Validadores.ActividadAforoYNumeroEntradasRestriccion;
+import org.springframework.samples.petclinic.model.Validadores.ActividadesParaTipoEntradaRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechaTipoEntradaRestriccion;
 
 import lombok.Getter;
@@ -26,7 +27,7 @@ import lombok.Setter;
 @Table(name = "tipoentradas")
 
 @ActividadAforoYNumeroEntradasRestriccion(actividades = "actividades", numEntradas = "numEntradas")
-//@ActividadesParaTipoEntradaRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin", actividades = "actividades")
+@ActividadesParaTipoEntradaRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin", actividades = "actividades")
 @FechaTipoEntradaRestriccion(
     evento_id = "evento_id",
     fechaInicio = "fechaInicio", fechaFin = "fechaFin", nombreEntrada = "nombre", message = "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento")
