@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.web;
+/*package org.springframework.samples.petclinic.web;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,3 +40,4 @@ public class CustomErrorController implements ErrorController {
 
 }
 
+*/

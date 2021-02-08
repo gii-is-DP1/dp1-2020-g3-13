@@ -2,18 +2,14 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.samples.petclinic.model.Validadores.ValidadorCIFRestriccion;
 
 import lombok.Getter;
 import lombok.Setter;

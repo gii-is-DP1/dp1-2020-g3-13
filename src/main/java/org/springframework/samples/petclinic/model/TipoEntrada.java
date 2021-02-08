@@ -13,7 +13,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.Validadores.ActividadAforoYNumeroEntradasRestriccion;

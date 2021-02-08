@@ -47,8 +47,8 @@ public class ConsultaServiceTest {
         usuario.setPassword("Password8");
         usuario.setEnabled(true);
         au.setAutoridad("cliente");
-        au.setUsuario(usuario);
-        usuario.setAutoridades(au);
+        //au.setUsuario(usuario);
+        //usuario.setAutoridades(au);
 
         Cliente cliente = new Cliente();
         cliente.setUsuario(usuario);
