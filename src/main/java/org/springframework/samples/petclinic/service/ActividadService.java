@@ -27,8 +27,7 @@ public class ActividadService {
 
     @Autowired
     private CarritoService carritoService;
-    @Autowired
-    private ExponenteService expoService;
+    
     @Autowired
     private EventoRepository eventoRepo;
 
