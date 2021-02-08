@@ -55,12 +55,17 @@
                                             </spring:url>
                                             <a href="${fn:escapeXml(detallesActividadesUrl)}">
                                             <c:out value="Ver más" /><br></a>
-                                            <spring:url value="{eventoId}/actividades/{actividadId}/editar" var="modificarActividadUrl">
-                                            <spring:param name="eventoId" value="${evento.id}" />
-                                            <spring:param name="actividadId" value="${actividad.id}" />
-                                            </spring:url>
-                                            <a href="${fn:escapeXml(modificarActividadUrl)}">
-                                            <c:out value="Modificar Actividad"/><br></a>
+                                            <c:choose>
+                                                <c:when test="${not evento.esPublico}">
+                                                    <spring:url value="{eventoId}/actividades/{actividadId}/editar" var="modificarActividadUrl">
+                                                    <spring:param name="eventoId" value="${evento.id}" />
+                                                    <spring:param name="actividadId" value="${actividad.id}" />
+                                                    </spring:url>
+                                                    <a href="${fn:escapeXml(modificarActividadUrl)}">
+                                                    <c:out value="Modificar Actividad"/><br></a>
+                                                </c:when>
+                                            </c:choose>
+                                            
                                         </div>
 
                                     </c:forEach>
