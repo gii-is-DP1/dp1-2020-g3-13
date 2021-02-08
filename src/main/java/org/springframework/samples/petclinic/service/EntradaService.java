@@ -8,7 +8,6 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.repository.EntradaRepository;
-import org.springframework.samples.petclinic.repository.TipoEntradaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -24,8 +24,6 @@ public class CarritoServiceTest {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
-    private EntradaService entradaService;
-    @Autowired
     private ClienteService clienteService;
     @Autowired
     private CarritoService carritoService;
