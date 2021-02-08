@@ -4,14 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Actividad;
-import org.springframework.samples.petclinic.model.Entrada;
 import org.springframework.samples.petclinic.model.Evento;
-import org.springframework.samples.petclinic.model.LineaFactura;
 import org.springframework.samples.petclinic.model.Organizacion;
-import org.springframework.samples.petclinic.model.Sponsor;
-import org.springframework.samples.petclinic.model.TipoEntrada;
-import org.springframework.samples.petclinic.repository.ActividadRepository;
 import org.springframework.samples.petclinic.repository.OrganizacionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +17,6 @@ public class OrganizacionService {
     private OrganizacionRepository organizacionRepo;
     @Autowired
     private EventoService eventoService;
-
-    @Autowired
-    private ExponenteService exponenteService;
     @Autowired
     private ActividadService actividadService;
     @Autowired
@@ -33,11 +24,7 @@ public class OrganizacionService {
     @Autowired
     private CarritoService carritoService;
     @Autowired
-    private SponsorService sponsorService;
-    @Autowired
     private TipoEntradaService tipoEntradaService;
-    @Autowired
-    private EntradaService entradaService;
     @Autowired
     private ConsultaService consultaService;
 
