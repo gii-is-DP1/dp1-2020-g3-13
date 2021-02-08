@@ -79,7 +79,9 @@ public class ActividadController {
         if(actividad.getAlquilerEspacio()==null){
             actividadService.borrarActividad(actividad);
         }else{
-            return "exception";
+            throw new DataAccessException("No puede eliminar una actividad con un alquiler de espacio asignado"){
+                
+            };
         }
       
         return "redirect:/eventos/{evento_id}";
