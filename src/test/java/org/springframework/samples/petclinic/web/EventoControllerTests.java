@@ -94,9 +94,7 @@ public class EventoControllerTests {
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
         evento.setDescripcion("descripcion");
         evento.setNombreEvento("nombreEvento");
-        evento.setMedidasSanitarias("medidasSanitarias");
         evento.setFechaFin(LocalDate.now());
-        evento.setCategoria("categoria");
         evento.setFechaInicio(LocalDate.now());
         evento.setEsPublico(false);
         //inicializamos usuario y su autoridad

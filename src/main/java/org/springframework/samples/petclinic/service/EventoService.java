@@ -24,6 +24,8 @@ public class EventoService {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private ActividadService actividadService;
 
     public int eventosCount() {
         return (int) eventoRepository.count();
@@ -52,7 +54,8 @@ public class EventoService {
         return eventoRepository.findById(eventoId).orElse(null);
     }
 
-    public void modifyEvento(Evento evento, Evento eventoActual) throws DataAccessException {
+    public void modificarEvento(Evento evento, Evento eventoActual) throws DataAccessException {
+        evento.setOrganizacion(eventoActual.getOrganizacion());
         evento.setId(eventoActual.getId());
         save(evento);
     }

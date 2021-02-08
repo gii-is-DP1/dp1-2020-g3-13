@@ -43,18 +43,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Categoría</th>
-                                <td>
-                                    <c:out value="${evento.categoria}" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Medidas Sanitarias</th>
-                                <td>
-                                    <c:out value="${evento.medidasSanitarias}" />
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>Actividades</th>
                                 <td>
                                     <div class="cuadro-entrada"></div>
@@ -158,7 +146,18 @@
                             <a href="${fn:escapeXml(volverAEvento)}" class="btn btn-default">Hacer publico</a>
                             </div>
                         </c:when>
-                        </c:choose>   
+                        </c:choose> 
+                        <c:choose>
+                            <c:when test="${not evento.esPublico}">
+                                <div class="editarEvento">    
+                                <spring:url value="/eventos/{eventoId}/editar" var="editarEvento">
+                                <spring:param name="eventoId" value="${evento.id}" />
+                                </spring:url>
+    
+                            <a href="${fn:escapeXml(editarEvento)}" class="btn btn-default">Editar Evento</a>
+                            </div>
+                        </c:when>
+                        </c:choose>    
 
 
  

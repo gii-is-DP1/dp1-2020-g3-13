@@ -111,9 +111,7 @@ public class EntradaControllerTest {
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
         evento.setDescripcion("descripcion");
         evento.setNombreEvento("nombreEvento");
-        evento.setMedidasSanitarias("medidasSanitarias");
         evento.setFechaFin(LocalDate.of(2021, 03, 03));
-        evento.setCategoria("categoria");
         evento.setFechaInicio(LocalDate.of(2021, 03, 03));
         diurna.setEvento(evento);
         entrada.setTipoEntrada(diurna);

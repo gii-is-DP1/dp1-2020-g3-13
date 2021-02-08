@@ -145,24 +145,26 @@ public class EventoController {
 
     }
 
-    // @GetMapping(value = "/{eventoId}/edit")
-    // public String initUpdateEventoForm(@PathVariable("eventoId") int eventoId, ModelMap modelMap) {
-    //     Evento evento = this.eventoService.findEventoById(eventoId);
-    //     modelMap.addAttribute(evento);
-    //     return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
-    // }
+    @GetMapping(value = "/{eventoId}/editar")
+    public String initUpdateEventoForm(@PathVariable("eventoId") int eventoId, ModelMap modelMap) {
+        Evento evento = this.eventoService.findEventoById(eventoId);
+        List<TipoEvento> tipoEventos = Arrays.asList(TipoEvento.values());
+        modelMap.addAttribute("tipoEvento", tipoEventos);
+        modelMap.addAttribute("evento",evento);
+        return "eventos/editarEvento";
+    }
 
-    // @PostMapping(value = "/{eventoId}/edit")
-    // public String processUpdateEventoForm(@Valid Evento evento, BindingResult result,
-    //         @PathVariable("eventoId") int eventoId) {
-    //     if (result.hasErrors()) {
-    //         return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
-    //     } else {
-    //         this.eventoService.modifyEvento(evento, this.eventoService.findEventoById(eventoId));
-    //         return "redirect:/eventos/{eventoId}";
-    //     }
+    @PostMapping(value = "/{eventoId}/editar")
+    public String processUpdateEventoForm(@Valid Evento evento, BindingResult result,
+            @PathVariable("eventoId") int eventoId) {
+        if (result.hasErrors()) {
+            return "eventos/editarEvento";
+        } else {
+            this.eventoService.modificarEvento(evento, this.eventoService.findEventoById(eventoId));
+            return "redirect:/eventos/{eventoId}";
+        }
 
-    // }
+    }
 
     @GetMapping(value = "/{eventoId}/delete")
     public String deleteEvento(@PathVariable("eventoId") int eventoId, ModelMap model) {
