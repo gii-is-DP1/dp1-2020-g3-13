@@ -58,7 +58,7 @@ public class PeticionService {
         Peticion peticion = findPeticionById(peticionId).get();
         Usuario usuario = usuarioService.creaUsuarioParaPeticion(peticion);
         usuarioService.saveUser(usuario);
-        autoridadadesService.saveAuthorities(usuario.getNombreUsuario(), "organizacion");
+        autoridadadesService.guardarAutoridades(usuario.getNombreUsuario(), "organizacion");
         Organizacion organizacion = organizacionService.creaOrganizacionParaPeticion(peticion, usuario);
         organizacionService.saveOrganizacion(organizacion);
         deletePeticion(peticion);
