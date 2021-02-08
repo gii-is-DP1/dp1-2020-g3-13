@@ -30,7 +30,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/eventos")
 public class EventoController {
 
-    private static final String VIEWS_EVENTO_CREATE_OR_UPDATE_FORM = "eventos/editarEvento";
 
     @Autowired
     private EventoService eventoService;
