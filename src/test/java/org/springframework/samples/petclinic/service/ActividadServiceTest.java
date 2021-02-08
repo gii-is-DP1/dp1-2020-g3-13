@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
+import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.InicializadorObjetosTest;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public class ActividadServiceTest {
     private ActividadRepository actividadRepo;
     @Autowired
     private EventoService eventoService;
+    @Autowired
+    private ExponenteService expoService;
 
     @Test
     public void testCountWithInitialDataActividad() {

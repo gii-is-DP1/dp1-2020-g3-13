@@ -29,6 +29,8 @@ public class CarritoServiceTest {
     private CarritoService carritoService;
     @Autowired
     private FacturaService facturaService;
+    @Autowired
+    private EntradaService entradaService;
 
     @Test
     public void deberiaAnadirAlCarrito(){
