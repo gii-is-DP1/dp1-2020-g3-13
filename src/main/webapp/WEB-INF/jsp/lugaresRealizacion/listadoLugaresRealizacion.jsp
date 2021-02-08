@@ -35,7 +35,7 @@
                 
             </tr>
         </c:forEach>
-        <spring:url value="/lugaresRealizacion/new" var="newUrl">
+        <spring:url value="/lugaresRealizacion/nuevo" var="newUrl">
     </spring:url>
     <a href="${fn:escapeXml(newUrl)}" class="btn btn-default">Añadir lugar</a>
         </tbody>

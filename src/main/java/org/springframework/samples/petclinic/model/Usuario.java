@@ -3,6 +3,9 @@ package org.springframework.samples.petclinic.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -27,6 +30,7 @@ public class Usuario {
     protected String password;
 	boolean enabled;
 
-    @OneToOne(mappedBy = "usuario", optional = false)
+    @ManyToOne()
+    @JoinColumn(name = "autoridades", referencedColumnName = "autoridad")
     private Autoridades autoridades;
 }

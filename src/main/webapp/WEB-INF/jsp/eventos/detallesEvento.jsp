@@ -137,7 +137,7 @@
                         </c:choose>
 
                         <c:choose>
-                            <c:when test="${not empty actividades and not evento.esPublico and not empty listaTipoEntrada}">
+                            <c:when test="${not empty actividades and not evento.esPublico and not empty listaTipoEntrada and estaPagado}">
                                 <div class="publicar">    
                                 <spring:url value="/eventos/{eventoId}/hacerPublico" var="volverAEvento">
                                 <spring:param name="eventoId" value="${evento.id}" />
