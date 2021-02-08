@@ -37,6 +37,10 @@ public class AutoridadesService {
 	}
 
 
+	public Autoridades encuentraAutoridad(String autoridad){
+		return autoridadesRepository.findById(autoridad).orElse(null);
+	}
+
 
 	public void deleteAutoridades(Autoridades autoridades){
 		autoridadesRepository.delete(autoridades);

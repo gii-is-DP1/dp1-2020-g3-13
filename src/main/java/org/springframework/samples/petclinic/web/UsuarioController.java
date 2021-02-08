@@ -155,11 +155,7 @@ public class UsuarioController {
         if (!(organizacionService.encuentraOrganizacionByUsuario(username) == null)) {
             Organizacion org2 = this.organizacionService
                     .encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-
-            
-
             organizacionService.deleteOrganizacion(org2);
-
             usuarioService.deleteUsuario(org2.getUsuario());
 
         }
