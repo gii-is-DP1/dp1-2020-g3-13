@@ -16,6 +16,8 @@ import org.springframework.samples.petclinic.model.Peticion;
 public class PeticionServiceTest {
     @Autowired
     private PeticionService peticionService;
+    @Autowired
+    private OrganizacionService organizacionService;
     @Test
     public void testCountWithInitialData(){
         int count= peticionService.peticionCount();
@@ -30,7 +32,7 @@ public class PeticionServiceTest {
     }
 
     @Test
-    public void createPeticionTest(){
+    public void deberiaCrearPeticiónTest(){
         int antes = peticionService.peticionCount();
         Peticion peti = new Peticion();
         peti.setNombre_organizacion("pacopepe");
@@ -44,10 +46,23 @@ public class PeticionServiceTest {
         
     }
     @Test
-    public void deletePeticionTest(){
+    public void deberíaEliminarPeticionTest(){
         int prev = peticionService.peticionCount();
         peticionService.deletePeticion(peticionService.findPeticionById(1).get());
         assertEquals(prev-1, peticionService.peticionCount());
     
+    }
+    @Test
+    void deberíaCrearOrganizacionAPartirDePeticionTest(){ 
+        int organizacionAntes = organizacionService.organizacionCount();
+        Peticion peti = new Peticion();
+        peti.setNombre_organizacion("pacopepe");
+        peti.setFecha(LocalDate.now());
+        peti.setCif("J76767676");
+        peti.setEmail("email@email.email");
+        peti.setInfo("info");
+        peticionService.createPeticion(peti);
+        int organizacionDespues = organizacionService.organizacionCount();
+        assertEquals(organizacionAntes+1, organizacionDespues);
     }
 }
