@@ -3,15 +3,18 @@ package org.springframework.samples.petclinic.web;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.AdminService;
+import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -45,6 +48,8 @@ public class EventoController {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private CarritoService carritoService;
 
     @GetMapping
     public String listadoEventos(ModelMap modelMap) {
@@ -89,10 +94,16 @@ public class EventoController {
                 }
             }
         }
+        Predicate<Actividad> pred = x->x.getAlquilerEspacio()!=null ;
+        boolean res = false;
+        for(Actividad act : eventoService.getActividades(evento.getId())){
+            res = pred.test(act);
+        }
         mav.addObject("listaTipoEntrada",  tipo);
         mav.addObject("sponsors", this.eventoService.getSponsors(eventosId));
         mav.addObject(this.eventoService.findEventoById(eventosId));
         mav.addObject("actividades", this.eventoService.getActividades(eventosId));
+        mav.addObject("estaPagado", res);
         return mav;
     }
 
@@ -110,11 +121,21 @@ public class EventoController {
     public String hacerEventoPublico(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
         Evento evento = eventoService.findEventoById(eventosId);
 
-        if (eventoRepo.getActividades(evento.getId()).size() != 0) {
-            eventoService.hacerPublico(eventosId);
-            return "redirect:/eventos/{eventosId}";
+        if ((eventoService.getActividades(evento.getId()).size() != 0 && carritoService.dimeCarritoOrganizacion(evento.getOrganizacion().getNombreOrganizacion())!=null)) {
+            Predicate<Actividad> pred = x->x.getAlquilerEspacio()!=null && carritoService.contadorElementosCarrito(carritoService.dimeCarritoOrganizacion(evento.getOrganizacion().getNombreOrganizacion()))==0;
+            boolean res = false;
+            for(Actividad act : eventoService.getActividades(evento.getId())){
+                res = pred.test(act);
+            }
+            if (res==true){
+                eventoService.hacerPublico(eventosId);
+                return "redirect:/eventos/{eventosId}";
+            }else{
+                return "redirect:/carrito/organizacion";
+            }
+
         } else {
-            return "redirect:/eventos";
+            return "redirect:/eventos/{eventosId}";
         }
     }
 
