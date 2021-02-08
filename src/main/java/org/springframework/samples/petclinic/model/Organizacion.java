@@ -32,8 +32,8 @@ public class Organizacion extends BaseEntity {
     private String email;
 
     @Column(name = "cif")
-
     private String cif;
+
     @Column(name = "info")
     @NotEmpty
     private String info;

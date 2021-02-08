@@ -31,7 +31,6 @@ public class Usuario {
     protected String password;
 	boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario", optional = false)
+    @OneToOne(mappedBy = "usuario", optional = false)
     private Autoridades autoridades;
-
 }

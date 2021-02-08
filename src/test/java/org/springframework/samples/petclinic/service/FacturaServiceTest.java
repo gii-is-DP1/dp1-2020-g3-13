@@ -25,14 +25,13 @@ public class FacturaServiceTest {
         int count = facturaService.facturaCount();
         assertEquals(count, 5);
     }
-/*
-    @Test
-    public void deberiaMostrarFactura(){
-        Usuario usuario = usuarioService.findUsuario("organizacion1");
-        List<Factura> facts = usuario.getFacturas();
-        Integer tam = facts.size();
-        assertEquals(1, tam);
 
-    }
-*/
+    // @Test
+    // public void deberiaMostrarFactura(){
+    //     Usuario usuario = usuarioService.findUsuario("organizacion1");
+    //     List<Factura> facts = usuario.getFacturas();
+    //     Integer tam = facts.size();
+    //     assertEquals(1, tam);
+
+    // }
 }
