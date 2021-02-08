@@ -104,6 +104,15 @@ public class ActividadService {
             actividadRepo.deleteById(actividad.getId());
            
         }
+        @Transactional
+        public void quitarAlquilerEspacio(Actividad actividad){
+        //    List<Exponente> exponentesActividad = expoService.encuentraActividadExponente(actividad.getId());
+        //     for(int i = 0; i<exponentesActividad.size();i++){
+        //        exponentesActividad.get(i).getActividades().remove(actividad);
+        //     }
+            actividad.setAlquilerEspacio(null);
+           
+        }
 
     public List<Actividad> encuentraActividadesPorEvento(int eventoId) {
         return actividadRepo.encuentrActividadesEventoId(eventoId);
