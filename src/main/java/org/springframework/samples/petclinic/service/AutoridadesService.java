@@ -23,26 +23,19 @@ public class AutoridadesService {
 	}
 
 	@Transactional
-	public void saveAuthorities(Autoridades autoridades) throws DataAccessException {
+	public void guardarAutoridades(Autoridades autoridades) throws DataAccessException {
 		autoridadesRepository.save(autoridades);
 	}
 	
 	@Transactional
-	public void saveAuthorities(String nombreUsuario, String role) throws DataAccessException {
-		Autoridades autoridades = new Autoridades();
+	public void guardarAutoridades(String nombreUsuario, String autoridad) throws DataAccessException {
 		Usuario usuario = usuarioService.findUsuario(nombreUsuario);
 		if(usuario!=null) {
-			autoridades.setUsuario(usuario);
-			autoridades.setAutoridad(role);
-			//user.get().getAuthorities().add(authority);
-			autoridadesRepository.save(autoridades);
+			usuario.setAutoridades(autoridadesRepository.findById(autoridad).orElse(null));
 		}else
 			throw new DataAccessException("User '"+nombreUsuario+" ' not found!") {};
 	}
 
-	public Collection<Autoridades> listadoAutoridades(String usuario){
-		return autoridadesRepository.listadoAutoridadesByUsuario(usuario);
-	}
 
 
 	public void deleteAutoridades(Autoridades autoridades){

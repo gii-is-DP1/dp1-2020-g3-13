@@ -1,44 +1,38 @@
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('alebangon', 'alebangon', TRUE);
+INSERT INTO autoridades(autoridad) VALUES ('admin');
+INSERT INTO autoridades(autoridad) VALUES ('organizacion');
+INSERT INTO autoridades(autoridad) VALUES ('cliente');
+
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('alebangon', 'alebangon', TRUE, 'admin');
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (1, 'alejandro', 'Baños Gonzalez', 'abagon1999@gmail.com', 'alebangon');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (1,'alebangon','admin');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('pabgutceb', 'pabgutceb', TRUE);
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('pabgutceb', 'pabgutceb', TRUE, 'admin');
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (2, 'Pablo', 'Gutiérrez Ceballos', 'pabloguti1006@gmail.com', 'pabgutceb');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (2,'pabgutceb','admin');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('andmecsan', 'andmecsan', TRUE);
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('andmecsan', 'andmecsan', TRUE, 'admin');
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (3, 'Andrea', 'Mec San', 'andmecsan@gmail.com', 'andmecsan');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (3,'andmecsan','admin');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('romflorod', 'romflorod', TRUE);
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('romflorod', 'romflorod', TRUE, 'admin');
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (4, 'roman', 'flores rodriguez', 'romflorod@gmail.com', 'romflorod');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (4,'romflorod','admin');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('ezepersos', 'ezepersos', TRUE);
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('ezepersos', 'ezepersos', TRUE, 'admin');
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (5, 'ezequiel', 'per sos', 'ezepersos@gmail.com', 'ezepersos');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (5,'ezepersos','admin');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('julibamon', 'julibamon', TRUE);
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('julibamon', 'julibamon', TRUE, 'admin');
 INSERT INTO admins(id, nombre, apellidos, email, nombre_usuario) VALUES (6, 'julia', 'iba mon', 'julibamon@gmail.com', 'julibamon');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (6,'julibamon','admin');
 
-
-
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('cliente1', 'cliente1', TRUE);
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('cliente1', 'cliente1', TRUE, 'cliente');
 INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (2,'andrea', 'Ceballos', 'AndreaCeballos@gmail.com','cliente1', '666777888');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (7,'cliente1','cliente');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('organizacion1', 'organizacion1', TRUE);
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('organizacion1', 'organizacion1', TRUE, 'organizacion');
 INSERT INTO organizaciones(id,cif, email, info, nombre_organizacion, nombre_usuario) VALUES (1,'A1373B', 'organizacion1@gmail.com','empresa de cenas', 'organizacion1', 'organizacion1');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (10,'organizacion1','organizacion');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('Test_delete', 'test', TRUE);
+
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('Test_delete', 'test', TRUE, 'cliente');
 INSERT INTO clientes(id, nombre, apellidos, email, nombre_usuario, telefono) VALUES (1,'andrea23', 'Ceballos', 'pepeceba@gmail.com','Test_delete', '666777888');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (8,'Test_delete','cliente');
 
-INSERT INTO usuarios(nombre_usuario, password, enabled) VALUES ('Test_delete2', 'test', TRUE);
+
+INSERT INTO usuarios(nombre_usuario, password, enabled, autoridades) VALUES ('Test_delete2', 'test', TRUE, 'organizacion');
 INSERT INTO organizaciones(id,cif, email, info, nombre_organizacion, nombre_usuario) VALUES (2,'A1373B', 'cenitaspaco@gmail.com','empresa de cenas', 'Paco el cenas', 'Test_delete2');
-INSERT INTO autoridades(id,usuario,autoridad) VALUES (9,'Test_delete2','organizacion');
 
 
 

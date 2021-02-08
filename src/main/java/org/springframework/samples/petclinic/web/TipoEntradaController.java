@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.validation.Valid;
 
@@ -37,9 +39,15 @@ public class TipoEntradaController {
     public String crearTipoEntrada(ModelMap modelMap, @PathVariable("evento_id") int eventoId){
         modelMap.addAttribute("tipoEntrada", new TipoEntrada());
         List<NombreTiposEntrada> nombre =  Arrays.asList(NombreTiposEntrada.values());
-        List<Actividad> actividades =eventoRepo.getActividades(eventoId);
         modelMap.addAttribute("NombreTipoEntrada", nombre);
-        modelMap.addAttribute("actividades", actividades);
+        Predicate<Actividad> pred = x->x.getAlquilerEspacio()!=null ;
+        List<Actividad> acts = new ArrayList<Actividad>();
+        for(Actividad act : eventoService.getActividades(eventoId)){
+            if(pred.test(act)){
+                acts.add(act);
+            }
+        }
+        modelMap.addAttribute("actividades", acts);
         return VIEWS_TIPOS_ENTRADAS_CREATE_OR_UPDATE_FORM;
     }
 

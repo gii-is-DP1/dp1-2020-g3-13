@@ -33,8 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**", "/webjars/**", "/h2-console/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/", "/oups").permitAll().antMatchers("/lugaresRealizacion/**")
-				.hasAnyAuthority("admin", "organizacion")
+				.antMatchers(HttpMethod.GET, "/", "/oups").permitAll()
+				.antMatchers("/lugaresRealizacion/**").hasAnyAuthority("admin")
 				.antMatchers("/admins/**").hasAnyAuthority("admin")
 				.antMatchers("/peticion/new").anonymous()
 				.antMatchers("/peticion/**").hasAnyAuthority("admin")
@@ -83,7 +83,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery(
 						"select nombre_usuario,password,enabled " + "from usuarios " + "where nombre_usuario = ?")
-				.authoritiesByUsernameQuery("select usuario, autoridad " + "from autoridades " + "where usuario = ?")
+				.authoritiesByUsernameQuery("select nombre_usuario,autoridades " + "from usuarios " + "where nombre_usuario = ?")
 				.passwordEncoder(passwordEncoder());
 	}
 
