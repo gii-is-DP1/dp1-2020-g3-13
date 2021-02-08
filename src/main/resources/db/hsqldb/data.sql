@@ -42,10 +42,10 @@ INSERT INTO autoridades(id,usuario,autoridad) VALUES (9,'Test_delete2','organiza
 
 
 
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (1,'6969696969','VinosEmpresa@gmailTest.com','Empresa de vinos','Vinos y Empresa','2020-12-03');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (2,'96969696','CantadoresDeAndalucia@gmailTest.com','Empresa de cantaores de Andalucía','Canta Andalucia','2020-12-12');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (3, '666666666','MilesSongs@example.com','Conciertos','Miles Songs','2020-11-23');
-INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'9999999','ConcertForValor@beef.com','conciertos de todo el mundo','For Valor','2020-11-05');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (1,'J76767676','VinosEmpresa@gmailTest.com','Empresa de vinos','Vinos y Empresa','2021-12-03');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (2,'S8787877','CantadoresDeAndalucia@gmailTest.com','Empresa de cantaores de Andalucía','Canta Andalucia','2021-12-12');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (3, 'P98989898','MilesSongs@example.com','Conciertos','Miles Songs','2021-11-23');
+INSERT INTO peticion(id,cif,email,info,nombre_organizacion,fecha) VALUES (4,'X98989898','ConcertForValor@beef.com','conciertos de todo el mundo','For Valor','2021-11-05');
 
 
 

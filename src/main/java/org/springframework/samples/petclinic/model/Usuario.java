@@ -1,18 +1,14 @@
 package org.springframework.samples.petclinic.model;
 
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.Table;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 @Getter
 @Setter 
@@ -31,9 +27,6 @@ public class Usuario {
     protected String password;
 	boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario", optional = false)
+    @OneToOne(mappedBy = "usuario", optional = false)
     private Autoridades autoridades;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Factura> facturas;
 }

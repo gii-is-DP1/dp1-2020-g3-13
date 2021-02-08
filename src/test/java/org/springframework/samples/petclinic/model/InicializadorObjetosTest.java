@@ -3,9 +3,6 @@ package org.springframework.samples.petclinic.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 
 //Objetos para los test, todos los objetos están creados y cumpliendo las restricciones de los validadores
@@ -75,9 +72,9 @@ public class InicializadorObjetosTest {
         Usuario usuario = new Usuario();
         usuario.setPassword("password");
         usuario.setNombreUsuario("nombreUsuario");
-        usuario.setFacturas(new ArrayList<>());
+        // usuario.setFacturas(new ArrayList<>());
         usuario.setEnabled(true);
-        usuario.setAutoridades(new Autoridades());
+        //usuario.setAutoridades(new Autoridades());
         return usuario;
     }
 

@@ -1,12 +1,10 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -23,7 +21,7 @@ import lombok.Setter;
 public class Consulta extends BaseEntity {
 
   
-    @OneToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
 
@@ -41,7 +39,7 @@ public class Consulta extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaConsulta;
 
-    @ManyToOne(optional = false) // si se crea una consulta tiene que haber por cojones un evento
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento evento;
     //TODO revisar bien esta validacion
