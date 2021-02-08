@@ -50,7 +50,7 @@ public class ClienteController {
             usuario.setEnabled(true);            
             cliente.setUsuario(usuario);
             this.clienteService.saveCliente(cliente);
-            autoridadesService.saveAuthorities(usuario.getNombreUsuario(), "cliente");
+            autoridadesService.guardarAutoridades(usuario.getNombreUsuario(), "cliente");
 			
 			return "redirect:/login";
 		}

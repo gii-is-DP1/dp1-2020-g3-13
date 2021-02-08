@@ -8,9 +8,6 @@ import org.springframework.samples.petclinic.model.Autoridades;
 
 public interface AutoridadesRepository extends CrudRepository<Autoridades, String> {
 
-    @Query("SELECT autoridades FROM Autoridades autoridades WHERE autoridades.usuario.nombreUsuario =:usuario")
-    public Collection<Autoridades> listadoAutoridadesByUsuario(String usuario);
-
     
 
 
