@@ -156,8 +156,6 @@ public class CarritoService {
     public void generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carritoRepo.dimeLineaFacturaCarrito(carrito.getId());;
-       List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
-    //    factura.setLineasFacturas(listaLineasDeFactura);
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();

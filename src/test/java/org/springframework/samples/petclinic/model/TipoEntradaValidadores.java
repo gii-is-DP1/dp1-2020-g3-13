@@ -1,17 +1,12 @@
 package org.springframework.samples.petclinic.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.isA;
-
-import org.assertj.core.condition.AnyOf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -221,11 +216,11 @@ public class TipoEntradaValidadores {
 		tipoEntrada.setNumEntradas(10);
 		tipoEntrada.setPrecio(1.0);
 		// Validamos
+		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
-		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(
 				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
 

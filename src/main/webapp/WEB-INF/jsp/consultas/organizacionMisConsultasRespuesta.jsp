@@ -5,12 +5,13 @@
                 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
                         <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-                            <%@page pageEncoding="UTF-8"%>
-
+                            <%@page contentType="text/html"%>
+                                <%@page pageEncoding="UTF-8"%>
+                                                
                             <head>
                                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                             </head>
-                            <petclinic:layout pageName="consulta/new">
+                            <petclinic:layout pageName="consulta/respuesta">
                                 <h2>
                                     Formulario de respuesta a la consulta
                                 </h2>

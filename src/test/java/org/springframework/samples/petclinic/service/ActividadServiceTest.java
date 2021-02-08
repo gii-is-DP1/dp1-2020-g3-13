@@ -3,8 +3,6 @@ package org.springframework.samples.petclinic.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,7 +14,6 @@ import org.springframework.samples.petclinic.model.InicializadorObjetosTest;
 import org.springframework.samples.petclinic.repository.ActividadRepository;
 import org.springframework.stereotype.Service;
 
-import net.bytebuddy.asm.Advice.Local;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class ActividadServiceTest {
@@ -26,9 +23,9 @@ public class ActividadServiceTest {
     @Autowired
     private ActividadRepository actividadRepo;
     @Autowired
-    private ExponenteService expoService;
-    @Autowired
     private EventoService eventoService;
+    @Autowired
+    private ExponenteService expoService;
 
     @Test
     public void testCountWithInitialDataActividad() {
@@ -38,39 +35,41 @@ public class ActividadServiceTest {
 
 
     @Test
-    public void deberiaAñadirActividad() {
+    public void deberiaAñadirActividadAEvento() {
+        Evento eventoPrueba = eventoService.findAll().iterator().next();
         Actividad act = InicializadorObjetosTest.actividadParaTest();
-        int count = actividadService.actividadesCount();
+        actividadService.anadirActividadAEvento(eventoPrueba, act);
+      
         actividadService.guardarActividad(act);
-        assertEquals(count + 1, actividadService.actividadesCount());
+        eventoService.save(eventoPrueba);
+        assertEquals(act.getTematicaActividad(),actividadService.encuentraActividadesPorEvento(eventoPrueba.getId()).get(2).getTematicaActividad());
 
     }
+    @Test
+    public void deberiaModificarActividad(){
+        Evento eventoPrueba = eventoService.findAll().iterator().next();
+        Actividad actPrevia= actividadService.encuentraActividadesPorEvento(eventoPrueba.getId()).get(1);
+        Actividad actPost= actPrevia;
+        actPost.setDescripcionActividad("que me gusta hacer test me guta me guta");
+        actividadService.modificarActividad(actPrevia , actPost);
+        assertEquals(actividadService.encuentraActividadesPorEvento(eventoPrueba.getId()).get(1).getDescripcionActividad(), "que me gusta hacer test me guta me guta");
+    }
 
-    // @Test 
-    // public void deberiaTenerExponente(){
-    //     Actividad act = InicializadorObjetosTest.actividadParaTest();
-    //     Exponente exp = InicializadorObjetosTest.exponenteParaTest();
-    //     List<Actividad> actividad = exp.getActividades();
-    //     actividad.add(act);
-    //     exp.setActividades(actividad);
-    //     expoService.guardarExponente(exp);
-    //     // act.getExponentes().add(exp);
-    //     assertEquals(actividadService.contieneExponente(exp, act), true);
-    // }
+    
 
     @Test
-    public void deberiaAnadirActividadAEvento(){
-        Evento evento = InicializadorObjetosTest.eventoParaTest();
-        Actividad actividad = new Actividad();
-        actividad.setTematicaActividad("Cine");
-        actividad.setDescripcionActividad("Peliculas de terror");
-        actividad.setFechaInicio(LocalDateTime.now().plusDays(2));
-        actividad.setFechaFin(LocalDateTime.now().plusDays(3));
+    public void deberiaEncontrarExponente(){
+        Evento eventoPrueba = eventoService.findAll().iterator().next();
+        Actividad actPrevia= actividadService.encuentraActividadesPorEvento(eventoPrueba.getId()).get(1);
+        Exponente exp= new Exponente();
+        exp.setAlias("paquito");
+        exp.setApellidosExponente("tesito");
+        exp.setNombreExponente("me guta");
+        exp.setId(42112);
         
-        actividadRepo.save(actividad);
-        actividadService.anadirActividadAEvento(evento, actividad);
-        
-        assertEquals(eventoService.getActividades(evento.getId()).iterator().next(), actividad);
-        
+        expoService.anadirExponente(actPrevia, exp);
+        assertEquals(true, actividadService.contieneExponente(actPrevia.getExponentes().get(0), actPrevia)); actividadService.contieneExponente(actPrevia.getExponentes().get(0), actPrevia);
     }
+
+   
 }
