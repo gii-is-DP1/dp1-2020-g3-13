@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Evento;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Peticion;
 import org.springframework.samples.petclinic.model.Usuario;
@@ -29,6 +30,8 @@ public class OrganizacionService {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private ConsultaService consultaService;
+    @Autowired
+    private FacturaService facturaService;
 
     public int organizacionCount() {
         return (int) organizacionRepo.count();
@@ -60,6 +63,8 @@ public class OrganizacionService {
         consultaService.eliminaConsultasDeOrganizacion(o.getId());
         actividadService.eliminaActividadesOrganizacion(o.getId());
         eventoService.eliminaEventosDeOrganizacion(o.getId());
+        String usuario = o.getUsuario().getNombreUsuario();
+        facturaService.eliminaFacturaDeUsuario(o.getUsuario().getNombreUsuario());
         organizacionRepo.delete(o);
 
     }

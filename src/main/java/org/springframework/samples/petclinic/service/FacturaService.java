@@ -35,6 +35,9 @@ public class FacturaService {
    public List<LineaFactura> lineasFacturaDeFactura(int facturaId){
        return facturaRepo.lineasFacturaDeFactura(facturaId);
    }
+public void eliminaFacturaDeUsuario(String nombreUsuario) {
+    facturaRepo.eliminaFacturaDeUsuario(nombreUsuario);
+}
     
 }
 

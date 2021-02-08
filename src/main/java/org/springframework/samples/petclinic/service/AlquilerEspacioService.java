@@ -5,6 +5,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
@@ -88,4 +89,6 @@ public class AlquilerEspacioService {
             }
         }
     }
+}
+
 }

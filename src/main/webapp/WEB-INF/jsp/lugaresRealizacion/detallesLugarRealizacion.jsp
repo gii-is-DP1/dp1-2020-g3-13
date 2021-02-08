@@ -43,6 +43,10 @@
         
     </spring:url>
     <a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Editar Lugar</a>
+    <spring:url value="${lugarRealizacion.id}/borrar" var="borrarUrl">
+        
+    </spring:url>
+    <a href="${fn:escapeXml(borrarUrl)}" class="btn btn-default">Eliminar Lugar</a>
 
 
 </petclinic:layout>

@@ -75,10 +75,11 @@ INSERT INTO eventos(id,tipo_evento, descripcion, nombre_evento, fecha_inicio, fe
 
 INSERT INTO alquiler_espacio(id, fecha_fin_reserva, fecha_inicio_reserva, precio_total, id_lugar_realizacion) VALUES(1, '2021-04-11 16:00', '2021-04-11 10:00' , '35000.00', 1);
 INSERT INTO alquiler_espacio(id, fecha_fin_reserva, fecha_inicio_reserva, precio_total, id_lugar_realizacion) VALUES(2, '2021-04-11 14:00', '2021-04-11 08:00' , '20000.00', 2);
+INSERT INTO alquiler_espacio(id, fecha_fin_reserva, fecha_inicio_reserva, precio_total, id_lugar_realizacion) VALUES(3, '2021-04-11 14:00', '2021-04-11 08:00' , '20000.00', 3);
 
 INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, alquiler_espacio_id, evento_id) VALUES (2,'Eminem in live', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2021-04-11 10:00', '2021-04-11 13:00',1, 1);
-INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, alquiler_espacio_id, evento_id) VALUES (3,'Eminem behind scenes', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2021-04-11 13:05', '2021-04-11 13:45',1, 1);
-INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, alquiler_espacio_id, evento_id) VALUES (11,'Tupac in live', 'accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias,', '2021-04-11 10:00', '2021-04-11 13:00', 2, 2);
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, alquiler_espacio_id, evento_id) VALUES (3,'Eminem behind scenes', 'Mauris dolor elit, lobortis vel nulla eget, tristique scelerisque orci. Integer feugiat urna at volutpat dapibus. Curabitur pharetra, metus quis egestas scelerisque, mi nunc varius lectus,', '2021-04-11 13:05', '2021-04-11 13:45',2, 1);
+INSERT INTO actividad(id,tematica_actividad,descripcion_actividad,fecha_inicio,fecha_fin, alquiler_espacio_id, evento_id) VALUES (11,'Tupac in live', 'accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias,', '2021-04-11 10:00', '2021-04-11 13:00', 3, 2);
 
 INSERT INTO exponente(id,nombre_exponente,apellidos_exponente,alias) VALUES(1,'Marshall Bruce','Mathers III', 'EMINEM');
 INSERT INTO exponente(id,nombre_exponente,apellidos_exponente,alias) VALUES(2,'Jack Berman','Webster II', 'Travis Scott');
