@@ -44,7 +44,9 @@ public class ExponenteController {
     }
 
     @PostMapping(value="/nuevo")
-    public String guardarExponentes(@Valid Exponente exponente,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id, BindingResult resultado, ModelMap modelMap){
+    public String guardarExponentes(@Valid Exponente exponente,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id,
+     BindingResult resultado, ModelMap modelMap){
+
         if(resultado.hasErrors()){
             modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
             modelMap.addAttribute("exponente", exponente);

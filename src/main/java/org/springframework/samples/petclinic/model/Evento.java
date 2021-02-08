@@ -23,15 +23,15 @@ import lombok.Setter;
 public class Evento extends BaseEntity {
     @Column(name = "tipoEvento")
     @Enumerated(EnumType.STRING)
-    protected TipoEvento tipoEvento;
+    private TipoEvento tipoEvento;
 
     @Column(name = "descripcion")
     @NotEmpty
-    protected String descripcion;
+    private String descripcion;
 
     @Column(name = "nombreEvento")
     @NotEmpty
-    protected String nombreEvento;
+    private String nombreEvento;
 
     @Column(name = "fechaInicio")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -39,11 +39,11 @@ public class Evento extends BaseEntity {
 
     @Column(name = "medidasSanitarias")
     @NotEmpty
-    protected String medidasSanitarias;
+    private String medidasSanitarias;
 
     @Column(name = "categoria")
     @NotEmpty
-    protected String categoria;
+    private String categoria;
 
     @Column(name = "fechaFin")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -52,7 +52,7 @@ public class Evento extends BaseEntity {
     @Column(name = "esPublico")
     private Boolean esPublico;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     private Organizacion organizacion;
 }

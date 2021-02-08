@@ -28,8 +28,6 @@ import lombok.Setter;
 @Table(name = "lugar_realizacion")
 public class LugarRealizacion extends BaseEntity{
 
-// CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
-
 
     @Column(name = "telefono")
     @Digits(fraction = 0, integer = 9, message = "El número de teléfono debe tener 9 dígitos")

@@ -15,11 +15,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "admins")
 public class Admin extends Persona{
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(optional = false)
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_peticion", referencedColumnName = "id")
-    private List<Peticion> peticiones;
+
 }
