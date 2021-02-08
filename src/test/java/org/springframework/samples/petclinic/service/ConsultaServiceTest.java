@@ -39,24 +39,8 @@ public class ConsultaServiceTest {
 
     @Test
     public void testNuevaConsulta() {
-        
-        Usuario usuario = new Usuario();
-        Autoridades au = new Autoridades();
+        Cliente cliente = clienteService.findCliente().iterator().next();
 
-        usuario.setNombreUsuario("pepelu");
-        usuario.setPassword("Password8");
-        usuario.setEnabled(true);
-        au.setAutoridad("cliente");
-        au.setUsuario(usuario);
-        usuario.setAutoridades(au);
-
-        Cliente cliente = new Cliente();
-        cliente.setUsuario(usuario);
-        cliente.setApellidos("Apellidos");
-        cliente.setEmail("ejemplo@email.com");
-        cliente.setNombre("nombre");
-        cliente.setTelefono("123445623");
-        clienteService.saveCliente(cliente);
 
 
         Consulta consulta = new Consulta();
