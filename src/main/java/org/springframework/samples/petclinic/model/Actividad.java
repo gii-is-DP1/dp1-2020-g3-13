@@ -27,7 +27,9 @@ import lombok.Setter;
 @FechasActividadRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin")
 public class Actividad extends BaseEntity {
 
-
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "exponente_id", referencedColumnName = "id")
+  private List<Exponente> exponentes;
 
   @NotBlank(message = "El nombre de la temática debe estar comprendido entre 2 y 30 caracteres, además de no estar vacío")
   @Size(min = 2, max = 30, message = "El nombre de la temática debe estar comprendido entre 2 y 30 caracteres, además de no estar vacío")
@@ -53,7 +55,8 @@ public class Actividad extends BaseEntity {
   @JoinColumn(name = "alquiler_espacio_id", referencedColumnName = "id")
   private AlquilerEspacio alquilerEspacio;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(optional = false)
   @JoinColumn(name = "evento_id", referencedColumnName = "id")
   private Evento evento;
+
 }

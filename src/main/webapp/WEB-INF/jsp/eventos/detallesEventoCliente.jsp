@@ -82,7 +82,7 @@
                                 <th>Tipos de entrada</th>
                                 <td>
                                     <div class="cuadro-entrada"></div>
-                                    <c:forEach items="${evento.tipoEntradas}" var="tipoEntradas">
+                                    <c:forEach items="${listaTipoEntrada}" var="tipoEntradas">
 
                                         <h3>
                                             Tipo de entrada:
@@ -116,7 +116,7 @@
                         <spring:param name="eventoId" value="${evento.id}" />
                         </spring:url>
                         <form action="favoritos" method="POST">
-                            <spring:url value="/eventos/{eventoId}/añadirEventosFavoritos" var="favoritosUrl">
+                            <spring:url value="/eventos/{eventoId}/anadirEventosFavoritos" var="favoritosUrl">
                             <spring:param name="eventoId" value="${evento.id}" />
                             </spring:url>
                             <a href="${fn:escapeXml(favoritosUrl)}">

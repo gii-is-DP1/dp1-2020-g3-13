@@ -50,8 +50,9 @@ public class EntradaController {
 		else if(entradaService.existeElNombreEnElCarro(nAsists, entrada.getNombreAsistente())||entradaService.buscaPorEventoYPorNombreAsistene(entrada.getNombreAsistente(), eventoId)){
 			return "/entradas/errorAsistente";
 		}else{
-		   this.entradaService.crearEntrada(entrada, tipoEntradaId);
+		   
 		   Cliente cliente  = clienteService.findClienteByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
+		   this.entradaService.crearEntrada(entrada, tipoEntradaId, cliente);
 		   this.carritoService.anadirCarrito(entrada, cliente);
 			return "redirect:/eventos/{eventoId}";
 		}
