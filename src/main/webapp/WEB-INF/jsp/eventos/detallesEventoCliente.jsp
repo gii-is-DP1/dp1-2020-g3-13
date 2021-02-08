@@ -43,18 +43,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Categoría</th>
-                                <td>
-                                    <c:out value="${evento.categoria}" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Medidas Sanitarias</th>
-                                <td>
-                                    <c:out value="${evento.medidasSanitarias}" />
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>Actividades</th>
                                 <td>
                                     <div class="cuadro-entrada"></div>

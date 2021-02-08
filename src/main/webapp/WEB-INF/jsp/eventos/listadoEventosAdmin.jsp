@@ -42,9 +42,6 @@
                     <c:out value="${evento.fechaFin}"/>
                 </td>
                 <td>
-                    <c:out value="${evento.categoria}"/>
-                </td>
-                <td>
                     <spring:url value="eventos/${evento.id}/edit" var="edicionUrl"></spring:url>
                         <a href="${fn:escapeXml(edicionUrl)}">
                             <img class="img-responsive" src="/resources/images/icons/editar.png" width="38%" />

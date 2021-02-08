@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.Evento;
@@ -78,11 +79,14 @@ public class ActividadController {
         if(actividad.getAlquilerEspacio()==null){
             actividadService.borrarActividad(actividad);
         }else{
-            return "exception";
+            throw new DataAccessException("No puede eliminar una actividad con un alquiler de espacio asignado"){
+                
+            };
         }
       
         return "redirect:/eventos/{evento_id}";
     }
+    
     @GetMapping("/{actividadId}/editar")
     public String editarActividadForm(ModelMap model,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId){
         Actividad actividad = actividadService.findById(actividadId);
@@ -101,13 +105,10 @@ public class ActividadController {
             return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
            }else{
                model.put("actividad", actividad);
-               try{
                    this.actividadService.modificarActividad(actividad, actividadService.findById(actividadId));
-               }catch(Exception e){
                 return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
                }
-           }
-       }  
+           } 
        return "redirect:/eventos/{evento_id}/actividades/{actividadId}";      
     }
     @GetMapping(value="/nuevo")
@@ -167,7 +168,9 @@ public class ActividadController {
             try {
                 alquilerService.compruebaFechas(alquiler.getLugarRealizacion(), actividad, evento);
             } catch (Exception e) {
-                return "exception";
+                throw new DataAccessException("Ese lugar esta reservado para esas fechas"){};
+                    
+                }
             }
             alquilerService.alquilerLugarRealizacion(alquiler, actividad, org);
             carritoService.anadirCarritoLugarRealizacion(actividad, org);
@@ -177,4 +180,3 @@ public class ActividadController {
 		
      }
 
-}

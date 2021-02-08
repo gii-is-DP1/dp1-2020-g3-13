@@ -68,6 +68,10 @@
     <spring:param name="actividadId" value="${actividad.id}"/>
 </spring:url>
 <a href="${fn:escapeXml(borrarActividadUrl)}" class="btn btn-default">Borrar Actividad</a>
+<spring:url value="/eventos/{evento_id}" var="volverUrl">
+<spring:param name="evento_id" value="${evento.id}" />
+</spring:url>
+<a href="${fn:escapeXml(volverUrl)}" class="btn btn-default"><c:out value="Volver"/></a>        
 
 
 </petclinic:layout>

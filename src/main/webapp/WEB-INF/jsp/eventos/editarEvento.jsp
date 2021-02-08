@@ -16,12 +16,9 @@
                             <form:form modelAttribute="evento" class="form-horizontal" id="add-evento-form">
                                     <petclinic:inputField label="Nombre" name="nombreEvento" />
                                     <petclinic:selectFieldTipoEntrada label="Tipo de evento" name="tipoEvento" size="1" names="${tipoEvento}"/>
-                                    <petclinic:textAreaField label = "Descripción" name ="descripcion"/>
+                                    <petclinic:textAreaField label = "Descripción" name ="descripcion" value= "${evento.descripcion}"/>
                                     <petclinic:inputField label = "Fecha Inicio" name ="fechaInicio" id="fechaInicio"/>
                                     <petclinic:inputField label = "Fecha Fin" name ="fechaFin" id="fechaFin"/>
-                                    
-                                    <petclinic:inputField label="Categoría" name="categoria" />
-                                    <petclinic:inputField label="Medidas Sanitarias" name="medidasSanitarias" />
                         
                                 </div>
 

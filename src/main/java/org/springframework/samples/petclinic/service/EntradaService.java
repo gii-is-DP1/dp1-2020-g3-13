@@ -18,6 +18,10 @@ public class EntradaService {
     private EntradaRepository entradaRepo;
     @Autowired
     private TipoEntradaService tipoEntradaService;
+
+    public int cuentaEntradas(){
+        return (int) entradaRepo.count();
+    }
     
     @Transactional
     public void crearEntrada(Entrada entrada, Integer tipoEntradaId, Cliente cliente) throws DataAccessException{

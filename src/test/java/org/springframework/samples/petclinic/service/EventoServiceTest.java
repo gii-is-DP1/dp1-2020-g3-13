@@ -40,17 +40,12 @@ public class EventoServiceTest {
         int cantidad = eventoService.eventosCount();
         Evento evento = new Evento();
         Evento eventoCreado = eventoService.findAll().iterator().next();
-        evento.setCategoria("categoria");
-        //evento.setConsultas(new ArrayList<Consulta>());
         evento.setDescripcion("descripcion");
         evento.setFechaInicio(LocalDate.now().plusDays(10));
         evento.setFechaFin(LocalDate.now().plusDays(20));
         evento.setId(cantidad);
-        evento.setMedidasSanitarias("medidasSanitarias");
         evento.setNombreEvento("nombreEvento");
         evento.setOrganizacion(eventoCreado.getOrganizacion());
-        //evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        //evento.setTipoEntradas(new ArrayList<TipoEntrada>());
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
         eventoService.save(evento);
         assertEquals(eventoService.eventosCount(), cantidad+1);
@@ -67,9 +62,22 @@ public class EventoServiceTest {
 
     @Test
     public void deberiaEditarEventos(){
-        Evento evento = eventoService.findAll().iterator().next();
-        evento.setCategoria("evento de prueba");
-        assertEquals("evento de prueba", evento.getCategoria());
+        int cantidad = eventoService.eventosCount();
+        Evento evento = new Evento();
+        Evento eventoCreado = eventoService.findAll().iterator().next();
+        evento.setDescripcion("Esto es una descripcion bastante apropiada para un evento de prueba");
+        evento.setFechaInicio(LocalDate.now().plusDays(10));
+        evento.setFechaFin(LocalDate.now().plusDays(20));
+        evento.setId(cantidad);
+        evento.setNombreEvento("nombreEvento");
+        evento.setOrganizacion(eventoCreado.getOrganizacion());
+        evento.setTipoEvento(TipoEvento.ACADEMICOS);
+        eventoService.save(evento);
+        Evento eventoMod = evento;
+        eventoMod.setId(cantidad+1);
+        eventoMod.setNombreEvento("nombreEventoMod");
+        eventoService.modificarEvento(eventoMod, evento);
+        assertEquals(evento.getId(), eventoMod.getId());
     }
    
 }

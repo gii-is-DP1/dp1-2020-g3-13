@@ -59,6 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/eventos/{eventoId}/tipoEntradas/nuevo").hasAnyAuthority("organizacion","admin")
 				// .antMatchers("/eventos").hasAnyAuthority("cliente","admin", "organizacion")
 				.antMatchers("/eventos/{evento_id}").hasAnyAuthority("cliente", "organizacion", "admin")
+				.antMatchers("/eventos/{evento_id}/editar").hasAnyAuthority("organizacion", "admin")
 				.antMatchers("/eventos").permitAll()
 				.antMatchers("/tipoentradas/**").permitAll()
 				.antMatchers("/carrito/organizacion/**").hasAnyAuthority("organizacion")	
@@ -66,7 +67,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/carrito/finalizarCompra").hasAnyAuthority("cliente")
 				.antMatchers("/carrito/cliente/**").hasAnyAuthority("cliente")
 				.antMatchers("/actividades/**").hasAnyAuthority("organizacion")
-				.antMatchers("/facturas/**").hasAnyAuthority("organizacion","cliente")
+				.antMatchers("/facturas").hasAnyAuthority("organizacion","cliente")
+				.antMatchers("/facturas/{facturaId}").hasAnyAuthority("organizacion","cliente")
 				.anyRequest().denyAll().and().formLogin()
 				/* .loginPage("/login") */
 				.failureUrl("/login-error").and().logout().logoutSuccessUrl("/");

@@ -7,6 +7,8 @@
               description="Label appears in red color if input is considered as invalid after submission" %>
 <%@ attribute name="id" required="false" rtexprvalue="true"
               description="id for javascript use" %>
+<%@ attribute name="value" required="false" rtexprvalue="true"
+              description="id for javascript use" %>
 
 
 <spring:bind path="${name}">
@@ -16,7 +18,7 @@
         <label class="col-sm-2 control-label">${label}</label>
 
         <div class="col-sm-10">
-            <textarea name="${name}" id="${id}" cols="119" rows="5"></textarea>
+            <textarea name="${name}" id="${id}" cols="119" rows="5">${value}</textarea>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>
