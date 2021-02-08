@@ -25,7 +25,7 @@ public class Factura extends BaseEntity{
     @NotNull
     private Double precioTotal;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "nombreUsuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
 
