@@ -35,31 +35,29 @@ public class LugarRealizacionController {
     @GetMapping("/{lugarRealizacionId}")
 	public ModelAndView showLugarRealizacion(@PathVariable("lugarRealizacionId") int lugarId) {
 		ModelAndView mav = new ModelAndView("lugaresRealizacion/detallesLugarRealizacion");
-		mav.addObject(this.lugarRealizacionService.findById(lugarId));
+		mav.addObject("lugarRealizacion",this.lugarRealizacionService.findById(lugarId));
 		return mav;
 	}
 		
 
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/nuevo")
 	public String initCreationForm(Map<String, Object> model) {
         LugarRealizacion lugarRealizacion = new LugarRealizacion();
 		model.put("lugarRealizacion", lugarRealizacion);
 		return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
 	}
 
-	@PostMapping(value = "/new")
+	@PostMapping(value = "/nuevo")
 	public String processCreationForm(@Valid LugarRealizacion lugarRealizacion, BindingResult result) {
 		if (result.hasErrors()) {
 			return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
 		}
 		else {
-			//creating owner, user and authorities
 			this.lugarRealizacionService.saveLugarRealizacion(lugarRealizacion);
-			
 			return "redirect:/lugaresRealizacion/";
 		}
 	}
-	@GetMapping(value = "/{lugarRealizacionId}/edit")
+	@GetMapping(value = "/{lugarRealizacionId}/editar")
     public String initUpdateLugarRealizacionForm(@PathVariable("lugarRealizacionId") int lugarRealizacionId, ModelMap modelMap) {
 			LugarRealizacion lugarRealizacion= this.lugarRealizacionService.findById(lugarRealizacionId);
 			modelMap.addAttribute(lugarRealizacion);
@@ -69,13 +67,22 @@ public class LugarRealizacionController {
     }
 
     //TODO 
-    @PostMapping(value = "/{lugarRealizacionId}/edit")
+    @PostMapping(value = "/{lugarRealizacionId}/editar")
     public String editLugarRealizacion(@Valid LugarRealizacion lugarRealizacion, BindingResult result, ModelMap model,@PathVariable("lugarRealizacionId") int lugarRealizacionId){
 		if(result.hasErrors()){
 			return VIEWS_LUGAR_CREATE_OR_UPDATE_FORM;
 		}else{
 			this.lugarRealizacionService.modifyLugaRealizacion(lugarRealizacion, this.lugarRealizacionService.findById(lugarRealizacionId));
-			return "redirect:/lugaresRealizacion/";		}
-
-}
+			return "redirect:/lugaresRealizacion/";		
+		}
+	}
+	// @GetMapping(value = "/{lugarRealizacionId}/delete")
+    // public String deleteLineaFacturaCliente(@PathVariable("lugarRealizacionId") int lugarRealizacionId, ModelMap model){ 
+    //     LugarRealizacion lugar = lugarRealizacionService.findById(lugarRealizacionId);
+    //     carritoService.borrarLineaFactura(carrito, lineaFacturaId);
+    //     entradaService.borrarEntrada(entradaService.encuentraEntradaPorId(linea.getEntrada().getId()));
+    //     lineaFacturaService.borrarLinea(linea);
+    //     model.addAttribute("carrito", carrito);
+    //     return "redirect:/carrito/cliente";
+    // }
 }
