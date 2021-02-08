@@ -20,6 +20,7 @@
 
         <div class="col-sm-10">
             <select name="${name}" onchange="${onchange}">
+                <option value="value" selected disabled>------------------</option>
                 <c:forEach items="${names}" var="items">
                     <option value="${items.id}"> <c:out value="${items.nombre_recinto}"></c:out> </option>
                         </c:forEach>

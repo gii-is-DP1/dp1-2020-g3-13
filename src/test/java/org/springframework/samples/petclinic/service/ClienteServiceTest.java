@@ -49,7 +49,7 @@ public class ClienteServiceTest {
 
         Autoridades autoridades = new Autoridades();
         autoridades.setAutoridad("cliente");
-        usuario.setAutoridades(autoridades);
+        //usuario.setAutoridades(autoridades);
 
 
         Cliente cliente = new Cliente();

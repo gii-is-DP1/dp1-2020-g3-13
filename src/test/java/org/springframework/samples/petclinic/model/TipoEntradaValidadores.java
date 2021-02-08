@@ -216,11 +216,11 @@ public class TipoEntradaValidadores {
 		tipoEntrada.setNumEntradas(10);
 		tipoEntrada.setPrecio(1.0);
 		// Validamos
+		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
-		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(
 				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
 
