@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Sponsor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,18 @@ public class SponsorServiceTest {
         assertEquals(count+1, sponsorService.sponsorCount());
     }
     
+
+    @Test
+    public void deberiaAñadirAlEvento(){
+        Evento evento = new Evento();
+        Sponsor sponsor = new Sponsor();
+        sponsor.setEvento(eventoService.findAll().iterator().next());
+        sponsor.setEmpresa("Mercedes");
+        sponsor.setUrlWeb("https://www.mercedes-benz.com/en/");
+        sponsor.setUrlLogo("https://lezebre.lu/images/detailed/17/30356-Mercedes-Benz.png");
+        sponsorService.anadirSponsorAEvento(evento, sponsor);
+        assertEquals(sponsor.getEvento(), evento);
+    }
     
 }
 
