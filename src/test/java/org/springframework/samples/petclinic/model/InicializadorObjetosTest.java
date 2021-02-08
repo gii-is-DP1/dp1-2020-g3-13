@@ -75,7 +75,7 @@ public class InicializadorObjetosTest {
         Usuario usuario = new Usuario();
         usuario.setPassword("password");
         usuario.setNombreUsuario("nombreUsuario");
-        usuario.setFacturas(new ArrayList<>());
+        //usuario.setFacturas(new ArrayList<>());
         usuario.setEnabled(true);
         usuario.setAutoridades(new Autoridades());
         return usuario;

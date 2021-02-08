@@ -18,8 +18,5 @@ public class Admin extends Persona{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_peticion", referencedColumnName = "id")
-    private List<Peticion> peticiones;
+
 }

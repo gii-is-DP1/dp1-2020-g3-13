@@ -42,8 +42,5 @@ public class Peticion extends BaseEntity {
 
   @Column(name = "fecha")
   protected LocalDate fecha;
-
-  @ManyToOne
-  @JoinColumn(name = "nombre_admin", referencedColumnName = "nombre_usuario")
-  private Admin admin;
+ 
 }

@@ -25,7 +25,7 @@ public class FacturaServiceTest {
         int count = facturaService.facturaCount();
         assertEquals(count, 5);
     }
-
+/*
     @Test
     public void deberiaMostrarFactura(){
         Usuario usuario = usuarioService.findUsuario("organizacion1");
@@ -34,4 +34,5 @@ public class FacturaServiceTest {
         assertEquals(1, tam);
 
     }
+*/
 }

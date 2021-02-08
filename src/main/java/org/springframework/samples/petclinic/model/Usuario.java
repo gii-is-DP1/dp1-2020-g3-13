@@ -33,7 +33,5 @@ public class Usuario {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario", optional = false)
     private Autoridades autoridades;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Factura> facturas;
+
 }

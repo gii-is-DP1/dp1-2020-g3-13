@@ -24,6 +24,7 @@ import java.util.List;
 @RequestMapping("/eventos/{eventoId}/{tipoEntradasId}")
 public class EntradaController {
 
+	
     public static final String VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM= "entradas/crearEntrada";
     @Autowired
     private EntradaService entradaService; 
