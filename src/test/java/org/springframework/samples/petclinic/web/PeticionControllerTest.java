@@ -70,7 +70,7 @@ public class PeticionControllerTest {
     // @Test
     // @WithMockUser
     // public void testDetallesPeticion() throws Exception {
-    // mockMvc.perform(get("/peticion/{peticion_id}")).andExpect(status().isOk())
+    // mockMvc.perform(get("/peticion/{peticion_id}", 1)).andExpect(status().isOk())
     // .andExpect(view().name(VIEWS_DETALLES_PETICION)).andExpect(model().attributeExists("peticion"));
     // }
 }

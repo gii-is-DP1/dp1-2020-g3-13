@@ -97,4 +97,35 @@ public class PeticionSecurityControllerTest {
     void deberiaDevolverProhibidoListadoPeticionesParaUsuarioNoLogeado() throws Exception {
         mockMvc.perform(get("/peticion", TEST_ID)).andExpect(status().isForbidden());
     }
+
+    // DETALLES PETICIONES
+
+    // CON USUARIO ADMIN LOGEADO
+    @WithMockUser(username = "UsuarioAleatorio", authorities = { "admin" })
+    @Test
+    void deberiaDevolverDetallesPeticionesParaAdmin() throws Exception {
+        mockMvc.perform(get("/peticion/{peticion_id}", TEST_ID)).andExpect(view().name("peticion/listadoDetails"))
+                .andExpect(model().attributeExists("peticion"));
+    }
+
+    // CON USUARIO CLIENTE LOGEADO
+    @WithMockUser(username = "UsuarioAleatorio", authorities = { "cliente" })
+    @Test
+    void deberiaDevolverProhibidoDetallesPeticionesParaCliente() throws Exception {
+        mockMvc.perform(get("/peticion/{peticion_id}", TEST_ID)).andExpect(status().isForbidden());
+    }
+
+    // CON USUARIO ORGANIZACION LOGEADO
+    @WithMockUser(username = "UsuarioAleatorio", authorities = { "organizacion" })
+    @Test
+    void deberiaDevolverProhibidoDetallesPeticionesParaOrganizacion() throws Exception {
+        mockMvc.perform(get("/peticion/{peticion_id}", TEST_ID)).andExpect(status().isForbidden());
+    }
+
+    // SIN USUARIO LOGEADO
+    @WithMockUser
+    @Test
+    void deberiaDevolverProhibidoDetallesPeticionesParaUsuarioNoLogeado() throws Exception {
+        mockMvc.perform(get("/peticion/{peticion_id}", TEST_ID)).andExpect(status().isForbidden());
+    }
 }
