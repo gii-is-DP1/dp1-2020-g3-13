@@ -106,7 +106,7 @@ public class EventoControllerTests {
         usuario.setPassword("org1");
         autoridades = new Autoridades();
         autoridades.setAutoridad("organizacion");
-        usuario.setAutoridades(autoridades);
+        //usuario.setAutoridades(autoridades);
         //inicializamos la organizacion
         organizacion = new Organizacion();
         organizacion.setUsuario(usuario);

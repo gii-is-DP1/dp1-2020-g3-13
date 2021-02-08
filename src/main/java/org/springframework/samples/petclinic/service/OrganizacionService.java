@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.Peticion;
+import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.OrganizacionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,6 @@ public class OrganizacionService {
     @Autowired
     private ConsultaService consultaService;
 
-    @Transactional
     public int organizacionCount() {
         return (int) organizacionRepo.count();
     }
@@ -50,7 +51,7 @@ public class OrganizacionService {
         }
 
     }
-    
+
     @Transactional
     public void deleteOrganizacion(Organizacion o) throws DataAccessException {
         lineaFacturaService.eliminaLineaFacturaDeOrganizacion(o.getId());
@@ -81,6 +82,17 @@ public class OrganizacionService {
 
     public List<Evento> getEventos(int id_organizacion) {
         return organizacionRepo.getEventos(id_organizacion);
+
+    }
+
+    public Organizacion creaOrganizacionParaPeticion(Peticion peticion, Usuario usuario) {
+        Organizacion organizacion = new Organizacion();
+        organizacion.setUsuario(usuario);
+        organizacion.setEmail(peticion.getEmail());
+        organizacion.setCif(peticion.getCif());
+        organizacion.setInfo(peticion.getInfo());
+        organizacion.setNombreOrganizacion(peticion.getNombre_organizacion());
+        return organizacion;
 
     }
 
