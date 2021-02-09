@@ -45,6 +45,7 @@ public class ActividadServiceTest {
         assertEquals(act.getTematicaActividad(),actividadService.encuentraActividadesPorEvento(eventoPrueba.getId()).get(2).getTematicaActividad());
 
     }
+    
     @Test
     public void deberiaModificarActividad(){
         Evento eventoPrueba = eventoService.findAll().iterator().next();

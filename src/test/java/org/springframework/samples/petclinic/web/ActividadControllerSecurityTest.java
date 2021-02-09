@@ -34,19 +34,19 @@ public class ActividadControllerSecurityTest {
     @Test
     @WithMockUser(username = "UsuarioAleatorio", authorities = {"cliente"})
     void deberiaDevolverListaDeActividadesCliente() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(status().isForbidden());
+        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(status().isOk()).andExpect(view().name("actividades/detallesActividad"));
         
     }
     @Test
     @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
     void deberiaDevolverListaDeActividadesOrganizacion() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(view().name("actividades/detallesActividad"));
+        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(status().isOk()).andExpect(view().name("actividades/detallesActividad"));
         
     }
     @Test
     @WithMockUser(username = "UsuarioAleatorio", authorities = {"admin"})
     void deberiaDevolverListaDeActividadesAdmin() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(view().name("actividades/detallesActividad"));
+        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(status().isOk()).andExpect(view().name("actividades/detallesActividad"));
         
     }
     

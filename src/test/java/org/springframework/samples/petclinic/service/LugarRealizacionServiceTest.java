@@ -34,6 +34,7 @@ private LugarRealizacionService lugarService;
         lugar.setEmail("email@email.com");
         lugar.setNombre_recinto("nombre_recinto");
         lugar.setTelefono("786765887");
+        lugar.setPrecio(20.0);
         lugarService.saveLugarRealizacion(lugar);
         assertEquals(count+1, lugarService.lugaresCount());
         assertEquals(lugar, lugarService.findById(lugar.getId()));

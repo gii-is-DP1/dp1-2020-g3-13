@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -12,6 +11,7 @@ import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.CarritoService;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -57,6 +57,9 @@ public class ActividadControllerTest {
 
     @MockBean
     private ExponenteService exponenteService;
+
+    @MockBean
+    private ClienteService clienteService;
 
 
 

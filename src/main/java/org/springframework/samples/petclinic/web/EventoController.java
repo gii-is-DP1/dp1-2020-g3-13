@@ -38,8 +38,6 @@ public class EventoController {
 
     @Autowired
     private EventoService eventoService;
-    @Autowired
-    private ActividadService actividadService;
 
     @Autowired
     private OrganizacionService organizacionService;

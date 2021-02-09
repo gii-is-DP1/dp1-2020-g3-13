@@ -122,7 +122,7 @@ public class ActividadController {
        return "redirect:/eventos/{evento_id}/actividades/{actividadId}";      
     }
     @GetMapping(value="/nuevo")
-    public String crearActividad(ModelMap modelMap){
+    public String crearActividad(@PathVariable("evento_id") int eventoId,ModelMap modelMap){
         Iterable<LugarRealizacion> lugaresRealizacion = lugarRealizacionService.findAll();
         List<LugarRealizacion> lugaresLista= new ArrayList<LugarRealizacion>();
         lugaresRealizacion.forEach(lugaresLista::add);
@@ -131,7 +131,7 @@ public class ActividadController {
         modelMap.addAttribute("lugares", lugares);
         modelMap.addAttribute("listaId", listaIds);
         modelMap.addAttribute("lugaresRealizacion", lugaresLista);
-
+        modelMap.addAttribute("eventoId",eventoId);
         modelMap.addAttribute("actividad", new Actividad());
         return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
     }
