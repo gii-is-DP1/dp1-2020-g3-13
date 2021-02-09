@@ -26,8 +26,8 @@ public class ClienteServiceTest {
     @Test
     public void deberiaBorrarClienteTest(){
         int clienteAntes = clienteService.clienteCount();
-        usuarioService.deleteUsuario(clienteService.findClienteByUsuario("cliente1").getUsuario());
-        clienteService.deleteCliente(clienteService.findClienteByUsuario("cliente1"));
+        usuarioService.deleteUsuario(clienteService.findClienteByUsuario("Test_delete").getUsuario());
+        clienteService.deleteCliente(clienteService.findClienteByUsuario("Test_delete"));
         int clienteDespues = clienteService.clienteCount();
         assertEquals(clienteAntes-1, clienteDespues);
 
