@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 public class ClienteServiceTest {
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private UsuarioService usuarioService;
     @Test
     public void testCountWithInitialData(){
         int count= clienteService.clienteCount();
@@ -24,6 +26,7 @@ public class ClienteServiceTest {
     @Test
     public void deberiaBorrarClienteTest(){
         int clienteAntes = clienteService.clienteCount();
+        usuarioService.deleteUsuario(clienteService.findClienteByUsuario("cliente1").getUsuario());
         clienteService.deleteCliente(clienteService.findClienteByUsuario("cliente1"));
         int clienteDespues = clienteService.clienteCount();
         assertEquals(clienteAntes-1, clienteDespues);
