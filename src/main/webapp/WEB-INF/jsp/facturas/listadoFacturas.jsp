@@ -15,7 +15,8 @@
         <tr>
             <th style="width: 150px;">Num. Factura</th>
             <th style="width: 200px;">Fecha de la Factura</th>
-            <th style="width: 200px;">PDF</th>
+            <th style="width: 200px;">Precio Total</th>
+            <th style="width: 200px;">Más</th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,11 @@
                 <td>
 
                     <c:out value="${facturas.fechaFactura}" />
+
+                </td>
+                <td>
+
+                    <c:out value="${facturas.precioTotal}" />
 
                 </td>
                 <td>

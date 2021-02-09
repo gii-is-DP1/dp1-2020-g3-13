@@ -92,6 +92,14 @@
                                     <p>Entradas disponibles:
                                         <c:out value="${tipoEntradas.numEntradas}" />
                                     </p>
+                                    <spring:url value="/eventos/{eventoId}/{tipoEntradaId}/entrada" var="ventaUrl">
+                                            <spring:param name="eventoId" value="${evento.id}" />
+                                            <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
+                                        </spring:url>
+                                        <a href="${fn:escapeXml(ventaUrl)}">
+                                            <c:out value="Comprar" /><br></a>
+
+
                                 </c:forEach>
                             </td>
                             </tr>

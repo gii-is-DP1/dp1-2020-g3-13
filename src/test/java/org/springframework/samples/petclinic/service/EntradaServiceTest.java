@@ -120,10 +120,11 @@ public class EntradaServiceTest {
 		actividad.setFechaInicio(LocalDateTime.now().plusDays(1).plusHours(1));
 		actividad.setFechaFin(actividad.getFechaInicio().plusDays(1));
 		actividad.setTematicaActividad("tematicaActividad");
+        actividad.setEvento(evento);
         actividadService.guardarActividad(actividad);
         List<Actividad> actividades = new ArrayList<>();
         actividades.add(actividad);
-        //inicializamos el tipo de entrada
+        //inicializamos el tipo de entrada **FALLA EL VALIDADOR DE AFORO**
         TipoEntrada tipoEntrada = new TipoEntrada();
         tipoEntrada.setFechaInicio(LocalDateTime.now().plusDays(1));
         tipoEntrada.setFechaFin(tipoEntrada.getFechaInicio().plusDays(1));

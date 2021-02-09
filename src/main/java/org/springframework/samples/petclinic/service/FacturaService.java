@@ -17,7 +17,7 @@ public class FacturaService {
     private LineaFacturaService lineaService;
 
     @Transactional
-    public int facturaCount(){
+    public int cuentaFactura(){
     return (int) facturaRepo.count();
     }
     public Iterable<Factura> findAll(){

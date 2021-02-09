@@ -21,8 +21,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +39,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,9 +47,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext
+@ExtendWith(SpringExtension.class)
 public class EntradaControllerTest {
 
     private static final int TEST_ENTRADA_ID = 1;
@@ -53,7 +61,10 @@ public class EntradaControllerTest {
     private static final NombreTiposEntrada TEST_ENTRADA_TIPO_ENTRADA = NombreTiposEntrada.DIURNA;
     public static final String VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM = "entradas/crearEntrada";
 
+
     @Autowired
+    private WebApplicationContext context;
+
     private MockMvc mockMvc;
     @MockBean
     @Autowired
@@ -77,6 +88,7 @@ public class EntradaControllerTest {
 
     @BeforeEach
     void setup() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
         entrada = new Entrada();
         entrada.setId(TEST_ENTRADA_ID);
         entrada.setDni("77777777A");
@@ -117,32 +129,25 @@ public class EntradaControllerTest {
         entrada.setTipoEntrada(diurna);
         entrada.setCliente(luz);
 
-        // given(this.entradas.findById(TEST_ENTRADA_ID).orElse(null)).willReturn(entrada);
-        // given(this.clientes.findById(TEST_CLIENTE_ID)).willReturn(luz);
-        // given(this.tiposEntradas.findById(TEST_TIPO_ENTRADA_ID).orElse(null)).willReturn(diurna);
-
     }
-
+    @WithMockUser(username = "orgRandom", authorities = {"organizacion"})
     @Test
-    void testCrearEntradaForm() throws Exception {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("cliente");
-        List<SimpleGrantedAuthority> aut = new ArrayList<>();
-        aut.add(authority);
-        UsernamePasswordAuthenticationToken auth1 = new UsernamePasswordAuthenticationToken(luzCusMo.getNombreUsuario(), luzCusMo.getPassword(), aut);
-        SecurityContextHolder.getContext().setAuthentication(auth1);
-
+    void noPuedeCrearEntradaForm() throws Exception {
+        mockMvc.perform(get("/eventos/8/1/entrada")).andExpect(status().isForbidden());
+    }
+    @WithMockUser(username = "clienteRandom", authorities = {"cliente"})
+    @Test
+    void puedeCrearEntradaForm() throws Exception {
         mockMvc.perform(get("/eventos/8/1/entrada")).andExpect(status().isOk())
         .andExpect(view().name(VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM)).andExpect(model().attributeExists("entrada"));
     }
 
+    @WithMockUser(username = "clienteRandom", authorities = {"cliente"})
     @Test
     void testCrearEntradaFormExito() throws Exception {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("cliente");
-        List<SimpleGrantedAuthority> aut = new ArrayList<>();
-        aut.add(authority);
-        UsernamePasswordAuthenticationToken auth1 = new UsernamePasswordAuthenticationToken(luzCusMo.getNombreUsuario(), luzCusMo.getPassword(), aut);
-        SecurityContextHolder.getContext().setAuthentication(auth1);
-
-        mockMvc.perform(post("/eventos/8/1/entrada").param("dni", "77778888H").param("nombreAsistente", "Raul Rodriguez Mendez")).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/8"));
+        
+        mockMvc.perform(post("/eventos/1/2/entrada").param("dni", "77934193G")
+        .param("nombreAsistente", "Raul Rodriguez Mendez").with(csrf()))
+        .andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/8"));
     }
 }

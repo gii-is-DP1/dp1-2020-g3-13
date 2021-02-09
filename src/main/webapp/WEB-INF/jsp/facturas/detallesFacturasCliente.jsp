@@ -12,6 +12,7 @@
         <p>Detalles de Entradas</p>
         <thead>        
         <tr>
+            <th style="width: 150px;">Evento</th>
             <th style="width: 150px;">Entrada</th>
             <th style="width: 200px;">DNI</th>
             <th style="width: 200px;">Nombre Asistente</th>
@@ -21,6 +22,11 @@
         <tbody>
         <c:forEach items="${lineaFacturas}" var="lineaFactura">
             <tr>
+                <td>
+
+                    <c:out value="${lineaFactura.entrada.tipoEntrada.evento.nombreEvento}" />
+
+                </td>
                 <td>
 
                     <c:out value="${lineaFactura.entrada.tipoEntrada.nombre}" />
