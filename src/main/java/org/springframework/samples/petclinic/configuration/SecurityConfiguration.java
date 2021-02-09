@@ -58,6 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/eventos/{eventoId}/borrarEvento").hasAnyAuthority("organizacion","admin")
 				.antMatchers("/eventos/{evento_id}/tipoEntradas/{tipoEntradaId}/borrarTiposEntradas").hasAnyAuthority("organizacion")
 				.antMatchers("/eventos/{eventoId}/tipoEntradas/nuevo").hasAnyAuthority("organizacion","admin")
+				.antMatchers("/eventos/{eventoId}/tipoEntradas/nuevo").hasAnyAuthority("organizacion")
+				.antMatchers("/eventos/{eventoId}/tipoEntradas/{tipo_entrada_id}/editar").hasAnyAuthority("organizacion")
 				// .antMatchers("/eventos").hasAnyAuthority("cliente","admin", "organizacion")
 				.antMatchers("/eventos/{evento_id}").hasAnyAuthority("cliente", "organizacion", "admin")
 				.antMatchers("/eventos/{evento_id}/editar").hasAnyAuthority("organizacion", "admin")
