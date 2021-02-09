@@ -41,11 +41,12 @@
                     <c:out value="${lineaFactura.precio}" />
 
                 </td>
-                    <spring:url value="/facturas" var="facturasUrl">
-                    </spring:url>
-                    <a href="${fn:escapeXml(facturasUrl)}" class="btn btn-default"><c:out value="Volver"/></a>              
+                                  
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <spring:url value="/facturas" var="facturasUrl">
+                    </spring:url>
+                    <a href="${fn:escapeXml(facturasUrl)}" class="btn btn-default"><c:out value="Volver"/></a>
 </petclinic:layout>

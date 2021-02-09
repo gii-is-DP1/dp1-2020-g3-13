@@ -16,6 +16,7 @@ tagdir="/WEB-INF/tags" %> <%@page pageEncoding="UTF-8"%>
           >Modifica <c:out value="${actividad.tematicaActividad}"></c:out
         ></c:otherwise>
       </c:choose>
+      
     </h2>
     <form:form
       modelAttribute="actividad"
@@ -30,12 +31,17 @@ tagdir="/WEB-INF/tags" %> <%@page pageEncoding="UTF-8"%>
           label="Fecha de Inicio"
           name="fechaInicio"
         />
+        <petclinic:inputFieldHidden label="eventoId" name="evento.id"  value="${eventoId}"/>
+
         <petclinic:inputField
           id="datetimeFin"
           label="Fecha de Fin"
           name="fechaFin"
         />
+
       </div>
+
+    
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <c:choose>

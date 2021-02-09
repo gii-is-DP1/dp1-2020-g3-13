@@ -6,8 +6,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Exponente;
-import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.ActividadService;
+import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.ExponenteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,7 +25,7 @@ public class ExponenteController {
     @Autowired 
     private ExponenteService exponenteService;
     @Autowired
-    private EventoRepository eventoRepository;
+    private EventoService eventoService;
 
     @Autowired 
     private ActividadService actividadService;
@@ -35,7 +35,7 @@ public class ExponenteController {
     public String guardarExponentes(ModelMap modelMap, @PathVariable("actividad_id") int actividadInt, @PathVariable("evento_id") int evento_id){
         Exponente nuevoExponente = new Exponente();
         Actividad actividad = actividadService.findById(actividadInt);
-        modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
+        modelMap.addAttribute("evento", eventoService.findEventoById(evento_id));
         modelMap.addAttribute("exponente", nuevoExponente);
         modelMap.addAttribute("actividad", actividad);
         modelMap.addAttribute("listaExponentes", actividad.getExponentes());
@@ -48,7 +48,7 @@ public class ExponenteController {
      BindingResult resultado, ModelMap modelMap){
 
         if(resultado.hasErrors()){
-            modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
+            modelMap.addAttribute("evento", eventoService.findEventoById(evento_id));
             modelMap.addAttribute("exponente", exponente);
             modelMap.addAttribute("listaExponentes", actividadService.findById(actividadInt).getExponentes());
             return VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM;
@@ -62,12 +62,12 @@ public class ExponenteController {
     public String borrarExponente(@PathVariable("exponenteId") int exponenteId,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id, ModelMap modelMap){
     Actividad actividad = actividadService.findById(actividadInt);
     Exponente exponente = exponenteService.encuentraExponente(exponenteId);
-    modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
+    modelMap.addAttribute("evento", eventoService.findEventoById(evento_id));
     modelMap.addAttribute("actividad", actividad);
     modelMap.addAttribute("exponente", exponente);
     modelMap.addAttribute("listaExponentes", actividad.getExponentes());
     exponenteService.eliminaExponente(exponente, actividad);
-    return "redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo/";
+    return "redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo";
 
 
 }

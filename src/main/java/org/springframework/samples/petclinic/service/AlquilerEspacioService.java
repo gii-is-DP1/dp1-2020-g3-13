@@ -48,7 +48,7 @@ public class AlquilerEspacioService {
     }
 
     @Transactional
-    public void alquilerLugarRealizacion(AlquilerEspacio alquiler, Actividad actividad, Organizacion org) {
+    public void alquilerLugarRealizacion(AlquilerEspacio alquiler, Actividad actividad) {
         LugarRealizacion lugar = alquiler.getLugarRealizacion();
         double precioTotal = 0.0;
         alquiler.setFechaInicioReserva(actividad.getFechaInicio());

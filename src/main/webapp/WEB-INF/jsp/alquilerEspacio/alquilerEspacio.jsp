@@ -7,7 +7,6 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@page pageEncoding="UTF-8"%>
 
-    <!-- TODO -->
 <petclinic:layout pageName="alquilarlugarSeleccionado">
     <jsp:body>
         <h2>

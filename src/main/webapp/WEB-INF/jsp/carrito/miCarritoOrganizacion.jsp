@@ -43,7 +43,7 @@
                                     <spring:url value="/carrito/organizacion/${lineasFacturas.id}/delete" var="borrarAlquilerEspacioUrl">
                                     <spring:param name="lineaFacturaId" value="${lineasFacturas.id}"/>
                                     </spring:url>
-                                    <a href="${fn:escapeXml(borrarAlquilerEspacioUrl)}" class="btn btn-default">Borrar elemento</a>
+                                    <a class="btn btn-default" href="${fn:escapeXml(borrarAlquilerEspacioUrl)}" class="btn btn-default">Borrar elemento</a>
 
                                 </c:forEach>
                                 <p> Total: </p>
@@ -51,7 +51,7 @@
 
                                 <spring:url value="/carrito/org/finalizarCompra" var="ventaUrl">
                                             </spring:url>
-                                            <a href="${fn:escapeXml(ventaUrl)}">
+                                            <a class="btn btn-default" href="${fn:escapeXml(ventaUrl)}">
                                                 <c:out value="Comprar" /><br></a>
                             </c:otherwise>
                         </c:choose>
