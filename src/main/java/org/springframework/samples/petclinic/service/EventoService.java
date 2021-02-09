@@ -24,6 +24,8 @@ public class EventoService {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private ActividadService actividadService;
 
     public int eventosCount() {
         return (int) eventoRepository.count();
@@ -52,7 +54,8 @@ public class EventoService {
         return eventoRepository.findById(eventoId).orElse(null);
     }
 
-    public void modifyEvento(Evento evento, Evento eventoActual) throws DataAccessException {
+    public void modificarEvento(Evento evento, Evento eventoActual) throws DataAccessException {
+        evento.setOrganizacion(eventoActual.getOrganizacion());
         evento.setId(eventoActual.getId());
         save(evento);
     }
@@ -121,6 +124,27 @@ public class EventoService {
     public List<Sponsor> getSponsors(int id_evento) {
         return eventoRepository.getSponsors(id_evento);
 
+    }
+
+    public void eliminaActividadesEnEvento(int eventoId){
+        if(actividadService.encuentraActividadesPorEvento(eventoId)!=null){
+            List<Actividad> lista = actividadService.encuentraActividadesPorEvento(eventoId);
+            for(int i =0; i<lista.size();i++){
+                if(lista.get(i).getAlquilerEspacio()==null){
+                    actividadService.borraActividadEvento(eventoId);
+                }else{
+                    throw new DataAccessException("No se puede borrar un evento que ya tiene un alquiler espacio asignado"){
+                        
+                    };
+                }
+            }
+        }
+    }
+
+    public void eliminaTipoEntradasEnEvento(int eventoId){
+        if(tipoEntradaService.encuentraTodasLasEntradasDeEvento(eventoId)!=null){
+                   tipoEntradaService.eliminaTipoEntradaEvento(eventoId);
+        }
     }
 
     @Transactional

@@ -17,7 +17,7 @@ public class FacturaService {
     private LineaFacturaService lineaService;
 
     @Transactional
-    public int facturaCount(){
+    public int cuentaFactura(){
     return (int) facturaRepo.count();
     }
     public Iterable<Factura> findAll(){
@@ -38,27 +38,6 @@ public class FacturaService {
 public void eliminaFacturaDeUsuario(String nombreUsuario) {
     facturaRepo.eliminaFacturaDeUsuario(nombreUsuario);
 }
-
-
-//    public void calculaPrecioTotal(List<Factura> facturas){
-//         int i = 0;
-//         Double precio = 0.;
-//         while (i<facturas.size()){
-//             int j = 0;
-            
-//             List<LineaFactura> lineas = lineaService.lineasFacturaDeFactura(facturas.get(i).getId());
-//             if(! (lineas==null)){
-//             while (j<lineas.size()){
-//                 precio += lineas.get(j).getAlquilerEspacio().getPrecioTotal();
-//                 j++;
-//             }
-//         }
-//             facturas.get(i).setPrecioTotal(precio);
-//             save(facturas.get(i));
-//             i++;
-//         }
-
-//    }
     
 }
 

@@ -43,31 +43,6 @@
         </tr>
        
     </table>
-
-    <c:choose>
-        <c:when test="${actividad.alquilerEspacio==null}">
-            <spring:url value="/eventos/{eventoId}/actividades/{actividadId}/alquilarEspacio" var="alquilarEspacioUrl">
-            <spring:param name="eventoId" value="${evento.id}"/>
-            <spring:param name="actividadId" value="${actividad.id}"/>
-            </spring:url>
-            <a href="${fn:escapeXml(alquilarEspacioUrl)}" class="btn btn-default">¿Quieres reservar el espacio?</a>
-        </c:when>
-        <c:otherwise>
-            <h2>Esta actividad ya tiene un lugar de realizacion asociado </h2>
-        </c:otherwise>
-    </c:choose>
-
-    <spring:url value="/eventos/{eventoId}/actividades/{actividadId}/nuevo" var="anadirExponenteUrl">
-        <spring:param name="eventoId" value="${evento.id}"/>
-        <spring:param name="actividadId" value="${actividad.id}"/>
-    </spring:url>
-    <a href="${fn:escapeXml(anadirExponenteUrl)}" class="btn btn-default">Añadir más exponentes</a>
-
-    <spring:url value="/eventos/{eventoId}/actividades/{actividadId}/borrarActividad" var="borrarActividadUrl">
-    <spring:param name="eventoId" value="${evento.id}"/>
-    <spring:param name="actividadId" value="${actividad.id}"/>
-</spring:url>
-<a href="${fn:escapeXml(borrarActividadUrl)}" class="btn btn-default">Borrar Actividad</a>
 <spring:url value="/eventos/{evento_id}" var="volverUrl">
 <spring:param name="evento_id" value="${evento.id}" />
 </spring:url>

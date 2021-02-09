@@ -22,5 +22,9 @@ public interface TipoEntradaRepository extends CrudRepository<TipoEntrada, Integ
     @Query("DELETE FROM TipoEntrada tipoEntrada WHERE tipoEntrada.evento.id IN(SELECT evento.id FROM Evento evento WHERE evento.organizacion.id=:organizacionId)")
     public void eliminaTipoEntradaDeOrganizacion(int organizacionId);
 
+    @Modifying
+    @Query("DELETE FROM TipoEntrada tipoEntrada WHERE tipoEntrada.evento.id=:eventoId")
+    public void eliminaTipoEntradaDeEvento(int eventoId);
+
     
 }
