@@ -24,4 +24,5 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer>{
     @Modifying
     @Query("DELETE FROM Actividad actividad WHERE actividad.evento.id IN(SELECT evento.id FROM Evento evento WHERE evento.organizacion.id=:organizacionId)")
     public void eliminaActividadesOrganizacion(int organizacionId);
+
 }

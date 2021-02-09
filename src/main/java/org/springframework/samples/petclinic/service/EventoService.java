@@ -126,6 +126,27 @@ public class EventoService {
 
     }
 
+    public void eliminaActividadesEnEvento(int eventoId){
+        if(actividadService.encuentraActividadesPorEvento(eventoId)!=null){
+            List<Actividad> lista = actividadService.encuentraActividadesPorEvento(eventoId);
+            for(int i =0; i<lista.size();i++){
+                if(lista.get(i).getAlquilerEspacio()==null){
+                    actividadService.borraActividadEvento(eventoId);
+                }else{
+                    throw new DataAccessException("No se puede borrar un evento que ya tiene un alquiler espacio asignado"){
+                        
+                    };
+                }
+            }
+        }
+    }
+
+    public void eliminaTipoEntradasEnEvento(int eventoId){
+        if(tipoEntradaService.encuentraTodasLasEntradasDeEvento(eventoId)!=null){
+                   tipoEntradaService.eliminaTipoEntradaEvento(eventoId);
+        }
+    }
+
     @Transactional
     public void borraSponsor(int id_evento) {
         eventoRepository.borraSponsor(id_evento);

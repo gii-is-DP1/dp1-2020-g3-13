@@ -7,12 +7,14 @@ import java.util.function.Predicate;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.repository.EventoRepository;
+import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
@@ -37,7 +39,7 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
     @Autowired
-    private EventoRepository eventoRepo;
+    private ActividadService actividadService;
 
     @Autowired
     private OrganizacionService organizacionService;
@@ -187,14 +189,16 @@ public class EventoController {
 
     }
 
-    @GetMapping(value = "/{eventoId}/delete")
-    public String deleteEvento(@PathVariable("eventoId") int eventoId, ModelMap model) {
+    @GetMapping(value = "/{eventoId}/borrarEvento")
+    public String borrarEvento(@PathVariable("eventoId") int eventoId, ModelMap model) {
         Organizacion org = this.organizacionService
                 .encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
         Evento evento = this.eventoService.findEventoById(eventoId);
         if ((org == evento.getOrganizacion()
                 || adminService.encuentraAdminPorNombre(SecurityContextHolder.getContext().getAuthentication().getName())!=null)
                 && !evento.getEsPublico()) {
+            this.eventoService.eliminaTipoEntradasEnEvento(eventoId);
+            this.eventoService.eliminaActividadesEnEvento(eventoId);
             this.eventoService.borraSponsor(eventoId);
             this.eventoService.delete(evento);
         } else {
@@ -203,5 +207,6 @@ public class EventoController {
 
         return "redirect:/eventos";
     }
+   
 
 }
