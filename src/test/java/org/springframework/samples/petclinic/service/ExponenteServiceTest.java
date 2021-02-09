@@ -27,8 +27,6 @@ import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class ExponenteServiceTest {
-
-    
         @Autowired
         private ExponenteService exponenteService;
         @Autowired
@@ -73,7 +71,7 @@ public class ExponenteServiceTest {
             actividadService.guardarActividad(actividadExpo);
             exponenteService.guardarExponente(exponente);
             exponenteService.anadirExponente(actividadExpo, exponente);
-    
+            assertTrue(actividadExpo.getExponentes().contains(exponente));
     
         }
 
@@ -109,7 +107,7 @@ public class ExponenteServiceTest {
             exponenteService.guardarExponente(exponente);
             exponenteService.guardarExponente(exponenteNuevo);
             exponenteService.anadirExponente(actividadExpo, exponenteNuevo);
-    
+            assertFalse(actividadExpo.getExponentes().contains(exponenteNuevo));
         }
 
         @Test

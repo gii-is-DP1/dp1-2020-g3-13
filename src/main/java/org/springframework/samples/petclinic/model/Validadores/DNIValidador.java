@@ -8,24 +8,15 @@ public class DNIValidador implements ConstraintValidator<DNIRestriccion, String>
 
 	@Override
     public void initialize(DNIRestriccion dni){
-
     }
 
     @Override
     public boolean isValid(String dni, ConstraintValidatorContext context) {
-        String letraMayuscula = ""; //Guardaremos la letra introducida en formato mayúscula
-			
-		// Aquí excluimos cadenas distintas a 9 caracteres que debe tener un dni y también si el último caracter no es una letra
+        String letraMayuscula = "";
 		if(dni.length() != 9 || Character.isLetter(dni.charAt(8)) == false ) {
 			return false;
 		}
-
-		
-		// Al superar la primera restricción, la letra la pasamos a mayúscula
 		letraMayuscula = (dni.substring(8)).toUpperCase();
-
-		// Por último validamos que sólo tengo 8 dígitos entre los 8 primeros caracteres y que la letra introducida es igual a la de la ecuación
-		// Llamamos a los métodos privados de la clase soloNumeros() y letraDNI()
 		if(soloNumeros(dni) == true && letraDNI(dni).equals(letraMayuscula)) {
 			return true;
 		}
@@ -37,8 +28,8 @@ public class DNIValidador implements ConstraintValidator<DNIRestriccion, String>
 		private boolean soloNumeros(String dni) {
 
 			int i, j = 0;
-			String numero = ""; // Es el número que se comprueba uno a uno por si hay alguna letra entre los 8 primeros dígitos
-			String miDNI = ""; // Guardamos en una cadena los números para después calcular la letra
+			String numero = "";
+			String miDNI = "";
 			String[] unoNueve = {"0","1","2","3","4","5","6","7","8","9"};
 
 			for(i = 0; i < dni.length() - 1; i++) {
@@ -60,9 +51,6 @@ public class DNIValidador implements ConstraintValidator<DNIRestriccion, String>
 		}
 
 		private String letraDNI(String dni) {
-		// El método es privado porque lo voy a usar internamente en esta clase, no se necesita fuera de ella
-
-		// pasar miNumero a integer
 		int miDNI = Integer.parseInt(dni.substring(0,8));
 		int resto = 0;
 		String miLetra = "";

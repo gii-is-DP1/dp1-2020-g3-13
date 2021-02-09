@@ -182,7 +182,7 @@ public class ActividadController {
                     
                 }
             }
-            alquilerService.alquilerLugarRealizacion(alquiler, actividad, org);
+            alquilerService.alquilerLugarRealizacion(alquiler, actividad);
             carritoService.anadirCarritoLugarRealizacion(actividad, org);
             model.addAttribute("alquilerEspacio", alquiler);
             return "redirect:/eventos/{evento_id}";

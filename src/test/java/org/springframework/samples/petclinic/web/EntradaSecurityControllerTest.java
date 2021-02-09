@@ -69,12 +69,4 @@ public class EntradaSecurityControllerTest {
              .andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/eventos/{eventoId}"));
     }
 
-    // @WithMockUser(username="clienteRandom",authorities = {"cliente"})
-    // @Test
-    // void postEntradaTieneErrores() throws Exception{
-    //     mockMvc.perform(post("/eventos/8/1/entrada").param("nombreAsistente", "Raul Rodriguez Mendez").with(csrf()))
-    //          .andExpect(model().attributeHasFieldErrors("entrada", "dni")).andExpect(view().name("redirect:/eventos/{eventoId}"));
-    // }
-
-
 }

@@ -23,4 +23,9 @@
                                         </div>
                                     </div>
                                 </form:form>
+                                <spring:url value="/eventos/{eventoId}" var="volverUrl">
+<spring:param name="eventoId" value="${evento.id}" />
+</spring:url>
+<a href="${fn:escapeXml(volverUrl)}" class="btn btn-default"><c:out value="Volver"/></a>        
+
  </petclinic:layout>
