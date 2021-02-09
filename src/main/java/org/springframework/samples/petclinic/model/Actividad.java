@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.samples.petclinic.model.Validadores.ActividadParaEventoRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechaInicioTimeRestriccion;
 import org.springframework.samples.petclinic.model.Validadores.FechasActividadRestriccion;
 import lombok.Getter;
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Table(name = "actividad")
 // Comprueba que la fecha de fin no es anterior a la de inicio
 @FechasActividadRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin")
+//@ActividadParaEventoRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin", evento_id = "evento_id")
 public class Actividad extends BaseEntity {
 
   @ManyToMany(cascade = CascadeType.ALL)

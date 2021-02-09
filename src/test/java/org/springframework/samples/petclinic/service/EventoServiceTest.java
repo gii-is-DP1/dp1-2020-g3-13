@@ -26,12 +26,12 @@ public class EventoServiceTest {
     @Autowired
     private EventoService eventoService;
     @Autowired
-    private EventoRepository eventoRepo;
+    private ActividadService actividadService;
 
     @Test
     public void testCountWithInitialData() {
         int count = eventoService.eventosCount();
-        assertEquals(count, 1);
+        assertEquals(count, 9);
     }
 
     @Test
@@ -40,21 +40,24 @@ public class EventoServiceTest {
         int cantidad = eventoService.eventosCount();
         Evento evento = new Evento();
         Evento eventoCreado = eventoService.findAll().iterator().next();
-        evento.setDescripcion("descripcion");
+        evento.setDescripcion("descripcion de mas de 65 caracteres para superar la validacion aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         evento.setFechaInicio(LocalDate.now().plusDays(10));
         evento.setFechaFin(LocalDate.now().plusDays(20));
-        evento.setId(cantidad);
+        evento.setId(cantidad+1);
         evento.setNombreEvento("nombreEvento");
         evento.setOrganizacion(eventoCreado.getOrganizacion());
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
+        evento.setEsPublico(false);
         eventoService.save(evento);
-        assertEquals(eventoService.eventosCount(), cantidad+1);
+        int cantidadDespues = eventoService.eventosCount();
+        assertEquals(cantidad+1, cantidadDespues);
     }
 
     @Test
     public void deberiaEliminarEventos(){
-        Evento evento = eventoService.findAll().iterator().next();
+        Evento evento = eventoService.findEventoById(8);
         int cantidadAntes = eventoService.eventosCount();
+        eventoService.eliminaActividadesEnEvento(evento.getId());
         eventoService.delete(evento);
         int cantidadDespues = eventoService.eventosCount();
         assertEquals(cantidadAntes-1, cantidadDespues);
@@ -78,6 +81,13 @@ public class EventoServiceTest {
         eventoMod.setNombreEvento("nombreEventoMod");
         eventoService.modificarEvento(eventoMod, evento);
         assertEquals(evento.getId(), eventoMod.getId());
+        assertEquals(evento.getNombreEvento(), "nombreEventoMod");
+    }
+
+    @Test
+    public void deberiaEliminarActividadesDelEvento(){
+        eventoService.eliminaActividadesEnEvento(3);
+        assertEquals(new ArrayList<Actividad>(), actividadService.encuentraActividadesPorEvento(3));
     }
    
 }
