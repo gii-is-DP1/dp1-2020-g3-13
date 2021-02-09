@@ -15,15 +15,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TipoEntradaService {
-    
 
     @Autowired
     private TipoEntradaRepository tipoEntradaRepository;
 
-    public int tipoEntradaCount(){
+    public int tipoEntradaCount() {
         return (int) tipoEntradaRepository.count();
     }
-    public Iterable<TipoEntrada> findAll(){
+
+    public Iterable<TipoEntrada> findAll() {
         return tipoEntradaRepository.findAll();
     }
 
@@ -31,24 +31,27 @@ public class TipoEntradaService {
         return tipoEntradaRepository.findById(id_tipoEntrada).get();
     }
 
-    public void anadirTipoEntrada(Evento evento, TipoEntrada tipoEntrada){
+    public void anadirTipoEntrada(Evento evento, TipoEntrada tipoEntrada) {
         tipoEntrada.setEvento(evento);
     }
-    public List<Entrada> EncontrarTodasLasEntradas(TipoEntrada tipoEntrada){
+
+    public List<Entrada> EncontrarTodasLasEntradas(TipoEntrada tipoEntrada) {
         return tipoEntradaRepository.findAllEntradas(tipoEntrada.getId());
     }
+
     @Transactional
-    public void guardar(TipoEntrada tipoEntrada){
+    public void guardar(TipoEntrada tipoEntrada) {
         tipoEntradaRepository.save(tipoEntrada);
     }
 
-    public void soloVentaAl90PorCiento(TipoEntrada tipoEntrada){
-        tipoEntrada.setNumEntradas((int) (tipoEntrada.getNumEntradas()*0.9));
+    public void soloVentaAl90PorCiento(TipoEntrada tipoEntrada) {
+        tipoEntrada.setNumEntradas((int) (tipoEntrada.getNumEntradas() * 0.9));
     }
-	public List<TipoEntrada> devuelveTodasLasEntradasParaElLugar(Integer id) {
+
+    public List<TipoEntrada> devuelveTodasLasEntradasParaElLugar(Integer id) {
         Iterator<TipoEntrada> tiposEntradaIterador = tipoEntradaRepository.findAll().iterator();
         List<TipoEntrada> res = new ArrayList<TipoEntrada>();
-        while(tiposEntradaIterador.hasNext()){
+        while (tiposEntradaIterador.hasNext()) {
             TipoEntrada tipoEntrada = tiposEntradaIterador.next();
             for (int i = 0; i < tipoEntrada.getActividades().size(); i++) {
                 if (tipoEntrada.getActividades().get(i).getId().equals(id)) {
@@ -58,14 +61,10 @@ public class TipoEntradaService {
 
         }
         return res;
-	}
-    @Transactional
-    public void borrarTipoEntrada(TipoEntrada te){
-        tipoEntradaRepository.delete(te);
     }
 
     @Transactional
-    public void eliminaTipoEntradaDeOrganizacion(int organizacionId){
+    public void eliminaTipoEntradaDeOrganizacion(int organizacionId) {
         tipoEntradaRepository.eliminaTipoEntradaDeOrganizacion(organizacionId);
     }
 
@@ -80,6 +79,5 @@ public class TipoEntradaService {
         return tipoEntradaRepository.encuentraTodasLasEntradasDeEvento(eventoId);
 
     }
-    
 
 }

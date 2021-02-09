@@ -35,7 +35,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/eventos")
 public class EventoController {
 
-
     @Autowired
     private EventoService eventoService;
     @Autowired
@@ -68,7 +67,7 @@ public class EventoController {
         } else {
             Iterable<Evento> eventos = eventoService.encuentraTodosPublicos();
             modelMap.addAttribute("eventos", eventos);
-        } 
+        }
 
         return vista;
     }
@@ -80,14 +79,14 @@ public class EventoController {
         mav.setViewName("eventos/detallesEvento");
         Evento evento = this.eventoService.findEventoById(eventosId);
         if (evento.getFechaInicio().isBefore(LocalDate.now())) {
-            mav.addObject("listaTipoEntrada",  tipo);
+            mav.addObject("listaTipoEntrada", tipo);
             mav.setViewName("eventos/eventoFinalizado");
             return mav;
         } else {
             if (!(clienteService.findClienteByUsuario(usuario) == null)) {
-                mav.addObject("listaTipoEntrada",  tipo);
+                mav.addObject("listaTipoEntrada", tipo);
                 mav.setViewName("eventos/detallesEventoCliente");
-            } else if (!(organizacionService.encuentraOrganizacionByUsuario(usuario) == null))  {
+            } else if (!(organizacionService.encuentraOrganizacionByUsuario(usuario) == null)) {
                 Organizacion org = organizacionService.encuentraOrganizacionByUsuario(usuario);
                 if (evento.getOrganizacion() != org) {
                     mav.setViewName("eventos/organizacionSinPermiso");
@@ -95,12 +94,12 @@ public class EventoController {
                 }
             }
         }
-        Predicate<Actividad> pred = x->x.getAlquilerEspacio()!=null ;
+        Predicate<Actividad> pred = x -> x.getAlquilerEspacio() != null;
         boolean res = false;
-        for(Actividad act : eventoService.getActividades(evento.getId())){
+        for (Actividad act : eventoService.getActividades(evento.getId())) {
             res = pred.test(act);
         }
-        mav.addObject("listaTipoEntrada",  tipo);
+        mav.addObject("listaTipoEntrada", tipo);
         mav.addObject("sponsors", this.eventoService.getSponsors(eventosId));
         mav.addObject(this.eventoService.findEventoById(eventosId));
         mav.addObject("actividades", this.eventoService.getActividades(eventosId));
@@ -122,16 +121,18 @@ public class EventoController {
     public String hacerEventoPublico(@PathVariable("eventosId") int eventosId, ModelMap modelMap) {
         Evento evento = eventoService.findEventoById(eventosId);
 
-        if ((eventoService.getActividades(evento.getId()).size() != 0 && carritoService.dimeCarritoOrganizacion(evento.getOrganizacion().getNombreOrganizacion())!=null)) {
-            Predicate<Actividad> pred = x->x.getAlquilerEspacio()!=null && carritoService.contadorElementosCarrito(carritoService.dimeCarritoOrganizacion(evento.getOrganizacion().getNombreOrganizacion()))==0;
+        if ((eventoService.getActividades(evento.getId()).size() != 0
+                && carritoService.dimeCarritoOrganizacion(evento.getOrganizacion().getNombreOrganizacion()) != null)) {
+            Predicate<Actividad> pred = x -> x.getAlquilerEspacio() != null && carritoService.contadorElementosCarrito(
+                    carritoService.dimeCarritoOrganizacion(evento.getOrganizacion().getNombreOrganizacion())) == 0;
             boolean res = false;
-            for(Actividad act : eventoService.getActividades(evento.getId())){
+            for (Actividad act : eventoService.getActividades(evento.getId())) {
                 res = pred.test(act);
             }
-            if (res==true){
+            if (res == true) {
                 eventoService.hacerPublico(eventosId);
                 return "redirect:/eventos/{eventosId}";
-            }else{
+            } else {
                 return "redirect:/carrito/organizacion";
             }
 
@@ -194,8 +195,8 @@ public class EventoController {
         Organizacion org = this.organizacionService
                 .encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
         Evento evento = this.eventoService.findEventoById(eventoId);
-        if ((org == evento.getOrganizacion()
-                || adminService.encuentraAdminPorNombre(SecurityContextHolder.getContext().getAuthentication().getName())!=null)
+        if ((org == evento.getOrganizacion() || adminService
+                .encuentraAdminPorNombre(SecurityContextHolder.getContext().getAuthentication().getName()) != null)
                 && !evento.getEsPublico()) {
             this.eventoService.eliminaTipoEntradasEnEvento(eventoId);
             this.eventoService.eliminaActividadesEnEvento(eventoId);

@@ -14,7 +14,9 @@ import org.springframework.samples.petclinic.model.NombreTiposEntrada;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.service.EventoService;
+import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.samples.petclinic.service.TipoEntradaService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -34,14 +36,14 @@ public class TipoEntradaController {
     private EventoService eventoService;
 
     @GetMapping(value = "/nuevo")
-    public String crearTipoEntrada(ModelMap modelMap, @PathVariable("evento_id") int eventoId){
+    public String crearTipoEntrada(ModelMap modelMap, @PathVariable("evento_id") int eventoId) {
         modelMap.addAttribute("tipoEntrada", new TipoEntrada());
-        List<NombreTiposEntrada> nombre =  Arrays.asList(NombreTiposEntrada.values());
+        List<NombreTiposEntrada> nombre = Arrays.asList(NombreTiposEntrada.values());
         modelMap.addAttribute("NombreTipoEntrada", nombre);
-        Predicate<Actividad> pred = x->x.getAlquilerEspacio()!=null ;
+        Predicate<Actividad> pred = x -> x.getAlquilerEspacio() != null;
         List<Actividad> acts = new ArrayList<Actividad>();
-        for(Actividad act : eventoService.getActividades(eventoId)){
-            if(pred.test(act)){
+        for (Actividad act : eventoService.getActividades(eventoId)) {
+            if (pred.test(act)) {
                 acts.add(act);
             }
         }
@@ -52,9 +54,9 @@ public class TipoEntradaController {
     @PostMapping(value = {"/nuevo", "/{tipo_entrada_id}/editar"})
     public String listadoTiposEntrada(@Valid TipoEntrada tipoEntrada, @PathVariable("evento_id") int eventoId ,BindingResult resultado, ModelMap modelMap){
         Evento evento = eventoService.findEventoById(eventoId);
-        if(resultado.hasErrors()){
+        if (resultado.hasErrors()) {
             modelMap.addAttribute("tipoEntrada", tipoEntrada);
-            List<NombreTiposEntrada> nombre =  Arrays.asList(NombreTiposEntrada.values());
+            List<NombreTiposEntrada> nombre = Arrays.asList(NombreTiposEntrada.values());
             modelMap.addAttribute("NombreTipoEntrada", nombre);
             return VIEWS_TIPOS_ENTRADAS_CREATE_OR_UPDATE_FORM;
         }else{
