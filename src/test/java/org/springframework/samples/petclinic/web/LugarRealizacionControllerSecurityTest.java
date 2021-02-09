@@ -58,7 +58,7 @@ public class LugarRealizacionControllerSecurityTest {
         mockMvc.perform(get("/lugaresRealizacion")).andExpect(status().isOk()).andExpect(view().name("/lugaresRealizacion/listadoLugaresRealizacion"))
         .andExpect(model().attributeExists("lugaresRealizacion"));
     }
-    //LISTADO LUGARES
+    //DETALLES LUGARES
     @WithMockUser(username="organizacion1", authorities = {"organizacion"})
     @Test
     void noDeberiaDevolverDetallesLugaresDeOrganizacion() throws Exception{
@@ -97,7 +97,7 @@ public class LugarRealizacionControllerSecurityTest {
         .andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/lugaresRealizacion/"));
     }
 
-    //CREAR LUGAR
+    //EDITAR LUGAR
     @WithMockUser(username="organizacion1", authorities = {"organizacion"})
     @Test
     void noDeberiaEditarLugarOrganizacion() throws Exception{
