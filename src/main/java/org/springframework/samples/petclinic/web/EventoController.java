@@ -12,7 +12,6 @@ import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.model.TipoEvento;
-import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
@@ -36,9 +35,6 @@ public class EventoController {
 
     @Autowired
     private EventoService eventoService;
-    @Autowired
-    private EventoRepository eventoRepo;
-
     @Autowired
     private OrganizacionService organizacionService;
     @Autowired
@@ -165,25 +161,6 @@ public class EventoController {
         }
 
     }
-
-    // @GetMapping(value = "/{eventoId}/edit")
-    // public String initUpdateEventoForm(@PathVariable("eventoId") int eventoId, ModelMap modelMap) {
-    //     Evento evento = this.eventoService.findEventoById(eventoId);
-    //     modelMap.addAttribute(evento);
-    //     return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
-    // }
-
-    // @PostMapping(value = "/{eventoId}/edit")
-    // public String processUpdateEventoForm(@Valid Evento evento, BindingResult result,
-    //         @PathVariable("eventoId") int eventoId) {
-    //     if (result.hasErrors()) {
-    //         return VIEWS_EVENTO_CREATE_OR_UPDATE_FORM;
-    //     } else {
-    //         this.eventoService.modifyEvento(evento, this.eventoService.findEventoById(eventoId));
-    //         return "redirect:/eventos/{eventoId}";
-    //     }
-
-    // }
 
     @GetMapping(value = "/{eventoId}/delete")
     public String deleteEvento(@PathVariable("eventoId") int eventoId, ModelMap model) {

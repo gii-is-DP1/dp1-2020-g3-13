@@ -12,7 +12,6 @@ import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
 import org.springframework.samples.petclinic.model.TipoEntrada;
-import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.TipoEntradaService;
 import org.springframework.stereotype.Controller;
@@ -32,8 +31,6 @@ public class TipoEntradaController {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private EventoService eventoService;
-    @Autowired
-    private EventoRepository eventoRepo;
 
     @GetMapping(value = "/nuevo")
     public String crearTipoEntrada(ModelMap modelMap, @PathVariable("evento_id") int eventoId){
@@ -51,7 +48,7 @@ public class TipoEntradaController {
         return VIEWS_TIPOS_ENTRADAS_CREATE_OR_UPDATE_FORM;
     }
 
-    @PostMapping(value = "/nuevo")
+    @PostMapping(value = {"/nuevo", "/{tipo_entrada_id}/editar"})
     public String listadoTiposEntrada(@Valid TipoEntrada tipoEntrada, @PathVariable("evento_id") int eventoId ,BindingResult resultado, ModelMap modelMap){
         Evento evento = eventoService.findEventoById(eventoId);
         if(resultado.hasErrors()){
@@ -60,10 +57,6 @@ public class TipoEntradaController {
             modelMap.addAttribute("NombreTipoEntrada", nombre);
             return VIEWS_TIPOS_ENTRADAS_CREATE_OR_UPDATE_FORM;
         }else{
-
-            //TODO
-            //Terminar el tipoEntrada
-            System.out.println(tipoEntrada.getActividades().size());
             tipoEntradaService.anadirTipoEntrada(evento, tipoEntrada);
             tipoEntradaService.soloVentaAl90PorCiento(tipoEntrada);
             tipoEntradaService.guardar(tipoEntrada);
@@ -71,5 +64,24 @@ public class TipoEntradaController {
             modelMap.addAttribute("message", "Tipo de Entrada creada satisfactoriamente!");
             return "redirect:/eventos/{evento_id}";
         }
+    }
+
+
+    @GetMapping(value = "/{tipo_entrada_id}/editar")
+    public String editarTipoEntradaForm(ModelMap modelMap,@PathVariable("evento_id") int eventoId,@PathVariable("tipo_entrada_id") int tipoEntradaId){
+        TipoEntrada tipoEntrada = tipoEntradaService.findById(tipoEntradaId);
+        modelMap.addAttribute("tipoEntrada",tipoEntrada);
+        List<NombreTiposEntrada> nombre =  Arrays.asList(NombreTiposEntrada.values());
+        modelMap.addAttribute("NombreTipoEntrada", nombre);
+        Predicate<Actividad> pred = x->x.getAlquilerEspacio()!=null ;
+        List<Actividad> acts = new ArrayList<Actividad>();
+        tipoEntrada.getActividades().clear();
+        for(Actividad act : eventoService.getActividades(eventoId)){
+            if(pred.test(act)){
+                acts.add(act);
+            }
+        }
+        modelMap.addAttribute("actividades", acts);
+        return VIEWS_TIPOS_ENTRADAS_CREATE_OR_UPDATE_FORM;
     }
 }

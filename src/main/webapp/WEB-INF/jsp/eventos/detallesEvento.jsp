@@ -110,11 +110,24 @@
                                     <p>Entradas disponibles:
                                         <c:out value="${tipoEntradas.numEntradas}" />
                                     </p>
+
+                                    <c:choose>
+                                        <c:when test="${not evento.esPublico}">
+                                            
+                                            <spring:url value="{eventoId}/tipoEntradas/{tipo_entrada_id}/editar" var="tipoEntradasUrlEdit">
+                                            <spring:param name="eventoId" value="${evento.id}" />
+                                            <spring:param name="tipo_entrada_id" value="${tipoEntradas.id}" />
+                                            </spring:url>
+                                            <a href="${fn:escapeXml(tipoEntradasUrlEdit)}">
+                                            <c:out value="Editar entrada" /><br></a>
+                                        </c:when>
+                                    </c:choose>  
                                 </c:forEach>
                             </td>
                             </tr>
                         </table>
-                                                
+                                
+
                         <c:choose>
                             <c:when test="${not evento.esPublico}">
                                 <spring:url value="{eventoId}/actividades/nuevo" var="actividadesUrl">
