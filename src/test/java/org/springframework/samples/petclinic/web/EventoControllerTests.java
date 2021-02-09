@@ -16,6 +16,7 @@ import org.springframework.samples.petclinic.model.TipoEvento;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.AdminService;
+import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
@@ -57,6 +58,8 @@ public class EventoControllerTests {
     private AdminService adminService;
     @MockBean
     private TipoEntradaService tipoEntradaService;
+    @MockBean
+    private CarritoService carritoService;
 
     @Test
     public void contextLoads() throws Exception {
@@ -93,7 +96,7 @@ public class EventoControllerTests {
     }
     @WithMockUser
     @Test
-    public void testDeberiaMostrarFormularioDeInscripccion() throws Exception{
+    public void testDeberiaMostrarFormularioDeInscripcion() throws Exception{
         mockMvc.perform(get("/eventos/nuevo")).andExpect(status().isOk()).andExpect(model().attributeExists("evento"))
         .andExpect(view().name("eventos/editarEvento"));
 
