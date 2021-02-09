@@ -53,7 +53,7 @@
                                             <spring:param name="eventoId" value="${evento.id}" />
                                             <spring:param name="actividadId" value="${actividad.id}" />
                                             </spring:url>
-                                            <a href="${fn:escapeXml(detallesActividadesUrl)}">
+                                            <a class="btn btn-default" href="${fn:escapeXml(detallesActividadesUrl)}">
                                             <c:out value="Ver más" /><br></a>                                            
                                         </div>
 
@@ -96,7 +96,7 @@
                                             <spring:param name="eventoId" value="${evento.id}" />
                                             <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
                                         </spring:url>
-                                        <a href="${fn:escapeXml(ventaUrl)}">
+                                        <a class="btn btn-default" href="${fn:escapeXml(ventaUrl)}">
                                             <c:out value="Comprar" /><br></a>
                             
                                 
@@ -112,7 +112,7 @@
                             <spring:url value="/eventos/{eventoId}/anadirEventosFavoritos" var="favoritosUrl">
                             <spring:param name="eventoId" value="${evento.id}" />
                             </spring:url>
-                            <a href="${fn:escapeXml(favoritosUrl)}">
+                            <a class="btn btn-default" href="${fn:escapeXml(favoritosUrl)}">
                             <c:out value="Añadir a favoritos" /><br></a>
                             </form>
                      </petclinic:layout>

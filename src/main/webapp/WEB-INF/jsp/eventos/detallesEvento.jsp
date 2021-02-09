@@ -53,7 +53,7 @@
                                             <spring:param name="eventoId" value="${evento.id}" />
                                             <spring:param name="actividadId" value="${actividad.id}" />
                                             </spring:url>
-                                            <a href="${fn:escapeXml(detallesActividadesUrl)}">
+                                            <a class="btn btn-default" href="${fn:escapeXml(detallesActividadesUrl)}">
                                             <c:out value="Ver más" /><br></a>
                                             <c:choose>
                                                 <c:when test="${not evento.esPublico}">
@@ -61,7 +61,7 @@
                                                     <spring:param name="eventoId" value="${evento.id}" />
                                                     <spring:param name="actividadId" value="${actividad.id}" />
                                                     </spring:url>
-                                                    <a href="${fn:escapeXml(modificarActividadUrl)}">
+                                                    <a class="btn btn-default" href="${fn:escapeXml(modificarActividadUrl)}">
                                                     <c:out value="Modificar Actividad"/><br></a>
                                                 </c:when>
                                             </c:choose>
@@ -107,7 +107,7 @@
                                 <spring:param name="evento_id" value="${evento.id}" />
                                 <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
                              </spring:url>
-                                <a href="${fn:escapeXml(borrarTipoEntradaUrl)}">
+                                <a class="btn btn-default" href="${fn:escapeXml(borrarTipoEntradaUrl)}">
                                 <c:out value="Borrar Tipo Entrada" /><br></a>
 
                                     <c:choose>
@@ -132,25 +132,31 @@
                                 <spring:url value="{eventoId}/actividades/nuevo" var="actividadesUrl">
                                 <spring:param name="eventoId" value="${evento.id}" />
                              </spring:url>
-                                <a href="${fn:escapeXml(actividadesUrl)}">
+                                <a class="btn btn-default" href="${fn:escapeXml(actividadesUrl)}">
                                 <c:out value="Añadir actividades" /><br></a>
                                 <spring:url value="{eventoId}/sponsors/nuevo" var="sponsorUrl">
                                 <spring:param name="eventoId" value="${evento.id}" />
                              </spring:url>
-                                <a href="${fn:escapeXml(sponsorUrl)}">
+                                <a class="btn btn-default" href="${fn:escapeXml(sponsorUrl)}">
                                 <c:out value="Añadir Sponsors" /><br></a>
         
         
                                 <spring:url value="{eventoId}/tipoEntradas/nuevo" var="tipoEntradasUrl">
                                 <spring:param name="eventoId" value="${evento.id}" />
                                 </spring:url>
-                                <a href="${fn:escapeXml(tipoEntradasUrl)}">
+                                <a class="btn btn-default" href="${fn:escapeXml(tipoEntradasUrl)}">
                                 <c:out value="Añadir Tipos de Entradas" /><br></a>
                                 <spring:url value="/eventos/{eventoId}/borrarEvento" var="borrarEvento">
                                 <spring:param name="eventoId" value="${evento.id}" />
-                                </spring:url>
+                                </spring:url>   
+                                    <spring:url value="/eventos/{eventoId}/editar" var="editarEvento">
+                                    <spring:param name="eventoId" value="${evento.id}" />
+                                    </spring:url>
+        
+                                <a href="${fn:escapeXml(editarEvento)}" class="btn btn-default">Editar Evento</a>
+
     
-                                <a href="${fn:escapeXml(borrarEvento)}" class="btn btn-default">Eliminar evento</a>
+                                <a class="btn btn-default" href="${fn:escapeXml(borrarEvento)}" class="btn btn-default">Eliminar evento</a>
                             </c:when>
                         </c:choose>  
 
@@ -171,17 +177,7 @@
                             </div>
                         </c:when>
                         </c:choose> 
-                        <c:choose>
-                            <c:when test="${not evento.esPublico}">
-                                <div class="editarEvento">    
-                                <spring:url value="/eventos/{eventoId}/editar" var="editarEvento">
-                                <spring:param name="eventoId" value="${evento.id}" />
-                                </spring:url>
-    
-                            <a href="${fn:escapeXml(editarEvento)}" class="btn btn-default">Editar Evento</a>
-                            </div>
-                        </c:when>
-                        </c:choose>    
+  
 
 
  
