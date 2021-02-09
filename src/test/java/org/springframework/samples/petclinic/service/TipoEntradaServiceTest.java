@@ -23,7 +23,7 @@ public class TipoEntradaServiceTest {
     @Test
     public void contarDatosIniciales() {
         int count = tipoEntradaService.tipoEntradaCount();
-        assertEquals(count, 0);
+        assertEquals(count, 13);
 
     }
 

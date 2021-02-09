@@ -21,7 +21,7 @@ public class PeticionServiceTest {
     @Test
     public void testCountWithInitialData(){
         int count= peticionService.peticionCount();
-        assertEquals(count, 0);
+        assertEquals(count, 4);
     }
   
     @Test
@@ -61,7 +61,10 @@ public class PeticionServiceTest {
         peti.setCif("J76767676");
         peti.setEmail("email@email.email");
         peti.setInfo("info");
+        peti.setId(5);
         peticionService.createPeticion(peti);
+        peticionService.generaOrganizacionAPartirDePeticion(peti.getId());
+
         int organizacionDespues = organizacionService.organizacionCount();
         assertEquals(organizacionAntes+1, organizacionDespues);
     }
