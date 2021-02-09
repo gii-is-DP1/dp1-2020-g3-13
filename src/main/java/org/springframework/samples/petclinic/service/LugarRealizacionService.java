@@ -17,11 +17,6 @@ public class LugarRealizacionService {
     @Autowired
     private LugarRealizacionRepository lugarRealizacionRepository;
 
-    //@Autowired
-    // public LugarRealizacionService(LugarRealizacionRepository lugarRealizacionRepository){
-    //     this.lugarRealizacionRepository = lugarRealizacionRepository;
-    // }
-
     @Transactional
     public int lugaresCount(){
         return (int) lugarRealizacionRepository.count();
