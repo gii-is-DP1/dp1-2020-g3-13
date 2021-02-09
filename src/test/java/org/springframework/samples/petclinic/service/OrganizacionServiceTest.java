@@ -14,11 +14,12 @@ import org.springframework.stereotype.Service;
 public class OrganizacionServiceTest {
     @Autowired
     private OrganizacionService organizacionService;
+    
 
     @Test
     public void testCountWithInitialDataOrganizational(){
         int count = organizacionService.organizacionCount();
-        assertEquals(count, 0);
+        assertEquals(count, 2);
     }
     @Test
     public void deberiaModificarMiPerfl(){
@@ -31,19 +32,10 @@ public class OrganizacionServiceTest {
 
     @Test
     public void deberiaEliminarMiPerfil(){
-        Usuario usuario = new Usuario();
-        usuario.setNombreUsuario("nombreUsuario");
-        usuario.setPassword("passwordAd23");
-        Organizacion organizacion = new Organizacion();
-        organizacion.setCif("J87878787");
-        organizacion.setEmail("email@email.com");
-        organizacion.setId(1);
-        organizacion.setInfo("info de una organizacion cualquiera");
-        organizacion.setNombreOrganizacion("nombreOrganizacion");
-        organizacion.setUsuario(usuario);
-        organizacionService.saveOrganizacion(organizacion);
+        
+      
         int cuentaOrganizacionAntes = organizacionService.organizacionCount();
-        organizacionService.deleteOrganizacion(organizacion);
+        organizacionService.deleteOrganizacion(organizacionService.encuentraOrganizacionByUsuario("organizacion1"));
         int cuentaOrganizacionDespues = organizacionService.organizacionCount();
         assertEquals(cuentaOrganizacionAntes-1, cuentaOrganizacionDespues);
         
