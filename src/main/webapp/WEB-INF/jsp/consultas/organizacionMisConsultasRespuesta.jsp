@@ -26,6 +26,9 @@
                                     <petclinic:inputFieldHidden label="Descripcion" name="descripcion"  value="${consulta.descripcion}"/>
                                     <petclinic:inputFieldHidden label="Descripcion" name="asunto"  value="${consulta.asunto}"/>
 
+                                    <spring:url value="/consultas/organizacion/misConsultas" var="consultasUrl">
+                                </spring:url>
+                                <a href="${fn:escapeXml(consultasUrl)}" class="btn btn-default"><c:out value="Volver"/></a>
                                     
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
@@ -33,4 +36,5 @@
                                         </div>
                                     </div>
                                 </form:form>
+
                             </petclinic:layout>

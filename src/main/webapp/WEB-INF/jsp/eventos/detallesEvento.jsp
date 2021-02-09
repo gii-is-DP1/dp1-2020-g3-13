@@ -184,6 +184,11 @@
                         </c:choose>    
 
 
+                        <spring:url value="/eventos" var="eventosUrl">
+                    </spring:url>
+                    <a href="${fn:escapeXml(eventosUrl)}" class="btn btn-default"><c:out value="Volver"/></a>
+
+
  
 
 

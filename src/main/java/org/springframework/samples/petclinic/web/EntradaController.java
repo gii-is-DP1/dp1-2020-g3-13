@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Carrito;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
+import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EntradaService;
+import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,11 +35,15 @@ public class EntradaController {
     private CarritoService carritoService;
     @Autowired
     private ClienteService clienteService;
+	@Autowired
+	private EventoService eventoService;
 
     @GetMapping(value ="/entrada")
-	public String initCreationForm(Map<String,Object> model) {
+	public String initCreationForm(Map<String,Object> model, @PathVariable("eventoId") int eventoId, @PathVariable("tipoEntradasId") int tipoEntradasId) {
 		Entrada entrada = new Entrada();
+		Evento evento = eventoService.findEventoById(eventoId);	
 		model.put("entrada", entrada);
+		model.put("evento", evento);
 		return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 	}
 
