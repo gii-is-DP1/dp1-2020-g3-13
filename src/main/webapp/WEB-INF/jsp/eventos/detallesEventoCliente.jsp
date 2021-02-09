@@ -115,4 +115,8 @@
                             <a href="${fn:escapeXml(favoritosUrl)}">
                             <c:out value="Añadir a favoritos" /><br></a>
                             </form>
+
+                            <spring:url value="/eventos" var="eventosUrl">
+                        </spring:url>
+                        <a href="${fn:escapeXml(eventosUrl)}" class="btn btn-default"><c:out value="Volver"/></a>
                      </petclinic:layout>

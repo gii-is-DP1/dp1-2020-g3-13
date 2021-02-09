@@ -38,7 +38,7 @@
                                                 <spring:param name="eventosId" value="${evento.id}" />
                                             </spring:url>
                                             <a href="${fn:escapeXml(eventoUrl)}">
-                                                <p class="enlaceEvento"> <i class="fas fa-plus"></i> A&ntilde;adir entrada
+                                                <p class="enlaceEvento"> <i class="fa fa-calendar"></i> Detalle
                                                 </p>
                                             </a>
                                             <spring:url value="/consultas/{eventoId}/nuevo" var="nuevaConsultaUrl">
