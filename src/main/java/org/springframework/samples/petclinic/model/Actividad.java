@@ -25,7 +25,7 @@ import lombok.Setter;
 @Table(name = "actividad")
 // Comprueba que la fecha de fin no es anterior a la de inicio
 @FechasActividadRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin")
-@ActividadParaEventoRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin", evento_id = "evento_id")
+//@ActividadParaEventoRestriccion(fechaInicio = "fechaInicio", fechaFin = "fechaFin", evento_id = "evento_id")
 public class Actividad extends BaseEntity {
 
   @ManyToMany(cascade = CascadeType.ALL)
