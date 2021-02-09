@@ -103,6 +103,12 @@
                                     <p>Entradas disponibles:
                                         <c:out value="${tipoEntradas.numEntradas}" />
                                     </p>
+                                    <spring:url value="/eventos/{evento_id}/tipoEntradas/{tipoEntradaId}/borrarTiposEntradas" var="borrarTipoEntradaUrl">
+                                <spring:param name="evento_id" value="${evento.id}" />
+                                <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
+                             </spring:url>
+                                <a href="${fn:escapeXml(borrarTipoEntradaUrl)}">
+                                <c:out value="Borrar Tipo Entrada" /><br></a>
                                 </c:forEach>
                             </td>
                             </tr>
@@ -127,7 +133,7 @@
                                 </spring:url>
                                 <a href="${fn:escapeXml(tipoEntradasUrl)}">
                                 <c:out value="Añadir Tipos de Entradas" /><br></a>
-                                <spring:url value="/eventos/{eventoId}/delete" var="borrarEvento">
+                                <spring:url value="/eventos/{eventoId}/borrarEvento" var="borrarEvento">
                                 <spring:param name="eventoId" value="${evento.id}" />
                                 </spring:url>
     

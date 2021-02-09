@@ -98,10 +98,21 @@
                                         </spring:url>
                                         <a href="${fn:escapeXml(ventaUrl)}">
                                             <c:out value="Comprar" /><br></a>
-
+                            
+                                
 
                                 </c:forEach>
+                                
+     
                             </td>
+
                             </tr>
                         </table>
+                        <form action="favoritos" method="POST">
+                            <spring:url value="/eventos/{eventoId}/anadirEventosFavoritos" var="favoritosUrl">
+                            <spring:param name="eventoId" value="${evento.id}" />
+                            </spring:url>
+                            <a href="${fn:escapeXml(favoritosUrl)}">
+                            <c:out value="Añadir a favoritos" /><br></a>
+                            </form>
                      </petclinic:layout>

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
+import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.TipoEntrada;
 import org.springframework.samples.petclinic.repository.EventoRepository;
 import org.springframework.samples.petclinic.service.EventoService;
@@ -71,5 +72,11 @@ public class TipoEntradaController {
             modelMap.addAttribute("message", "Tipo de Entrada creada satisfactoriamente!");
             return "redirect:/eventos/{evento_id}";
         }
+    }
+    @GetMapping(value = "{tipoEntradaId}/borrarTiposEntradas")
+    public String borrarTipoEntradaEvento(@PathVariable("evento_id") int eventoId, @PathVariable("tipoEntradaId") int tipoEntradaId, ModelMap model) {
+        TipoEntrada tipoEntrada = tipoEntradaService.findById(tipoEntradaId);
+        tipoEntradaService.borrarTipoEntrada(tipoEntrada);
+        return "redirect:/eventos/{evento_id}";
     }
 }
