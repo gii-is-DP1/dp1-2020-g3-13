@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
 import org.springframework.samples.petclinic.repository.LugarRealizacionRepository;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,10 @@ public class LugarRealizacionService {
     @Transactional
 	public LugarRealizacion findById(int lugarId) throws DataAccessException {
 		return lugarRealizacionRepository.findById(lugarId);
+    }
+    @Transactional
+    public List<AlquilerEspacio> encuentraAlquileresPorLugarId(int lugarId){
+        return lugarRealizacionRepository.alquilerEspacioDeLugar(lugarId);
     }
 
 }

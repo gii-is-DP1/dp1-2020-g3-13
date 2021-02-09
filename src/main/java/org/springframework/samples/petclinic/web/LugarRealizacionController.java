@@ -3,7 +3,10 @@ package org.springframework.samples.petclinic.web;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.AlquilerEspacio;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
+import org.springframework.samples.petclinic.service.ActividadService;
+import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +26,12 @@ public class LugarRealizacionController {
     
     @Autowired
 	private LugarRealizacionService lugarRealizacionService;
+
+	@Autowired
+	private AlquilerEspacioService alquilerEspacioService;
+
+	@Autowired
+	private ActividadService actividadService;
 
     @GetMapping()
     public String listadoLugaresRealizacion(ModelMap modelMap){
@@ -76,13 +85,15 @@ public class LugarRealizacionController {
 			return "redirect:/lugaresRealizacion/";		
 		}
 	}
-	// @GetMapping(value = "/{lugarRealizacionId}/delete")
-    // public String deleteLineaFacturaCliente(@PathVariable("lugarRealizacionId") int lugarRealizacionId, ModelMap model){ 
-    //     LugarRealizacion lugar = lugarRealizacionService.findById(lugarRealizacionId);
-    //     carritoService.borrarLineaFactura(carrito, lineaFacturaId);
-    //     entradaService.borrarEntrada(entradaService.encuentraEntradaPorId(linea.getEntrada().getId()));
-    //     lineaFacturaService.borrarLinea(linea);
-    //     model.addAttribute("carrito", carrito);
-    //     return "redirect:/carrito/cliente";
-    // }
+	@GetMapping(value = "/{lugarRealizacionId}/borrar")
+    public String deleteLineaFacturaCliente(@PathVariable("lugarRealizacionId") int lugarRealizacionId, ModelMap model){ 
+        LugarRealizacion lugar = lugarRealizacionService.findById(lugarRealizacionId);
+        for(AlquilerEspacio alq : lugarRealizacionService.encuentraAlquileresPorLugarId(lugar.getId())){
+			actividadService.quitarAlquilerEspacio(alquilerEspacioService.encuentraActividad(alq.getId()));
+			alquilerEspacioService.borrarAlquiler(alq);
+
+		}
+		lugarRealizacionService.borrarLugarRealizacion(lugar);
+        return "redirect:/lugaresRealizacion";
+    }
 }

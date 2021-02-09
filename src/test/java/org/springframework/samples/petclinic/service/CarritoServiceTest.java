@@ -51,7 +51,7 @@ public class CarritoServiceTest {
     }
     @Test
     public void deberiaGenerarFactura(){
-        Integer contFacturasInicial = facturaService.facturaCount();
+        Integer contFacturasInicial = facturaService.cuentaFactura();
         Evento eventoPrueba = eventoService.findAll().iterator().next();
         Usuario usuario = usuarioService.findUsuario("cliente1");
         Cliente cliente = clienteService.findClienteByUsuario(usuario.getNombreUsuario());
@@ -67,7 +67,7 @@ public class CarritoServiceTest {
         carritoService.anadirCarrito(entradaPrueba, cliente);
         Carrito carritoPrueba= carritoService.dimeCarritoUsuario(usuario.getNombreUsuario());
         carritoService.generarFacturaCarrito(carritoPrueba, cliente);
-        Integer contFacturasActual = facturaService.facturaCount();
+        Integer contFacturasActual = facturaService.cuentaFactura();
         assertEquals(contFacturasInicial+1, contFacturasActual);
 
 

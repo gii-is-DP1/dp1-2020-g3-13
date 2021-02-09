@@ -13,6 +13,7 @@ import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EntradaService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,10 +42,10 @@ public class EntradaController {
 	}
 
     @PostMapping(value = "/entrada")
-	public String processCreationForm(@Valid Entrada entrada,@PathVariable("eventoId") int eventoId,@PathVariable("tipoEntradasId") int tipoEntradaId, BindingResult result) {
+	public String processCreationForm(@Valid Entrada entrada,@PathVariable("eventoId") int eventoId,@PathVariable("tipoEntradasId") int tipoEntradaId, BindingResult result, ModelMap model) {
 		Carrito car= carritoService.dimeCarritoUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
 		List<String> nAsists= carritoService.dimeNombreAsistentes(car,eventoId);
-		
+		model.addAttribute("entrada", entrada);
 		if (result.hasErrors()) {
 			return VIEWS_ENTRADA_CREATE_OR_UPDATE_FORM;
 		}
