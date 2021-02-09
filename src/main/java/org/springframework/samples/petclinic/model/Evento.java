@@ -12,6 +12,8 @@ import javax.persistence.Column;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -23,24 +25,18 @@ public class Evento extends BaseEntity {
     private TipoEvento tipoEvento;
 
     @Column(name = "descripcion")
-    @NotEmpty
+    @NotBlank(message = "La descripción debe estar comprendida entre 65 y 150 caracteres, además de no estar vacía")
+    @Size(min = 65, max = 150, message = "La descripción debe estar comprendida entre 65 y 150 caracteres, además de no estar vacía")
     private String descripcion;
 
     @Column(name = "nombreEvento")
-    @NotEmpty
+    @NotBlank(message = "El nombre del evento debe estar comprendido entre 10 y 100 caracteres, además de no estar vacío")
+    @Size(min = 10, max = 100, message = "El nombre del evento debe estar comprendido entre 10 y 100 caracteres, además de no estar vacío")
     private String nombreEvento;
 
     @Column(name = "fechaInicio")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaInicio;
-
-    @Column(name = "medidasSanitarias")
-    @NotEmpty
-    private String medidasSanitarias;
-
-    @Column(name = "categoria")
-    @NotEmpty
-    private String categoria;
 
     @Column(name = "fechaFin")
     @DateTimeFormat(pattern = "yyyy/MM/dd")

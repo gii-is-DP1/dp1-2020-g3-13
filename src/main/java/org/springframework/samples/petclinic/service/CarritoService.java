@@ -58,7 +58,7 @@ public class CarritoService {
     @Transactional
     public void actualizaCarritoAcero(Carrito carrito){
       for (LineaFactura  lf : carritoRepo.dimeLineaFacturaCarrito(carrito.getId())) {
-        lineaService.borrarLinea(lf);
+        lf.setCarrito(null);
       } 
         carrito.setTotal(0.0);
         carritoRepo.save(carrito);

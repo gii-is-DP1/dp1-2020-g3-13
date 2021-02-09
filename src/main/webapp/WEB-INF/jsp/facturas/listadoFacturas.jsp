@@ -15,7 +15,8 @@
         <tr>
             <th style="width: 150px;">Num. Factura</th>
             <th style="width: 200px;">Fecha de la Factura</th>
-            <th style="width: 200px;">PDF</th>
+            <th style="width: 200px;">Precio Total</th>
+            <th style="width: 200px;">Más</th>
         </tr>
         </thead>
         <tbody>
@@ -32,13 +33,23 @@
 
                 </td>
                 <td>
-                    <spring:url value="/facturas" var="facturasUrl">
-                    <spring:param name="facturasId" value="${facturas.id}"/>
+
+                    <c:out value="${facturas.precioTotal}" />
+
+                </td>
+                <td>
+                    <spring:url value="/facturas/{facturaId}" var="facturasUrl">
+                    <spring:param name="facturaId" value="${facturas.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(facturasUrl)}"><c:out value="Descargar PDF"/></a>
+                    <a href="${fn:escapeXml(facturasUrl)}"><c:out value="Muestra Detalles Factura"/></a>
                 </td>              
             </tr>
         </c:forEach>
+
+            
         </tbody>
+        <spring:url value="/eventos" var="volverUrl">
+                    </spring:url>
+                    <a href="${fn:escapeXml(volverUrl)}" class="btn btn-default"><c:out value="Volver"/></a> 
     </table>
 </petclinic:layout>
