@@ -19,11 +19,14 @@
                                         <div class="evento">
                                             <c:choose>
                                             <c:when test="${evento.esPublico}">
-
-                                            <p class="tituloEvento">
+                                                <spring:url value="/eventos/{eventosId}" var="eventoUrl">
+                                                <spring:param name="eventosId" value="${evento.id}" />
+                                                </spring:url>
+                                                <a href="${fn:escapeXml(eventoUrl)}">
+                                                <p class="tituloEvento">
                                                 <c:out value="${evento.nombreEvento}" />
-                                            </p>
-
+                                                </p>
+                                            </a>
 
                                             <p class="tipoEvento"><i class="fas fa-theater-masks"></i>
                                                 <c:out value="${evento.tipoEvento}" />
