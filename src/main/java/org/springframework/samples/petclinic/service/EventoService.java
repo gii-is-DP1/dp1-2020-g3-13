@@ -3,12 +3,9 @@ package org.springframework.samples.petclinic.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Entrada;
@@ -27,6 +24,8 @@ public class EventoService {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private ActividadService actividadService;
 
     public int eventosCount() {
         return (int) eventoRepository.count();
@@ -55,7 +54,8 @@ public class EventoService {
         return eventoRepository.findById(eventoId).orElse(null);
     }
 
-    public void modifyEvento(Evento evento, Evento eventoActual) throws DataAccessException {
+    public void modificarEvento(Evento evento, Evento eventoActual) throws DataAccessException {
+        evento.setOrganizacion(eventoActual.getOrganizacion());
         evento.setId(eventoActual.getId());
         save(evento);
     }
@@ -66,7 +66,7 @@ public class EventoService {
 
     public List<Entrada> encontrarEntradasEvento(Evento evento) {
         List<Entrada> entradas = new ArrayList<Entrada>();
-        List<TipoEntrada> tiposEntrada = evento.getTipoEntradas();
+        List<TipoEntrada> tiposEntrada = tipoEntradaService.encuentraTodasLasEntradasDeEvento(evento.getId());
         int i = 0;
         while (i < tiposEntrada.size()) {
             entradas.addAll(tipoEntradaService.EncontrarTodasLasEntradas(tiposEntrada.get(i)));
@@ -124,14 +124,40 @@ public class EventoService {
     public List<Sponsor> getSponsors(int id_evento) {
         return eventoRepository.getSponsors(id_evento);
 
+    }
 
+    public void eliminaActividadesEnEvento(int eventoId){
+        if(actividadService.encuentraActividadesPorEvento(eventoId)!=null){
+            List<Actividad> lista = actividadService.encuentraActividadesPorEvento(eventoId);
+            for(int i =0; i<lista.size();i++){
+                if(lista.get(i).getAlquilerEspacio()==null){
+                    actividadService.borraActividadEvento(eventoId);
+                }else{
+                    throw new DataAccessException("No se puede borrar un evento que ya tiene un alquiler espacio asignado"){
+                        
+                    };
+                }
+            }
+        }
+    }
+
+    public void eliminaTipoEntradasEnEvento(int eventoId){
+        if(tipoEntradaService.encuentraTodasLasEntradasDeEvento(eventoId)!=null){
+                   tipoEntradaService.eliminaTipoEntradaEvento(eventoId);
+        }
     }
 
     @Transactional
     public void borraSponsor(int id_evento) {
         eventoRepository.borraSponsor(id_evento);
     }
-    public List<TipoEntrada> getTipoEntradaPorEvento(int eventoId){
+
+    public List<TipoEntrada> getTipoEntradaPorEvento(int eventoId) {
         return eventoRepository.getTipoEntrada(eventoId);
+    }
+
+    @Transactional
+    public void eliminaEventosDeOrganizacion(int organizacionId) {
+        eventoRepository.eliminaEventosDeOrganizacion(organizacionId);
     }
 }

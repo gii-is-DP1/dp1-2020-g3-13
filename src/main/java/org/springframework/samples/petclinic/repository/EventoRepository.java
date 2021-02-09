@@ -29,4 +29,8 @@ public interface EventoRepository extends CrudRepository<Evento, Integer> {
 
     @Query("SELECT tipoEntrada FROM TipoEntrada tipoEntrada WHERE tipoEntrada.evento.id=:id_evento")
     public List<TipoEntrada> getTipoEntrada(int id_evento);
+    
+    @Modifying
+    @Query("DELETE FROM Evento evento WHERE evento.organizacion.id=:organizacionId")
+    public void eliminaEventosDeOrganizacion(int organizacionId);
 }

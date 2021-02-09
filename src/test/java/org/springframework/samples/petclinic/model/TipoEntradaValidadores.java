@@ -1,20 +1,18 @@
 package org.springframework.samples.petclinic.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.isA;
-
-import org.assertj.core.condition.AnyOf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
+
 
 public class TipoEntradaValidadores {
 	LugarRealizacion lugarRealizacion = new LugarRealizacion();
@@ -218,11 +216,11 @@ public class TipoEntradaValidadores {
 		tipoEntrada.setNumEntradas(10);
 		tipoEntrada.setPrecio(1.0);
 		// Validamos
+		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
-		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(
 				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
 
@@ -301,7 +299,7 @@ public class TipoEntradaValidadores {
 		// Validamos
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(1);
+		assertThat(constraintViolations.size()).isEqualTo(0);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
 		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(
@@ -311,15 +309,4 @@ public class TipoEntradaValidadores {
 
 }
 
-/*
- * @ActividadAforoYNumeroEntradasRestriccion(actividades = "actividades",
- * numEntradas = "numEntradas")
- * 
- * 
- * @FechaTipoEntradaRestriccion( //evento_id = "evento_id" fechaInicio =
- * "fechaInicio", fechaFin = "fechaFin", nombreEntrada = "nombre", message =
- * "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento"
- * )
- * 
- * 
- */
+ 

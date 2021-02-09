@@ -1,16 +1,13 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Evento;
-import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.service.AdminService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
-import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.samples.petclinic.service.UsuarioService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,8 +34,6 @@ public class UsuarioController {
     private OrganizacionService organizacionService;
     @Autowired
     private AdminService adminService;
-    @Autowired
-    private FacturaService facturaService;
     @Autowired
     private EventoService eventoService;
 
@@ -160,10 +155,8 @@ public class UsuarioController {
         if (!(organizacionService.encuentraOrganizacionByUsuario(username) == null)) {
             Organizacion org2 = this.organizacionService
                     .encuentraOrganizacionByUsuario(SecurityContextHolder.getContext().getAuthentication().getName());
-
-            usuarioService.deleteUsuario(org2.getUsuario());
-
             organizacionService.deleteOrganizacion(org2);
+            usuarioService.deleteUsuario(org2.getUsuario());
 
         }
         return "redirect:/logout";

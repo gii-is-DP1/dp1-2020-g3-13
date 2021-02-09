@@ -58,7 +58,7 @@ public class CarritoService {
     @Transactional
     public void actualizaCarritoAcero(Carrito carrito){
       for (LineaFactura  lf : carritoRepo.dimeLineaFacturaCarrito(carrito.getId())) {
-        lineaService.borrarLinea(lf);
+        lf.setCarrito(null);
       } 
         carrito.setTotal(0.0);
         carritoRepo.save(carrito);
@@ -70,8 +70,6 @@ public class CarritoService {
         LineaFactura linea = new LineaFactura();
         linea.setCantidad(1);
         linea.setPrecio(entrada.getTipoEntrada().getPrecio());
-    //    linea.setTipoEntrada(entrada.getTipoEntrada());
-        // entrada.setLineaFactura(linea);
         entrada.setCliente(cliente);
         linea.setEntrada(entrada);
         Carrito carrito = new Carrito();
@@ -81,8 +79,6 @@ public class CarritoService {
         if(carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario()) != null){
                 carrito = carritoRepo.dimeCarritoDeUsuario(cliente.getUsuario().getNombreUsuario());
                 linea.setCarrito(carrito);
-                
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa");
                 carrito.setCliente(cliente);
                 guardarCarrito(carrito);
                 System.out.println(carrito.getTotal());
@@ -91,10 +87,7 @@ public class CarritoService {
             carrito.setCliente(cliente);
             List<LineaFactura> lineasFacturas = new ArrayList<>();
             lineasFacturas.add(linea);
-           
             guardarCarrito(carrito);
-            
-            System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
             System.out.println(carrito.getTotal());
 
         }
@@ -155,14 +148,14 @@ public class CarritoService {
     public void borrarLineaFactura(Carrito carrito, int lineaFacturaId) throws DataAccessException{
         LineaFactura linea = lineaService.encuentraLineaFactura(lineaFacturaId);
         carritoRepo.dimeLineaFacturaCarrito(carrito.getId()).remove(linea);
+        Double nuevoTotal = carrito.getTotal()-linea.getPrecio();
+        carrito.setTotal(nuevoTotal);
 
     }
 
     public void generarFacturaCarrito(Carrito carrito, Cliente cliente) throws DataAccessException{
        Factura factura = new Factura();
        List<LineaFactura> lineas =  carritoRepo.dimeLineaFacturaCarrito(carrito.getId());;
-       List<LineaFactura> listaLineasDeFactura = new ArrayList<LineaFactura>();
-    //    factura.setLineasFacturas(listaLineasDeFactura);
        Integer cont = 0;
        Double precioTotal = 0.0;
        Integer numLinea = lineas.size();
@@ -227,5 +220,10 @@ public class CarritoService {
     }
     public List<LineaFactura> dimeLineaFacturasDeCarrito(int carritoId){
         return carritoRepo.dimeLineaFacturaCarrito(carritoId);
+    }
+
+    @Transactional
+    public void eliminaCarritoOrganizacion(int organizacionId){
+        carritoRepo.eliminaCarritoOrganizacion(organizacionId);
     }
 }

@@ -39,7 +39,6 @@ public class AdminService {
         Usuario u = usuarioService.findUsuario(usuarioId);
         Cliente c = clienteService.findClienteByUsuario(usuarioId);
         Organizacion o = organizacionService.encuentraOrganizacionByUsuario(usuarioId); 
-
             if(u.getAutoridades().getAutoridad().equals("cliente")){
                 this.clienteService.deleteCliente(c);
         
@@ -50,5 +49,10 @@ public class AdminService {
             }
         
         this.usuarioService.deleteUsuario(u);
+    }
+
+    @Transactional
+    public Admin encuentraAdminPorNombre(String nombreUsuario){
+        return adminRepo.encuentraAdminPorNombreUsuario(nombreUsuario);
     }
 }

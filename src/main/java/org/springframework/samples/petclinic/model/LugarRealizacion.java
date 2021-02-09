@@ -1,11 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
@@ -27,8 +23,6 @@ import lombok.Setter;
 @Setter
 @Table(name = "lugar_realizacion")
 public class LugarRealizacion extends BaseEntity{
-
-// CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
 
 
     @Column(name = "telefono")

@@ -48,4 +48,9 @@ public class LineaFacturaService {
     public List<LineaFactura> lineasFacturaDeFactura(int facturaId){
         return lineaFacturaRepository.lineaFacturaDeFactura(facturaId);
     }
+
+    @Transactional
+    public void eliminaLineaFacturaDeOrganizacion(int organizacionId){
+        lineaFacturaRepository.eliminaLineaFacturaDeOrganizacion(organizacionId);
+    }
 }

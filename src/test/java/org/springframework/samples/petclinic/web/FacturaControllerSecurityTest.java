@@ -23,26 +23,46 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 @DirtiesContext
 @ExtendWith(SpringExtension.class)
 public class FacturaControllerSecurityTest {
+
+    private static final int TEST_FACTURA_CLIENTE_ID = 7;
+    private static final int TEST_FACTURA_ORGANIZACION_ID = 5;
     @Autowired
     private WebApplicationContext context;
-    
+
     private MockMvc mockMvc;
 
     @BeforeEach
     void setup() {
-       mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
-    }
-    @WithMockUser(username = "clienteRandom", authorities = {"cliente"})
-    @Test
-    void accederAFacturasCliente() throws Exception{
-        mockMvc.perform(get("/facturas")).andExpect(status().isOk())
-        .andExpect(view().name("facturas/listadoFacturas")).andExpect(model().attributeExists("facturas"));
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity())
+                .build();
     }
 
-    @WithMockUser(username = "orgRandom", authorities = {"organizacion"})
+    @WithMockUser(username = "clienteRandom", authorities = { "cliente" })
     @Test
-    void accederAFacturasOrg() throws Exception{
-        mockMvc.perform(get("/facturas")).andExpect(status().isOk())
-        .andExpect(view().name("facturas/listadoFacturas")).andExpect(model().attributeExists("facturas"));
-}
+    void accederAFacturasCliente() throws Exception {
+        mockMvc.perform(get("/facturas")).andExpect(status().isOk()).andExpect(view().name("facturas/listadoFacturas"))
+                .andExpect(model().attributeExists("facturas"));
+    }
+
+    @WithMockUser(username = "orgRandom", authorities = { "organizacion" })
+    @Test
+    void accederAFacturasOrg() throws Exception {
+        mockMvc.perform(get("/facturas")).andExpect(status().isOk()).andExpect(view().name("facturas/listadoFacturas"))
+                .andExpect(model().attributeExists("facturas"));
+    }
+
+    @WithMockUser(username = "organizacion1", authorities = { "organizacion" })
+    @Test
+    void accederADetallesFacturasOrg() throws Exception {
+        mockMvc.perform(get("/facturas/{facturaId}",TEST_FACTURA_ORGANIZACION_ID)).andExpect(status().isOk())
+                .andExpect(view().name("facturas/detallesFacturaOrg")).andExpect(model().attributeExists("facturas"));
+    }
+
+    @WithMockUser(username = "cliente1", authorities = { "cliente" })
+    @Test
+    void accederADetallesFacturasCliente() throws Exception {
+        mockMvc.perform(get("/facturas/{facturaId}",TEST_FACTURA_CLIENTE_ID)).andExpect(status().isOk())
+                .andExpect(view().name("facturas/detallesFacturasCliente"))
+                .andExpect(model().attributeExists("facturas"));
+    }
 }

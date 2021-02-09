@@ -3,8 +3,10 @@ package org.springframework.samples.petclinic.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.AlquilerEspacio;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Exponente;
 import org.springframework.samples.petclinic.model.LugarRealizacion;
@@ -12,8 +14,8 @@ import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.service.ActividadService;
 import org.springframework.samples.petclinic.service.AlquilerEspacioService;
 import org.springframework.samples.petclinic.service.CarritoService;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.EventoService;
-import org.springframework.samples.petclinic.service.ExponenteService;
 import org.springframework.samples.petclinic.service.LugarRealizacionService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,9 +52,7 @@ public class ActividadController {
     @Autowired
     private OrganizacionService orgService;
     @Autowired
-    private ExponenteService exponenteService;
-
-
+    private ClienteService clienteService;
 
 
     @GetMapping
@@ -67,13 +67,60 @@ public class ActividadController {
     public String detallesActividad(ModelMap model,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId){
         Actividad actividad = actividadService.findById(actividadId);
         Evento evento = eventoService.findEventoById(eventoId);
-        List<Exponente> exponentes = exponenteService.encuentraExponentesPorActividad(actividadId);
+        List<Exponente> exponentes = actividad.getExponentes();
         model.addAttribute("actividad", actividad);
         model.addAttribute("evento", evento);
         model.addAttribute("exponentes", exponentes);
-        return VIEW_ACTIVIDAD_DETALLES;
+        String usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+        if(clienteService.findClienteByUsuario(usuario)!=null){
+            return "actividades/detallesActividadCliente";
+        }else{
+            return VIEW_ACTIVIDAD_DETALLES;
+        }
+      
+    }
+
+    @GetMapping("/{actividadId}/borrarActividad")
+    public String borrarActividad(ModelMap model,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId){
+        Actividad actividad = actividadService.findById(actividadId);
+        Evento evento = eventoService.findEventoById(eventoId);
+        model.addAttribute("actividad", actividad);
+        model.addAttribute("evento", evento);
+        if(actividad.getAlquilerEspacio()==null){
+            actividadService.borrarActividad(actividad);
+        }else{
+            throw new DataAccessException("No puede eliminar una actividad con un alquiler de espacio asignado"){
+                
+            };
+        }
+      
+        return "redirect:/eventos/{evento_id}";
     }
     
+    @GetMapping("/{actividadId}/editar")
+    public String editarActividadForm(ModelMap model,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId){
+        Actividad actividad = actividadService.findById(actividadId);
+        Evento evento = eventoService.findEventoById(eventoId);
+        List<Exponente> exponentes = actividad.getExponentes();
+        model.addAttribute("actividad", actividad);
+        model.addAttribute("evento", evento);
+        model.addAttribute("exponentes", exponentes);
+        return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
+    }
+    @PostMapping("/{actividadId}/editar")
+    public String editarActividad(@Valid Actividad actividad,@PathVariable("evento_id") int eventoId, @PathVariable("actividadId") int actividadId, BindingResult result, ModelMap model){
+       if(!(actividadService.findById(actividadId)==null)){
+           if(result.hasErrors()){
+            model.put("actividad", actividad);
+            return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
+           }else{
+               model.put("actividad", actividad);
+                   this.actividadService.modificarActividad(actividad, actividadService.findById(actividadId));
+                return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
+               }
+           } 
+       return "redirect:/eventos/{evento_id}/actividades/{actividadId}";      
+    }
     @GetMapping(value="/nuevo")
     public String crearActividad(ModelMap modelMap){
         Iterable<LugarRealizacion> lugaresRealizacion = lugarRealizacionService.findAll();
@@ -84,6 +131,7 @@ public class ActividadController {
         modelMap.addAttribute("lugares", lugares);
         modelMap.addAttribute("listaId", listaIds);
         modelMap.addAttribute("lugaresRealizacion", lugaresLista);
+
         modelMap.addAttribute("actividad", new Actividad());
         return VIEWS_ACTIVIDAD_CREATE_OR_UPDATE_FORM;
     }
@@ -130,7 +178,9 @@ public class ActividadController {
             try {
                 alquilerService.compruebaFechas(alquiler.getLugarRealizacion(), actividad, evento);
             } catch (Exception e) {
-                return "exception";
+                throw new DataAccessException("Ese lugar esta reservado para esas fechas"){};
+                    
+                }
             }
             alquilerService.alquilerLugarRealizacion(alquiler, actividad, org);
             carritoService.anadirCarritoLugarRealizacion(actividad, org);
@@ -140,4 +190,3 @@ public class ActividadController {
 		
      }
 
-}

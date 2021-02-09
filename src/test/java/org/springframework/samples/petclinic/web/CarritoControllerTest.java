@@ -12,6 +12,8 @@ import org.springframework.samples.petclinic.service.CarritoService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.LineaFacturaService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
+import org.springframework.samples.petclinic.service.ActividadService;
+import org.springframework.samples.petclinic.service.EntradaService;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,6 +49,12 @@ public class CarritoControllerTest {
 
     @MockBean
     private AutoridadesService autoridadesService;
+    
+    @MockBean
+    private ActividadService actividadService;
+
+    @MockBean
+    private EntradaService entradaService;
 
 
     @WithMockUser

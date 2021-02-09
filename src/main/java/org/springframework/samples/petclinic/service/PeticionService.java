@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Peticion;
+import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.PeticionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class PeticionService {
     @Autowired
     private PeticionRepository peticionRepo;
+    @Autowired
+    private UsuarioService usuarioService;
+    @Autowired
+    private AutoridadesService autoridadadesService;
+    @Autowired
+    private OrganizacionService organizacionService;
+    @Autowired
+    private EnvioEmailService envioEmailService;
 
     public int peticionCount() {
         return (int) peticionRepo.count();
@@ -41,6 +51,22 @@ public class PeticionService {
     public void createPeticion(Peticion peticion) {
         peticion.setFecha(LocalDate.now());
         savePeticion(peticion);
+    }
+
+    @Transactional
+    public void generaOrganizacionAPartirDePeticion(int peticionId) {
+        Peticion peticion = findPeticionById(peticionId).get();
+        Usuario usuario = usuarioService.creaUsuarioParaPeticion(peticion);
+        usuarioService.saveUser(usuario);
+        autoridadadesService.guardarAutoridades(usuario.getNombreUsuario(), "organizacion");
+        Organizacion organizacion = organizacionService.creaOrganizacionParaPeticion(peticion, usuario);
+        organizacionService.saveOrganizacion(organizacion);
+        deletePeticion(peticion);
+        envioEmailService.sendEmailSimple(organizacion, "Petición de Organización",
+                "Hola ! Desde Qplan queremos darte la bienvenida después de aceptar tu petición\nYa puedes iniciar sesión en la web con las siguientes credenciales\nUsuario: "
+                        + organizacion.getUsuario().getNombreUsuario() + "\nContraseña: "
+                        + organizacion.getUsuario().getPassword() + "\n¡Bienvenid@!");
+
     }
 
 }

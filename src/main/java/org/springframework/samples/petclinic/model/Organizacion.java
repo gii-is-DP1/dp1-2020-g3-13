@@ -18,7 +18,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "organizaciones")
 public class Organizacion extends BaseEntity {
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(name = "nombre_usuario", referencedColumnName = "nombreUsuario")
     private Usuario usuario;
 
@@ -32,8 +32,8 @@ public class Organizacion extends BaseEntity {
     private String email;
 
     @Column(name = "cif")
-
     private String cif;
+
     @Column(name = "info")
     @NotEmpty
     private String info;

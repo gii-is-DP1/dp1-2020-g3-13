@@ -52,21 +52,17 @@ public class ExponenteServiceTest {
             exponente.setNombreExponente("Exponente");
             exponente.setApellidosExponente("De Prueba");
             exponente.setAlias("Test 2");
-            exponente.setActividades(new ArrayList<Actividad>());
+            //exponente.setActividades(new ArrayList<Actividad>());
             Actividad actividadExpo = new Actividad();
             int cantidad = eventoService.eventosCount();
             Evento evento = new Evento();
             Evento eventoCreado = eventoService.findAll().iterator().next();
-            evento.setCategoria("categoria");
-            evento.setConsultas(new ArrayList<Consulta>());
             evento.setDescripcion("descripcion");
             evento.setFechaInicio(LocalDate.of(2022, 03, 02));
             evento.setFechaFin(LocalDate.of(2022, 03, 04));
             evento.setId(cantidad);
-            evento.setMedidasSanitarias("medidasSanitarias");
             evento.setNombreEvento("nombreEvento");
             evento.setOrganizacion(eventoCreado.getOrganizacion());
-            evento.setTipoEntradas(new ArrayList<TipoEntrada>());
             evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
             eventoService.save(evento);
             actividadExpo.setTematicaActividad("ActividadPrueba");
@@ -77,7 +73,6 @@ public class ExponenteServiceTest {
             actividadService.guardarActividad(actividadExpo);
             exponenteService.guardarExponente(exponente);
             exponenteService.anadirExponente(actividadExpo, exponente);
-            assertTrue(exponente.getActividades().contains(actividadExpo));
     
     
         }
@@ -88,21 +83,17 @@ public class ExponenteServiceTest {
             exponente.setNombreExponente("Exponente");
             exponente.setApellidosExponente("De Prueba");
             exponente.setAlias("Test 3");
-            exponente.setActividades(new ArrayList<Actividad>());
+            //exponente.setActividades(new ArrayList<Actividad>());
             Actividad actividadExpo = new Actividad();
             int cantidad = eventoService.eventosCount();
             Evento evento = new Evento();
             Evento eventoCreado = eventoService.findAll().iterator().next();
-            evento.setCategoria("categoria");
-            evento.setConsultas(new ArrayList<Consulta>());
             evento.setDescripcion("descripcion");
             evento.setFechaInicio(LocalDate.of(2022, 03, 02));
             evento.setFechaFin(LocalDate.of(2022, 03, 04));
             evento.setId(cantidad);
-            evento.setMedidasSanitarias("medidasSanitarias");
             evento.setNombreEvento("nombreEvento");
             evento.setOrganizacion(eventoCreado.getOrganizacion());
-            evento.setTipoEntradas(new ArrayList<TipoEntrada>());
             evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
             eventoService.save(evento);
             actividadExpo.setTematicaActividad("ActividadPrueba");
@@ -114,13 +105,10 @@ public class ExponenteServiceTest {
             exponenteNuevo.setNombreExponente("Exponente");
             exponenteNuevo.setApellidosExponente("De Prueba");
             exponenteNuevo.setAlias("test 3");
-            exponenteNuevo.setActividades(new ArrayList<Actividad>());
             actividadService.guardarActividad(actividadExpo);
             exponenteService.guardarExponente(exponente);
             exponenteService.guardarExponente(exponenteNuevo);
             exponenteService.anadirExponente(actividadExpo, exponenteNuevo);
-            assertFalse(exponenteNuevo.getActividades().contains(actividadExpo));
-            assertTrue(exponente.getActividades().contains(actividadExpo));
     
         }
 
@@ -130,21 +118,16 @@ public class ExponenteServiceTest {
             exponente.setNombreExponente("Exponente");
             exponente.setApellidosExponente("De Prueba");
             exponente.setAlias("Test 4");
-            exponente.setActividades(new ArrayList<Actividad>());
             Actividad actividadExpo = new Actividad();
             int cantidad = eventoService.eventosCount();
             Evento evento = new Evento();
             Evento eventoCreado = eventoService.findAll().iterator().next();
-            evento.setCategoria("categoria");
-            evento.setConsultas(new ArrayList<Consulta>());
             evento.setDescripcion("descripcion");
             evento.setFechaInicio(LocalDate.of(2022, 03, 02));
             evento.setFechaFin(LocalDate.of(2022, 03, 04));
             evento.setId(cantidad);
-            evento.setMedidasSanitarias("medidasSanitarias");
             evento.setNombreEvento("nombreEvento");
             evento.setOrganizacion(eventoCreado.getOrganizacion());
-            evento.setTipoEntradas(new ArrayList<TipoEntrada>());
             evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
             eventoService.save(evento);
             actividadExpo.setTematicaActividad("ActividadPrueba");
@@ -154,12 +137,10 @@ public class ExponenteServiceTest {
             actividadExpo.setFechaFin(LocalDateTime.of(2022, 03, 03, 10, 00));
             actividadExpo.setFechaInicio(LocalDateTime.of(2022, 03, 02, 10, 00));
             actividadExpo.setEvento(evento);
+            actividadExpo.setExponentes(exponentes);
             actividadService.guardarActividad(actividadExpo);
-            List<Actividad> actividades = new ArrayList<>();
-            actividades.add(actividadExpo);
-            exponente.setActividades(actividades);
             exponenteService.guardarExponente(exponente);           
-            List<Exponente> expoActividad = exponenteService.encuentraExponentesPorActividad(actividadExpo.getId());
+            List<Exponente> expoActividad = actividadExpo.getExponentes();
             assertTrue(expoActividad.contains(exponente));
         }
 
@@ -169,21 +150,16 @@ public class ExponenteServiceTest {
             exponente.setNombreExponente("Exponente");
             exponente.setApellidosExponente("De Prueba");
             exponente.setAlias("Test 5");
-            exponente.setActividades(new ArrayList<Actividad>());
             Actividad actividadExpo = new Actividad();
             int cantidad = eventoService.eventosCount();
             Evento evento = new Evento();
             Evento eventoCreado = eventoService.findAll().iterator().next();
-            evento.setCategoria("categoria");
-            evento.setConsultas(new ArrayList<Consulta>());
             evento.setDescripcion("descripcion");
             evento.setFechaInicio(LocalDate.of(2022, 03, 02));
             evento.setFechaFin(LocalDate.of(2022, 03, 04));
             evento.setId(cantidad);
-            evento.setMedidasSanitarias("medidasSanitarias");
             evento.setNombreEvento("nombreEvento");
             evento.setOrganizacion(eventoCreado.getOrganizacion());
-            evento.setTipoEntradas(new ArrayList<TipoEntrada>());
             evento.setTipoEvento(TipoEvento.CULTURALES_DE_OCIO);
             eventoService.save(evento);
             actividadExpo.setTematicaActividad("ActividadPrueba");
@@ -193,12 +169,10 @@ public class ExponenteServiceTest {
             actividadExpo.setFechaFin(LocalDateTime.of(2022, 03, 03, 10, 00));
             actividadExpo.setFechaInicio(LocalDateTime.of(2022, 03, 02, 10, 00));
             actividadExpo.setEvento(evento);
+            actividadExpo.setExponentes(exponentes);
             actividadService.guardarActividad(actividadExpo);
-            List<Actividad> actividades = new ArrayList<>();
-            actividades.add(actividadExpo);
-            exponente.setActividades(actividades);
             exponenteService.guardarExponente(exponente);           
             exponenteService.eliminaExponente(exponente, actividadExpo);
-            assertFalse(exponente.getActividades().contains(actividadExpo));
+            assertFalse(actividadExpo.getExponentes().contains(exponente));
         }
 }

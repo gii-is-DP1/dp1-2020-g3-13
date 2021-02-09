@@ -1,19 +1,13 @@
 package org.springframework.samples.petclinic.service;
 
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
-import org.springframework.samples.petclinic.repository.CarritoRepository;
 import org.springframework.samples.petclinic.repository.ClienteRepository;
-import org.springframework.samples.petclinic.repository.ConsultaRepository;
-import org.springframework.samples.petclinic.repository.EntradaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.samples.petclinic.model.Consulta;
 import org.springframework.samples.petclinic.model.Entrada;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.LineaFactura;
 @Service
 public class ClienteService {
@@ -25,6 +19,8 @@ public class ClienteService {
     private EntradaService entradaService;
     @Autowired
     private LineaFacturaService lineaFacturaService;
+    @Autowired
+    private FacturaService facturaService;
    
     @Autowired
     private CarritoService carritoService;
@@ -49,15 +45,20 @@ public class ClienteService {
     }
 
     public void deleteCliente(Cliente cliente) throws DataAccessException{
-//beti
         for (Entrada en : entradaService.buscaEntradaPorClienteId(cliente.getId())) {
             en.setCliente(null);
             entradaService.guardarEntrada(en);
         }
+
+        if(facturaService.facturasUsuario(cliente.getUsuario())!=null){
+            facturaService.eliminaFacturaDeUsuario(cliente.getUsuario().getNombreUsuario());
+        }
+        
         if(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario())!=null){
             for (LineaFactura lf :  carritoService.dimeLineaFacturasDeCarrito(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()).getId())) {
                 lineaFacturaService.borrarLinea(lf);
             }
+        
            
           //  carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()).getLineasFacturas()
         carritoService.deleteCarrito(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()));

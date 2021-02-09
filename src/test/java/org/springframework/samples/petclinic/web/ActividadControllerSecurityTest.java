@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -33,26 +34,20 @@ public class ActividadControllerSecurityTest {
     @Test
     @WithMockUser(username = "UsuarioAleatorio", authorities = {"cliente"})
     void deberiaDevolverListaDeActividadesCliente() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
+        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(status().isOk()).andExpect(view().name("actividades/detallesActividad"));
         
     }
     @Test
     @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
     void deberiaDevolverListaDeActividadesOrganizacion() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
+        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(status().isOk()).andExpect(view().name("actividades/detallesActividad"));
         
     }
     @Test
     @WithMockUser(username = "UsuarioAleatorio", authorities = {"admin"})
     void deberiaDevolverListaDeActividadesAdmin() throws Exception{
-        mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
+        mockMvc.perform(get("/eventos/{evento_id}/actividades/{actividad_id}",1,2, TEST_ID)).andExpect(status().isOk()).andExpect(view().name("actividades/detallesActividad"));
         
     }
-    // @Test
-    // @WithMockUser(username = "UsuarioAleatorio", authorities = {"organizacion"})
-  //  void deberiaDevolverFormularioActividadOrganizacion() throws Exception{
-   //     mockMvc.perform(get("/eventos/{evento_id}/actividades",1, TEST_ID)).andExpect(view().name("actividades/EventoLista")).andExpect(model().attributeExists("actividades"));
-        
-  //  }
     
 }

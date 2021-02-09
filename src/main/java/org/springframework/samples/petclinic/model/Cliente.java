@@ -3,14 +3,10 @@ package org.springframework.samples.petclinic.model;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
@@ -23,10 +19,6 @@ import lombok.Setter;
 @Setter
 @Table(name = "clientes")
 public class Cliente extends Persona{
-
-    // @OneToMany(cascade = CascadeType.ALL,mappedBy = "cliente")
-    // private  List<Entrada> entradas;
-
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Evento> eventosFavoritos;

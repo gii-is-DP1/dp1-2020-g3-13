@@ -3,9 +3,6 @@ package org.springframework.samples.petclinic.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.OrganizacionService;
 
 //Objetos para los test, todos los objetos están creados y cumpliendo las restricciones de los validadores
@@ -15,16 +12,14 @@ public class InicializadorObjetosTest {
 
     public static Evento eventoParaTest() {
         Evento evento = new Evento();
-        evento.setCategoria("categoria");
         evento.setDescripcion("descripcion de un evento cualquiera");
         evento.setFechaInicio(LocalDate.now());
         evento.setFechaFin(LocalDate.now().plusDays(1));
         evento.setId(Integer.MAX_VALUE);
-        evento.setMedidasSanitarias("6M");
         evento.setNombreEvento("nombreEvento");
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
-        evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        evento.setConsultas(new ArrayList<Consulta>());
+        //evento.setTipoEntradas(new ArrayList<TipoEntrada>());
+        //evento.setConsultas(new ArrayList<Consulta>());
         return evento;
     }
 
@@ -67,7 +62,7 @@ public class InicializadorObjetosTest {
         exponente.setNombreExponente("nombreExponente");
         exponente.setApellidosExponente("apellidosExponente");
         exponente.setId(Integer.MAX_VALUE);
-        exponente.setActividades(new ArrayList<Actividad>());
+        //exponente.setActividades(new ArrayList<Actividad>());
         return exponente;
     }
 
@@ -75,9 +70,9 @@ public class InicializadorObjetosTest {
         Usuario usuario = new Usuario();
         usuario.setPassword("password");
         usuario.setNombreUsuario("nombreUsuario");
-        usuario.setFacturas(new ArrayList<>());
+        // usuario.setFacturas(new ArrayList<>());
         usuario.setEnabled(true);
-        usuario.setAutoridades(new Autoridades());
+        //usuario.setAutoridades(new Autoridades());
         return usuario;
     }
 
