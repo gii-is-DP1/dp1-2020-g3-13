@@ -127,11 +127,11 @@
 										<div class="col-lg-12">
 											<p>
 											<a href="<c:url value="/logout" />"
-													class="btn btn-primary btn-block btn-sm">Logout</a>
+													class="btn btn-default" btn-block btn-sm">Logout</a>
 											</p>
 											<p>
-											<a href="<c:url value="/usuarios/myprofile" />"
-													class="btn btn-primary btn-block btn-sm">Mi perfil</a>
+											<a  href="<c:url value="/usuarios/myprofile" />"
+													class="btn btn-default" btn-block btn-sm">Mi perfil</a>
 											</p>
 										</div>
 									</div>

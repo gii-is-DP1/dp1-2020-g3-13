@@ -41,15 +41,16 @@
                     <spring:url value="/facturas/{facturaId}" var="facturasUrl">
                     <spring:param name="facturaId" value="${facturas.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(facturasUrl)}"><c:out value="Muestra Detalles Factura"/></a>
+                    <a class="btn btn-default" href="${fn:escapeXml(facturasUrl)}"><c:out value="Muestra Detalles Factura"/></a>
                 </td>              
             </tr>
         </c:forEach>
 
             
         </tbody>
-        <spring:url value="/eventos" var="volverUrl">
-                    </spring:url>
-                    <a href="${fn:escapeXml(volverUrl)}" class="btn btn-default"><c:out value="Volver"/></a> 
+
     </table>
+    <spring:url value="/eventos" var="volverUrl">
+</spring:url>
+<a href="${fn:escapeXml(volverUrl)}" class="btn btn-default"><c:out value="Volver"/></a> 
 </petclinic:layout>

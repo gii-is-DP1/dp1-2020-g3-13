@@ -26,7 +26,7 @@
                     <spring:url value="/eventos/{eventosId}" var="eventoUrl">
                     <spring:param name="eventosId" value="${evento.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(eventoUrl)}"><c:out value="${evento.nombreEvento}"/></a>    
+                    <a  href="${fn:escapeXml(eventoUrl)}"><c:out value="${evento.nombreEvento}"/></a>    
                 </td>
                 <td>
                     <c:out value="${evento.tipoEvento}"/></a>
