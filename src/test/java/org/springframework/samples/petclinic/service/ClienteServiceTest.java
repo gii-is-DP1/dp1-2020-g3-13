@@ -52,8 +52,6 @@ public class ClienteServiceTest {
 
         Autoridades autoridades = new Autoridades();
         autoridades.setAutoridad("cliente");
-        //usuario.setAutoridades(autoridades);
-
 
         Cliente cliente = new Cliente();
         cliente.setUsuario(usuario);
