@@ -57,6 +57,7 @@
                                                             Entrada</button>
                                                     </c:otherwise>
                                                 </c:choose>
+                                                <a href="javascript:history.go(-1)" class="btn btn-default">Atrás</a>
                                             </div>
                                         </div>
                                     </form:form>
