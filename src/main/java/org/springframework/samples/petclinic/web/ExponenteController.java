@@ -67,7 +67,7 @@ public class ExponenteController {
     modelMap.addAttribute("exponente", exponente);
     modelMap.addAttribute("listaExponentes", actividad.getExponentes());
     exponenteService.eliminaExponente(exponente, actividad);
-    return "redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo/";
+    return "redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo";
 
 
 }
