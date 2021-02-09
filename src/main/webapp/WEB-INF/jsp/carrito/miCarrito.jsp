@@ -7,7 +7,7 @@
 
                     <petclinic:layout pageName="carrito">
 
-                        <h2>Detalles del carrito ;)
+                        <h2>Detalles del carrito
                         </h2>
 
                         <h3>¿Qué llevo en mi carrito?</h3>
@@ -45,7 +45,7 @@
                                 <spring:url value="/carrito/cliente/{lineaFacturaId}/delete" var="borrarUrl">
                                             <spring:param name="lineaFacturaId" value="${lineasFacturas.id}" />
                                         </spring:url>
-                                        <a href="${fn:escapeXml(borrarUrl)}">
+                                        <a class="btn btn-default" href="${fn:escapeXml(borrarUrl)}">
                                             <c:out value="Borrar" /><br></a>
                             </c:forEach>
                             <p> Total: </p>
@@ -53,7 +53,7 @@
 
                             <spring:url value="/carrito/finalizarCompra" var="ventaUrl">
                                         </spring:url>
-                                        <a href="${fn:escapeXml(ventaUrl)}">
+                                        <a class="btn btn-default" href="${fn:escapeXml(ventaUrl)}">
                                             <c:out value="Comprar" /><br></a>
 
                     </petclinic:layout>
