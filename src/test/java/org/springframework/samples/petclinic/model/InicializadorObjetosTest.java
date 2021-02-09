@@ -3,27 +3,23 @@ package org.springframework.samples.petclinic.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 import org.springframework.samples.petclinic.service.OrganizacionService;
 
 //Objetos para los test, todos los objetos están creados y cumpliendo las restricciones de los validadores
 public class InicializadorObjetosTest {
-    
+
     OrganizacionService organizacionService;
 
     public static Evento eventoParaTest() {
         Evento evento = new Evento();
-        evento.setCategoria("categoria");
         evento.setDescripcion("descripcion de un evento cualquiera");
         evento.setFechaInicio(LocalDate.now());
         evento.setFechaFin(LocalDate.now().plusDays(1));
         evento.setId(Integer.MAX_VALUE);
-        evento.setMedidasSanitarias("6M");
         evento.setNombreEvento("nombreEvento");
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
-        evento.setTipoEntradas(new ArrayList<TipoEntrada>());
-        evento.setConsultas(new ArrayList<Consulta>());
-        evento.setSponsors(new ArrayList<Sponsor>());
+        //evento.setTipoEntradas(new ArrayList<TipoEntrada>());
+        //evento.setConsultas(new ArrayList<Consulta>());
         return evento;
     }
 
@@ -48,7 +44,7 @@ public class InicializadorObjetosTest {
 
     }
 
-    public static Actividad actividadParaTest(){
+    public static Actividad actividadParaTest() {
         Actividad actividad = new Actividad();
         actividad.setDescripcionActividad("descripción de una actividad de ejemplo");
         actividad.setFechaInicio(LocalDateTime.now().plusDays(1));
@@ -56,35 +52,34 @@ public class InicializadorObjetosTest {
         actividad.setId(Integer.MAX_VALUE);
         actividad.setTematicaActividad("tematica de una actividad");
         // actividad.setExponentes( new ArrayList<Exponente>());
-        actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
+        // actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
         return actividad;
     }
-        
 
-    public static Exponente exponenteParaTest(){
+    public static Exponente exponenteParaTest() {
         Exponente exponente = new Exponente();
         exponente.setAlias("alias");
         exponente.setNombreExponente("nombreExponente");
         exponente.setApellidosExponente("apellidosExponente");
         exponente.setId(Integer.MAX_VALUE);
-        exponente.setActividades(new ArrayList<Actividad>());
+        //exponente.setActividades(new ArrayList<Actividad>());
         return exponente;
     }
-    
-    public static Usuario usuarioParaTest(){
+
+    public static Usuario usuarioParaTest() {
         Usuario usuario = new Usuario();
         usuario.setPassword("password");
         usuario.setNombreUsuario("nombreUsuario");
-        usuario.setFacturas(new ArrayList<>());
+        // usuario.setFacturas(new ArrayList<>());
         usuario.setEnabled(true);
-        usuario.setAutoridades(new Autoridades());
+        //usuario.setAutoridades(new Autoridades());
         return usuario;
     }
-    public static Cliente clienteParaTest(){
+
+    public static Cliente clienteParaTest() {
         Cliente cliente = new Cliente();
         cliente.setApellidos("apellidos");
         cliente.setEmail("email@email.com");
-        cliente.setEntradas(new ArrayList<Entrada>());
         cliente.setEventosFavoritos(new ArrayList<Evento>());
         cliente.setId(Integer.MAX_VALUE);
         cliente.setNombre("nombre");
@@ -94,7 +89,8 @@ public class InicializadorObjetosTest {
         return cliente;
 
     }
-    public static Entrada entradaParaTest(){
+
+    public static Entrada entradaParaTest() {
         Entrada entrada = new Entrada();
         entrada.setCliente(clienteParaTest());
         entrada.setDni("00000000L");
@@ -103,4 +99,4 @@ public class InicializadorObjetosTest {
         entrada.setTipoEntrada(tipoEntradaParaTest());
         return entrada;
     }
-    }
+}

@@ -38,21 +38,37 @@ public class ExponenteController {
         modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
         modelMap.addAttribute("exponente", nuevoExponente);
         modelMap.addAttribute("actividad", actividad);
-        modelMap.addAttribute("listaExponentes", exponenteService.encuentraActividadExponente(actividadInt));
+        modelMap.addAttribute("listaExponentes", actividad.getExponentes());
 
         return VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping(value="/nuevo")
-    public String guardarExponentes(@Valid Exponente exponente,@PathVariable("evento_id") int eventoId,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id, BindingResult resultado, ModelMap modelMap){
+    public String guardarExponentes(@Valid Exponente exponente,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id,
+     BindingResult resultado, ModelMap modelMap){
+
         if(resultado.hasErrors()){
             modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
             modelMap.addAttribute("exponente", exponente);
-            modelMap.addAttribute("listaExponentes", exponenteService.encuentraActividadExponente(actividadInt));
+            modelMap.addAttribute("listaExponentes", actividadService.findById(actividadInt).getExponentes());
             return VIEWS_EXPONENTE_CREATE_OR_UPDATE_FORM;
         }else {
             exponenteService.anadirExponente(actividadService.findById(actividadInt), exponente);
             return guardarExponentes(modelMap, actividadInt, evento_id);
         } 
     }
+
+    @GetMapping(value = "/{exponenteId}/borrarExponente")
+    public String borrarExponente(@PathVariable("exponenteId") int exponenteId,@PathVariable("actividad_id") int actividadInt,@PathVariable("evento_id") int evento_id, ModelMap modelMap){
+    Actividad actividad = actividadService.findById(actividadInt);
+    Exponente exponente = exponenteService.encuentraExponente(exponenteId);
+    modelMap.addAttribute("evento", eventoRepository.findById(evento_id).get());
+    modelMap.addAttribute("actividad", actividad);
+    modelMap.addAttribute("exponente", exponente);
+    modelMap.addAttribute("listaExponentes", actividad.getExponentes());
+    exponenteService.eliminaExponente(exponente, actividad);
+    return "redirect:/eventos/{evento_id}/actividades/{actividad_id}/nuevo/";
+
+
+}
 }

@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.LineaFactura;
@@ -41,5 +43,14 @@ public class LineaFacturaService {
     @Transactional
     public void borrarLinea(LineaFactura linea){
         lineaFacturaRepository.delete(linea);
+    }
+
+    public List<LineaFactura> lineasFacturaDeFactura(int facturaId){
+        return lineaFacturaRepository.lineaFacturaDeFactura(facturaId);
+    }
+
+    @Transactional
+    public void eliminaLineaFacturaDeOrganizacion(int organizacionId){
+        lineaFacturaRepository.eliminaLineaFacturaDeOrganizacion(organizacionId);
     }
 }

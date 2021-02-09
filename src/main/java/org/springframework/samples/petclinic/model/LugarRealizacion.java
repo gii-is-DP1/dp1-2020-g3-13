@@ -1,11 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
@@ -28,14 +24,10 @@ import lombok.Setter;
 @Table(name = "lugar_realizacion")
 public class LugarRealizacion extends BaseEntity{
 
-// CAMBIARLO POR LA ID JOIN COLUMN MAPPED BY EN ACTIVIDADES EN LUGARREALIZACION
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugarRealizacion")
-    private List<AlquilerEspacio> alquilerEspacio;
 
     @Column(name = "telefono")
-    @Digits(fraction = 0, integer = 9, message = "El número de teléfono debe tener 6 dígitos")
-    @Length(min = 16, message ="El número de teléfono debe tener 6 dígitos" )
+    @Digits(fraction = 0, integer = 9, message = "El número de teléfono debe tener 9 dígitos")
+    @Length(min = 9, message ="El número de teléfono debe tener 9 dígitos" )
     private String telefono;
 
     @Column(name = "aforo")

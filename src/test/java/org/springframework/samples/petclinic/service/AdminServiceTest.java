@@ -22,7 +22,7 @@ public class AdminServiceTest {
     @Test
     public void testCountWithInitialDataAdmin(){
         int count = adminService.adminCount();
-        assertEquals(count, 1);
+        assertEquals(count, 6);
     }
     @Test
     public void testMuestraUsuarios(){

@@ -3,6 +3,7 @@
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+                    <%@page pageEncoding="UTF-8"%>
 
                     <petclinic:layout pageName="peticion">
 
@@ -28,6 +29,7 @@
                             <li>
                                 <label>Fecha:</label>
                                 <c:out value="${peticion.fecha}" />
+                                
                             </li>
                             <li>
                                 <label>Opciones:</label>

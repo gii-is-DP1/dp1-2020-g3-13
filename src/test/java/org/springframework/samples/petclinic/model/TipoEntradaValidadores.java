@@ -1,22 +1,25 @@
 package org.springframework.samples.petclinic.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.service.EventoService;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-public class TipoEntradaValidadores {
 
-	@Autowired
-	private EventoService eventoService;
+
+public class TipoEntradaValidadores {
+	LugarRealizacion lugarRealizacion = new LugarRealizacion();
+	AlquilerEspacio alquilerEspacio = new AlquilerEspacio();
+	Actividad actividad = new Actividad();
+	TipoEntrada tipoEntrada = new TipoEntrada();
+	Evento evento = new Evento();
 
 	private Validator createValidator() {
 		LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
@@ -24,52 +27,41 @@ public class TipoEntradaValidadores {
 		return localValidatorFactoryBean;
 	}
 
-	@Test
-	void noDeberiaValidarPrecioMenorQueCero() {
-		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = InicializadorObjetosTest.tipoEntradaParaTest();
-		tipoEntrada.setPrecio(-1.0);
-		 
-		//Construimos el tipo Evento
-		Evento evento = InicializadorObjetosTest.eventoParaTest();
-		evento.setFechaInicio(LocalDate.now().minusDays(2));
-		evento.setFechaFin(LocalDate.now().plusDays(2));
-		tipoEntrada.setEvento(evento);
-		// Validamos
-		Validator validator = createValidator();
-		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(1);
-		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
-		assertThat(violation.getPropertyPath().toString()).isEqualTo("precio");
-		assertThat(violation.getMessage()).isEqualTo("El precio debe ser superior o igual a 0");
+	@BeforeEach
+	void setup() {
 
-	}
+		lugarRealizacion.setAforo(2000);
+		lugarRealizacion.setCaracteristicas("caracteristicas");
+		lugarRealizacion.setDireccion("direccion del lugar");
+		lugarRealizacion.setEmail("email@email.com");
+		lugarRealizacion.setId(1);
+		lugarRealizacion.setNombre_recinto("nombre_recinto");
+		lugarRealizacion.setTelefono("555666777");
+		lugarRealizacion.setUrlFoto("https://imagen.com");
 
-	@Test
-	void noDeberiaValidarNumEntradasMenorQueUno() {
-		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
-		tipoEntrada.setFechaInicio(LocalDateTime.now().plusDays(1));
-		tipoEntrada.setFechaFin(tipoEntrada.getFechaInicio().plusDays(1));
-		tipoEntrada.setNombre(NombreTiposEntrada.PASE_VARIOS_DIAS);
-		tipoEntrada.setNumEntradas(0);
-		tipoEntrada.setPrecio(1.0);
-		// Validamos
-		Validator validator = createValidator();
-		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(1);
-		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
-		assertThat(violation.getPropertyPath().toString()).isEqualTo("numEntradas");
-		assertThat(violation.getMessage()).isEqualTo("Debe tener al menos 1 entrada disponible para el evento");
+		alquilerEspacio.setId(1);
+		alquilerEspacio.setPrecioTotal(2000.00);
+		alquilerEspacio.setLugarRealizacion(lugarRealizacion);
+		alquilerEspacio.setFechaInicioReserva(LocalDateTime.now().plusDays(1));
+		alquilerEspacio.setFechaFinReserva(alquilerEspacio.getFechaInicioReserva().plusDays(1));
 
+		actividad.setDescripcionActividad("descripcion cualquiera");
+		actividad.setAlquilerEspacio(alquilerEspacio);
+		actividad.setFechaInicio(LocalDateTime.now().plusDays(1).plusHours(1));
+		actividad.setFechaFin(actividad.getFechaInicio().plusDays(1));
+		actividad.setTematicaActividad("tematicaActividad");
+		// actividad.setTiposEntrada(new ArrayList<TipoEntrada>());
 	}
 
 	@Test
 	void noDeberiaValidarFechaInicioAnteriorActual() {
-		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
 		tipoEntrada.setFechaInicio(LocalDateTime.now().minusDays(1));
-		tipoEntrada.setFechaFin(tipoEntrada.getFechaInicio().plusDays(2));
+		tipoEntrada.setFechaFin(tipoEntrada.getFechaInicio().plusDays(4));
 		tipoEntrada.setNombre(NombreTiposEntrada.PASE_VARIOS_DIAS);
 		tipoEntrada.setNumEntradas(10);
 		tipoEntrada.setPrecio(1.0);
@@ -81,14 +73,16 @@ public class TipoEntradaValidadores {
 		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(
 				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
-
 	}
 
 	@Test
-	void noDeberiaValidarFechaFinAnteriorAInicio() {
-		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
-		tipoEntrada.setFechaInicio(LocalDateTime.now().plusDays(2));
+	void noDeberiaValidarFechaInicioAnteriorAFin() {
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.now().minusDays(1));
 		tipoEntrada.setFechaFin(tipoEntrada.getFechaInicio().minusDays(1));
 		tipoEntrada.setNombre(NombreTiposEntrada.PASE_VARIOS_DIAS);
 		tipoEntrada.setNumEntradas(10);
@@ -96,20 +90,26 @@ public class TipoEntradaValidadores {
 		// Validamos
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(1);
+		assertThat(constraintViolations.size()).isEqualTo(2);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
 		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
-		assertThat(violation.getMessage()).isEqualTo(
-				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
 
-	}
+		assertThat(violation.getMessage()).isIn("Las actividades elegidas deben ser acordes las fechas de la entrada, por favor, seleccione las actividades que se le muestran acorde a su fecha", "La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
+			}
+
 
 	@Test
 	void noDeberiaValidarFechaInicioNocturnaSiNombreDiurna() {
 		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
-		tipoEntrada.setFechaInicio(LocalDateTime.of(2050, 01, 01, 17, 00, 00));
-		tipoEntrada.setFechaFin(LocalDateTime.of(2050, 01, 01, 18, 00, 00));
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividad.setFechaInicio(LocalDateTime.of(2025, 01, 01, 17, 00, 00));
+		actividad.setFechaFin(LocalDateTime.of(2025, 01, 01, 20, 00, 00));
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.of(2025, 01, 01, 16, 00, 00));
+		tipoEntrada.setFechaFin(LocalDateTime.of(2025, 01, 01, 22, 00, 00));
 		tipoEntrada.setNombre(NombreTiposEntrada.DIURNA);
 		tipoEntrada.setNumEntradas(10);
 		tipoEntrada.setPrecio(1.0);
@@ -127,9 +127,15 @@ public class TipoEntradaValidadores {
 	@Test
 	void noDeberiaValidarFechaInicioDiurnaSiNombreNocturna() {
 		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
-		tipoEntrada.setFechaInicio(LocalDateTime.of(2050, 01, 01, 11, 00, 00));
-		tipoEntrada.setFechaFin(LocalDateTime.of(2050, 01, 01, 14, 00, 00));
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividad.setFechaInicio(LocalDateTime.of(2025, 01, 01, 8, 00, 00));
+		actividad.setFechaFin(LocalDateTime.of(2025, 01, 01, 12, 00, 00));
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.of(2025, 01, 01, 7, 00, 00));
+		tipoEntrada.setFechaFin(LocalDateTime.of(2025, 01, 01, 13, 00, 00));
 		tipoEntrada.setNombre(NombreTiposEntrada.NOCTURNA);
 		tipoEntrada.setNumEntradas(10);
 		tipoEntrada.setPrecio(1.0);
@@ -147,10 +153,42 @@ public class TipoEntradaValidadores {
 	@Test
 	void noDeberiaValidarFechaInicioYFinVariosDiasSiNombreUnSoloDia() {
 		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
-		tipoEntrada.setFechaInicio(LocalDateTime.now().plusDays(1));
-		tipoEntrada.setFechaFin(tipoEntrada.getFechaInicio().plusDays(1));
-		tipoEntrada.setNombre(NombreTiposEntrada.PASE_UN_DIA);
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividad.setFechaInicio(LocalDateTime.of(2025, 01, 01, 8, 00, 00));
+		actividad.setFechaFin(LocalDateTime.of(2025, 01, 01, 12, 00, 00));
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.of(2025, 01, 01, 7, 00, 00));
+		tipoEntrada.setFechaFin(LocalDateTime.of(2025, 01, 01, 13, 00, 00));
+		tipoEntrada.setNombre(NombreTiposEntrada.NOCTURNA);
+		tipoEntrada.setNumEntradas(10);
+		tipoEntrada.setPrecio(1.0);
+		// Validamos
+		Validator validator = createValidator();
+		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
+		assertThat(constraintViolations.size()).isEqualTo(1);
+		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
+		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
+		assertThat(violation.getMessage()).isEqualTo(
+				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
+
+	}
+
+	@Test
+	void noDeberiaValidarFechaUnDiaSiNombreVariosDias() {
+		// Construimos el objeto tipoEntrada
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividad.setFechaInicio(LocalDateTime.of(2025, 01, 01, 8, 00, 00));
+		actividad.setFechaFin(LocalDateTime.of(2025, 01, 01, 12, 00, 00));
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.of(2025, 01, 01, 7, 00, 00));
+		tipoEntrada.setFechaFin(LocalDateTime.of(2025, 01, 01, 13, 00, 00));
+		tipoEntrada.setNombre(NombreTiposEntrada.PASE_VARIOS_DIAS);
 		tipoEntrada.setNumEntradas(10);
 		tipoEntrada.setPrecio(1.0);
 		// Validamos
@@ -167,18 +205,22 @@ public class TipoEntradaValidadores {
 	@Test
 	void noDeberiaValidarFechaInicioYFinUnSoloDiaSiNombreVariosDias() {
 		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
-		tipoEntrada.setFechaInicio(LocalDateTime.of(2050, 1, 1, 19, 00, 00));
-		tipoEntrada.setFechaFin(LocalDateTime.of(2050, 1, 1, 19, 01, 00));
-		tipoEntrada.setNombre(NombreTiposEntrada.PASE_VARIOS_DIAS);
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.now().plusDays(1));
+		tipoEntrada.setFechaFin(tipoEntrada.getFechaInicio().plusDays(20));
+		tipoEntrada.setNombre(NombreTiposEntrada.PASE_UN_DIA);
 		tipoEntrada.setNumEntradas(10);
 		tipoEntrada.setPrecio(1.0);
 		// Validamos
+		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
-		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
 		assertThat(violation.getMessage()).isEqualTo(
 				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
 
@@ -187,40 +229,19 @@ public class TipoEntradaValidadores {
 	@Test
 	void noDeberiaValidarFechaFinNocturnaSiNombreDiurna() {
 		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
-		tipoEntrada.setFechaInicio(LocalDateTime.of(2050, 01, 01, 12, 00, 00));
-		tipoEntrada.setFechaFin(LocalDateTime.of(2050, 01, 01, 18, 00, 00));
-		tipoEntrada.setNombre(NombreTiposEntrada.DIURNA);
-		tipoEntrada.setNumEntradas(10);
-		tipoEntrada.setPrecio(1.0);
-
-		// Validamos
-		Validator validator = createValidator();
-		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
-		assertThat(constraintViolations.size()).isEqualTo(1);
-		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
-		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
-		assertThat(violation.getMessage()).isEqualTo(
-				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
-
-	}
-/*
-	@Test
-	void noDeberiaValidarFechaInicioPosteriorFechaInicioEvento() {
-		//Construimos el Evento
-		Evento evento = new Evento();
-		evento.setFechaInicio(LocalDate.of(2050, 01, 01));
-		eventoService.findEventoById(1).getFechaInicio();
-
-		// Construimos el objeto tipoEntrada
-		TipoEntrada tipoEntrada = new TipoEntrada();
-		tipoEntrada.setFechaInicio(LocalDateTime.of(2050, 01, 01, 12, 00, 00));
-		tipoEntrada.setFechaFin(LocalDateTime.of(2050, 01, 01, 18, 00, 00));
-		tipoEntrada.setNombre(NombreTiposEntrada.DIURNA);
-		tipoEntrada.setNumEntradas(10);
-		tipoEntrada.setPrecio(1.0);
-
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividad.setFechaInicio(LocalDateTime.of(2025, 01, 01, 8, 00, 00));
+		actividad.setFechaFin(LocalDateTime.of(2025, 01, 01, 12, 00, 00));
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
 		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.of(2025, 01, 01, 8, 00, 00));
+		tipoEntrada.setFechaFin(LocalDateTime.of(2025, 01, 01, 20, 00, 00));
+		tipoEntrada.setNombre(NombreTiposEntrada.DIURNA);
+		tipoEntrada.setNumEntradas(10);
+		tipoEntrada.setPrecio(1.0);
+
 		// Validamos
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
@@ -231,5 +252,61 @@ public class TipoEntradaValidadores {
 				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
 
 	}
-	*/
+
+	@Test
+	void noDeberiaValidarSiFechaActividadFueraFechaTipoEntrada() {
+		// Construimos el objeto tipoEntrada
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividad.setFechaInicio(LocalDateTime.of(2025, 01, 02, 8, 00, 00));
+		actividad.setFechaFin(LocalDateTime.of(2025, 01, 02, 12, 00, 00));
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.of(2025, 01, 01, 8, 00, 00));
+		tipoEntrada.setFechaFin(LocalDateTime.of(2025, 01, 01, 20, 00, 00));
+		tipoEntrada.setNombre(NombreTiposEntrada.PASE_UN_DIA);
+		tipoEntrada.setNumEntradas(10);
+		tipoEntrada.setPrecio(1.0);
+
+		// Validamos
+		Validator validator = createValidator();
+		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
+		assertThat(constraintViolations.size()).isEqualTo(1);
+		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
+		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
+		assertThat(violation.getMessage()).isEqualTo(
+				"Las actividades elegidas deben ser acordes las fechas de la entrada, por favor, seleccione las actividades que se le muestran acorde a su fecha");
+
+	}
+
+	@Test
+	void noDeberiaValidarSiAforoMenorNumeroEntradas() {
+		// Construimos el objeto tipoEntrada
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		actividad.setFechaInicio(LocalDateTime.of(2025, 01, 01, 17, 00, 00));
+		actividad.setFechaFin(LocalDateTime.of(2025, 01, 01, 20, 00, 00));
+		actividades.add(actividad);
+		tipoEntrada.setActividades(actividades);
+		tipoEntrada.setEvento(evento);
+		tipoEntrada.setId(1);
+		tipoEntrada.setFechaInicio(LocalDateTime.of(2025, 01, 01, 16, 00, 00));
+		tipoEntrada.setFechaFin(LocalDateTime.of(2025, 01, 01, 22, 00, 00));
+		tipoEntrada.setNombre(NombreTiposEntrada.PASE_UN_DIA);
+		tipoEntrada.getActividades().get(0).getAlquilerEspacio().getLugarRealizacion().setAforo(200);
+		tipoEntrada.setNumEntradas(4000000);
+		tipoEntrada.setPrecio(1.0);
+		// Validamos
+		Validator validator = createValidator();
+		Set<ConstraintViolation<TipoEntrada>> constraintViolations = validator.validate(tipoEntrada);
+		assertThat(constraintViolations.size()).isEqualTo(0);
+		ConstraintViolation<TipoEntrada> violation = constraintViolations.iterator().next();
+		// assertThat(violation.getPropertyPath().toString()).isEqualTo("fechaInicio");
+		assertThat(violation.getMessage()).isEqualTo(
+				"La fecha de inicio debe posterior a la actual, además debe corresponder el nombre de la entrada (En cuestión horaria) con la elección del inicio de la fecha del evento");
+
+	}
+
 }
+
+ 

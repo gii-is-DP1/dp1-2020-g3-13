@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="lugaresRealizacion">
     <h2>Lugares de realizacion de eventos</h2>
@@ -35,9 +35,9 @@
                 
             </tr>
         </c:forEach>
-        <spring:url value="/lugaresRealizacion/new" var="newUrl">
+        <spring:url value="/lugaresRealizacion/nuevo" var="newUrl">
     </spring:url>
-    <a href="${fn:escapeXml(newUrl)}" class="btn btn-default">Add Lugar</a>
+    <a href="${fn:escapeXml(newUrl)}" class="btn btn-default">Añadir lugar</a>
         </tbody>
     </table>
 </petclinic:layout>

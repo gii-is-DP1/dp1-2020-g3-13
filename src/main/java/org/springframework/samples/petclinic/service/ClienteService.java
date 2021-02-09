@@ -7,11 +7,21 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.samples.petclinic.model.Entrada;
+import org.springframework.samples.petclinic.model.LineaFactura;
 @Service
 public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepo;
+    @Autowired
+    private ConsultaService consultaService;
+    @Autowired
+    private EntradaService entradaService;
+    @Autowired
+    private LineaFacturaService lineaFacturaService;
+   
+    @Autowired
+    private CarritoService carritoService;
 
     @Transactional
     public int clienteCount() {
@@ -33,6 +43,24 @@ public class ClienteService {
     }
 
     public void deleteCliente(Cliente cliente) throws DataAccessException{
+//beti
+        for (Entrada en : entradaService.buscaEntradaPorClienteId(cliente.getId())) {
+            en.setCliente(null);
+            entradaService.guardarEntrada(en);
+        }
+        if(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario())!=null){
+            for (LineaFactura lf :  carritoService.dimeLineaFacturasDeCarrito(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()).getId())) {
+                lineaFacturaService.borrarLinea(lf);
+            }
+           
+          //  carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()).getLineasFacturas()
+        carritoService.deleteCarrito(carritoService.dimeCarritoUsuario(cliente.getUsuario().getNombreUsuario()));
+        
+   
+        
+         } //carritoRepos
+        consultaService.eliminaTodasConsulta(cliente.getId());
+      //  entradaRepoa
         clienteRepo.delete(cliente);
     }
 

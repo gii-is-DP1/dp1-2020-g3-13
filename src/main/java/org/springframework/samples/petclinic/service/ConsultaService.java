@@ -100,4 +100,12 @@ public class ConsultaService {
             }
         }
     }
+    public void eliminaTodasConsulta(int clienteId){
+        consultaRepository.deleteAll(devuelveTodasLasConsultasDeClienteConId(clienteId));
+    }
+    @Transactional
+    public void eliminaConsultasDeOrganizacion(int organizacionId){
+        consultaRepository.eliminaConsultasDeOrganizacion(organizacionId);
+
+    }
 }

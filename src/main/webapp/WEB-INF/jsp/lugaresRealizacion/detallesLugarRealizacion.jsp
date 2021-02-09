@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@page pageEncoding="UTF-8"%>
 <petclinic:layout pageName="lugaresRealizacion">
 
     <h2>Detalles de <c:out value="${lugarRealizacion.nombre_recinto}"/></h2>
@@ -39,10 +39,14 @@
             <td><img src="${lugarRealizacion.urlFoto}" ></td>
         </tr>
     </table>
-    <spring:url value="${lugarRealizacion.id}/edit" var="editUrl">
+    <spring:url value="${lugarRealizacion.id}/editar" var="editUrl">
         
     </spring:url>
     <a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Editar Lugar</a>
+    <spring:url value="${lugarRealizacion.id}/borrar" var="borrarUrl">
+        
+    </spring:url>
+    <a href="${fn:escapeXml(borrarUrl)}" class="btn btn-default">Eliminar Lugar</a>
 
 
 </petclinic:layout>

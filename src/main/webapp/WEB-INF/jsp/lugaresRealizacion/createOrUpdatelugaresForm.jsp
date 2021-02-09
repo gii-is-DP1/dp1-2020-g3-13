@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="lugaresRealizacion">
     <h2>
@@ -19,6 +19,7 @@
             <petclinic:inputField label="Caracteristicas" name="caracteristicas"/>
             <petclinic:inputField label="Telefono" name="telefono"/>
             <petclinic:inputField label="email" name="email"/>
+            <petclinic:inputField label="Precio/dia" name="precio"/>
             <petclinic:inputField label="Foto" name="urlFoto"/>
         </div>
         <div class="form-group">

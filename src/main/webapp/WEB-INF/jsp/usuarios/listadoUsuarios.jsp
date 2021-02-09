@@ -4,13 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %> 
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="usuarios">
     <h2>Usuarios</h2>
 
     <table id="usuariosTable" class="table table-striped">
-        <p>Numero de usuarios: <c:out value="${usuarios.size()} "/></p>
+        <p>Número de usuarios: <c:out value="${usuarios.size()} "/></p>
         <thead>
         
         <tr>
