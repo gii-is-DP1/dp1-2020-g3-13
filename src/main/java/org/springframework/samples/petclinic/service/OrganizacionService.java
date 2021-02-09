@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Evento;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Organizacion;
+import org.springframework.samples.petclinic.model.Peticion;
+import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.samples.petclinic.repository.OrganizacionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +30,9 @@ public class OrganizacionService {
     private TipoEntradaService tipoEntradaService;
     @Autowired
     private ConsultaService consultaService;
+    @Autowired
+    private FacturaService facturaService;
 
-    @Transactional
     public int organizacionCount() {
         return (int) organizacionRepo.count();
     }
@@ -50,7 +54,7 @@ public class OrganizacionService {
         }
 
     }
-    
+
     @Transactional
     public void deleteOrganizacion(Organizacion o) throws DataAccessException {
         lineaFacturaService.eliminaLineaFacturaDeOrganizacion(o.getId());
@@ -59,6 +63,8 @@ public class OrganizacionService {
         consultaService.eliminaConsultasDeOrganizacion(o.getId());
         actividadService.eliminaActividadesOrganizacion(o.getId());
         eventoService.eliminaEventosDeOrganizacion(o.getId());
+        String usuario = o.getUsuario().getNombreUsuario();
+        facturaService.eliminaFacturaDeUsuario(o.getUsuario().getNombreUsuario());
         organizacionRepo.delete(o);
 
     }
@@ -81,6 +87,17 @@ public class OrganizacionService {
 
     public List<Evento> getEventos(int id_organizacion) {
         return organizacionRepo.getEventos(id_organizacion);
+
+    }
+
+    public Organizacion creaOrganizacionParaPeticion(Peticion peticion, Usuario usuario) {
+        Organizacion organizacion = new Organizacion();
+        organizacion.setUsuario(usuario);
+        organizacion.setEmail(peticion.getEmail());
+        organizacion.setCif(peticion.getCif());
+        organizacion.setInfo(peticion.getInfo());
+        organizacion.setNombreOrganizacion(peticion.getNombre_organizacion());
+        return organizacion;
 
     }
 

@@ -17,15 +17,15 @@ public class AlquilerEspacio extends BaseEntity{
 
     @Column(name = "precioTotal")
     // @NotEmpty
-    protected Double precioTotal;
+    private Double precioTotal;
 
     @Column(name = "fechaInicioReserva")
     // @NotEmpty
-    protected LocalDateTime fechaInicioReserva;
+    private LocalDateTime fechaInicioReserva;
 
     @Column(name = "fechaFinReserva")
     // @NotEmpty
-    protected LocalDateTime fechaFinReserva;
+    private LocalDateTime fechaFinReserva;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_lugar_realizacion", referencedColumnName = "id")

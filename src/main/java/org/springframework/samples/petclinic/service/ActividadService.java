@@ -97,11 +97,14 @@ public class ActividadService {
 
         @Transactional
         public void borrarActividad(Actividad actividad){
-        //    List<Exponente> exponentesActividad = expoService.encuentraActividadExponente(actividad.getId());
-        //     for(int i = 0; i<exponentesActividad.size();i++){
-        //        exponentesActividad.get(i).getActividades().remove(actividad);
-        //     }
+
             actividadRepo.deleteById(actividad.getId());
+           
+        }
+        @Transactional
+        public void quitarAlquilerEspacio(Actividad actividad){
+
+            actividad.setAlquilerEspacio(null);
            
         }
 
@@ -130,15 +133,4 @@ public class ActividadService {
     public List<Actividad> encuentraActividadesDeOrganizacion(int organizacionId){
         return actividadRepo.encuentraActividadesDeOrganizacion(organizacionId);
     }
-/*
-    @Transactional
-    public void borrarActividad(Actividad actividad){
-        List<Exponente> exponentesActividad = expoService.encuentraExponentesPorActividad(actividad.getId());
-        for(int i = 0; i<exponentesActividad.size();i++){
-            exponentesActividad.get(i).getActividades().remove(actividad);
-        }
-        actividadRepo.deleteById(actividad.getId());
-
-    }
-*/
 }

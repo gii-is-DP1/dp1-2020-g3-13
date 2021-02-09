@@ -6,29 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.Organizacion;
 import org.springframework.samples.petclinic.model.Usuario;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class OrganizacionServiceTest {
     @Autowired
     private OrganizacionService organizacionService;
-    @Autowired
-    private EventoService eventoService;
 
     @Test
     public void testCountWithInitialDataOrganizational(){
         int count = organizacionService.organizacionCount();
         assertEquals(count, 0);
-    }
-    @Test
-    public void deberiaListarMisEventos(){
-        List<Evento> listaEventos= eventoService.listadoEventosDeOrganizacion(1);
-        assertEquals(3, listaEventos.size());
     }
     @Test
     public void deberiaModificarMiPerfl(){

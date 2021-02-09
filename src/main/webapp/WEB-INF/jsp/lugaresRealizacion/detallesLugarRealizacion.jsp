@@ -39,10 +39,14 @@
             <td><img src="${lugarRealizacion.urlFoto}" ></td>
         </tr>
     </table>
-    <spring:url value="${lugarRealizacion.id}/edit" var="editUrl">
+    <spring:url value="${lugarRealizacion.id}/editar" var="editUrl">
         
     </spring:url>
     <a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Editar Lugar</a>
+    <spring:url value="${lugarRealizacion.id}/borrar" var="borrarUrl">
+        
+    </spring:url>
+    <a href="${fn:escapeXml(borrarUrl)}" class="btn btn-default">Eliminar Lugar</a>
 
 
 </petclinic:layout>

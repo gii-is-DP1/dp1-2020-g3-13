@@ -29,6 +29,18 @@ public class SponsorServiceTest {
         assertEquals(count+1, sponsorService.sponsorCount());
     }
     
+
+    @Test
+    public void deberiaAñadirAlEvento(){
+        Evento evento = new Evento();
+        Sponsor sponsor = new Sponsor();
+        sponsor.setEvento(eventoService.findAll().iterator().next());
+        sponsor.setEmpresa("Mercedes");
+        sponsor.setUrlWeb("https://www.mercedes-benz.com/en/");
+        sponsor.setUrlLogo("https://lezebre.lu/images/detailed/17/30356-Mercedes-Benz.png");
+        sponsorService.anadirSponsorAEvento(evento, sponsor);
+        assertEquals(sponsor.getEvento(), evento);
+    }
     
 }
 

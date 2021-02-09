@@ -12,12 +12,10 @@ public class InicializadorObjetosTest {
 
     public static Evento eventoParaTest() {
         Evento evento = new Evento();
-        evento.setCategoria("categoria");
         evento.setDescripcion("descripcion de un evento cualquiera");
         evento.setFechaInicio(LocalDate.now());
         evento.setFechaFin(LocalDate.now().plusDays(1));
         evento.setId(Integer.MAX_VALUE);
-        evento.setMedidasSanitarias("6M");
         evento.setNombreEvento("nombreEvento");
         evento.setTipoEvento(TipoEvento.ACADEMICOS);
         //evento.setTipoEntradas(new ArrayList<TipoEntrada>());
@@ -74,7 +72,7 @@ public class InicializadorObjetosTest {
         usuario.setNombreUsuario("nombreUsuario");
         // usuario.setFacturas(new ArrayList<>());
         usuario.setEnabled(true);
-        usuario.setAutoridades(new Autoridades());
+        //usuario.setAutoridades(new Autoridades());
         return usuario;
     }
 

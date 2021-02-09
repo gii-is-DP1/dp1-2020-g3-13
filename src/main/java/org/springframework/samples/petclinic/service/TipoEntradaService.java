@@ -31,7 +31,6 @@ public class TipoEntradaService {
         return tipoEntradaRepository.findById(id_tipoEntrada).get();
     }
 
-    @Transactional
     public void anadirTipoEntrada(Evento evento, TipoEntrada tipoEntrada){
         tipoEntrada.setEvento(evento);
     }
@@ -60,6 +59,7 @@ public class TipoEntradaService {
         }
         return res;
 	}
+    @Transactional
     public void borrarTipoEntrada(TipoEntrada te){
         tipoEntradaRepository.delete(te);
     }
@@ -67,6 +67,13 @@ public class TipoEntradaService {
     @Transactional
     public void eliminaTipoEntradaDeOrganizacion(int organizacionId){
         tipoEntradaRepository.eliminaTipoEntradaDeOrganizacion(organizacionId);
+    }
+
+    
+    @Transactional
+    public void eliminaTipoEntradaEvento(int eventoId){
+        tipoEntradaRepository.eliminaTipoEntradaDeEvento(eventoId);
+        
     }
 
     public List<TipoEntrada> encuentraTodasLasEntradasDeEvento(int eventoId){

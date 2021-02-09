@@ -5,6 +5,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Actividad;
@@ -54,12 +55,12 @@ public class AlquilerEspacioService {
         alquiler.setFechaFinReserva(actividad.getFechaFin());
         actividad.setAlquilerEspacio(alquiler);
         long horas = DAYS.between(alquiler.getFechaInicioReserva(), alquiler.getFechaFinReserva());
-        if(horas<1){
+        if (horas < 1) {
             precioTotal = lugar.getPrecio() * 1;
-        }else{
+        } else {
             precioTotal = lugar.getPrecio() * horas;
         }
-        precioTotal = Math.round(precioTotal * 100)/100d;
+        precioTotal = Math.round(precioTotal * 100) / 100d;
         alquiler.setPrecioTotal(precioTotal);
         // actividadService.guardarActividad(actividad);
     }
@@ -69,20 +70,23 @@ public class AlquilerEspacioService {
         return alquilerEspacioRepository.encuentraActividadPorAlquilerId(alquilerId);
     }
 
-
-    public void compruebaFechas(LugarRealizacion lugarSeleccionado, Actividad actividad, Evento evento) throws Exception{
-        Iterator<AlquilerEspacio> todosAlquileres = alquilerEspacioRepository.findAll().iterator();
-        if(todosAlquileres.hasNext()){
-            AlquilerEspacio alqActual =todosAlquileres.next();
-            if(alqActual.getLugarRealizacion().equals(lugarSeleccionado)){
-               LocalDateTime alqFechaFin = alqActual.getFechaFinReserva();
-               LocalDateTime alqFechaInicio = alqActual.getFechaInicioReserva();
-                    if((actividad.getFechaInicio().isAfter(alqFechaInicio) && actividad.getFechaInicio().isBefore(alqFechaFin))
-                || (actividad.getFechaFin().isAfter(alqFechaInicio) && actividad.getFechaFin().isBefore(alqFechaFin)) 
-                || (actividad.getFechaFin().isAfter(alqFechaInicio) && actividad.getFechaFin().isAfter(alqFechaInicio))){
+    public void compruebaFechas(LugarRealizacion lugarSeleccionado, Actividad actividad, Evento evento)
+            throws Exception {
+        Iterator<AlquilerEspacio> todosAlquileres = alquilerEspacioRepository.findAll().iterator();     
+        while(todosAlquileres.hasNext()) {
+            AlquilerEspacio alqActual = todosAlquileres.next();
+            if (alqActual.getLugarRealizacion().equals(lugarSeleccionado)) {
+                LocalDateTime alqFechaFin = alqActual.getFechaFinReserva();
+                LocalDateTime alqFechaInicio = alqActual.getFechaInicioReserva();
+                if ((actividad.getFechaInicio().isAfter(alqFechaInicio)
+                        && actividad.getFechaInicio().isBefore(alqFechaFin))
+                        || (actividad.getFechaFin().isAfter(alqFechaInicio)
+                                && actividad.getFechaFin().isBefore(alqFechaFin))
+                        || (actividad.getFechaFin().isAfter(alqFechaInicio)
+                                && actividad.getFechaFin().isAfter(alqFechaInicio))) {
                     throw new Exception("El lugar seleccionado esta reservado para esas fechas");
+                }
             }
         }
     }
-}
 }
