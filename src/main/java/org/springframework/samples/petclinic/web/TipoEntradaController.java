@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Actividad;
 import org.springframework.samples.petclinic.model.Evento;
 import org.springframework.samples.petclinic.model.NombreTiposEntrada;
@@ -68,8 +69,15 @@ public class TipoEntradaController {
     }
     @GetMapping(value = "{tipoEntradaId}/borrarTiposEntradas")
     public String borrarTipoEntradaEvento(@PathVariable("evento_id") int eventoId, @PathVariable("tipoEntradaId") int tipoEntradaId, ModelMap model) {
-        TipoEntrada tipoEntrada = tipoEntradaService.findById(tipoEntradaId);
-        tipoEntradaService.borrarTipoEntrada(tipoEntrada);
+        if(eventoService.findEventoById(eventoId).getEsPublico() != true){
+            TipoEntrada tipoEntrada = tipoEntradaService.findById(tipoEntradaId);
+            tipoEntradaService.borrarTipoEntrada(tipoEntrada);
+        }else{
+            throw new DataAccessException("No puedes borrar los tipos de entradas si el evento esta público"){
+
+            };
+        }
+        
         return "redirect:/eventos/{evento_id}";
     }
 

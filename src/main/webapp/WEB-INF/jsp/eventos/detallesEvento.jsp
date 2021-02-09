@@ -103,12 +103,16 @@
                                     <p>Entradas disponibles:
                                         <c:out value="${tipoEntradas.numEntradas}" />
                                     </p>
+                                    <c:choose>
+                                        <c:when test="${not evento.esPublico}">
                                     <spring:url value="/eventos/{evento_id}/tipoEntradas/{tipoEntradaId}/borrarTiposEntradas" var="borrarTipoEntradaUrl">
                                 <spring:param name="evento_id" value="${evento.id}" />
                                 <spring:param name="tipoEntradaId" value="${tipoEntradas.id}" />
                              </spring:url>
                                 <a href="${fn:escapeXml(borrarTipoEntradaUrl)}">
                                 <c:out value="Borrar Tipo Entrada" /><br></a>
+                                        </c:when>
+                                    </c:choose>
 
                                     <c:choose>
                                         <c:when test="${not evento.esPublico}">
